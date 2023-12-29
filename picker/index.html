@@ -78,7 +78,12 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#library" class="nav-link">Library</a>
+            <li class="nav-item" data-level="1"><a href="#phase-picker-gui" class="nav-link">Phase Picker GUI</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#phase-picker-from-library" class="nav-link">Phase Picker from Library</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#classes" class="nav-link">Classes</a>
               <ul class="nav flex-column">
@@ -88,20 +93,31 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#example-using-library" class="nav-link">example using library</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#cl-interface" class="nav-link">CL Interface</a>
+            <li class="nav-item" data-level="1"><a href="#phase-picker-from-cli" class="nav-link">Phase picker from CLI</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="2"><a href="#usage" class="nav-link">Usage</a>
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-help" class="nav-link">Interactive help</a>
+              <ul class="nav flex-column">
               </ul>
             </li>
-            
-            <li class="nav-item" data-level="1"><a href="#gui" class="nav-link">GUI</a>
+            <li class="nav-item" data-level="2"><a href="#run-phase-picker-from-cli" class="nav-link">Run Phase Picker from CLI</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -109,8 +125,17 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<p>The Picking algorythm of surfQuake uses the Deep Neural Network of Phasenet (<a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086189">Liu et al., 2019</a>) to estimate the arrival times of P- and S-wave.</p>
-<h1 id="library">Library</h1>
+<p>The Picking algorythm of surfQuake uses the Deep Neural Network of Phasenet (<a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086189">Liu et al., 2019</a>) to estimate the arrival times of P- and S-wave. The arrival times are saved as a csv file and in daily folders to be ready to be used by the associator. Example of csv header:</p>
+<div class="codehilite"><pre><span></span><code>date,fname,year,month,day,net,station,flag,tt,date_time,weight,amplitude,phase
+20220131,CA.ARBS.P,2022,1,31,CA,ARBS,1,39383.88,2022-01-31T10:56:23.880000,0.5383206605911255,8557892.700195312,P
+20220131,CA.ARBS.S,2022,1,31,CA,ARBS,1,85480.59,2022-01-31T23:44:40.590000,0.30124416947364807,8481788.269042969,S
+</code></pre></div>
+
+<h1 id="phase-picker-gui">Phase Picker GUI</h1>
+<p>We start with the GUI. This is a screenshot of the Project GUI.</p>
+<p><img alt="Screenshot" src="../img/picking.png" /></p>
+<p>Be sure you have just created a <a href="https://projectisp.github.io/surfquaketutorial.github.io/project/"><span style="color:green">Project</span></a> or you have loaded one. Then click on <span style="color:red">Run Auto Pick</span>. This action will start the phase picker and will save the output in <span style="color:blue">surfquake/data/picks</span> ready to be used in the associator toolbox and <span style="color:blue">surfquake/data/original_picks</span> as csv file for direct reading.</p>
+<h1 id="phase-picker-from-library">Phase Picker from Library</h1>
 <h2 id="classes">Classes</h2>
 <p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetISP</code></a></p>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PhasenetISP</span><span class="p">:</span>
@@ -184,13 +209,50 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
 
-<h1 id="cl-interface">CL Interface</h1>
-<h2 id="usage">Usage</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">surfquake</span> <span class="n">pick</span> <span class="o">-</span><span class="n">f</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">your</span> <span class="n">project</span> <span class="n">file</span><span class="p">]</span> <span class="o">-</span><span class="n">d</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">your</span> <span class="n">pick</span> <span class="n">saving</span> <span class="n">directory</span><span class="p">]</span> <span class="o">-</span><span class="n">p</span> 
-              <span class="p">[</span><span class="n">P</span><span class="o">-</span><span class="n">wave</span> <span class="n">threshoold</span><span class="p">]</span> <span class="o">-</span><span class="n">s</span> <span class="p">[</span><span class="n">S</span><span class="o">-</span><span class="n">wave</span> <span class="n">threshold</span><span class="p">]</span> <span class="o">--</span><span class="n">verbose</span><span class="s2">&quot;</span>
+<h2 id="example-using-library">example using library</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">freeze_support</span>
+<span class="kn">from</span> <span class="nn">surfquakecore.phasenet.phasenet_handler</span> <span class="kn">import</span> <span class="n">PhasenetUtils</span>
+<span class="kn">from</span> <span class="nn">surfquakecore.phasenet.phasenet_handler</span> <span class="kn">import</span> <span class="n">PhasenetISP</span>
+<span class="kn">from</span> <span class="nn">surfquakecore.project.surf_project</span> <span class="kn">import</span> <span class="n">SurfProject</span>
+
+<span class="c1">### Set Paths to project file and output folder ###</span>
+<span class="n">path_to_project</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/test_surfquake_core/project/surfquake_project.pkl&quot;</span>
+<span class="n">output_picks</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/LaCie/test_surfquake_core/test_picking&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">freeze_support</span><span class="p">()</span>
+
+    <span class="c1"># Load project</span>
+    <span class="n">sp_loaded</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
+
+    <span class="c1"># Instantiate the class PhasenetISP</span>
+    <span class="n">phISP</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp_loaded</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
+
+    <span class="c1"># Running Stage</span>
+    <span class="n">picks</span> <span class="o">=</span> <span class="n">phISP</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; PHASENET OUTPUT TO REAL INPUT &quot;&quot;&quot;</span>
+
+    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
+    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
 </code></pre></div>
 
-<h1 id="gui">GUI</h1></div>
+<h1 id="phase-picker-from-cli">Phase picker from CLI</h1>
+<h2 id="overview">Overview</h2>
+<p>The Picking algorythm uses the Deep Neural Network of Phasenet to estimate the arrival times of P- and S-wave</p>
+<h2 id="usage">Usage</h2>
+<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>project<span class="w"> </span>file<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>pick<span class="w"> </span>saving<span class="w"> </span>directory<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>P-wave<span class="w"> </span>threshoold<span class="o">]</span><span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>S-wave<span class="w"> </span>threshold<span class="o">]</span><span class="w"> </span>--verbose<span class="s2">&quot;</span>
+</code></pre></div>
+
+<h2 id="interactive-help">Interactive help</h2>
+<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-h
+</code></pre></div>
+
+<h2 id="run-phase-picker-from-cli">Run Phase Picker from CLI</h2>
+<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/projectssurfquake_project_new.pkl<span class="w"> </span>-d<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/picks<span class="w"> </span>-p<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+</code></pre></div></div>
             </div>
         </div>
 
