@@ -78,13 +78,51 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#library" class="nav-link">Library</a>
+            <li class="nav-item" data-level="1"><a href="#create-your-project" class="nav-link">Create your project</a>
               <ul class="nav flex-column">
               </ul>
             </li>
             
-            <li class="nav-item" data-level="1"><a href="#cl-interface" class="nav-link">CL Interface</a>
+            <li class="nav-item" data-level="1"><a href="#project-gui" class="nav-link">Project GUI</a>
               <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#project-from-library" class="nav-link">Project from library</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#classes" class="nav-link">Classes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#methods" class="nav-link">Methods</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#attibutes" class="nav-link">Attibutes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#project-from-cli" class="nav-link">Project from CLI</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#usage" class="nav-link">Usage</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#interactive-help" class="nav-link">Interactive help</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#create-project-example-from-cli" class="nav-link">Create Project example from CLI</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -92,9 +130,199 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="library">Library</h1>
-<p>surfQuake is an amenable toolbox that joins functionality and standard algorithms commonly used in seismology. The complete software is separated in several modules and each module is designed to overcome a specific task.</p>
-<h1 id="cl-interface">CL Interface</h1></div>
+<h1 id="create-your-project">Create your project</h1>
+<p>In surfQuake a project is simply a python object that can store in its attributes the path to valid seismogram files plus the associated metadata. This strategy allows to proceed with fast filters or join different projects. Project is the necessary input for the toolboxes Picker, Associator, Event Locator, Seismic Source and MTI.</p>
+<p>Here we will explain how the user can manage a project and be ready to proceed with the rest of toolboxes.</p>
+<h1 id="project-gui">Project GUI</h1>
+<p>We start with the GUI. This is a screenshot of the Project GUI.</p>
+<p><img alt="Screenshot" src="../img/project.png" /></p>
+<p>First, you need to choose between: </p>
+<ul>
+<li><span style="color:#8E44AD">Search files using Regular Expressions</span>: Click in this button will open a window explorer to select the available files based on the filter edit line. In the example (<em>.HHZ) and (</em>EMUR*). Please set to blank space if you do not desire apply filters inside the window explorer. Then just select files and accept. The project will be automatically generated. </li>
+<li><span style="color:#8E44AD">Project Parth Files</span>: This option is intendeed to let surfQuake search for valid seismogram files from a root folder in ahead. Optionally check <span style="color:red">Filter Time Spam</span> and/or <span style="color:red">Filter Keys</span> to include seismograms files that only fullfills the filter.</li>
+</ul>
+<p>Second:</p>
+<ul>
+<li><span style="color:#8E44AD">Save Project</span> It is very remmendable to save the project. So, Proceed to give a name to the project and save it pressing Save Project for later using.</li>
+</ul>
+<p>Third:</p>
+<ul>
+<li><span style="color:#8E44AD">Load Project</span> This action will open a window explorer so that you can select a project file previously saved and loaded. This will let you go ahead with the following toolboxes such as Picking Phases.</li>
+</ul>
+<p>Finally:</p>
+<ul>
+<li><span style="color:#8E44AD">Metadata</span> (https://docs.obspy.org/tutorial/code_snippets/stationxml_file_from_scratch.html): Metadata file with the in there is information structured as a dictionary nets/stations/channels. Personally, the best way to make your own metadata file is using either the java software <a href="https://ds.iris.edu/ds/nodes/dmc/software/downloads/pdcc/">PDCC</a> or going to the <a href="https://smp.gempa.de/">API Station Management Portal</a>.</li>
+</ul>
+<p><img alt="Screenshot" src="../img/metadata_structure.png" /></p>
+<h1 id="project-from-library">Project from library</h1>
+<h2 id="classes">Classes</h2>
+<p>In this section, we will explain the class SurfProject and we will explain how to manage your project from a simple example:</p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>SurfProject</code></a></p>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SurfProject</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        SurfProject class is designed to be able to storage the path to seismograms</span>
+<span class="sd">        files plus the file metadata information (i.e. sampling_rate, starttime...)</span>
+
+<span class="sd">        Attributes:</span>
+<span class="sd">        - root_path (str): The root path to the folder where the user have the data files.</span>
+
+<span class="sd">        Methods:</span>
+<span class="sd">        - __init__(root_path): Initialize a new instance of MyClass.</span>
+<span class="sd">        - load_project(path_to_project_file: str): Load a project from a file storage in hard-drive</span>
+<span class="sd">        - save_project(path_file_to_storage: str): Saves a project as a pickle file in hard-drive</span>
+<span class="sd">        - search_files(verbose=True, **kwargs): Create a project. It can be used filters by nets,</span>
+<span class="sd">        stations, channels selection and/or filter by timestamp</span>
+<span class="sd">        - filter_project_keys(**kwargs): Filter a project (once is crated) using regular expressions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h2 id="methods">Methods</h2>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>search_files</code></a></p>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">search_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NONE&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+
+<span class="sd">        - verbose (bool): Description of arg1.</span>
+<span class="sd">        - nets (str): String with the name of selected nets to be filtered (i.e., &quot;WM,ES&quot;)</span>
+<span class="sd">        - stations (str): String with the name of selected stations to be filtered (i.e., &quot;ARNO,UCM,EMAL&quot;)</span>
+<span class="sd">        - channels (str): String with the name of selected channels to be filtered (i.e., &quot;HHN,HHZ,HHE&quot;)</span>
+<span class="sd">        - starttime (str &quot;%Y-%m-%d %H:%M:%S&quot; ): String with the reference starttime, upper time spam threshold</span>
+<span class="sd">        (i.e.,&quot;2023-12-10 00:00:00&quot;)</span>
+<span class="sd">        - endtime (str &quot;%Y-%m-%d %H:%M:%S&quot; ): String with the reference endtime, lower time spam threshold</span>
+<span class="sd">        (i.e.,&quot;2023-12-23 00:00:00&quot;)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">        - type: Description of the return value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>filter_project_keys</code></a></p>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">filter_project_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">        - net (str): String with the name of selected nets to be filtered (i.e., &quot;.&quot;)</span>
+<span class="sd">        - station (str): String with the name of selected stations to be filtered (i.e., &quot;ARNO|UCM|EMAL&quot;)</span>
+<span class="sd">        - channel (str): String with the name of selected channels to be filtered (i.e., &quot;HH.&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>filter_project_time</code></a></p>
+<div class="codehilite"><pre><span></span><code>    <span class="k">def</span> <span class="nf">filter_project_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starttime</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endtime</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        - starttime (str, &quot;%Y-%m-%d %H:%M:%S&quot;): String with the reference starttime, upper time spam threshold</span>
+<span class="sd">        (i.e., &quot;2023-12-10 00:00:00&quot;)</span>
+
+<span class="sd">        - endtime (str, &quot;%Y-%m-%d %H:%M:%S&quot; ): String with the reference endtime, lower time spam threshold</span>
+<span class="sd">        (i.e., &quot;2023-12-23 00:00:00&quot;)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>save_project</code></a></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_file_to_storage</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span><span class="nb">bool</span>
+<span class="c1"># Saves the project object as a pickle file.</span>
+</code></pre></div>
+
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>load_project</code></a></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</code></pre></div>
+
+<h2 id="attibutes">Attibutes</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">project</span> <span class="p">:</span><span class="n">Dict</span>
+<span class="n">data_files</span> <span class="p">:</span><span class="n">List</span>
+</code></pre></div>
+
+<p>Next, the example of using this class and its methods. This example script is available in SurfQuakeCore/examples/manage_project_new.py</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">freeze_support</span>
+<span class="kn">from</span> <span class="nn">surfquakecore.project.surf_project</span> <span class="kn">import</span> <span class="n">SurfProject</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">path_to_data</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/test_surfquake_core/testing_data&quot;</span>
+<span class="n">path_to_project</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/test_surfquake_core/testing_data/projects/surfquake_project_new.pkl&quot;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">freeze_support</span><span class="p">()</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="p">(</span><span class="n">path_to_data</span><span class="p">)</span>
+    <span class="c1">#sp.search_files(starttime=&quot;2022-01-30 23:55:00&quot;, endtime=&quot;2022-02-01 00:30:00&quot;, stations=&quot;SALF,VALC&quot;, channels=&quot;HHZ&quot;)</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">search_files</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1">#sp_original_project = copy.copy()</span>
+    <span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;SALF|VALC|CEST&quot;</span><span class="p">)</span>
+    <span class="n">sp_original1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sp_original1</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;SALF&quot;</span><span class="p">)</span>
+    <span class="n">sp_original2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sp_original2</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;VALC&quot;</span><span class="p">)</span>
+
+    <span class="n">sp_join</span> <span class="o">=</span> <span class="n">sp_original1</span> <span class="o">+</span> <span class="n">sp_original2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With no filter&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sp_join</span><span class="p">)</span>
+    <span class="n">sp_join</span><span class="o">.</span><span class="n">filter_project_time</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;2022-01-30 23:55:00&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;2022-02-01 00:30:00&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With filter&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sp_join</span><span class="p">)</span>
+    <span class="n">sp_join</span><span class="o">.</span><span class="n">save_project</span><span class="p">(</span><span class="n">path_file_to_storage</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">sp_loaded</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sp_loaded</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The first step is create the object from the class SurfProject </p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span>
+</code></pre></div>
+
+<p>The necessary input to create the sp object is the root path where you have storage the seismogram files. Then, you can proceed to apply the method "search_files". This method includes the possibility of filter the inclusion of files inside the project.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp</span><span class="o">.</span><span class="n">search_files</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;2022-01-30 23:55:00&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;2022-02-01 00:30:00&quot;</span><span class="p">,</span> <span class="n">stations</span><span class="o">=</span><span class="s2">&quot;SALF,VALC&quot;</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="s2">&quot;HHZ&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span> <span class="c1"># To see the contain of the project</span>
+</code></pre></div>
+
+<p>Additionally, once the project has been created, you can also filter it by using <a href="https://docs.python.org/3/library/re.html">´regular expressions´</a> net, station, channel using:</p>
+<p>Note: some util Regex info at <a href="*https://en.wikipedia.org/wiki/Regular_expression*">Wiki Regex</a> and <a href="*https://www.educative.io/answers/how-to-implement-wildcards-in-python*">Python keywords</a></p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;SALF|VALC|CEST&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>or filterintg the time spam using:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp_join</span><span class="o">.</span><span class="n">ilter_project_time</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;2022-01-30 23:55:00&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;2022-02-01 00:30:00&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Adding projects using "+" symbol</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp_original1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sp_original1</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;SALF&quot;</span><span class="p">)</span>
+<span class="n">sp_original2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sp_original2</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;VALC&quot;</span><span class="p">)</span>
+
+<span class="n">sp_join</span> <span class="o">=</span> <span class="n">sp_original1</span> <span class="o">+</span> <span class="n">sp_original2</span>
+</code></pre></div>
+
+<p>Finally, you can save the project by,</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp_join</span><span class="o">.</span><span class="n">save_project</span><span class="p">(</span><span class="n">path_file_to_storage</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
+</code></pre></div>
+
+<p>and loading it</p>
+<div class="codehilite"><pre><span></span><code><span class="n">sp_loaded</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="project-from-cli">Project from CLI</h1>
+<h2 id="overview">Overview</h2>
+<p>This command allows you to create a seismic project, which is essentially a dictionary
+storing the paths to seismogram files along with their corresponding metadata.</p>
+<h2 id="usage">Usage</h2>
+<div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="n">surfquake</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="p">[</span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">files</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="p">[</span><span class="n">path</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">save</span><span class="w"> </span><span class="n">directory</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="p">[</span><span class="n">project</span><span class="w"> </span><span class="n">name</span><span class="p">]</span><span class="w"> </span><span class="o">--</span><span class="n">verbose</span>
+</code></pre></div>
+
+<h2 id="interactive-help">Interactive help</h2>
+<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>project<span class="w"> </span>-h
+</code></pre></div>
+
+<h2 id="create-project-example-from-cli">Create Project example from CLI</h2>
+<p>In your termina, activate sufquake enviroment to have access to the commands. Then:</p>
+<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data<span class="w"> </span>-s<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/projects<span class="w"> </span>-n<span class="w"> </span>/surfquake_project_new.pkl<span class="w"> </span>--verbose
+</code></pre></div></div>
             </div>
         </div>
 
