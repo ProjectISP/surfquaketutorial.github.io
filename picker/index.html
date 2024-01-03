@@ -1,332 +1,716 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuakeCore/picker/">
+      
+      
+        <link rel="prev" href="../project/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Phase Picker - </title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
         
-        
-        
-        <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Phase Picker - surfQuake Tutorial</title>
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/docco.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
 
-        <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="..">surfQuake Tutorial</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href=".." class="nav-link">Home</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../project/" class="nav-link">Project</a>
-                            </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Phase Picker</a>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a rel="prev" href="../project/" class="nav-link">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="1"><a href="#phase-picker-gui" class="nav-link">Phase Picker GUI</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#phase-picker-from-library" class="nav-link">Phase Picker from Library</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#classes" class="nav-link">Classes</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#methods" class="nav-link">Methods</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#example-using-library" class="nav-link">example using library</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#phase-picker-from-cli" class="nav-link">Phase picker from CLI</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#overview" class="nav-link">Overview</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#usage" class="nav-link">Usage</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#interactive-help" class="nav-link">Interactive help</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#run-phase-picker-from-cli" class="nav-link">Run Phase Picker from CLI</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#phase-picker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="" class="md-header__button md-logo" aria-label="" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Phase Picker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../project/" class="md-tabs__link">
+        
+  
+    
+  
+  Project
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Phase Picker
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="" class="md-nav__button md-logo" aria-label="" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Phase Picker
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Phase Picker
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#phase-picker-gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase Picker GUI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-picker-from-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase picker from CLI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase picker from CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-phase-picker-from-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run Phase Picker from CLI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phase-picker-from-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase Picker from Library
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase Picker from Library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-using-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      example using library
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="phase-picker">Phase Picker</h1>
 <p>The Picking algorythm of surfQuake uses the Deep Neural Network of Phasenet (<a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086189">Liu et al., 2019</a>) to estimate the arrival times of P- and S-wave. The arrival times are saved as a csv file and in daily folders to be ready to be used by the associator. Example of csv header:</p>
-<div class="codehilite"><pre><span></span><code>date,fname,year,month,day,net,station,flag,tt,date_time,weight,amplitude,phase
+<div class="highlight"><pre><span></span><code>date,fname,year,month,day,net,station,flag,tt,date_time,weight,amplitude,phase
 20220131,CA.ARBS.P,2022,1,31,CA,ARBS,1,39383.88,2022-01-31T10:56:23.880000,0.5383206605911255,8557892.700195312,P
 20220131,CA.ARBS.S,2022,1,31,CA,ARBS,1,85480.59,2022-01-31T23:44:40.590000,0.30124416947364807,8481788.269042969,S
 </code></pre></div>
-
-<h1 id="phase-picker-gui">Phase Picker GUI</h1>
+<h2 id="phase-picker-gui">Phase Picker GUI</h2>
 <p>We start with the GUI. This is a screenshot of the Project GUI.</p>
 <p><img alt="Screenshot" src="../img/picking.png" /></p>
 <p>Be sure you have just created a <a href="https://projectisp.github.io/surfquaketutorial.github.io/project/"><span style="color:green">Project</span></a> or you have loaded one. Then click on <span style="color:red">Run Auto Pick</span>. This action will start the phase picker and will save the output in <span style="color:blue">surfquake/data/picks</span> ready to be used in the associator toolbox and <span style="color:blue">surfquake/data/original_picks</span> as csv file for direct reading.</p>
-<h1 id="phase-picker-from-library">Phase Picker from Library</h1>
-<h2 id="classes">Classes</h2>
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetISP</code></a></p>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PhasenetISP</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">highpass_filter</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    Main class to initialize the picker</span>
-
-<span class="sd">    :param files: Dictionary with kewords addressing to seismograms file path and their corresponding metadata (i.e. sampling rate).</span>
-<span class="sd">    :type SurfProject: required (see Project section)</span>
-
-<span class="sd">    :param batch_size: Determines the number of samples in each batch (larger batch size uses more memory but can provide more accurate updates)</span>
-<span class="sd">    :type float:</span>
-
-<span class="sd">    :param highpass_filter: Lower corner frequency of highpass filter to be applied to the raw seismogram. Set to 0 to do not apply any pre-filter</span>
-<span class="sd">    :type float:</span>
-
-<span class="sd">    :param min_p_prob: Probability threshold for P pick</span>
-<span class="sd">    :type float:</span>
-
-<span class="sd">    :param min_s_prob: Probability threshold for S pick</span>
-<span class="sd">    :type float:</span>
-
-<span class="sd">    :param min_peak_distance: Minimum peak distance</span>
-<span class="sd">    :type float:</span>
-
-<span class="sd">    :param amplitude: if return amplitude value</span>
-<span class="sd">    :type float:</span>
-
-<span class="sd">    :returns:</span>
-<span class="sd">    :rtype: :class:`surfquakecore.phasenet.phasenet_handler.PhasenetISP`</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-</code></pre></div>
-
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils</code></a></p>
-<h2 id="methods">Methods</h2>
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>phasenet</code></a></p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># instance method</span>
-<span class="k">def</span> <span class="nf">phasenet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</code></pre></div>
-
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils.split_picks</code></a></p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    :param picks: A DataFrame with all pick information</span>
-<span class="sd">    :type picks: Pandas DataFrame</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</code></pre></div>
-
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils.convert2real</code></a></p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">convert2real</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="n">pick_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">:param picks: picks is output from method split_picks in mseedutils</span>
-<span class="sd">:param pick_dir: directory outpur where phases are storaged</span>
-<span class="sd">:return:</span>
-<span class="sd">&quot;&quot;&quot;</span>
-</code></pre></div>
-
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils.split_picks</code></a></p>
-<div class="codehilite"><pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">save_original_picks</span><span class="p">(</span><span class="n">original_picks</span><span class="p">,</span> <span class="n">original_p_dir</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    :param original_picks: picking output from phasenet (method split_picks in mseedutils)</span>
-<span class="sd">    :param original_p_dir: output to storage original_picks</span>
-<span class="sd">    :return:</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</code></pre></div>
-
-<h2 id="example-using-library">example using library</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">freeze_support</span>
-<span class="kn">from</span> <span class="nn">surfquakecore.phasenet.phasenet_handler</span> <span class="kn">import</span> <span class="n">PhasenetUtils</span>
-<span class="kn">from</span> <span class="nn">surfquakecore.phasenet.phasenet_handler</span> <span class="kn">import</span> <span class="n">PhasenetISP</span>
-<span class="kn">from</span> <span class="nn">surfquakecore.project.surf_project</span> <span class="kn">import</span> <span class="n">SurfProject</span>
-
-<span class="c1">### Set Paths to project file and output folder ###</span>
-<span class="n">path_to_project</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/test_surfquake_core/project/surfquake_project.pkl&quot;</span>
-<span class="n">output_picks</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/LaCie/test_surfquake_core/test_picking&#39;</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">freeze_support</span><span class="p">()</span>
-
-    <span class="c1"># Load project</span>
-    <span class="n">sp_loaded</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
-
-    <span class="c1"># Instantiate the class PhasenetISP</span>
-    <span class="n">phISP</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp_loaded</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
-
-    <span class="c1"># Running Stage</span>
-    <span class="n">picks</span> <span class="o">=</span> <span class="n">phISP</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; PHASENET OUTPUT TO REAL INPUT &quot;&quot;&quot;</span>
-
-    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
-    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-</code></pre></div>
-
-<h1 id="phase-picker-from-cli">Phase picker from CLI</h1>
-<h2 id="overview">Overview</h2>
+<h2 id="phase-picker-from-cli">Phase picker from CLI</h2>
+<h3 id="overview">Overview</h3>
 <p>The Picking algorythm uses the Deep Neural Network of Phasenet to estimate the arrival times of P- and S-wave</p>
-<h2 id="usage">Usage</h2>
-<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>project<span class="w"> </span>file<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>pick<span class="w"> </span>saving<span class="w"> </span>directory<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>P-wave<span class="w"> </span>threshoold<span class="o">]</span><span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>S-wave<span class="w"> </span>threshold<span class="o">]</span><span class="w"> </span>--verbose<span class="s2">&quot;</span>
+<h3 id="usage">Usage</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>project<span class="w"> </span>file<span class="o">]</span><span class="w"> </span>-d<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>pick<span class="w"> </span>saving<span class="w"> </span>directory<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>P-wave<span class="w"> </span>threshoold<span class="o">]</span><span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>S-wave<span class="w"> </span>threshold<span class="o">]</span><span class="w"> </span>--verbose<span class="s2">&quot;</span>
 </code></pre></div>
-
-<h2 id="interactive-help">Interactive help</h2>
-<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-h
+<h3 id="interactive-help">Interactive help</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-h
 </code></pre></div>
+<h3 id="run-phase-picker-from-cli">Run Phase Picker from CLI</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/projectssurfquake_project_new.pkl<span class="w"> </span>-d<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/picks<span class="w"> </span>-p<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+</code></pre></div>
+<h2 id="phase-picker-from-library">Phase Picker from Library</h2>
+<h3 id="classes">Classes</h3>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetISP</code></a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span> <span class="nc">PhasenetISP</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">highpass_filter</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_peak_distance</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">    Main class to initialize the picker</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="sd">    :param files: Dictionary with kewords addressing to seismograms file path and their corresponding metadata (i.e. sampling rate).</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="sd">    :type SurfProject: required (see Project section)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="sd">    :param batch_size: Determines the number of samples in each batch (larger batch size uses more memory but can provide more accurate updates)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="sd">    :type float:</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="sd">    :param highpass_filter: Lower corner frequency of highpass filter to be applied to the raw seismogram. Set to 0 to do not apply any pre-filter</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="sd">    :type float:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="sd">    :param min_p_prob: Probability threshold for P pick</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="sd">    :type float:</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="sd">    :param min_s_prob: Probability threshold for S pick</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="sd">    :type float:</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="sd">    :param min_peak_distance: Minimum peak distance</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="sd">    :type float:</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="sd">    :param amplitude: if return amplitude value</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="sd">    :type float:</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="sd">    :returns:</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="sd">    :rtype: :class:`surfquakecore.phasenet.phasenet_handler.PhasenetISP`</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils</code></a></p>
+<h3 id="methods">Methods</h3>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>phasenet</code></a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># instance method</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">def</span> <span class="nf">phasenet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</code></pre></div>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils.split_picks</code></a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@staticmethod</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span> <span class="nf">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">    :param picks: A DataFrame with all pick information</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    :type picks: Pandas DataFrame</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils.convert2real</code></a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@staticmethod</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span> <span class="nf">convert2real</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="n">pick_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="sd">:param picks: picks is output from method split_picks in mseedutils</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sd">:param pick_dir: directory outpur where phases are storaged</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">:return:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/phasenet/phasenet_handler.py"><code>PhasenetUtils.split_picks</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@staticmethod</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">def</span> <span class="nf">save_original_picks</span><span class="p">(</span><span class="n">original_picks</span><span class="p">,</span> <span class="n">original_p_dir</span><span class="p">):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sd">    :param original_picks: picking output from phasenet (method split_picks in mseedutils)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="sd">    :param original_p_dir: output to storage original_picks</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="sd">    :return:</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<h3 id="example-using-library">example using library</h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">freeze_support</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">from</span> <span class="nn">surfquakecore.phasenet.phasenet_handler</span> <span class="kn">import</span> <span class="n">PhasenetUtils</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kn">from</span> <span class="nn">surfquakecore.phasenet.phasenet_handler</span> <span class="kn">import</span> <span class="n">PhasenetISP</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="kn">from</span> <span class="nn">surfquakecore.project.surf_project</span> <span class="kn">import</span> <span class="n">SurfProject</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1">### Set Paths to project file and output folder ###</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="n">path_to_project</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/test_surfquake_core/project/surfquake_project.pkl&quot;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">output_picks</span> <span class="o">=</span> <span class="s1">&#39;/Volumes/LaCie/test_surfquake_core/test_picking&#39;</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>    <span class="n">freeze_support</span><span class="p">()</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a>    <span class="c1"># Load project</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>    <span class="n">sp_loaded</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">path_to_project</span><span class="p">)</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="c1"># Instantiate the class PhasenetISP</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a>    <span class="n">phISP</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp_loaded</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.65</span><span class="p">)</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a>    <span class="c1"># Running Stage</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="n">picks</span> <span class="o">=</span> <span class="n">phISP</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot; PHASENET OUTPUT TO REAL INPUT &quot;&quot;&quot;</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
 
-<h2 id="run-phase-picker-from-cli">Run Phase Picker from CLI</h2>
-<div class="codehilite"><pre><span></span><code>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/projectssurfquake_project_new.pkl<span class="w"> </span>-d<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/picks<span class="w"> </span>-p<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-s<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
-</code></pre></div></div>
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
 
-        <footer class="col-md-12">
-            <hr>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../js/base.js" defer></script>
-        <script src="../search/main.js" defer></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
-                <form>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
-                    </div>
-                </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            </div>
-            <div class="modal-body">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th style="width: 20%;">Keys</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="help shortcut"><kbd>?</kbd></td>
-                    <td>Open this help</td>
-                  </tr>
-                  <tr>
-                    <td class="next shortcut"><kbd>n</kbd></td>
-                    <td>Next page</td>
-                  </tr>
-                  <tr>
-                    <td class="prev shortcut"><kbd>p</kbd></td>
-                    <td>Previous page</td>
-                  </tr>
-                  <tr>
-                    <td class="search shortcut"><kbd>s</kbd></td>
-                    <td>Search</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-
-    </body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
 </html>
