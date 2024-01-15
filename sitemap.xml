@@ -2,17 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://github.com/rcabdia/SurfQuakeCore/</loc>
-         <lastmod>2024-01-03</lastmod>
+         <lastmod>2024-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/rcabdia/SurfQuakeCore/associate/</loc>
+         <lastmod>2024-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/rcabdia/SurfQuakeCore/locate/</loc>
+         <lastmod>2024-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/rcabdia/SurfQuakeCore/picker/</loc>
-         <lastmod>2024-01-03</lastmod>
+         <lastmod>2024-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://github.com/rcabdia/SurfQuakeCore/project/</loc>
-         <lastmod>2024-01-03</lastmod>
+         <lastmod>2024-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
