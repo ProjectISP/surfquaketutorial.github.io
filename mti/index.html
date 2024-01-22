@@ -534,6 +534,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mti-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      MTI Config File
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#mti-from-cli" class="md-nav__link">
     <span class="md-ellipsis">
       MTI from CLI
@@ -586,6 +595,24 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#example-using-library" class="md-nav__link">
     <span class="md-ellipsis">
       Example using library
@@ -626,119 +653,304 @@
 <p>The events foocal mechanism is estimated using a optimized version of Bayesian Isola (<a href="https://academic.oup.com/gji/article/210/2/693/3747443">Vackâr et al., 2017</a>). The MTI is run automatically over a set of events. The events can be selected quering the database through the GUI, giving a folder path with mti_config.ini files or even crating obsject for each event and the running the inversion from th cor library.</p>
 <h2 id="mti-gui">MTI GUI</h2>
 <p><img alt="Screenshot" src="../img/mti.png" /></p>
+<ul>
+<li>
+<p>Working Framework:</p>
+<ul>
+<li>
+<p>Working Dirctory (no required): Folder where Green functions a temporal files will be saved.</p>
+</li>
+<li>
+<p>Output Directory: Rooth path to the folder where output from event inversions will be saved.</p>
+</li>
+<li>
+<p>Earth Model File: File path to he earth model. An example as follows:</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Crustal model                  IBERIA
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>number of layers 
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   7
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Parameters of the layers
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>depth of layer top(km)   Vp(km/s)    Vs(km/s)    Rho(g/cm**3)    Qp     Qs
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      0.0                 6.10       3.490        2.920         300    300
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     11.0                 6.40       3.660        2.980         300    300
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     24.0                 6.90       3.940        3.080         300    300
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     31.0                 8.00       4.570        3.300         300    300
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>     45.6                 8.04       4.474        3.308         300    300
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>     56.2                 8.04       4.478        3.309         300    300
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     66.9                 8.04       4.481        3.309         300    300
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>*************************************************************************
+</code></pre></div>
+<ul>
+<li>
+<p>Grid search: Defines a geographic grid centered in the estimated hypocenter where surfquake will proceed with the search of the best MTI.</p>
+<ul>
+<li>
+<p>Horizontal Location Uncertainity: Maximum horizontal range of the search.</p>
+</li>
+<li>
+<p>Horizontal search step: Horizontal resolution of the grid search.</p>
+</li>
+<li>
+<p>Depth Uncertainty: Maximum vertical range of the search.</p>
+</li>
+<li>
+<p>Depth Search step: Vertical resolution of the grid search.</p>
+</li>
+<li>
+<p>Time Uncertainity: Time shift around the event origin time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Inversion Parameters: Defines parameters realtd to the source and the inversion process.</p>
+</li>
+<li>Traces Selection Criteria: Defin the criteria to include or not seismograms to your inversion</li>
+</ul>
+<p>Now, that you have parametrized your inversion follow the steps:</p>
+<ol>
+<li>Inside Project: Load your project and load your Metadata.</li>
+<li>Inside The DataBase dedicated GUI.<ul>
+<li>Fill your DataBase loading that files from the folder where you have the location files.</li>
+<li>Not required but very recommended populate your DataBase with the information from the output of Source. This will give the database information about Magnitudes and will facilitate the MTI.</li>
+</ul>
+</li>
+<li>Make a Query to filter your Database</li>
+<li>Without closing DataBase GUI, press <strong>Run Inversion</strong>.</li>
+<li>Track the evolution of your inversions in the output dirctory, finally press print Results.</li>
+<li>Populate your dataBase with the information from the output of MTIs.</li>
+</ol>
+<h2 id="mti-config-file">MTI Config File</h2>
+<p>In the following sections CLI and Core library the user can use mti_config.ini files to define each event where surfquake will carry out the MTIs. You can storage a single event per file. So, place all files inside the same folder. Please find here an example of mti_config.ini file (the name of the .ini file doen't matter just extension .ini).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[ORIGIN]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ORIGIN_DATE = 21/08/2018 00:28:57.000
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>LATITUDE = 42.7059
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>LONGITUDE= -7.6974
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>DEPTH_KM = 11.0
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>MAGNITUDE = 3.5
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>[STATIONS_AND_CHANNELS]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a># add the station name follow by channels split by a comma , and use .+ for all channels
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>ELOB = HHZ, HHN, HHE 
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>EPON = .+
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>EMAZ = .+
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>[MTI_PARAMETERS]
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>EARTH_MODEL_FILE = /earth_models/Iberia.dat
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>LOCATION_UNC = 3000
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>TIME_UNC = 0.5
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>DEVIATORIC = True
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>DEPTH_UNC = 3000
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>COVARIANCE = True
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>RUPTURE_VELOCITY = 2500
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>SOURCE_TYPE = Triangle
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>MIN_DIST = 50
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>MAX_DIST = 500
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>SOURCE_DURATION= 2
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>[SIGNAL_PROCESSING]
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>REMOVE_RESPONSE = True
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>MAX_FREQ = 0.08
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>MIN_FREQ = 0.04
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>RMS_THRESH = 5.0
+</code></pre></div>
 <h2 id="mti-from-cli">MTI from CLI</h2>
 <h3 id="usage">Usage</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span><span class="o">[</span>inventory_file_path<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>path_to_project<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>mti_config_file.ini<span class="o">]</span><span class="w"> </span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">        </span>-o<span class="w"> </span><span class="o">[</span>output_path<span class="o">]</span><span class="w">  </span>-s<span class="w"> </span><span class="o">[</span><span class="k">if</span><span class="w"> </span>save<span class="w"> </span>plots<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span><span class="o">[</span>inventory_file_path<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>path_to_project<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>mti_config_file.ini<span class="o">]</span><span class="w"> </span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span>-o<span class="w"> </span><span class="o">[</span>output_path<span class="o">]</span><span class="w">  </span>-s<span class="w"> </span><span class="o">[</span><span class="k">if</span><span class="w"> </span>save<span class="w"> </span>plots<span class="o">]</span>
 </code></pre></div>
 <h3 id="interactive-help">Interactive help</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-h
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-h
 </code></pre></div>
 <h3 id="run-mti-from-cli">Run MTI from CLI</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span>/mti_run_inversion_resources/inv_surfquakecore.xml<span class="w"> </span>-p<span class="w"> </span>/project/surfquake_project_mti.pkl<span class="w"> </span>-o<span class="w"> </span>/test_mti<span class="w"> </span>-c<span class="w"> </span>/surfquake_test/mti_configs<span class="w"> </span>-s
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span>/mti_run_inversion_resources/inv_surfquakecore.xml<span class="w"> </span>-p<span class="w"> </span>/project/surfquake_project_mti.pkl<span class="w"> </span>-o<span class="w"> </span>/test_mti<span class="w"> </span>-c<span class="w"> </span>/surfquake_test/mti_configs<span class="w"> </span>-s
 </code></pre></div>
 <h2 id="mti-from-library">MTI from Library</h2>
+<h3 id="classes">Classes</h3>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/moment_tensor/sq_isola_tools/sq_bayesian_isola.py"><code>BayesianIsolaCore</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span> <span class="nc">BayesianIsolaCore</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="p">:</span> <span class="n">SurfProject</span><span class="p">,</span> <span class="n">inventory_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                 <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">save_plots</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sd">        :param project: SurfProject object</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="sd">        :param inventory_file: File to the metadata file</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="sd">        :param output_directory: Root path to the output directory where inversion results will be saved</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="sd">        :param save_plots: if figures summarizing the results for each inversion are desired</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<h3 id="methods">Methods</h3>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/moment_tensor/sq_isola_tools/sq_bayesian_isola.py"><code>run_inversion</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># instance method</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span> <span class="nf">run_inversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mti_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MomentTensorInversionConfig</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sd">    This method should be to loop over config files and run the inversion.</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">    Previously it is needed to load the project and metadata.</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">    Args:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="sd">        mti_config: Either a directory of .ini files, a .ini file or an instance of MomentTensorInversionConfig</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="sd">        **kwargs:</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/moment_tensor/mti_parse.py"><code>read_isola_result</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">read_isola_result</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MomentTensorResult</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="sd">    Reads the ISOLA-ObsPy output inversion.json file.</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sd">    :param file: The location of inversion.json from isola.</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="sd">    :return: Dict</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></p>
 <h3 id="example-using-library">Example using library</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-3-10">10</a></span>
-<span class="normal"><a href="#__codelineno-3-11">11</a></span>
-<span class="normal"><a href="#__codelineno-3-12">12</a></span>
-<span class="normal"><a href="#__codelineno-3-13">13</a></span>
-<span class="normal"><a href="#__codelineno-3-14">14</a></span>
-<span class="normal"><a href="#__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#__codelineno-3-16">16</a></span>
-<span class="normal"><a href="#__codelineno-3-17">17</a></span>
-<span class="normal"><a href="#__codelineno-3-18">18</a></span>
-<span class="normal"><a href="#__codelineno-3-19">19</a></span>
-<span class="normal"><a href="#__codelineno-3-20">20</a></span>
-<span class="normal"><a href="#__codelineno-3-21">21</a></span>
-<span class="normal"><a href="#__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#__codelineno-3-23">23</a></span>
-<span class="normal"><a href="#__codelineno-3-24">24</a></span>
-<span class="normal"><a href="#__codelineno-3-25">25</a></span>
-<span class="normal"><a href="#__codelineno-3-26">26</a></span>
-<span class="normal"><a href="#__codelineno-3-27">27</a></span>
-<span class="normal"><a href="#__codelineno-3-28">28</a></span>
-<span class="normal"><a href="#__codelineno-3-29">29</a></span>
-<span class="normal"><a href="#__codelineno-3-30">30</a></span>
-<span class="normal"><a href="#__codelineno-3-31">31</a></span>
-<span class="normal"><a href="#__codelineno-3-32">32</a></span>
-<span class="normal"><a href="#__codelineno-3-33">33</a></span>
-<span class="normal"><a href="#__codelineno-3-34">34</a></span>
-<span class="normal"><a href="#__codelineno-3-35">35</a></span>
-<span class="normal"><a href="#__codelineno-3-36">36</a></span>
-<span class="normal"><a href="#__codelineno-3-37">37</a></span>
-<span class="normal"><a href="#__codelineno-3-38">38</a></span>
-<span class="normal"><a href="#__codelineno-3-39">39</a></span>
-<span class="normal"><a href="#__codelineno-3-40">40</a></span>
-<span class="normal"><a href="#__codelineno-3-41">41</a></span>
-<span class="normal"><a href="#__codelineno-3-42">42</a></span>
-<span class="normal"><a href="#__codelineno-3-43">43</a></span>
-<span class="normal"><a href="#__codelineno-3-44">44</a></span>
-<span class="normal"><a href="#__codelineno-3-45">45</a></span>
-<span class="normal"><a href="#__codelineno-3-46">46</a></span>
-<span class="normal"><a href="#__codelineno-3-47">47</a></span>
-<span class="normal"><a href="#__codelineno-3-48">48</a></span>
-<span class="normal"><a href="#__codelineno-3-49">49</a></span>
-<span class="normal"><a href="#__codelineno-3-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">iimport</span> <span class="n">os</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="kn">from</span> <span class="nn">surfquakecore.moment_tensor.mti_parse</span> <span class="kn">import</span> <span class="n">read_isola_log</span><span class="p">,</span> <span class="n">read_isola_result</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="kn">from</span> <span class="nn">surfquakecore.moment_tensor.sq_isola_tools.sq_bayesian_isola</span> <span class="kn">import</span> <span class="n">BayesianIsolaCore</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="kn">from</span> <span class="nn">surfquakecore.project.surf_project</span> <span class="kn">import</span> <span class="n">SurfProject</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="k">def</span> <span class="nf">list_files_with_iversion_json</span><span class="p">(</span><span class="n">root_folder</span><span class="p">):</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a>    <span class="n">iversion_json_files</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a>    <span class="k">for</span> <span class="n">foldername</span><span class="p">,</span> <span class="n">subfolders</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">root_folder</span><span class="p">):</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a>        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s2">&quot;iversion.json&quot;</span><span class="p">:</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a>                <span class="n">iversion_json_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a>    <span class="k">return</span> <span class="n">iversion_json_files</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a>    <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a>    <span class="n">resource_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s2">&quot;mti&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a>    <span class="n">inventory_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;inventories&quot;</span><span class="p">,</span> <span class="s2">&quot;inv_surfquakecore.xml&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a>    <span class="n">data_dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;waveforms&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a>    <span class="n">path_to_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;project&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a>    <span class="n">path_to_configfiles</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;list_earthquakes&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a>    <span class="n">working_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;working_directory&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24"></a>    <span class="n">output_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25"></a>
-<a id="__codelineno-3-26" name="__codelineno-3-26"></a>    <span class="c1"># Load the Project</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27"></a>    <span class="n">project_name</span> <span class="o">=</span> <span class="s2">&quot;mti_project.pkl&quot;</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28"></a>    <span class="n">path_to_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_project</span><span class="p">,</span> <span class="n">project_name</span><span class="p">)</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="p">(</span><span class="n">path_to_project</span><span class="p">)</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">search_files</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32"></a>
-<a id="__codelineno-3-33" name="__codelineno-3-33"></a>
-<a id="__codelineno-3-34" name="__codelineno-3-34"></a>    <span class="c1"># Build the class</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35"></a>    <span class="n">bic</span> <span class="o">=</span> <span class="n">BayesianIsolaCore</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">sp</span><span class="p">,</span> <span class="n">inventory_file</span><span class="o">=</span><span class="n">inventory_path</span><span class="p">,</span> <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36"></a>                            <span class="n">save_plots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37"></a>
-<a id="__codelineno-3-38" name="__codelineno-3-38"></a>    <span class="c1"># Run Inversion</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39"></a>    <span class="n">bic</span><span class="o">.</span><span class="n">run_inversion</span><span class="p">(</span><span class="n">mti_config</span><span class="o">=</span><span class="n">path_to_configfiles</span><span class="p">)</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished Inversion&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41"></a>    <span class="n">iversion_json_files</span> <span class="o">=</span> <span class="n">list_files_with_iversion_json</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
-<a id="__codelineno-3-42" name="__codelineno-3-42"></a>
-<a id="__codelineno-3-43" name="__codelineno-3-43"></a>    <span class="k">for</span> <span class="n">result_file</span> <span class="ow">in</span> <span class="n">iversion_json_files</span><span class="p">:</span>
-<a id="__codelineno-3-44" name="__codelineno-3-44"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">read_isola_result</span><span class="p">(</span><span class="n">result_file</span><span class="p">)</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46"></a>
-<a id="__codelineno-3-47" name="__codelineno-3-47"></a>    <span class="c1"># example of reading log_output file</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48"></a>    <span class="c1"># for r in bic.results:</span>
-<a id="__codelineno-3-49" name="__codelineno-3-49"></a>    <span class="c1">#     read_isola_log(r)</span>
-<a id="__codelineno-3-50" name="__codelineno-3-50"></a>    <span class="c1">#print(results.keys())</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span>
+<span class="normal"><a href="#__codelineno-8-40">40</a></span>
+<span class="normal"><a href="#__codelineno-8-41">41</a></span>
+<span class="normal"><a href="#__codelineno-8-42">42</a></span>
+<span class="normal"><a href="#__codelineno-8-43">43</a></span>
+<span class="normal"><a href="#__codelineno-8-44">44</a></span>
+<span class="normal"><a href="#__codelineno-8-45">45</a></span>
+<span class="normal"><a href="#__codelineno-8-46">46</a></span>
+<span class="normal"><a href="#__codelineno-8-47">47</a></span>
+<span class="normal"><a href="#__codelineno-8-48">48</a></span>
+<span class="normal"><a href="#__codelineno-8-49">49</a></span>
+<span class="normal"><a href="#__codelineno-8-50">50</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">iimport</span> <span class="n">os</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">surfquakecore.moment_tensor.mti_parse</span> <span class="kn">import</span> <span class="n">read_isola_log</span><span class="p">,</span> <span class="n">read_isola_result</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">from</span> <span class="nn">surfquakecore.moment_tensor.sq_isola_tools.sq_bayesian_isola</span> <span class="kn">import</span> <span class="n">BayesianIsolaCore</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kn">from</span> <span class="nn">surfquakecore.project.surf_project</span> <span class="kn">import</span> <span class="n">SurfProject</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="k">def</span> <span class="nf">list_files_with_iversion_json</span><span class="p">(</span><span class="n">root_folder</span><span class="p">):</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>    <span class="n">iversion_json_files</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>    <span class="k">for</span> <span class="n">foldername</span><span class="p">,</span> <span class="n">subfolders</span><span class="p">,</span> <span class="n">filenames</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">root_folder</span><span class="p">):</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s2">&quot;iversion.json&quot;</span><span class="p">:</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>                <span class="n">iversion_json_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">foldername</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a>    <span class="k">return</span> <span class="n">iversion_json_files</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a>    <span class="n">resource_root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s2">&quot;mti&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>    <span class="n">inventory_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;inventories&quot;</span><span class="p">,</span> <span class="s2">&quot;inv_surfquakecore.xml&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a>    <span class="n">data_dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;waveforms&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="n">path_to_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;project&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>    <span class="n">path_to_configfiles</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;list_earthquakes&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a>    <span class="n">working_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;working_directory&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>    <span class="n">output_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resource_root</span><span class="p">,</span> <span class="s2">&quot;output_directory&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a>    <span class="c1"># Load the Project</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a>    <span class="n">project_name</span> <span class="o">=</span> <span class="s2">&quot;mti_project.pkl&quot;</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a>    <span class="n">path_to_project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_to_project</span><span class="p">,</span> <span class="n">project_name</span><span class="p">)</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="p">(</span><span class="n">path_to_project</span><span class="p">)</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">search_files</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a>    <span class="c1"># Build the class</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35"></a>    <span class="n">bic</span> <span class="o">=</span> <span class="n">BayesianIsolaCore</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">sp</span><span class="p">,</span> <span class="n">inventory_file</span><span class="o">=</span><span class="n">inventory_path</span><span class="p">,</span> <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36"></a>                            <span class="n">save_plots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37"></a>
+<a id="__codelineno-8-38" name="__codelineno-8-38"></a>    <span class="c1"># Run Inversion</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39"></a>    <span class="n">bic</span><span class="o">.</span><span class="n">run_inversion</span><span class="p">(</span><span class="n">mti_config</span><span class="o">=</span><span class="n">path_to_configfiles</span><span class="p">)</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished Inversion&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41"></a>    <span class="n">iversion_json_files</span> <span class="o">=</span> <span class="n">list_files_with_iversion_json</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42"></a>
+<a id="__codelineno-8-43" name="__codelineno-8-43"></a>    <span class="k">for</span> <span class="n">result_file</span> <span class="ow">in</span> <span class="n">iversion_json_files</span><span class="p">:</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">read_isola_result</span><span class="p">(</span><span class="n">result_file</span><span class="p">)</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<a id="__codelineno-8-46" name="__codelineno-8-46"></a>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a>    <span class="c1"># example of reading log_output file</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48"></a>    <span class="c1">#for r in bic.results:</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49"></a>    <span class="c1">#     read_isola_log(r)</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50"></a>    <span class="c1">#print(results.keys())</span>
 </code></pre></div></td></tr></table></div>
+<p>Alternatively, if you want you would prefer crat moment tensor config objects rather than point to a folder with .ini files. Then, crate objects like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">mti_configs</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Create an empty list to storage mti configurations</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">date_str</span> <span class="o">=</span> <span class="s2">&quot;28/02/2022 02:07:59.433&quot;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">origin_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_str</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y %H:%M:%S.</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># still implementing test</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">mti_config1</span> <span class="o">=</span> <span class="n">MomentTensorInversionConfig</span><span class="p">(</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">origin_date</span><span class="o">=</span><span class="n">origin_date</span><span class="p">,</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">latitude</span><span class="o">=</span><span class="mf">42.5414</span><span class="p">,</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="n">longitude</span><span class="o">=</span><span class="mf">1.4505</span><span class="p">,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="n">depth_km</span><span class="o">=</span><span class="mf">5.75</span><span class="p">,</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">magnitude</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">stations</span><span class="o">=</span><span class="p">[</span><span class="n">StationConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TEST1&quot;</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NNH&quot;</span><span class="p">,</span> <span class="s2">&quot;NNZ&quot;</span><span class="p">,</span> <span class="s2">&quot;NNE&quot;</span><span class="p">]),</span> 
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="n">StationConfig</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;TEST2&quot;</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NNH&quot;</span><span class="p">,</span> <span class="s2">&quot;NNZ&quot;</span><span class="p">,</span> <span class="s2">&quot;NNE&quot;</span><span class="p">])],</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="n">inversion_parameters</span><span class="o">=</span><span class="n">InversionParameters</span><span class="p">(</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>        <span class="n">earth_model_file</span><span class="o">=</span><span class="s2">&quot;earthmodel/Iberia.txt&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>        <span class="n">location_unc</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="n">time_unc</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        <span class="n">depth_unc</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        <span class="n">source_duration</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>        <span class="n">rupture_velocity</span><span class="o">=</span><span class="mf">2500.</span><span class="p">,</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="n">min_dist</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        <span class="n">max_dist</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>        <span class="n">source_type</span><span class="o">=</span><span class="s1">&#39;PointSource&#39;</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>    <span class="p">),</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="p">)</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="n">mti_cnfig2</span> <span class="o">=</span> <span class="n">MomentTensorInversionConfig</span><span class="p">(</span><span class="o">....</span><span class="p">)</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="o">........</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="n">mti_configs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mti_config1</span><span class="p">,</span> <span class="n">mti_config2</span> <span class="o">....</span> <span class="p">]</span>
+</code></pre></div>
+<p>Then</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">for</span> <span class="n">mti_config</span> <span class="ow">in</span> <span class="n">list_of_mti_configs</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">bic</span><span class="o">.</span><span class="n">run_inversion</span><span class="p">(</span><span class="n">mti_config</span><span class="o">=</span><span class="n">mti_config</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">iversion_json_files</span> <span class="o">=</span> <span class="n">list_files_with_iversion_json</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="k">for</span> <span class="n">result_file</span> <span class="ow">in</span> <span class="n">iversion_json_files</span><span class="p">:</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">read_isola_result</span><span class="p">(</span><span class="n">result_file</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
 
 
 
