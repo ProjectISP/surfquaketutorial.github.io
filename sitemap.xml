@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://github.com/rcabdia/SurfQuakeCore/mti/</loc>
+         <lastmod>2024-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://github.com/rcabdia/SurfQuakeCore/picker/</loc>
          <lastmod>2024-01-22</lastmod>
          <changefreq>daily</changefreq>
