@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://github.com/rcabdia/SurfQuakeCore/db/</loc>
+         <lastmod>2024-01-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://github.com/rcabdia/SurfQuakeCore/locate/</loc>
          <lastmod>2024-01-22</lastmod>
          <changefreq>daily</changefreq>
