@@ -725,9 +725,9 @@
                   
 
 
-<h1 id="autamatic-moment-tensor-inversion">Autamatic Moment Tensor Inversion</h1>
-<p>The events foocal mechanism is estimated using a optimized version of Bayesian Isola (<a href="https://academic.oup.com/gji/article/210/2/693/3747443">Vackâr et al., 2017</a>). The MTI is run automatically over a set of events. The events can be selected quering the database through the GUI, giving a folder path with mti_config.ini files or even crating obsject for each event and the running the inversion from th cor library.</p>
-<h2 id="mti-gui">MTI GUI</h2>
+<h1 id="autamatic-moment-tensor-inversion"><span style="color:darkcyan;"><strong>Autamatic Moment Tensor Inversion</strong></span></h1>
+<p>The events foocal mechanism is estimated using a optimized version of Bayesian Isola (<a href="https://academic.oup.com/gji/article/210/2/693/3747443"><span style="color:#5DADE2;">Vackâr et al., 2017</span></a>). The MTI is run automatically over a set of events. The events can be selected quering the database through the GUI, giving a folder path with mti_config.ini files or even crating obsject for each event and the running the inversion from th cor library.</p>
+<h2 id="mti-gui"><span style="color:darkcyan;"><strong>MTI GUI</strong></span></h2>
 <p><img alt="Screenshot" src="../img/mti.png" /></p>
 <ul>
 <li>
@@ -798,7 +798,7 @@
 <li>Track the evolution of your inversions in the output dirctory, finally press print Results.</li>
 <li>Populate your dataBase with the information from the output of MTIs.</li>
 </ol>
-<h2 id="mti-config-file">MTI Config File</h2>
+<h2 id="mti-config-file"><span style="color:darkcyan;"><strong>MTI Config File</strong></span></h2>
 <p>In the following sections CLI and Core library the user can use mti_config.ini files to define each event where surfquake will carry out the MTIs. You can storage a single event per file. So, place all files inside the same folder. Please find here an example of mti_config.ini file (the name of the .ini file doen't matter just extension .ini).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[ORIGIN]
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ORIGIN_DATE = 21/08/2018 00:28:57.000
@@ -832,7 +832,7 @@
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>MIN_FREQ = 0.04
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>RMS_THRESH = 5.0
 </code></pre></div>
-<h2 id="mti-from-cli">MTI from CLI</h2>
+<h2 id="mti-from-cli"><span style="color:darkcyan;"><strong>MTI from CLI</strong></span></h2>
 <h3 id="usage">Usage</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span><span class="o">[</span>inventory_file_path<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>path_to_project<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>mti_config_file.ini<span class="o">]</span><span class="w"> </span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span>-o<span class="w"> </span><span class="o">[</span>output_path<span class="o">]</span><span class="w">  </span>-s<span class="w"> </span><span class="o">[</span><span class="k">if</span><span class="w"> </span>save<span class="w"> </span>plots<span class="o">]</span>
@@ -843,7 +843,7 @@
 <h3 id="run-mti-from-cli">Run MTI from CLI</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span>/mti_run_inversion_resources/inv_surfquakecore.xml<span class="w"> </span>-p<span class="w"> </span>/project/surfquake_project_mti.pkl<span class="w"> </span>-o<span class="w"> </span>/test_mti<span class="w"> </span>-c<span class="w"> </span>/surfquake_test/mti_configs<span class="w"> </span>-s
 </code></pre></div>
-<h2 id="mti-from-library">MTI from Library</h2>
+<h2 id="mti-from-library"><span style="color:darkcyan;"><strong>MTI from Library</strong></span></h2>
 <h3 id="classes">Classes</h3>
 <p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/moment_tensor/sq_isola_tools/sq_bayesian_isola.py"><code>BayesianIsolaCore</code></a>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span> <span class="nc">BayesianIsolaCore</span><span class="p">:</span>

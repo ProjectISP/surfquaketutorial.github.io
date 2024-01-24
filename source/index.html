@@ -716,9 +716,9 @@
                   
 
 
-<h1 id="source-parameters">Source Parameters</h1>
-<p>The tool Source Parameters is designed to estimate events source parameters (i.e., Mw, ML, seismic moment, corner frequency, radiated energy, source size and stress drop) and the attenuation parameters (t-star, quality factor). It is based in the implementation of <a href="https://sourcespec.readthedocs.io/en/stable/index.html">Satrinano et al., 2023</a>. A detailed theoretical background can be found <a href="https://sourcespec.readthedocs.io/en/stable/theoretical_background.html#overview">here</a></p>
-<h2 id="source-parameters-gui">Source Parameters GUI</h2>
+<h1 id="source-parameters"><span style="color:darkcyan;"><strong>Source Parameters</strong></span></h1>
+<p>The tool Source Parameters is designed to estimate events source parameters (i.e., Mw, ML, seismic moment, corner frequency, radiated energy, source size and stress drop) and the attenuation parameters (t-star, quality factor). It is based in the implementation of <a href="https://sourcespec.readthedocs.io/en/stable/index.html"><span style="color:#5DADE2;">Satrinano et al., 2023</span></a>. A detailed theoretical background can be found <a href="https://sourcespec.readthedocs.io/en/stable/theoretical_background.html#overview">here</a></p>
+<h2 id="source-parameters-gui"><span style="color:darkcyan;"><strong>Source Parameters GUI</strong></span></h2>
 <p><img alt="Screenshot" src="../img/source.png" /></p>
 <ul>
 <li>Time Window Parameters<ul>
@@ -744,7 +744,7 @@
 </li>
 <li>Local Magnitude: Local magnitude parameters: ml = log10(A) + a * log10(R/100) + b * (R-100) + c, where A is the maximum W-A amplitude (in mm) and R is the hypocentral distance (in km)</li>
 </ul>
-<h2 id="config-file">Config file</h2>
+<h2 id="config-file"><span style="color:darkcyan;"><strong>Config file</strong></span></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Config file for source_spec
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a># GENERAL PARAMETERS --------
@@ -1286,7 +1286,7 @@
 <a id="__codelineno-0-539" name="__codelineno-0-539" href="#__codelineno-0-539"></a>smi_focal_mechanism_template = string(default=&quot;$SMI_BASE/FocalMechanism/Origin/$ORIGIN_ID#sourcespec&quot;)
 <a id="__codelineno-0-540" name="__codelineno-0-540" href="#__codelineno-0-540"></a># -----------------QUAKEML PARAMETERS
 </code></pre></div>
-<h2 id="source-parameters-from-cli">Source Parameters from CLI</h2>
+<h2 id="source-parameters-from-cli"><span style="color:darkcyan;"><strong>Source Parameters from CLI</strong></span></h2>
 <h3 id="usage">Usage</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span><span class="nb">source</span><span class="w"> </span>parameters<span class="w"> </span>estimation<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-i<span class="w"> </span>INVENTORY_FILE_PATH<span class="w"> </span>-p<span class="w"> </span>PROJECT_FILE_PATH<span class="w"> </span>-c<span class="w"> </span>CONFIG_FILE_PATH<span class="w"> </span>-l<span class="w"> </span>LOC_FILES_PATH<span class="w"> </span><span class="o">[</span>-t<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span>OUTPUT_DIR_PATH
 </code></pre></div>
