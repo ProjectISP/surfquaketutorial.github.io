@@ -483,7 +483,7 @@
         <li class="md-nav__item">
   <a href="#project-gui" class="md-nav__link">
     <span class="md-ellipsis">
-      Project GUI
+       Project GUI 
     </span>
   </a>
   
@@ -492,7 +492,7 @@
         <li class="md-nav__item">
   <a href="#project-from-cli" class="md-nav__link">
     <span class="md-ellipsis">
-      Project from CLI
+       Project from CLI 
     </span>
   </a>
   
@@ -543,7 +543,7 @@
         <li class="md-nav__item">
   <a href="#project-from-library" class="md-nav__link">
     <span class="md-ellipsis">
-      Project from library
+       Project from library 
     </span>
   </a>
   
@@ -728,7 +728,7 @@
 <h1 id="create-your-project">Create your project</h1>
 <p>In surfQuake a project is simply a python object that can store in its attributes the path to valid seismogram files plus the associated metadata. This strategy allows to proceed with fast filters or join different projects. Project is the necessary input for the toolboxes Picker, Associator, Event Locator, Seismic Source and MTI.</p>
 <p>Here we will explain how the user can manage a project and be ready to proceed with the rest of toolboxes.</p>
-<h2 id="project-gui">Project GUI</h2>
+<h2 id="project-gui"><span style="color:orangered;"> <strong>Project GUI</strong> </span></h2>
 <p>We start with the GUI. This is a screenshot of the Project GUI.</p>
 <p><img alt="Screenshot" src="../img/project.png" /></p>
 <p>First, you need to choose between: </p>
@@ -749,7 +749,7 @@
 <li><span style="color:#8E44AD">Metadata</span> (https://docs.obspy.org/tutorial/code_snippets/stationxml_file_from_scratch.html): Metadata file with the in there is information structured as a dictionary nets/stations/channels. Personally, the best way to make your own metadata file is using either the java software <a href="https://ds.iris.edu/ds/nodes/dmc/software/downloads/pdcc/">PDCC</a> or going to the <a href="https://smp.gempa.de/">API Station Management Portal</a>.</li>
 </ul>
 <p><img alt="Screenshot" src="../img/metadata_structure.png" /></p>
-<h2 id="project-from-cli">Project from CLI</h2>
+<h2 id="project-from-cli"><span style="color:orangered;"> <strong>Project from CLI</strong> </span></h2>
 <h3 id="overview">Overview</h3>
 <p>This command allows you to create a seismic project, which is essentially a dictionary
 storing the paths to seismogram files along with their corresponding metadata.</p>
@@ -763,7 +763,7 @@ storing the paths to seismogram files along with their corresponding metadata.</
 <p>In your termina, activate sufquake enviroment to have access to the commands. Then:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data<span class="w"> </span>-s<span class="w"> </span>/Volumes/LaCie/test_surfquake_core/testing_data/projects<span class="w"> </span>-n<span class="w"> </span>/surfquake_project_new.pkl<span class="w"> </span>--verbose
 </code></pre></div>
-<h2 id="project-from-library">Project from library</h2>
+<h2 id="project-from-library"><span style="color:orangered;"> <strong>Project from library</strong> </span></h2>
 <h3 id="classes">Classes</h3>
 <p>In this section, we will explain the class SurfProject and we will explain how to manage your project from a simple example:</p>
 <p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/project/surf_project.py"><code>SurfProject</code></a></p>
