@@ -1,0 +1,1162 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuakeCore/utils/">
+      
+      
+        <link rel="prev" href="../db/">
+      
+      
+      
+      <link rel="icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Utilities - </title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#utilities" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="" class="md-header__button md-logo" aria-label="" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Utilities
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../install/" class="md-tabs__link">
+        
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../project/" class="md-tabs__link">
+        
+  
+    
+  
+  Project
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../picker/" class="md-tabs__link">
+        
+  
+    
+  
+  Phase Picker
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../associate/" class="md-tabs__link">
+        
+  
+    
+  
+  Event Associator
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../locate/" class="md-tabs__link">
+        
+  
+    
+  
+  Event Location
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../source/" class="md-tabs__link">
+        
+  
+    
+  
+  Source Parameters
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../mti/" class="md-tabs__link">
+        
+  
+    
+  
+  Moment Tensor Inversion
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../db/" class="md-tabs__link">
+        
+  
+    
+  
+  Data Base
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Utilities
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="" class="md-nav__button md-logo" aria-label="" data-md-component="logo">
+      
+  <img src="../img/logo.png" alt="logo">
+
+    </a>
+    
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Phase Picker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../associate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event Associator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Parameters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mti/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Moment Tensor Inversion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../db/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Utilities
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Utilities
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Metadata
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Metadata">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-metadata-from-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Metadata from CLI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Metadata from CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-create-metadatafrom-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run Create Metadatafrom CLI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-metadata-from-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Metadata from Library
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Metadata from Library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Class
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-using-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example using library
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage catalog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage catalog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manage-catalog-from-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Catalog from CLI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Catalog from CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive-help_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interactive help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-create-metadatafrom-cli_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run Create Metadatafrom CLI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-catalog-from-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manage Catalog from Library
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Catalog from Library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples-using-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples using library
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="utilities"><span style="color:darkcyan;"><strong>Utilities</strong></span></h1>
+<p>In this section we show some useful utilities to make easier how to create a metadata file and manage a catalog.</p>
+<h2 id="create-metadata"><span style="color:darkcyan;"><strong>Create Metadata</strong></span></h2>
+<h3 id="create-metadata-from-cli"><span style="color:darkcyan;"><strong>Create Metadata from CLI</strong></span></h3>
+<p>In many ocasions users only have a stations coordinates files. Other times they have the stations coordinates files and resp files (IMPORTANT: one per stations). In this context, we can use the csv2xml tool to create the metadata that is needed in sufquake for running many modules.</p>
+<p>First, the stations file must be in this simple way.</p>
+<div class="highlight"><pre><span></span><code>Net Station Lat Lon elevation start_date starttime end_date endtime
+WM ARNO 37.0988 -6.7322 117.0 2007-01-01  00:00:00 2050-12-31  23:59:59
+WM AVE 33.2981 -7.4133 230.0 2007-01-01  00:00:00 2050-12-31  23:59:59
+WM CART 37.5868 -1.0012 65.0 2007-01-01  00:00:00 2050-12-31  23:59:59
+WM CEU 35.8987 -5.3731 320.0 2007-01-01  00:00:00 2050-12-31  23:59:59
+WM CHAS 35.1837 -2.4304 110.0 2007-01-01  00:00:00 2050-12-31  23:59:59
+</code></pre></div>
+<p>Just separated by a simple space. Do not worry to much about starttime and end time. it can be something crazy like in the example. Optionally, the user can incorporate the root path where resp files are saved to be incorporated to the metadata.</p>
+<h4 id="usage">Usage</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>csv2xml<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>csv_file_path<span class="o">]</span><span class="w"> </span>-r<span class="w"> </span><span class="o">[</span>resp_files_path<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span><span class="o">[</span>output_path<span class="o">]</span><span class="w"> </span>-n<span class="w"> </span><span class="o">[</span>stations_xml_name<span class="o">]</span>
+</code></pre></div>
+<h4 id="interactive-help">Interactive help</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>csv2xml<span class="w"> </span>-h
+</code></pre></div>
+<h4 id="run-create-metadatafrom-cli">Run Create Metadatafrom CLI</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>csv2xml<span class="w"> </span>-c<span class="w"> </span>./stations_file.txt<span class="w"> </span>-r<span class="w"> </span>./resp_files_folder<span class="w"> </span>-o<span class="w"> </span>./output_path<span class="w"> </span>-n<span class="w"> </span>metadata.xml
+</code></pre></div>
+<h3 id="create-metadata-from-library"><span style="color:darkcyan;"><strong>Create Metadata from Library</strong></span></h3>
+<h4 id="class">Class</h4>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/create_station_xml.py"><code>Convert</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span> <span class="nc">Convert</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="n">resp_files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">file_path</span> <span class="o">=</span> <span class="n">file_path</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">respfiles</span> <span class="o">=</span> <span class="n">resp_files</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sep</span> <span class="o">=</span> <span class="n">sep</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">all_resps</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">respfiles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>             <span class="bp">self</span><span class="o">.</span><span class="n">check_resps</span><span class="p">()</span>
+</code></pre></div></p>
+<h4 id="method">Method</h4>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/create_station_xml.py"><code>create_stations_xml</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">create_stations_xml</span><span class="p">()</span>
+</code></pre></div></p>
+<h3 id="example-using-library">Example using library</h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span>
+<span class="normal"><a href="#__codelineno-5-8">8</a></span>
+<span class="normal"><a href="#__codelineno-5-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.create_station_xml</span> <span class="kn">import</span> <span class="n">Convert</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">stations_file</span> <span class="o">=</span> <span class="s2">&quot;/Users/roberto/Documents/python_notes/my_utils/test_data/coords.txt&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">path_dest</span> <span class="o">=</span> <span class="s2">&quot;/Users/roberto/Documents/python_notes/my_utils/test_data&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">resp_files</span> <span class="o">=</span> <span class="s2">&quot;/Users/roberto/Documents/python_notes/my_utils/resp_files&quot;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;metadata.xml&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">sc</span> <span class="o">=</span> <span class="n">Convert</span><span class="p">(</span><span class="n">stations_file</span><span class="p">,</span> <span class="n">resp_files</span><span class="o">=</span><span class="n">resp_files</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="n">data_map</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">create_stations_xml</span><span class="p">()</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="n">inventory</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">get_data_inventory</span><span class="p">(</span><span class="n">data_map</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="n">sc</span><span class="o">.</span><span class="n">write_xml</span><span class="p">(</span><span class="n">path_dest</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="manage-catalog"><span style="color:darkcyan;"><strong>Manage catalog</strong></span></h2>
+<h3 id="manage-catalog-from-cli"><span style="color:darkcyan;"><strong>Manage Catalog from CLI</strong></span></h3>
+<h4 id="usage_1">Usage</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>buildcatalog<span class="w"> </span>-e<span class="w"> </span><span class="o">[</span>path_event_files_folder<span class="o">]</span><span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>path_source_summary_file<span class="o">]</span><span class="w"> </span>-m<span class="w"> </span><span class="o">[</span>path_mti_summary_file<span class="o">]</span><span class="w"> </span>-t<span class="w"> </span><span class="o">[</span>type_of_catalog<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span><span class="o">[</span>path_to_ouput_folder<span class="o">]</span>
+</code></pre></div>
+<h4 id="interactive-help_1">Interactive help</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>buildcatalog<span class="w"> </span>-h
+</code></pre></div>
+<h4 id="run-create-metadatafrom-cli_1">Run Create Metadatafrom CLI</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>buildcatalog<span class="w"> </span>-e<span class="w"> </span>./locations<span class="w"> </span>-s<span class="w"> </span>source_summary.txt<span class="w"> </span>-m<span class="w"> </span>mti_source_summary.txt<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;QUAKEXML&quot;</span><span class="w"> </span>-o<span class="w"> </span>./catalog<span class="w"> </span>
+</code></pre></div>
+<h3 id="manage-catalog-from-library"><span style="color:darkcyan;"><strong>Manage Catalog from Library</strong></span></h3>
+<h4 id="classes">Classes</h4>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/manage_catalog.py"><code>BuildCatalog</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">class</span> <span class="nc">BuildCatalog</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loc_folder</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;QUAKEML&quot;</span><span class="p">,</span> <span class="n">source_summary_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mti_summary_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="sd">        BuildCatalog class helps to join information from all surfquake outputs and create a catalog</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="sd">        Attributes:</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="sd">        - loc_folder (str): Path to the folder where the user have the locations files *hyp</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="sd">        - output_path (str): Output folder path where catalog object and file will be saved</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="sd">        - format (str): https://docs.obspy.org/packages/autogen/obspy.core.event.Catalog.write.html</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="sd">        - source_summary_file (str): Path to the output file from source module</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="sd">        - mti_summary_file (str): Path to the output file from mti module</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="sd">        Methods:</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="sd">        - __init__(root_path): Initialize a new instance of BuildCatalog.</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="sd">        - __merge_info(catalog: Catalog): Merges the information from loc, source and mti</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="sd">        - build_catalog(): Starts the process to create the catalog from loc files, then calls __merge_info</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/manage_catalog.py"><code>WriteCatalog</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">class</span> <span class="nc">WriteCatalog</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_catalog</span><span class="p">):</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="sd">        WriteCatalog class helps to filter the catalog obj write in the most Readable</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="sd">        Attributes:</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="sd">        - path_catalog (str): Path to the pickle file saved when run build_catalog_loc from BuildCatalog class</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="sd">        Methods:</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="sd">        - __init__(root_path): Initialize a new instance of BuildCatalog.</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="sd">        - filter_time_catalog(verbose=True, **kwargs): filter the catalog in time span</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="sd">        - filter_geographic_catalog(verbose=True, **kwargs): filter the catalog in geographic contrain and magnitude</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="sd">        - write_catalog(catalog: Catalog, format, output_path)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="sd">        - write_catalog_surf(catalog: Union[Catalog, None], output_path)</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">path_catalog</span> <span class="o">=</span> <span class="n">path_catalog</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">catalog</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__test_catalog</span><span class="p">()</span>
+</code></pre></div></p>
+<h4 id="methods">Methods</h4>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/manage_catalog.py"><code>build_catalog_loc</code></a>
+Instance method from BuildCatalog Class
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span> <span class="nf">build_catalog_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/manage_catalog.py"><code>filter_time_catalog</code></a>
+Instance method from WriteCatalog Class
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>    <span class="k">def</span> <span class="nf">filter_time_catalog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="sd">        Filter the catalog readed in the class instantiation</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="sd">        verbose: bool:</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="sd">        **kwargs</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="sd">        starttime :str: starttime to filter the catalog in format %d/%m/%Y, %H:%M:%S.%f</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="sd">        endtime :str: endtime to filter the catalog in format %d/%m/%Y, %H:%M:%S.%f</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="sd">        example:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="sd">        wc = WriteCatalog(catalog_path)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="sd">        catalog_filtered = wc.filter_time_catalog(starttime=&quot;30/01/2022, 00:00:00.0&quot;,</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="sd">        endtime=&quot;20/02/2022, 00:00:00.0&quot;)</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="sd">        return :catalog obj:</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/manage_catalog.py"><code>filter_geographic_catalog</code></a>
+Instance method from WriteCatalog Class
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>    <span class="k">def</span> <span class="nf">filter_geographic_catalog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">catalog</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Catalog</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="sd">        Filter the catalog readed in the class instantiation or the catalog provided in bu the user when the method</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="sd">        is called</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="sd">        verbose: bool:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="sd">        catalog obj (optional), if not found it uses catalog from the catalog attribute</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="sd">        **kwargs --&gt; All keys must be used to filter success.</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="sd">        lat_min:float</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="sd">        lat_max:float</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="sd">        lon_min:float</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="sd">        lon_max:float</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="sd">        depth_min:float: km</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="sd">        depth_max:float: km</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="sd">        mag_min:float</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="sd">        mag_max:float</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="sd">        return :catalog obj:</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<h3 id="examples-using-library">Examples using library</h3>
+<p>First, We can join all infrmation from located events in your loc folder, with the information of magnitudes and source parameters plus the ourput from Moment Tensor.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span>
+<span class="normal"><a href="#__codelineno-14-5">5</a></span>
+<span class="normal"><a href="#__codelineno-14-6">6</a></span>
+<span class="normal"><a href="#__codelineno-14-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.manage_catalog</span> <span class="kn">import</span> <span class="n">BuildCatalog</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="n">path_events_folder</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/test_nll_loc&quot;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="n">path_source_file</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/catalog_output/sources.txt&quot;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/catalog_output&quot;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="n">bc</span> <span class="o">=</span> <span class="n">BuildCatalog</span><span class="p">(</span><span class="n">loc_folder</span><span class="o">=</span><span class="n">path_events_file</span><span class="p">,</span> <span class="n">source_summary_file</span><span class="o">=</span><span class="n">path_source_file</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a>                      <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;QUAKEML&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="n">bc</span><span class="o">.</span><span class="n">build_catalog_loc</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Secondly, We can play with the catalog, filtering it (filter_time_catalog and filter_geographic_catalog) or writing a human readable version using write_catalog_surf method.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span>
+<span class="normal"><a href="#__codelineno-15-14">14</a></span>
+<span class="normal"><a href="#__codelineno-15-15">15</a></span>
+<span class="normal"><a href="#__codelineno-15-16">16</a></span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.manage_catalog</span> <span class="kn">import</span> <span class="n">WriteCatalog</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">catalog_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/all_andorra/catalog/catalog_obj.pkl&quot;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/all_andorra/catalog/catalog_surf.txt&quot;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="n">wc</span> <span class="o">=</span> <span class="n">WriteCatalog</span><span class="p">(</span><span class="n">catalog_path</span><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">show_help</span><span class="p">())</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">filter_time_catalog</span><span class="p">)</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">filter_geographic_catalog</span><span class="p">)</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="n">catalog_filtered</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">filter_time_catalog</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;30/01/2022, 00:00:00.0&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;20/02/2022, 00:00:00.0&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="n">catalog_filtered</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">filter_geographic_catalog</span><span class="p">(</span><span class="n">catalog_filtered</span><span class="p">,</span> <span class="n">lat_min</span><span class="o">=</span><span class="mf">42.1</span><span class="p">,</span> <span class="n">lat_max</span><span class="o">=</span><span class="mf">43.0</span><span class="p">,</span> <span class="n">lon_min</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">lon_max</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a>                                                <span class="n">depth_min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">depth_max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mag_min</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span> <span class="n">mag_max</span><span class="o">=</span><span class="mf">3.9</span><span class="p">)</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="n">wc</span><span class="o">.</span><span class="n">write_catalog_surf</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="c1">#wc.write_catalog_surf(catalog=catalog_filtered, output_path=output_path)</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="c1"># Now you can also save the filtered catalog or even plot the catalog using common Obspy Methods</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="c1">#catalog_filtered.plot(projection=&#39;local&#39;)</span>
+</code></pre></div></td></tr></table></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/rcabdia/SurfQuakeCore" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ProgramSeismic" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+    
+  </body>
+</html>
