@@ -915,6 +915,33 @@ WM CHAS 35.1837 -2.4304 110.0 2007-01-01  00:00:00 2050-12-31  23:59:59
 <a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="n">sc</span><span class="o">.</span><span class="n">write_xml</span><span class="p">(</span><span class="n">path_dest</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="manage-catalog"><span style="color:darkcyan;"><strong>Manage catalog</strong></span></h2>
+<p>With this tool, the user can create an Obspy <a href="https://docs.obspy.org/packages/autogen/obspy.core.event.Catalog.html#obspy.core.event.Catalog"><span style="color:#5DADE2;">catalog</span></a> merging the information from the location, source spectrum and moment tensor inversion output. Finally, the user can filer the catalog by time spam or geographically. We have added a method to write in human language the catalog. See an example:</p>
+<div class="highlight"><pre><span></span><code>Event 46: Date 01/02/2022 02:03:00.598999 rms 0.47 s Lat 42.5250 Lon 1.4252 Depth -2.0 km +- 1.3 min_dist 0.089 max_dist 0.621 smin 0.6 km smax 0.7 km ell_azimuth 161.3 gap 65.3 conf_lev 90.0 %
+Magnitudes: Mw 3.58 +- 0.11
+Moment Tensor Solution:
+Mw 3.77 Mo 5.07e+14 Nm DC 44.64 % CLVD 22.70 % iso 32.65 % variance_red 34.54
+Nodal Plane: Strike 319.9 Dip 40.0 Rake -74.7
+Moment Tensor: mrr -1.05e+14 mtt 2.64e+14 mpp 3.38e+14 mrp 1.09e+13 mrt -7.33e+13 mrp -7.33e+13
+station phase polarity date time time_residual distance_degrees distance_km azimuth takeoff_angle
+PAND P ? 01/02/2022 02:03:01.900000 -0.32 0.1 9.9 90.8 89.4
+PAND S ? 01/02/2022 02:03:03.330000 0.00 0.1 9.9 90.8 89.4
+ARBS P ? 01/02/2022 02:03:02.340000 -0.48 0.1 13.6 137.9 90.8
+ARBS S ? 01/02/2022 02:03:04.290000 -0.04 0.1 13.6 137.9 90.8
+CEST P ? 01/02/2022 02:03:03.200000 -0.08 0.1 16.3 300.1 87.5
+CEST S ? 01/02/2022 02:03:05.210000 0.10 0.1 16.3 300.1 87.5
+CSOR P ? 01/02/2022 02:03:05.170000 -0.19 0.3 29.1 234.8 87.9
+CSOR S ? 01/02/2022 02:03:09.050000 0.44 0.3 29.1 234.8 87.9
+SALF S ? 01/02/2022 02:03:09.580000 -0.39 0.3 32.7 322.8 87.4
+CORG P ? 01/02/2022 02:03:05.770000 -0.40 0.3 34.0 194.3 87.1
+CORG S ? 01/02/2022 02:03:10.930000 0.97 0.3 34.0 194.3 87.1
+GENF P ? 01/02/2022 02:03:06.150000 -0.21 0.3 35.1 19.0 87.6
+GENF S ? 01/02/2022 02:03:10.530000 0.26 0.3 35.1 19.0 87.6
+VALC P ? 01/02/2022 02:03:08.590000 -0.70 0.5 53.0 106.7 89.4
+CARF P ? 01/02/2022 02:03:09.900000 -0.38 0.5 59.1 69.0 88.7
+CARF S ? 01/02/2022 02:03:17.300000 0.43 0.5 59.1 69.0 88.7
+FNEB P ? 01/02/2022 02:03:11.830000 -0.09 0.6 69.1 52.5 88.3
+FNEB S ? 01/02/2022 02:03:20.730000 1.11 0.6 69.1 52.5 88.3
+</code></pre></div>
 <h3 id="manage-catalog-from-cli"><span style="color:darkcyan;"><strong>Manage Catalog from CLI</strong></span></h3>
 <h4 id="usage_1">Usage</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>buildcatalog<span class="w"> </span>-e<span class="w"> </span><span class="o">[</span>path_event_files_folder<span class="o">]</span><span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>path_source_summary_file<span class="o">]</span><span class="w"> </span>-m<span class="w"> </span><span class="o">[</span>path_mti_summary_file<span class="o">]</span><span class="w"> </span>-t<span class="w"> </span><span class="o">[</span>type_of_catalog<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span><span class="o">[</span>path_to_ouput_folder<span class="o">]</span>
@@ -1014,58 +1041,68 @@ Instance method from WriteCatalog Class
 <a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="sd">        return :catalog obj:</span>
 <a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="sd">        &quot;&quot;&quot;</span>
 </code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/utils/manage_catalog.py"><code>write_catalog_surf</code></a>
+Instance method from WriteCatalog Class
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>    <span class="k">def</span> <span class="nf">write_catalog_surf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">catalog</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Catalog</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">output_path</span><span class="p">):</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="sd">        Writes in human language the catalog instantiated with the class</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="sd">        verbose: bool:</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="sd">        catalog obj (optional), if not found it uses catalog from the catalog attribute</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="sd">        &quot;&quot;&quot;</span>
+</code></pre></div></p>
 <h3 id="examples-using-library">Examples using library</h3>
 <p>First, We can join all infrmation from located events in your loc folder, with the information of magnitudes and source parameters plus the ourput from Moment Tensor.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
-<span class="normal"><a href="#__codelineno-14-2">2</a></span>
-<span class="normal"><a href="#__codelineno-14-3">3</a></span>
-<span class="normal"><a href="#__codelineno-14-4">4</a></span>
-<span class="normal"><a href="#__codelineno-14-5">5</a></span>
-<span class="normal"><a href="#__codelineno-14-6">6</a></span>
-<span class="normal"><a href="#__codelineno-14-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.manage_catalog</span> <span class="kn">import</span> <span class="n">BuildCatalog</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="n">path_events_folder</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/test_nll_loc&quot;</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="n">path_source_file</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/catalog_output/sources.txt&quot;</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/catalog_output&quot;</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="n">bc</span> <span class="o">=</span> <span class="n">BuildCatalog</span><span class="p">(</span><span class="n">loc_folder</span><span class="o">=</span><span class="n">path_events_file</span><span class="p">,</span> <span class="n">source_summary_file</span><span class="o">=</span><span class="n">path_source_file</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6"></a>                      <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;QUAKEML&quot;</span><span class="p">)</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="n">bc</span><span class="o">.</span><span class="n">build_catalog_loc</span><span class="p">()</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.manage_catalog</span> <span class="kn">import</span> <span class="n">BuildCatalog</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="n">path_events_folder</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/test_nll_loc&quot;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">path_source_file</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/catalog_output/sources.txt&quot;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/surfquake_test/catalog_output&quot;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="n">bc</span> <span class="o">=</span> <span class="n">BuildCatalog</span><span class="p">(</span><span class="n">loc_folder</span><span class="o">=</span><span class="n">path_events_file</span><span class="p">,</span> <span class="n">source_summary_file</span><span class="o">=</span><span class="n">path_source_file</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">,</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>                      <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;QUAKEML&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="n">bc</span><span class="o">.</span><span class="n">build_catalog_loc</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
 <p>Secondly, We can play with the catalog, filtering it (filter_time_catalog and filter_geographic_catalog) or writing a human readable version using write_catalog_surf method.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-15-10">10</a></span>
-<span class="normal"><a href="#__codelineno-15-11">11</a></span>
-<span class="normal"><a href="#__codelineno-15-12">12</a></span>
-<span class="normal"><a href="#__codelineno-15-13">13</a></span>
-<span class="normal"><a href="#__codelineno-15-14">14</a></span>
-<span class="normal"><a href="#__codelineno-15-15">15</a></span>
-<span class="normal"><a href="#__codelineno-15-16">16</a></span>
-<span class="normal"><a href="#__codelineno-15-17">17</a></span>
-<span class="normal"><a href="#__codelineno-15-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.manage_catalog</span> <span class="kn">import</span> <span class="n">WriteCatalog</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">catalog_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/all_andorra/catalog/catalog_obj.pkl&quot;</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/all_andorra/catalog/catalog_surf.txt&quot;</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="n">wc</span> <span class="o">=</span> <span class="n">WriteCatalog</span><span class="p">(</span><span class="n">catalog_path</span><span class="p">)</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">show_help</span><span class="p">())</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">filter_time_catalog</span><span class="p">)</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">filter_geographic_catalog</span><span class="p">)</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="n">catalog_filtered</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">filter_time_catalog</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;30/01/2022, 00:00:00.0&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;20/02/2022, 00:00:00.0&quot;</span><span class="p">)</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a>
-<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="n">catalog_filtered</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">filter_geographic_catalog</span><span class="p">(</span><span class="n">catalog_filtered</span><span class="p">,</span> <span class="n">lat_min</span><span class="o">=</span><span class="mf">42.1</span><span class="p">,</span> <span class="n">lat_max</span><span class="o">=</span><span class="mf">43.0</span><span class="p">,</span> <span class="n">lon_min</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">lon_max</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12"></a>                                                <span class="n">depth_min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">depth_max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mag_min</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span> <span class="n">mag_max</span><span class="o">=</span><span class="mf">3.9</span><span class="p">)</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13"></a>
-<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="n">wc</span><span class="o">.</span><span class="n">write_catalog_surf</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span class="c1">#wc.write_catalog_surf(catalog=catalog_filtered, output_path=output_path)</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16"></a>
-<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span class="c1"># Now you can also save the filtered catalog or even plot the catalog using common Obspy Methods</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="c1">#catalog_filtered.plot(projection=&#39;local&#39;)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span>
+<span class="normal"><a href="#__codelineno-16-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.utils.manage_catalog</span> <span class="kn">import</span> <span class="n">WriteCatalog</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="n">catalog_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/all_andorra/catalog/catalog_obj.pkl&quot;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Volumes/LaCie/all_andorra/catalog/catalog_surf.txt&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="n">wc</span> <span class="o">=</span> <span class="n">WriteCatalog</span><span class="p">(</span><span class="n">catalog_path</span><span class="p">)</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">show_help</span><span class="p">())</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">filter_time_catalog</span><span class="p">)</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="n">help</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">filter_geographic_catalog</span><span class="p">)</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="n">catalog_filtered</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">filter_time_catalog</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;30/01/2022, 00:00:00.0&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;20/02/2022, 00:00:00.0&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="n">catalog_filtered</span> <span class="o">=</span> <span class="n">wc</span><span class="o">.</span><span class="n">filter_geographic_catalog</span><span class="p">(</span><span class="n">catalog_filtered</span><span class="p">,</span> <span class="n">lat_min</span><span class="o">=</span><span class="mf">42.1</span><span class="p">,</span> <span class="n">lat_max</span><span class="o">=</span><span class="mf">43.0</span><span class="p">,</span> <span class="n">lon_min</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">lon_max</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a>                                                <span class="n">depth_min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">depth_max</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mag_min</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span> <span class="n">mag_max</span><span class="o">=</span><span class="mf">3.9</span><span class="p">)</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="n">wc</span><span class="o">.</span><span class="n">write_catalog_surf</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="c1">#wc.write_catalog_surf(catalog=catalog_filtered, output_path=output_path)</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a>
+<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="c1"># Now you can also save the filtered catalog or even plot the catalog using common Obspy Methods</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="c1">#catalog_filtered.plot(projection=&#39;local&#39;)</span>
 </code></pre></div></td></tr></table></div>
 
 
