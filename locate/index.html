@@ -807,7 +807,7 @@
 <p><img alt="Screenshot" src="../img/grid_definition.png" /></p>
 <p>One the most important parts is the geographic framework settings. In the figure is displayed an example of stations distrubition (orange triangles and blue squares) inside the region of study(shaded square) with probable epicenters (red circle). Simply, the user must set the grid coordinates origin, the resolution dx, dy and dz, plus the number of points in the grid X, Y, Z. Remind that the configuration follow the left hand rule so positive W-&gt;E, S-&gt;N, Top -&gt; Bottom in depth.</p>
 <h2 id="config-file"><span style="color:darkcyan;"><strong>Config File</strong></span></h2>
-<p>In the next section CLI and Library the user can configurate the event location tool from a config file type file.ini, an example is as follows:</p>
+<p>In the next section CLI and Library the user can configurate the event location tool from a config file type file.ini, an example of the typical configuration for locate local/regional events using a 1D-model as follows:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[GRID_CONFIGURATION]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>LATITUDE = 41.0000
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>LONGITUDE = 0.0000
@@ -836,98 +836,178 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>SEARCH = OCT-TREE
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>METHOD = GAU_ANALYTIC
 </code></pre></div>
+<p>In the section Location_Parameters SEARCH is just available <strong>OCT</strong> that corresponds to the Octree algorythm. 
+In Method you can change to:</p>
+<ul>
+<li><strong>GAU_ANALYTIC</strong> the inversion approach of Tarantola and Valette (1982) with L2-RMS likelihood function. </li>
+<li><strong>EDT</strong> Equal Differential Time likelihood function cast into the inversion approach of Tarantola and Valette (1982) <ul>
+<li><strong>EDT_OT_WT</strong> Weights EDT-sum probabilities by the variance of origin-time estimates over all pairs of readings. This reduces the probability (PDF values) at points with inconsistent OT estimates, and leads to more compact location PDF's. </li>
+<li><strong>EDT_OT_WT_ML</strong> version of EDT_OT_WT with EDT origin-time weighting applied using a grid-search, maximum-likelihood estimate of the origin time. Less efficient than EDT_OT_WT which uses simple statistical estimate of the origin time.</li>
+</ul>
+</li>
+</ul>
+<p>The model 1D: file is easily described as as follows:</p>
+<p>LAYER depth VpTop VpGrad VsTop VsGrad rhoTop rhoGrad</p>
+<ul>
+<li><strong>depth</strong> (float) depth to top of layer (use negative values for layers above z=0)</li>
+<li><strong>VpTop VsTop rhoTop</strong> P velocity, and S velocity in km/s and density in kg/m**3 at the top of the layer.</li>
+<li><strong>VpGrad VsGrad rhoGrad</strong> Linear P velocity and S velocity gradients in km/s/km and density gradient in kg/m**3/km increasing directly downwards from the top of the layer.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>LAYER   0.0  6.1 0.0    3.49  0.0  2.7 0.0
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>LAYER  11.0  6.4 0.0    3.66  0.0  2.7 0.0
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>LAYER  24.0  6.9 0.0    3.94  0.0  2.7 0.0
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>LAYER  31.0  8.0 0.0    4.57  0.0  2.7 0.0
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>LAYER    45.63   8.0412  0.000118   4.4737  0.000353
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>LAYER    56.25   8.0425  0.000118   4.4775  0.000353
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>LAYER    66.88   8.0437  0.000118   4.4813  0.000353
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>LAYER    77.50   8.0450  0.000118   4.4850  0.000353
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>LAYER    88.13   8.0463  0.000118   4.4887  0.000353
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>LAYER    98.75   8.0475  0.000118   4.4925  0.000353
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>LAYER   109.38   8.0488  0.000120   4.4962  0.000353
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>LAYER   120.00   8.0500  0.002775   4.5000  0.000200
+</code></pre></div>
+<p>The model 3D:</p>
+<p>We have created a repository with an example of <a href="https://github.com/rcabdia/ProjectISP_3Dmodels"><span style="color:#5DADE2">3D model</span></a> that describes the SW Iberian Peninsula using a <a href="https://academic.oup.com/gji/article/171/2/807/658273"><span style="color:#5DADE2">Grandin et ., 2007</span></a> to rapidly visualize the model <a href="https://link.springer.com/article/10.1007/s00024-020-02475-3#Sec15"><span style="color:#5DADE2">Cabieces et al 2020</span></a> </p>
+<p>Every depth layer must be placed in files called, for example</p>
+<pre>
+    <code>
+For the P wave --> layer.P.mod5.mod
+For the S wave --> layer.S.mod5.mod
+    </code>
+</pre>
+
+<p>Which means that inside this file there is the grid with the value of the Vp or Vs, for the layer at depth 5km.</p>
+<p>The layer must be a matrix with the values in the rows from top to bottom S -&gt; N, and from left to right E -&gt; W. That's mean following the next example that the file corresponding to a depth layer 5km "layer.P.mod5.mod" could be like this:</p>
+<pre>
+    <code>
+4.5759 4.5735 ...... 4.5707 4.5677
+4.5760 4.5755 ...... 4.5766 4.5670
+...... ...... ...... ...... ......
+4.6800 4.6500 ...... 4.6730 4.5678
+    </code>
+</pre>
+
+<p>This matrix means that, for example corresponds to geographic points long,lat (separated in cells of, dx dy of 0.5 x 0.5 degrees.</p>
+<pre>
+    <code>
+(-10.0,34.0) (-9.5,34.0) ...... (-9.0,34.0) (-8.5,34.0)
+(-10.0,34.5) (-9.5,34.5) ...... (-9.0,34.5) (-8.5,34.5)
+....... ..... ..... .... ...... .... ...... ...........
+(-10.0,40.0) (-9.5,40.0) ...... (-9.0,40.0) (-8.5,40.0)
+    </code>
+</pre>
+<p>Warning grid cells must be [dx = dy = dz] for a correct interpretation.</p>
+<p>The picking file <a href="http://alomax.free.fr/nlloc/"><span style="color:#5DADE2;">NonLinLoc Phase file format nll_input.txt</span></a> is automatically generated when the associator. However, you can make it by your own. Here, it's attached how is the file describing one event. For more events just you need yo write the picking info separated by a blank row. The location algorythm will locate all events with picking information inside the file</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hourmin Seconds GAU Err Coda_duration   Amplitude   Period
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ARBS    ?   ?   ?   P   ?   20220126    0200    14.700  GAU 2.50E-03    -1.00E+00   85600000.0  -1.00E+00
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ARBS    ?   ?   ?   S   ?   20220126    0200    16.320  GAU 7.50E-03    -1.00E+00   85600000.0  -1.00E+00
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>CORG    ?   ?   ?   P   ?   20220126    0200    18.210  GAU 2.50E-03    -1.00E+00   17000000.0  -1.00E+00
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>CORG    ?   ?   ?   S   ?   20220126    0200    23.020  GAU 7.50E-03    -1.00E+00   17000000.0  -1.00E+00
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>PAND    ?   ?   ?   P   ?   20220126    0200    14.200  GAU 2.50E-03    -1.00E+00   132000000000.0  -1.00E+00
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>PAND    ?   ?   ?   S   ?   20220126    0200    15.550  GAU 2.50E-03    -1.00E+00   132000000000.0  -1.00E+00
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>CSOR    ?   ?   ?   P   ?   20220126    0200    17.510  GAU 2.50E-03    -1.00E+00   45200000.0  -1.00E+00
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>CSOR    ?   ?   ?   S   ?   20220126    0200    21.330  GAU 5.00E-03    -1.00E+00   99900000.0  -1.00E+00
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>CEST    ?   ?   ?   P   ?   20220126    0200    15.570  GAU 2.50E-03    -1.00E+00   74500000.0  -1.00E+00
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>CEST    ?   ?   ?   S   ?   20220126    0200    17.660  GAU 2.50E-03    -1.00E+00   90000000.0  -1.00E+00
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>SALF    ?   ?   ?   P   ?   20220126    0200    18.080  GAU 5.00E-03    -1.00E+00   7240000000.0    -1.00E+00
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>SALF    ?   ?   ?   S   ?   20220126    0200    21.930  GAU 7.50E-03    -1.00E+00   24900000000.0   -1.00E+00
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>GENF    ?   ?   ?   P   ?   20220126    0200    18.470  GAU 2.50E-03    -1.00E+00   20100000.0  -1.00E+00
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>GENF    ?   ?   ?   S   ?   20220126    0200    22.730  GAU 5.00E-03    -1.00E+00   43900000.0  -1.00E+00
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>CARF    ?   ?   ?   P   ?   20220126    0200    22.230  GAU 2.50E-03    -1.00E+00   1750000000.0    -1.00E+00
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>CARF    ?   ?   ?   S   ?   20220126    0200    29.370  GAU 7.50E-03    -1.00E+00   2870000000.0    -1.00E+00
+</code></pre></div>
 <h2 id="event-location-from-cli"><span style="color:darkcyan;"><strong>Event Location from CLI</strong></span></h2>
 <h3 id="usage">Usage</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>seismic<span class="w"> </span>event<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-i<span class="w"> </span>INVENTORY_FILE_PATH<span class="w"> </span>-c<span class="w"> </span>CONFIG_FILE_PATH<span class="w"> </span>-o<span class="w"> </span>OUT_DIR_PATH<span class="w"> </span><span class="o">[</span>-g<span class="o">]</span><span class="w"> </span><span class="o">[</span>-s<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>seismic<span class="w"> </span>event<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-i<span class="w"> </span>INVENTORY_FILE_PATH<span class="w"> </span>-c<span class="w"> </span>CONFIG_FILE_PATH<span class="w"> </span>-o<span class="w"> </span>OUT_DIR_PATH<span class="w"> </span><span class="o">[</span>-g<span class="o">]</span><span class="w"> </span><span class="o">[</span>-s<span class="o">]</span>
 </code></pre></div>
 <h3 id="interactive-help">Interactive help</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>-h
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>-h
 </code></pre></div>
 <h3 id="run-event-location-from-cli">Run Event Location from CLI</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>-i<span class="w"> </span>/surfquake_test/metadata/inv_all.xml<span class="w"> </span>-c<span class="w"> </span>/surfquake_test/config_files/nll_config.ini<span class="w"> </span>-o<span class="w"> </span>/surfquake_test/test_nll_final<span class="w"> </span>-g<span class="w"> </span>-s
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>-i<span class="w"> </span>/surfquake_test/metadata/inv_all.xml<span class="w"> </span>-c<span class="w"> </span>/surfquake_test/config_files/nll_config.ini<span class="w"> </span>-o<span class="w"> </span>/surfquake_test/test_nll_final<span class="w"> </span>-g<span class="w"> </span>-s
 </code></pre></div>
 <h2 id="event-location-from-library"><span style="color:darkcyan;"><strong>Event Location from Library</strong></span></h2>
 <h3 id="classes">Classes</h3>
 <p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/earthquake_location/run_nll.py"><code>NllManager</code></a></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span> <span class="nc">NllManager</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nll_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NLLConfig</span><span class="p">],</span> <span class="n">metadata_path</span><span class="p">,</span> <span class="n">working_directory</span><span class="p">):</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">        Manage NonLinLoc program to locate seismic events.</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">        :param nll_config: Path to nll_config.ini file or to NLLConfig object.</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">        :param metadata_path: Path to metadata file.</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="sd">        :param working_dirctory: Root path to folder to establish the working and output structure.</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__get_nll_config</span><span class="p">(</span><span class="n">nll_config</span><span class="p">)</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location_output</span> <span class="o">=</span> <span class="n">working_directory</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__create_dirs</span><span class="p">()</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__dataless_dir</span> <span class="o">=</span> <span class="n">metadata_path</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__metadata_manager</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span> <span class="nc">NllManager</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nll_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NLLConfig</span><span class="p">],</span> <span class="n">metadata_path</span><span class="p">,</span> <span class="n">working_directory</span><span class="p">):</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sd">        Manage NonLinLoc program to locate seismic events.</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">        :param nll_config: Path to nll_config.ini file or to NLLConfig object.</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sd">        :param metadata_path: Path to metadata file.</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">        :param working_dirctory: Root path to folder to establish the working and output structure.</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__get_nll_config</span><span class="p">(</span><span class="n">nll_config</span><span class="p">)</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__location_output</span> <span class="o">=</span> <span class="n">working_directory</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__create_dirs</span><span class="p">()</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__dataless_dir</span> <span class="o">=</span> <span class="n">metadata_path</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__metadata_manager</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div>
 <h3 id="methods">Methods</h3>
 <p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/earthquake_location/run_nll.py"><code>vel_to_grid</code></a>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># instance method</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span> <span class="nf">vel_to_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">    # Method to generate the velocity grid #</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    :return: Extracts the velocity grid as layer*.buf and layer*.hdr inside working_dir/model</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sd">    template file temp.txt in working_dir/temp.txt</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="sd">    &quot;&quot;&quot;</span>
-</code></pre></div></p>
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/earthquake_location/run_nll.py"><code>grid_to_time</code></a>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># instance method</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span> <span class="nf">grid_to_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="sd">    # Method to generate the travel-time tables file #</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sd">    :return: Extracts the travel-times per wave type as</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">    [layer.P.STA.angle.buf, layer.P.STA.time.buf, layer.P.STA.time.hdr]</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sd">    inside ./working_dir/time</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">    template file at ./work_dir/temp/G2T_temp.txt</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="sd">    &quot;&quot;&quot;</span>
-</code></pre></div></p>
-<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/earthquake_location/run_nll.py"><code>run_nlloc</code></a>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># instance method</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">def</span> <span class="nf">run_nlloc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">def</span> <span class="nf">vel_to_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="sd">    # Method to run the event locations from the picking file and config_file.ini #</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sd">    :return: locations files *hyp inside ./working_dir/loc</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="sd">    template file at ./work_dir/temp/run_temp.txt</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="sd">    # Method to generate the velocity grid #</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sd">    :return: Extracts the velocity grid as layer*.buf and layer*.hdr inside working_dir/model</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="sd">    template file temp.txt in working_dir/temp.txt</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/earthquake_location/run_nll.py"><code>grid_to_time</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># instance method</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">def</span> <span class="nf">grid_to_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="sd">    # Method to generate the travel-time tables file #</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="sd">    :return: Extracts the travel-times per wave type as</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="sd">    [layer.P.STA.angle.buf, layer.P.STA.time.buf, layer.P.STA.time.hdr]</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="sd">    inside ./working_dir/time</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="sd">    template file at ./work_dir/temp/G2T_temp.txt</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></p>
+<p><a href="https://github.com/rcabdia/SurfQuakeCore/blob/main/surfquakecore/earthquake_location/run_nll.py"><code>run_nlloc</code></a>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># instance method</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">def</span> <span class="nf">run_nlloc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="sd">    # Method to run the event locations from the picking file and config_file.ini #</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="sd">    :return: locations files *hyp inside ./working_dir/loc</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="sd">    template file at ./work_dir/temp/run_temp.txt</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div></p>
 <h3 id="example-using-library">Example using library</h3>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-8-10">10</a></span>
-<span class="normal"><a href="#__codelineno-8-11">11</a></span>
-<span class="normal"><a href="#__codelineno-8-12">12</a></span>
-<span class="normal"><a href="#__codelineno-8-13">13</a></span>
-<span class="normal"><a href="#__codelineno-8-14">14</a></span>
-<span class="normal"><a href="#__codelineno-8-15">15</a></span>
-<span class="normal"><a href="#__codelineno-8-16">16</a></span>
-<span class="normal"><a href="#__codelineno-8-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">os</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">surfquakecore.earthquake_location.run_nll</span> <span class="kn">import</span> <span class="n">Nllcatalog</span><span class="p">,</span> <span class="n">NllManager</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a>    <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a>    <span class="c1"># Basic input: working_directory, inventory file path and config_file input</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a>    <span class="n">working_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s2">&quot;earthquake_locate&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a>    <span class="n">inventory_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_directory</span><span class="p">,</span> <span class="s2">&quot;inventories&quot;</span><span class="p">,</span> <span class="s2">&quot;inv_surfquakecore.xml&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a>    <span class="n">path_to_configfiles</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_directory</span><span class="p">,</span> <span class="s2">&quot;config/nll_config.ini&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a>    <span class="n">nll_manager</span> <span class="o">=</span> <span class="n">NllManager</span><span class="p">(</span><span class="n">path_to_configfiles</span><span class="p">,</span> <span class="n">inventory_path</span><span class="p">,</span> <span class="n">working_directory</span><span class="p">)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a>    <span class="n">nll_manager</span><span class="o">.</span><span class="n">vel_to_grid</span><span class="p">()</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12"></a>    <span class="n">nll_manager</span><span class="o">.</span><span class="n">grid_to_time</span><span class="p">()</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a>    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Locating &#39;</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a>        <span class="n">nll_manager</span><span class="o">.</span><span class="n">run_nlloc</span><span class="p">()</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a>    <span class="n">nll_catalog</span> <span class="o">=</span> <span class="n">Nllcatalog</span><span class="p">(</span><span class="n">working_directory</span><span class="p">)</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="n">nll_catalog</span><span class="o">.</span><span class="n">run_catalog</span><span class="p">(</span><span class="n">working_directory</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kn">from</span> <span class="nn">surfquakecore.earthquake_location.run_nll</span> <span class="kn">import</span> <span class="n">Nllcatalog</span><span class="p">,</span> <span class="n">NllManager</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>    <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>    <span class="c1"># Basic input: working_directory, inventory file path and config_file input</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>    <span class="n">working_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="s2">&quot;earthquake_locate&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>    <span class="n">inventory_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_directory</span><span class="p">,</span> <span class="s2">&quot;inventories&quot;</span><span class="p">,</span> <span class="s2">&quot;inv_surfquakecore.xml&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a>    <span class="n">path_to_configfiles</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_directory</span><span class="p">,</span> <span class="s2">&quot;config/nll_config.ini&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>    <span class="n">nll_manager</span> <span class="o">=</span> <span class="n">NllManager</span><span class="p">(</span><span class="n">path_to_configfiles</span><span class="p">,</span> <span class="n">inventory_path</span><span class="p">,</span> <span class="n">working_directory</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>    <span class="n">nll_manager</span><span class="o">.</span><span class="n">vel_to_grid</span><span class="p">()</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a>    <span class="n">nll_manager</span><span class="o">.</span><span class="n">grid_to_time</span><span class="p">()</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a>    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Locating &#39;</span><span class="p">,</span> <span class="nb">iter</span><span class="p">)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a>        <span class="n">nll_manager</span><span class="o">.</span><span class="n">run_nlloc</span><span class="p">()</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a>    <span class="n">nll_catalog</span> <span class="o">=</span> <span class="n">Nllcatalog</span><span class="p">(</span><span class="n">working_directory</span><span class="p">)</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a>    <span class="n">nll_catalog</span><span class="o">.</span><span class="n">run_catalog</span><span class="p">(</span><span class="n">working_directory</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
 
