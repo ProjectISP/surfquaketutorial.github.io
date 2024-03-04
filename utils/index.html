@@ -828,6 +828,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#build-mti-config-files-using-the-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build MTI config files using the Library
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1103,6 +1112,29 @@ Instance method from WriteCatalog Class
 <a id="__codelineno-16-16" name="__codelineno-16-16"></a>
 <a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="c1"># Now you can also save the filtered catalog or even plot the catalog using common Obspy Methods</span>
 <a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="c1">#catalog_filtered.plot(projection=&#39;local&#39;)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="build-mti-config-files-using-the-library"><span style="color:darkcyan;"><strong>Build MTI config files using the Library</strong></span></h3>
+<p>surfQuake core library incorporates and easy way to generate mti Config Files
+The only thing you need is a previously crated catalog and a mti.ini files that serves of template (just copy and paste the example in the explanation of config file from MTI). The routine will create the mti.ini files using the information from the event catalogs (date, latitude, lngitude, depth and magnitude) and from the rest of the fields from the template. This action will write a mti.ini file per event and ready to be used by MTI toolbox.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="kn">from</span> <span class="nn">surfquakecore.moment_tensor.mti_parse</span> <span class="kn">import</span> <span class="n">BuildMTIConfigs</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="n">catalog_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/admin/Desktop/all_andorra/catalog/catalog_obj.pkl&quot;</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="n">output_path</span> <span class="o">=</span> <span class="s2">&quot;/Users/admin/Desktop/all_andorra/mti_configs_created&quot;</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="n">mti_template_path</span> <span class="o">=</span> <span class="s1">&#39;/Users/admin/Desktop/all_andorra/mti_configs/mti_template.ini&#39;</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="n">bmc</span> <span class="o">=</span> <span class="n">BuildMTIConfigs</span><span class="p">(</span><span class="n">catalog_file_path</span><span class="o">=</span><span class="n">catalog_path</span><span class="p">,</span> <span class="n">mti_config</span><span class="o">=</span><span class="n">mti_template_path</span><span class="p">,</span> <span class="n">output_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="n">bmc</span><span class="o">.</span><span class="n">write_mti_ini_file</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="s2">&quot;01/01/2021, 00:00:00.0&quot;</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s2">&quot;30/10/2022, 00:00:00.0&quot;</span><span class="p">,</span> <span class="n">lat_min</span><span class="o">=</span><span class="mf">40.0</span><span class="p">,</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a>                       <span class="n">lat_max</span><span class="o">=</span><span class="mf">44.0</span><span class="p">,</span> <span class="n">lon_min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">lon_max</span><span class="o">=</span><span class="mf">4.2</span><span class="p">,</span> <span class="n">depth_min</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">depth_max</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a>                       <span class="n">mag_min</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">mag_max</span><span class="o">=</span><span class="mf">4.0</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
 
