@@ -558,6 +558,39 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#previous-knowledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      Previous knowledge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Previous knowledge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-picking-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Picking File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earth-model-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earth Model Settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#event-location-gui" class="md-nav__link">
     <span class="md-ellipsis">
       Event Location GUI
@@ -773,6 +806,81 @@
 
 <h1 id="event-location"><span style="color:darkcyan;"><strong>Event Location</strong></span></h1>
 <p>The Event Location toolbox uses <a href="http://alomax.free.fr/nlloc/"><span style="color:#5DADE2;">Non Lin Loc, Lomax et ., 2009</span></a> to locate seismic events.</p>
+<h2 id="previous-knowledge"><span style="color:darkcyan;"><strong>Previous knowledge</strong></span></h2>
+<p>First we include here, previous knowlege about files you need to set to run event locations.</p>
+<h3 id="the-picking-file">The Picking File</h3>
+<p>The picking file <a href="http://alomax.free.fr/nlloc/"><span style="color:#5DADE2;">NonLinLoc Phase file format nll_input.txt</span></a> is automatically generated when the associator. However, you can make it by your own. Here, it's attached how is the file describing one event. For more events just you need yo write the picking info separated by a blank row. The location algorythm will locate all events with picking information inside the file</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hourmin Seconds GAU Err Coda_duration   Amplitude   Period
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ARBS    ?   ?   ?   P   ?   20220126    0200    14.700  GAU 2.50E-03    -1.00E+00   85600000.0  -1.00E+00
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>ARBS    ?   ?   ?   S   ?   20220126    0200    16.320  GAU 7.50E-03    -1.00E+00   85600000.0  -1.00E+00
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>CORG    ?   ?   ?   P   ?   20220126    0200    18.210  GAU 2.50E-03    -1.00E+00   17000000.0  -1.00E+00
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>CORG    ?   ?   ?   S   ?   20220126    0200    23.020  GAU 7.50E-03    -1.00E+00   17000000.0  -1.00E+00
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>PAND    ?   ?   ?   P   ?   20220126    0200    14.200  GAU 2.50E-03    -1.00E+00   132000000000.0  -1.00E+00
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>PAND    ?   ?   ?   S   ?   20220126    0200    15.550  GAU 2.50E-03    -1.00E+00   132000000000.0  -1.00E+00
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>CSOR    ?   ?   ?   P   ?   20220126    0200    17.510  GAU 2.50E-03    -1.00E+00   45200000.0  -1.00E+00
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>CSOR    ?   ?   ?   S   ?   20220126    0200    21.330  GAU 5.00E-03    -1.00E+00   99900000.0  -1.00E+00
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>CEST    ?   ?   ?   P   ?   20220126    0200    15.570  GAU 2.50E-03    -1.00E+00   74500000.0  -1.00E+00
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>CEST    ?   ?   ?   S   ?   20220126    0200    17.660  GAU 2.50E-03    -1.00E+00   90000000.0  -1.00E+00
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>SALF    ?   ?   ?   P   ?   20220126    0200    18.080  GAU 5.00E-03    -1.00E+00   7240000000.0    -1.00E+00
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>SALF    ?   ?   ?   S   ?   20220126    0200    21.930  GAU 7.50E-03    -1.00E+00   24900000000.0   -1.00E+00
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>GENF    ?   ?   ?   P   ?   20220126    0200    18.470  GAU 2.50E-03    -1.00E+00   20100000.0  -1.00E+00
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>GENF    ?   ?   ?   S   ?   20220126    0200    22.730  GAU 5.00E-03    -1.00E+00   43900000.0  -1.00E+00
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>CARF    ?   ?   ?   P   ?   20220126    0200    22.230  GAU 2.50E-03    -1.00E+00   1750000000.0    -1.00E+00
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>CARF    ?   ?   ?   S   ?   20220126    0200    29.370  GAU 7.50E-03    -1.00E+00   2870000000.0    -1.00E+00
+</code></pre></div>
+<h3 id="earth-model-settings">Earth Model Settings</h3>
+<p>We have created a repository with an example of <a href="https://github.com/rcabdia/ProjectISP_3Dmodels"><span style="color:#5DADE2">1D and 3D model</span></a> that describes the SW Iberian Peninsula using a <a href="https://academic.oup.com/gji/article/171/2/807/658273"><span style="color:#5DADE2">Grandin et ., 2007</span></a> to rapidly visualize the model <a href="https://link.springer.com/article/10.1007/s00024-020-02475-3#Sec15"><span style="color:#5DADE2">Cabieces et al 2020</span></a> </p>
+<p>The <strong>model 1D</strong>: In the root path to your model, in this case at /Volumes/LaCie/surfquake_test/test_nll_final/model1D create two files called modelP and modelS. The files will be exactly the same but called differnlt. The are easily described as follows:</p>
+<p>LAYER depth VpTop VpGrad VsTop VsGrad rhoTop rhoGrad</p>
+<ul>
+<li><strong>depth</strong> (float) depth to top of layer (use negative values for layers above z=0)</li>
+<li><strong>VpTop VsTop rhoTop</strong> P velocity, and S velocity in km/s and density in kg/m**3 at the top of the layer.</li>
+<li><strong>VpGrad VsGrad rhoGrad</strong> Linear P velocity and S velocity gradients in km/s/km and density gradient in kg/m**3/km increasing directly downwards from the top of the layer.</li>
+</ul>
+<p>Summarizing for the hungry users. Copy and paste this lines into your files called modelP and modelS and place it into the root folder previouly set as PATH_TO_1D_MODEL in the config file or for GUI users in the root folder you select as earth model.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>LAYER   0.0  6.1 0.0    3.49  0.0  2.7 0.0
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>LAYER  11.0  6.4 0.0    3.66  0.0  2.7 0.0
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>LAYER  24.0  6.9 0.0    3.94  0.0  2.7 0.0
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>LAYER  31.0  8.0 0.0    4.57  0.0  2.7 0.0
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>LAYER    45.63   8.0412  0.000118   4.4737  0.000353
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>LAYER    56.25   8.0425  0.000118   4.4775  0.000353
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>LAYER    66.88   8.0437  0.000118   4.4813  0.000353
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>LAYER    77.50   8.0450  0.000118   4.4850  0.000353
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>LAYER    88.13   8.0463  0.000118   4.4887  0.000353
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>LAYER    98.75   8.0475  0.000118   4.4925  0.000353
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>LAYER   109.38   8.0488  0.000120   4.4962  0.000353
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>LAYER   120.00   8.0500  0.002775   4.5000  0.000200
+</code></pre></div>
+<p>The <strong>model 3D</strong>:</p>
+<p>Every depth layer must be placed in files called, for example</p>
+<pre>
+    <code>
+For the P wave --> layer.P.mod5.mod
+For the S wave --> layer.S.mod5.mod
+    </code>
+</pre>
+
+<p>Which means that inside this file there is the grid with the value of the Vp or Vs, for the layer at depth 5km.</p>
+<p>The layer must be a matrix with the values in the rows from top to bottom S -&gt; N, and from left to right E -&gt; W. That's mean following the next example that the file corresponding to a depth layer 5km "layer.P.mod5.mod" could be like this:</p>
+<pre>
+    <code>
+4.5759 4.5735 ...... 4.5707 4.5677
+4.5760 4.5755 ...... 4.5766 4.5670
+...... ...... ...... ...... ......
+4.6800 4.6500 ...... 4.6730 4.5678
+    </code>
+</pre>
+
+<p>This matrix means that, for example corresponds to geographic points long,lat (separated in cells of, dx dy of 0.5 x 0.5 degrees.</p>
+<pre>
+    <code>
+(-10.0,34.0) (-9.5,34.0) ...... (-9.0,34.0) (-8.5,34.0)
+(-10.0,34.5) (-9.5,34.5) ...... (-9.0,34.5) (-8.5,34.5)
+....... ..... ..... .... ...... .... ...... ...........
+(-10.0,40.0) (-9.5,40.0) ...... (-9.0,40.0) (-8.5,40.0)
+    </code>
+</pre>
+<p>Warning grid cells must be [dx = dy = dz] for a correct interpretation.</p>
 <h2 id="event-location-gui"><span style="color:darkcyan;"><strong>Event Location GUI</strong></span></h2>
 <p>This is a screenshot of the Event Location GUI.</p>
 <p><img alt="Screenshot" src="../img/locate.png" /></p>
@@ -808,33 +916,33 @@
 <p>One the most important parts is the geographic framework settings. In the figure is displayed an example of stations distrubition (orange triangles and blue squares) inside the region of study(shaded square) with probable epicenters (red circle). Simply, the user must set the grid coordinates origin, the resolution dx, dy and dz, plus the number of points in the grid X, Y, Z. Remind that the configuration follow the left hand rule so positive W-&gt;E, S-&gt;N, Top -&gt; Bottom in depth.</p>
 <h2 id="config-file"><span style="color:darkcyan;"><strong>Config File</strong></span></h2>
 <p>In the next section CLI and Library the user can configurate the event location tool from a config file type file.ini, an example of the typical configuration for locate local/regional events using a 1D-model as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[GRID_CONFIGURATION]
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>LATITUDE = 41.0000
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>LONGITUDE = 0.0000
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>DEPTH_KM = -3.0
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>X = 400
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Y = 400
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Z = 50
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>DX = 1
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>DY = 1
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>DZ = 1
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>GEO_TRANSFORMATION = SIMPLE
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>GRID_TYPE = SLOW_LEN
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>PATH_TO_PICKS = /Volumes/LaCie/surfquake_test/test_real_final/nll_input.txt
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>PATH_TO_1D_MODEL = /Volumes/LaCie/surfquake_test/test_nll_final/model1D
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>PATH_TO_3D_MODEL = NONE
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>MODEL = 1D
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>P_WAVE_TYPE = TRUE
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>S_WAVE_TYPE = TRUE
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>#
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>[TRAVEL_TIMES_CONFIGURATION]
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>DISTANCE_LIMIT = 500
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>GRID = 1D
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>#
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>[LOCATION_PARAMETERS]
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>SEARCH = OCT-TREE
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>METHOD = GAU_ANALYTIC
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[GRID_CONFIGURATION]
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>LATITUDE = 41.0000
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>LONGITUDE = 0.0000
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>DEPTH_KM = -3.0
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>X = 400
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Y = 400
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>Z = 50
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>DX = 1
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>DY = 1
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>DZ = 1
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>GEO_TRANSFORMATION = SIMPLE
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>GRID_TYPE = SLOW_LEN
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>PATH_TO_PICKS = /Volumes/LaCie/surfquake_test/test_real_final/nll_input.txt
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>PATH_TO_1D_MODEL = /Volumes/LaCie/surfquake_test/test_nll_final/model1D
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>PATH_TO_3D_MODEL = NONE
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>MODEL = 1D
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>P_WAVE_TYPE = TRUE
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>S_WAVE_TYPE = TRUE
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>#
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>[TRAVEL_TIMES_CONFIGURATION]
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>DISTANCE_LIMIT = 500
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>GRID = 1D
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>#
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>[LOCATION_PARAMETERS]
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>SEARCH = OCT-TREE
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>METHOD = GAU_ANALYTIC
 </code></pre></div>
 <p>In the section Location_Parameters SEARCH is just available <strong>OCT</strong> that corresponds to the Octree algorythm. 
 In Method you can change to:</p>
@@ -846,77 +954,6 @@ In Method you can change to:</p>
 </ul>
 </li>
 </ul>
-<p>The <strong>model 1D</strong>: In the root path to your model, in this case at /Volumes/LaCie/surfquake_test/test_nll_final/model1D create two files called modelP and modelS. The files will be exactly the same but called differnlt. The are easily described as follows:</p>
-<p>LAYER depth VpTop VpGrad VsTop VsGrad rhoTop rhoGrad</p>
-<ul>
-<li><strong>depth</strong> (float) depth to top of layer (use negative values for layers above z=0)</li>
-<li><strong>VpTop VsTop rhoTop</strong> P velocity, and S velocity in km/s and density in kg/m**3 at the top of the layer.</li>
-<li><strong>VpGrad VsGrad rhoGrad</strong> Linear P velocity and S velocity gradients in km/s/km and density gradient in kg/m**3/km increasing directly downwards from the top of the layer.</li>
-</ul>
-<p>Summarizing for the hungry users. Copy and paste this lines into your files called modelP and modelS and place it into the root folder previouly set as PATH_TO_1D_MODEL in the config file.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>LAYER   0.0  6.1 0.0    3.49  0.0  2.7 0.0
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>LAYER  11.0  6.4 0.0    3.66  0.0  2.7 0.0
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>LAYER  24.0  6.9 0.0    3.94  0.0  2.7 0.0
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>LAYER  31.0  8.0 0.0    4.57  0.0  2.7 0.0
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>LAYER    45.63   8.0412  0.000118   4.4737  0.000353
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>LAYER    56.25   8.0425  0.000118   4.4775  0.000353
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>LAYER    66.88   8.0437  0.000118   4.4813  0.000353
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>LAYER    77.50   8.0450  0.000118   4.4850  0.000353
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>LAYER    88.13   8.0463  0.000118   4.4887  0.000353
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>LAYER    98.75   8.0475  0.000118   4.4925  0.000353
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>LAYER   109.38   8.0488  0.000120   4.4962  0.000353
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>LAYER   120.00   8.0500  0.002775   4.5000  0.000200
-</code></pre></div></p>
-<p>The <strong>model 3D</strong>:</p>
-<p>We have created a repository with an example of <a href="https://github.com/rcabdia/ProjectISP_3Dmodels"><span style="color:#5DADE2">3D model</span></a> that describes the SW Iberian Peninsula using a <a href="https://academic.oup.com/gji/article/171/2/807/658273"><span style="color:#5DADE2">Grandin et ., 2007</span></a> to rapidly visualize the model <a href="https://link.springer.com/article/10.1007/s00024-020-02475-3#Sec15"><span style="color:#5DADE2">Cabieces et al 2020</span></a> </p>
-<p>Every depth layer must be placed in files called, for example</p>
-<pre>
-    <code>
-For the P wave --> layer.P.mod5.mod
-For the S wave --> layer.S.mod5.mod
-    </code>
-</pre>
-
-<p>Which means that inside this file there is the grid with the value of the Vp or Vs, for the layer at depth 5km.</p>
-<p>The layer must be a matrix with the values in the rows from top to bottom S -&gt; N, and from left to right E -&gt; W. That's mean following the next example that the file corresponding to a depth layer 5km "layer.P.mod5.mod" could be like this:</p>
-<pre>
-    <code>
-4.5759 4.5735 ...... 4.5707 4.5677
-4.5760 4.5755 ...... 4.5766 4.5670
-...... ...... ...... ...... ......
-4.6800 4.6500 ...... 4.6730 4.5678
-    </code>
-</pre>
-
-<p>This matrix means that, for example corresponds to geographic points long,lat (separated in cells of, dx dy of 0.5 x 0.5 degrees.</p>
-<pre>
-    <code>
-(-10.0,34.0) (-9.5,34.0) ...... (-9.0,34.0) (-8.5,34.0)
-(-10.0,34.5) (-9.5,34.5) ...... (-9.0,34.5) (-8.5,34.5)
-....... ..... ..... .... ...... .... ...... ...........
-(-10.0,40.0) (-9.5,40.0) ...... (-9.0,40.0) (-8.5,40.0)
-    </code>
-</pre>
-<p>Warning grid cells must be [dx = dy = dz] for a correct interpretation.</p>
-<p>The picking file <a href="http://alomax.free.fr/nlloc/"><span style="color:#5DADE2;">NonLinLoc Phase file format nll_input.txt</span></a> is automatically generated when the associator. However, you can make it by your own. Here, it's attached how is the file describing one event. For more events just you need yo write the picking info separated by a blank row. The location algorythm will locate all events with picking information inside the file</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hourmin Seconds GAU Err Coda_duration   Amplitude   Period
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ARBS    ?   ?   ?   P   ?   20220126    0200    14.700  GAU 2.50E-03    -1.00E+00   85600000.0  -1.00E+00
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ARBS    ?   ?   ?   S   ?   20220126    0200    16.320  GAU 7.50E-03    -1.00E+00   85600000.0  -1.00E+00
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>CORG    ?   ?   ?   P   ?   20220126    0200    18.210  GAU 2.50E-03    -1.00E+00   17000000.0  -1.00E+00
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>CORG    ?   ?   ?   S   ?   20220126    0200    23.020  GAU 7.50E-03    -1.00E+00   17000000.0  -1.00E+00
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>PAND    ?   ?   ?   P   ?   20220126    0200    14.200  GAU 2.50E-03    -1.00E+00   132000000000.0  -1.00E+00
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>PAND    ?   ?   ?   S   ?   20220126    0200    15.550  GAU 2.50E-03    -1.00E+00   132000000000.0  -1.00E+00
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>CSOR    ?   ?   ?   P   ?   20220126    0200    17.510  GAU 2.50E-03    -1.00E+00   45200000.0  -1.00E+00
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>CSOR    ?   ?   ?   S   ?   20220126    0200    21.330  GAU 5.00E-03    -1.00E+00   99900000.0  -1.00E+00
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>CEST    ?   ?   ?   P   ?   20220126    0200    15.570  GAU 2.50E-03    -1.00E+00   74500000.0  -1.00E+00
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>CEST    ?   ?   ?   S   ?   20220126    0200    17.660  GAU 2.50E-03    -1.00E+00   90000000.0  -1.00E+00
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>SALF    ?   ?   ?   P   ?   20220126    0200    18.080  GAU 5.00E-03    -1.00E+00   7240000000.0    -1.00E+00
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>SALF    ?   ?   ?   S   ?   20220126    0200    21.930  GAU 7.50E-03    -1.00E+00   24900000000.0   -1.00E+00
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>GENF    ?   ?   ?   P   ?   20220126    0200    18.470  GAU 2.50E-03    -1.00E+00   20100000.0  -1.00E+00
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>GENF    ?   ?   ?   S   ?   20220126    0200    22.730  GAU 5.00E-03    -1.00E+00   43900000.0  -1.00E+00
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>CARF    ?   ?   ?   P   ?   20220126    0200    22.230  GAU 2.50E-03    -1.00E+00   1750000000.0    -1.00E+00
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>CARF    ?   ?   ?   S   ?   20220126    0200    29.370  GAU 7.50E-03    -1.00E+00   2870000000.0    -1.00E+00
-</code></pre></div>
 <h2 id="event-location-from-cli"><span style="color:darkcyan;"><strong>Event Location from CLI</strong></span></h2>
 <h3 id="usage">Usage</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>locate<span class="w"> </span>seismic<span class="w"> </span>event<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-i<span class="w"> </span>INVENTORY_FILE_PATH<span class="w"> </span>-c<span class="w"> </span>CONFIG_FILE_PATH<span class="w"> </span>-o<span class="w"> </span>OUT_DIR_PATH<span class="w"> </span><span class="o">[</span>-g<span class="o">]</span><span class="w"> </span><span class="o">[</span>-s<span class="o">]</span>
