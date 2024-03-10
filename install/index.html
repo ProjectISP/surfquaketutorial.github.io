@@ -799,7 +799,15 @@
 
 
 <h1 id="installation"><span style="color:darkcyan;"><strong>Installation</strong></span></h1>
-<p>The user can select whether to install only the surfQuake core or the GUI, which includes the core. In both circumstances, SurfQuake must be manually installed from the pip repository after creating an environment (anaconda env or pip env). The automatic installation of surfQuake GUI requires the installation of <a href="https://www.anaconda.com/download"><span style="color:#5DADE2"><em>Anaconda</em></span></a>.</p>
+<p>The user can select whether to install only the surfQuake core or the GUI (which also includes the core). </p>
+<ul>
+<li>
+<p><strong>Automatic installation</strong>: This is only available in surfQuake GUI and requires a previous installation of <a href="https://www.anaconda.com/download"><span style="color:#5DADE2"><em>Anaconda</em></span></a>.</p>
+</li>
+<li>
+<p><strong>Manual Installation</strong>: In both circumstances (GUI &amp; Core), SurfQuake must be manually installed from the pip repository after creating an environment (anaconda env or pip env).</p>
+</li>
+</ul>
 <h2 id="installing-the-gui"><span style="color:darkcyan;"> <strong>Installing the GUI</strong> </span></h2>
 <h3 id="automatic-installation">Automatic Installation:</h3>
 <p>This process will create atomatically an anaconda environment and then will install surfquake.</p>
@@ -812,9 +820,10 @@
 <p>After this process, if everything is ok and the alias has been correctly included in your path system, just type in your terminal</p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake
 </code></pre></div>
-if you have problems, because doen't recognize surfquake, from the root path where you have installed surfquake,</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>python<span class="w"> </span>start_surfquake.py
+if you have problems because surfquake is not properly recognized by your system path, go to the root path where you have saved surfquake,</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>SurfQuake
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>python<span class="w"> </span>start_surfquake.py
 </code></pre></div>
 <p>Remenber that installing surfquake GUI also includes the core Library and the Command Line interface. That's means that now you have access to the commands
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>surfquake<span class="w"> </span>-h
@@ -832,35 +841,39 @@ if you have problems, because doen't recognize surfquake, from the root path whe
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt;<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>virtualenv
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&gt;&gt;<span class="w"> </span>python&lt;version&gt;<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>surfquake
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>&gt;&gt;<span class="w"> </span><span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w"> </span><span class="c1"># activate your environment</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>&gt;&gt;<span class="w"> </span><span class="nb">source</span><span class="w"> </span>surfquake/bin/activate<span class="w"> </span><span class="c1"># activate your environment</span>
 </code></pre></div>
 <h4 id="execute-the-installation">Execute the Installation</h4>
-<p>Now, you can proceed with the installation of the full surfQuake program (core and GUI):</p>
+<p>Now, you can proceed with the installation of the full surfQuake program:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>SurfQuake
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div>
+<p>to start the program</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>SurfQuake
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>python<span class="w"> </span>start_surfquake.py
 </code></pre></div>
 <h2 id="installing-the-core"><span style="color:darkcyan;"> <strong>Installing the core</strong> </span></h2>
 <h3 id="create-an-environment_1">Create an environment</h3>
 <h4 id="anaconda-env">Anaconda env</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>surfquake<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9<span class="w"> </span><span class="c1"># surfQuake for 3.9 &lt;= Python &lt;= 3.11</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>surfquake<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9<span class="w"> </span><span class="c1"># surfQuake for 3.9 &lt;= Python &lt;= 3.11</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
 </code></pre></div>
 <h4 id="pip-env">pip env</h4>
 <p>Warning, if you are using anaconda, normally is automatically activated the base environment in your terminal. So first of all deactivate it! </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>conda<span class="w"> </span>deactivate
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>conda<span class="w"> </span>deactivate
 </code></pre></div>
 <p>To prevent dependencies from becoming incompatible, please make sure that the version of Python you have installed on your system is greater than 3.9 and less than 3.12. Simply follow these steps to view your Python version:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&gt;&gt;<span class="w"> </span>python
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>Python<span class="w"> </span><span class="m">3</span>.11.4<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Jul<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">2023</span>,<span class="w"> </span><span class="m">09</span>:00:44<span class="o">)</span><span class="w"> </span><span class="o">[</span>Clang<span class="w"> </span><span class="m">14</span>.0.6<span class="w"> </span><span class="o">]</span><span class="w"> </span>on<span class="w"> </span>darwin
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&gt;&gt;<span class="w"> </span>python
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Python<span class="w"> </span><span class="m">3</span>.11.4<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Jul<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="m">2023</span>,<span class="w"> </span><span class="m">09</span>:00:44<span class="o">)</span><span class="w"> </span><span class="o">[</span>Clang<span class="w"> </span><span class="m">14</span>.0.6<span class="w"> </span><span class="o">]</span><span class="w"> </span>on<span class="w"> </span>darwin
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&gt;&gt;<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>virtualenv<span class="w"> </span><span class="c1"># install in your python the virtualenv package (just in case)</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>&gt;&gt;<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>./surfquake<span class="w"> </span><span class="c1"># python&lt;version&gt; -m &lt;virtual-environment-name&gt; &lt;venv_location&gt; </span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>&gt;&gt;<span class="w"> </span><span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w"> </span><span class="c1">#s ource &lt;venv_location&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&gt;&gt;<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>virtualenv<span class="w"> </span><span class="c1"># install in your python the virtualenv package (just in case)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>&gt;&gt;<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>./surfquake<span class="w"> </span><span class="c1"># python&lt;version&gt; -m &lt;virtual-environment-name&gt; &lt;venv_location&gt; </span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>&gt;&gt;<span class="w"> </span><span class="nb">source</span><span class="w"> </span>surfquake/bin/activate<span class="w"> </span><span class="c1">#s ource &lt;venv_location&gt;</span>
 </code></pre></div>
 <h3 id="install-the-core-package">Install the core package</h3>
-<p>You can install surfQuake after creating your virtual environment (using either Anaconda env or Pip env).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>pip<span class="w"> </span>install<span class="w"> </span>surfquake
+<p>You can install surfQuake core after creating your virtual environment (using either Anaconda env or Pip env). After activate your environment,</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>surfquake
 </code></pre></div>
 
 
