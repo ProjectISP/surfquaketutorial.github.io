@@ -782,546 +782,607 @@
 <li>Local Magnitude: Local magnitude parameters: ml = log10(A) + a * log10(R/100) + b * (R-100) + c, where A is the maximum W-A amplitude (in mm) and R is the hypocentral distance (in km)</li>
 </ul>
 <h2 id="config-file"><span style="color:darkcyan;"><strong>Config file</strong></span></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># Config file for source_spec
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a># GENERAL PARAMETERS --------
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># All the fields are optional.
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a># The filled in fields will be written to output files.
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a># Author information
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>author_name = string(default=None)
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>author_email = string(default=None)
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a># Agency information
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>agency_full_name = string(default=None)
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>agency_short_name = string(default=None)
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>agency_url = string(default=None)
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a># the logo can be a local file (it will be copied to the output dir)
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a># or a URL
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>agency_logo = string(default=None)
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a># -------- GENERAL PARAMETERS
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a># TRACE AND METADATA PARAMETERS --------
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a># Channel naming for mis-oriented channels (vertical, horiz1, horiz2):
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a># Example:
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>#   mis_oriented_channels = Z,1,2
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>mis_oriented_channels = string_list(default=None)
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a># Option to specify non standard instrument codes (e.g., &quot;L&quot; for accelerometer)
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>instrument_code_acceleration = string(default=None)
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>instrument_code_velocity = string(default=None)
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a># For more complex network.station.location.channel (SCNL) naming scenarios,
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a># you can provide a file, in json format, with traceid (SCNL) mapping
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>traceid_mapping_file = string(default=None)
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a># List of traceids to ignore.
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a># Use network.station.location.channel; wildcards are accepted
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a># Example:
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>#   ignore_traceids = FR.CIEL.*.*, AM.RA0D3.00.*
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>ignore_traceids = force_list(default=None)
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a># List of traceids to use.
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a># Use network.station.location.channel; wildcards are accepted
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a># Example:
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>#   use_traceids = FR.CIEL.*.*, AM.RA0D3.00.*
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>use_traceids = force_list(default=None)
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a># Maximum epicentral distance (km) to process a trace
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>max_epi_dist = float(min=0, default=None)
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a># Directory or single file name containing station metadata
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a># (instrument response and station coordinates).
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a># Note: this parameter can be overridden by the command line option
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>#       with the same name.
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a># Station metadata files can be in one of the following formats:
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>#   StationXML, dataless SEED, SEED RESP, PAZ (SAC polezero format)
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a># Notes:
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a># 1. SourceSpec will not enter in subdirectories of the given directory
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>#    (only one level allowed)
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a># 2. Traceid for PAZ files is specified through their name.
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>#    The traceid (network.station.location.channel) must be in the last four
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>#    fields (separated by a dot &quot;.&quot;) before the file suffix (which can be
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>#    &quot;.paz&quot;, &quot;.pz&quot;, or no suffix).
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>#    Example:
-<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>#      PREFIX.NET.STA.LOC.CHAN.paz
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>#    or (no prefix):
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>#      NET.STA.LOC.CHAN.paz
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>#    or (no prefix and no suffix):
-<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>#      NET.STA.LOC.CHAN
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a># 3. If no traceid is specified through the PAZ file name, then it is assumed
-<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>#    that this is a generic PAZ, valid for all the stations that do not have
-<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>#    a specific PAZ. Use &quot;trace_units&quot; below to specify the units of the
-<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>#    generic PAZ.
-<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a># 4. SEED RESP and PAZ files do not contain station coordinates, which
-<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>#    should therefore be in the trace header (traces in SAC format)
-<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>station_metadata = string(default=None)
-<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>
-<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a># It is also possible to provide a constant sensitivity (i.e., flat instrument
-<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a># response curve) as a numerical value or a combination of SAC header fields
-<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a># (in this case, traces must be in SAC format).
-<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a># This parameter overrides the response curve computed from station_metadata.
-<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a># Leave it to None to compute instrument response from station_metadata.
-<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a># Examples:
-<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>#  sensitivity = 1
-<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>#  sensitivity = 1e3
-<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>#  sensitivity = resp0
-<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>#  sensitivity = resp1*resp2
-<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>#  sensitivity = user3/user2
-<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>sensitivity = string(default=None)
-<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>
-<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a># SQLite database file for storing output parameters (optional):
-<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>database_file = string(default=None)
-<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>
-<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a># Correct_instrumental_response (optional, default=True):
-<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>correct_instrumental_response = boolean(default=True)
-<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>
-<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a># Trace units.
-<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a># Leave it to &#39;auto&#39; to let the code decide, based on instrument type.
-<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a># Manually set it to &#39;disp&#39;, &#39;vel&#39; or &#39;acc&#39; if you have already preprocessed
-<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a># the traces.
-<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>trace_units = option(&#39;auto&#39;, &#39;disp&#39;, &#39;vel&#39;, &#39;acc&#39;, default=&#39;auto&#39;)
-<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a># -------- TRACE AND METADATA PARAMETERS
-<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>
-<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>
-<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a># TIME WINDOW PARAMETERS --------
-<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a># P and S wave velocity (in km/s) for travel time calculation
-<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a># (if None, the global velocity model &#39;iasp91&#39; is used)
-<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a># Theoretical P or S arrival times are used when a manual P or S pick is not
-<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a># available, or when the manual P or S pick is too different from the
-<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a># theoretical arrival (see &#39;p_arrival_tolerance&#39; and &#39;s_arrival_tolerance&#39;
-<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a># below).
-<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a>vp_tt = float(min=0, default=None)
-<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a>vs_tt = float(min=0, default=None)
-<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a># As an alternative, a directory containing NonLinLoc travel time grids
-<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a># can be specified and values defined above will be ignored.
-<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a># Note that reading NonLinLoc grids takes time. For simple 1D models, you
-<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a># can speed up considerably the process using a generic station
-<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a># named &quot;DEFAULT&quot;. The coordinates of this default station are not important,
-<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a># since they will be superseded by each station&#39;s coordinates.
-<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>NLL_time_dir = string(default=None)
-<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>
-<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a># Arrival tolerances (in seconds) to accept a manual P or S pick
-<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>p_arrival_tolerance = float(min=0, default=4.0)
-<a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>s_arrival_tolerance = float(min=0, default=4.0)
-<a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>
-<a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a># Start time (in seconds) of the noise window, respect to the P arrival time
-<a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>noise_pre_time = float(default=6.0)
-<a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a>
-<a id="__codelineno-0-125" name="__codelineno-0-125" href="#__codelineno-0-125"></a># Start time (in seconds) of the signal window, respect to the P or S arrival
-<a id="__codelineno-0-126" name="__codelineno-0-126" href="#__codelineno-0-126"></a># times (see &quot;wave_type&quot; below)
-<a id="__codelineno-0-127" name="__codelineno-0-127" href="#__codelineno-0-127"></a>signal_pre_time = float(default=1.0)
-<a id="__codelineno-0-128" name="__codelineno-0-128" href="#__codelineno-0-128"></a>
-<a id="__codelineno-0-129" name="__codelineno-0-129" href="#__codelineno-0-129"></a># Length (in seconds) for both noise and signal windows
-<a id="__codelineno-0-130" name="__codelineno-0-130" href="#__codelineno-0-130"></a>win_length = float(min=0, default=5.0)
-<a id="__codelineno-0-131" name="__codelineno-0-131" href="#__codelineno-0-131"></a># -------- TIME WINDOW PARAMETERS
-<a id="__codelineno-0-132" name="__codelineno-0-132" href="#__codelineno-0-132"></a>
-<a id="__codelineno-0-133" name="__codelineno-0-133" href="#__codelineno-0-133"></a>
-<a id="__codelineno-0-134" name="__codelineno-0-134" href="#__codelineno-0-134"></a># SPECTRUM PARAMETERS --------
-<a id="__codelineno-0-135" name="__codelineno-0-135" href="#__codelineno-0-135"></a># Wave type to analyse: &#39;P&#39;, &#39;S&#39;, &#39;SH&#39; or &#39;SV&#39;
-<a id="__codelineno-0-136" name="__codelineno-0-136" href="#__codelineno-0-136"></a># If &#39;SH&#39; or &#39;SV&#39; are selected, traces are rotated in the radial-transverse
-<a id="__codelineno-0-137" name="__codelineno-0-137" href="#__codelineno-0-137"></a># system. Transverse component is used for &#39;SH&#39;, radial component (and
-<a id="__codelineno-0-138" name="__codelineno-0-138" href="#__codelineno-0-138"></a># optionally the vertical component, see &#39;ignore_vertical&#39; below) is used
-<a id="__codelineno-0-139" name="__codelineno-0-139" href="#__codelineno-0-139"></a># for &#39;SV&#39;
-<a id="__codelineno-0-140" name="__codelineno-0-140" href="#__codelineno-0-140"></a>wave_type = option(&#39;P&#39;, &#39;S&#39;, &#39;SH&#39;, &#39;SV&#39;, default=&#39;S&#39;)
-<a id="__codelineno-0-141" name="__codelineno-0-141" href="#__codelineno-0-141"></a>
-<a id="__codelineno-0-142" name="__codelineno-0-142" href="#__codelineno-0-142"></a># Integrate in time domain (default: integration in spectral domain)
-<a id="__codelineno-0-143" name="__codelineno-0-143" href="#__codelineno-0-143"></a>time_domain_int = boolean(default=False)
-<a id="__codelineno-0-144" name="__codelineno-0-144" href="#__codelineno-0-144"></a>
-<a id="__codelineno-0-145" name="__codelineno-0-145" href="#__codelineno-0-145"></a># Ignore vertical components when building S or SV spectra
-<a id="__codelineno-0-146" name="__codelineno-0-146" href="#__codelineno-0-146"></a># Note: this option has no effect when &#39;wave_type&#39; is &#39;P&#39; (the vertical
-<a id="__codelineno-0-147" name="__codelineno-0-147" href="#__codelineno-0-147"></a># component is not ignored) and when &#39;wave_type&#39; is &#39;SH&#39; (the vertical
-<a id="__codelineno-0-148" name="__codelineno-0-148" href="#__codelineno-0-148"></a># component is not needed)
-<a id="__codelineno-0-149" name="__codelineno-0-149" href="#__codelineno-0-149"></a>ignore_vertical = boolean(default=False)
-<a id="__codelineno-0-150" name="__codelineno-0-150" href="#__codelineno-0-150"></a>
-<a id="__codelineno-0-151" name="__codelineno-0-151" href="#__codelineno-0-151"></a># Taper half width: between 0 (no taper) and 0.5
-<a id="__codelineno-0-152" name="__codelineno-0-152" href="#__codelineno-0-152"></a>taper_halfwidth = float(min=0, max=0.5, default=0.05)
-<a id="__codelineno-0-153" name="__codelineno-0-153" href="#__codelineno-0-153"></a>
-<a id="__codelineno-0-154" name="__codelineno-0-154" href="#__codelineno-0-154"></a># Spectral window length (seconds)
-<a id="__codelineno-0-155" name="__codelineno-0-155" href="#__codelineno-0-155"></a># Signal is tapered, and then zero padded to
-<a id="__codelineno-0-156" name="__codelineno-0-156" href="#__codelineno-0-156"></a># this window length, so that the spectral
-<a id="__codelineno-0-157" name="__codelineno-0-157" href="#__codelineno-0-157"></a># sampling is fixed to 1/spectral_win_length.
-<a id="__codelineno-0-158" name="__codelineno-0-158" href="#__codelineno-0-158"></a># Comment out (or set to None) to use
-<a id="__codelineno-0-159" name="__codelineno-0-159" href="#__codelineno-0-159"></a># signal window as spectral window length.
-<a id="__codelineno-0-160" name="__codelineno-0-160" href="#__codelineno-0-160"></a>spectral_win_length = float(min=1e-99, default=None)
-<a id="__codelineno-0-161" name="__codelineno-0-161" href="#__codelineno-0-161"></a>
-<a id="__codelineno-0-162" name="__codelineno-0-162" href="#__codelineno-0-162"></a># Spectral smoothing window width in frequency decades
-<a id="__codelineno-0-163" name="__codelineno-0-163" href="#__codelineno-0-163"></a># (i.e., log10 frequency scale).
-<a id="__codelineno-0-164" name="__codelineno-0-164" href="#__codelineno-0-164"></a># Example:
-<a id="__codelineno-0-165" name="__codelineno-0-165" href="#__codelineno-0-165"></a>#  spectral_smooth_width_decades=1 means a width of 1 decade
-<a id="__codelineno-0-166" name="__codelineno-0-166" href="#__codelineno-0-166"></a>#  (generally, too large, producing a spectrum which is too smooth).
-<a id="__codelineno-0-167" name="__codelineno-0-167" href="#__codelineno-0-167"></a>#  spectrum(f0) is smoothed using values between f1 and f2, so that
-<a id="__codelineno-0-168" name="__codelineno-0-168" href="#__codelineno-0-168"></a>#  log10(f1)=log10(f0)-0.5 and log10(f2)=log10(f0)+0.5
-<a id="__codelineno-0-169" name="__codelineno-0-169" href="#__codelineno-0-169"></a>#    i.e.,
-<a id="__codelineno-0-170" name="__codelineno-0-170" href="#__codelineno-0-170"></a>#  f1=f0/(10^0.5) and f2=f0*(10^0.5)
-<a id="__codelineno-0-171" name="__codelineno-0-171" href="#__codelineno-0-171"></a>#    or,
-<a id="__codelineno-0-172" name="__codelineno-0-172" href="#__codelineno-0-172"></a>#  f2/f1=10 (1 decade width)
-<a id="__codelineno-0-173" name="__codelineno-0-173" href="#__codelineno-0-173"></a># Default value of 0.2 is generally a good choice
-<a id="__codelineno-0-174" name="__codelineno-0-174" href="#__codelineno-0-174"></a>spectral_smooth_width_decades = float(min=1e-99, default=0.2)
-<a id="__codelineno-0-175" name="__codelineno-0-175" href="#__codelineno-0-175"></a>
-<a id="__codelineno-0-176" name="__codelineno-0-176" href="#__codelineno-0-176"></a># Residuals file path
-<a id="__codelineno-0-177" name="__codelineno-0-177" href="#__codelineno-0-177"></a># (a pickle file with the mean residuals per station,
-<a id="__codelineno-0-178" name="__codelineno-0-178" href="#__codelineno-0-178"></a># used for station correction):
-<a id="__codelineno-0-179" name="__codelineno-0-179" href="#__codelineno-0-179"></a>residuals_filepath = string(default=None)
-<a id="__codelineno-0-180" name="__codelineno-0-180" href="#__codelineno-0-180"></a>
-<a id="__codelineno-0-181" name="__codelineno-0-181" href="#__codelineno-0-181"></a># Remove the signal baseline after instrument correction and before filtering
-<a id="__codelineno-0-182" name="__codelineno-0-182" href="#__codelineno-0-182"></a>remove_baseline = boolean(default=False)
-<a id="__codelineno-0-183" name="__codelineno-0-183" href="#__codelineno-0-183"></a>
-<a id="__codelineno-0-184" name="__codelineno-0-184" href="#__codelineno-0-184"></a># Band-pass frequencies (Hz) for accelerometers, velocimeters
-<a id="__codelineno-0-185" name="__codelineno-0-185" href="#__codelineno-0-185"></a># and displacement sensors.
-<a id="__codelineno-0-186" name="__codelineno-0-186" href="#__codelineno-0-186"></a># Use bp_freqmin_STATION and bp_freqmax_STATION to provide
-<a id="__codelineno-0-187" name="__codelineno-0-187" href="#__codelineno-0-187"></a># filter frequencies for a specific STATION code.
-<a id="__codelineno-0-188" name="__codelineno-0-188" href="#__codelineno-0-188"></a># TODO: calculate from sampling rate?
-<a id="__codelineno-0-189" name="__codelineno-0-189" href="#__codelineno-0-189"></a>bp_freqmin_acc    = float(min=0, default=1.0)
-<a id="__codelineno-0-190" name="__codelineno-0-190" href="#__codelineno-0-190"></a>bp_freqmax_acc    = float(min=0, default=50.0)
-<a id="__codelineno-0-191" name="__codelineno-0-191" href="#__codelineno-0-191"></a>bp_freqmin_shortp = float(min=0, default=1.0)
-<a id="__codelineno-0-192" name="__codelineno-0-192" href="#__codelineno-0-192"></a>bp_freqmax_shortp = float(min=0, default=40.0)
-<a id="__codelineno-0-193" name="__codelineno-0-193" href="#__codelineno-0-193"></a>bp_freqmin_broadb = float(min=0, default=0.5)
-<a id="__codelineno-0-194" name="__codelineno-0-194" href="#__codelineno-0-194"></a>bp_freqmax_broadb = float(min=0, default=40.0)
-<a id="__codelineno-0-195" name="__codelineno-0-195" href="#__codelineno-0-195"></a>bp_freqmin_disp   = float(min=0, default=0.5)
-<a id="__codelineno-0-196" name="__codelineno-0-196" href="#__codelineno-0-196"></a>bp_freqmax_disp   = float(min=0, default=40.0)
-<a id="__codelineno-0-197" name="__codelineno-0-197" href="#__codelineno-0-197"></a>
-<a id="__codelineno-0-198" name="__codelineno-0-198" href="#__codelineno-0-198"></a># Spectral windowing frequencies (Hz) for accelerometers, velocimeters
-<a id="__codelineno-0-199" name="__codelineno-0-199" href="#__codelineno-0-199"></a># and displacement sensors.
-<a id="__codelineno-0-200" name="__codelineno-0-200" href="#__codelineno-0-200"></a># (spectra will be cut between these two frequencies)
-<a id="__codelineno-0-201" name="__codelineno-0-201" href="#__codelineno-0-201"></a># Use freq1_STATION and freq2_STATION to provide
-<a id="__codelineno-0-202" name="__codelineno-0-202" href="#__codelineno-0-202"></a># windowing frequencies for a specific STATION code.
-<a id="__codelineno-0-203" name="__codelineno-0-203" href="#__codelineno-0-203"></a>freq1_acc     = float(min=0, default=1.0)
-<a id="__codelineno-0-204" name="__codelineno-0-204" href="#__codelineno-0-204"></a>freq2_acc     = float(min=0, default=30.0)
-<a id="__codelineno-0-205" name="__codelineno-0-205" href="#__codelineno-0-205"></a>freq1_shortp  = float(min=0, default=1.0)
-<a id="__codelineno-0-206" name="__codelineno-0-206" href="#__codelineno-0-206"></a>freq2_shortp  = float(min=0, default=30.0)
-<a id="__codelineno-0-207" name="__codelineno-0-207" href="#__codelineno-0-207"></a>freq1_broadb  = float(min=0, default=0.5)
-<a id="__codelineno-0-208" name="__codelineno-0-208" href="#__codelineno-0-208"></a>freq2_broadb  = float(min=0, default=30.0)
-<a id="__codelineno-0-209" name="__codelineno-0-209" href="#__codelineno-0-209"></a>freq1_disp    = float(min=0, default=0.5)
-<a id="__codelineno-0-210" name="__codelineno-0-210" href="#__codelineno-0-210"></a>freq2_disp    = float(min=0, default=30.0)
-<a id="__codelineno-0-211" name="__codelineno-0-211" href="#__codelineno-0-211"></a># -------- SPECTRUM PARAMETERS
-<a id="__codelineno-0-212" name="__codelineno-0-212" href="#__codelineno-0-212"></a>
-<a id="__codelineno-0-213" name="__codelineno-0-213" href="#__codelineno-0-213"></a>
-<a id="__codelineno-0-214" name="__codelineno-0-214" href="#__codelineno-0-214"></a># SIGNAL/NOISE PARAMETERS --------
-<a id="__codelineno-0-215" name="__codelineno-0-215" href="#__codelineno-0-215"></a># Minimum rms (in trace units before instrument corrections)
-<a id="__codelineno-0-216" name="__codelineno-0-216" href="#__codelineno-0-216"></a># to consider a trace as noise
-<a id="__codelineno-0-217" name="__codelineno-0-217" href="#__codelineno-0-217"></a>rmsmin = float(min=0, default=0)
-<a id="__codelineno-0-218" name="__codelineno-0-218" href="#__codelineno-0-218"></a>
-<a id="__codelineno-0-219" name="__codelineno-0-219" href="#__codelineno-0-219"></a># Time domain S/N ratio min
-<a id="__codelineno-0-220" name="__codelineno-0-220" href="#__codelineno-0-220"></a>sn_min = float(min=0, default=0)
-<a id="__codelineno-0-221" name="__codelineno-0-221" href="#__codelineno-0-221"></a>
-<a id="__codelineno-0-222" name="__codelineno-0-222" href="#__codelineno-0-222"></a># Clipping detection algorithm
-<a id="__codelineno-0-223" name="__codelineno-0-223" href="#__codelineno-0-223"></a># Options:
-<a id="__codelineno-0-224" name="__codelineno-0-224" href="#__codelineno-0-224"></a>#  - &#39;none&#39;: no clipping detection
-<a id="__codelineno-0-225" name="__codelineno-0-225" href="#__codelineno-0-225"></a>#  - &#39;clipping_score&#39;: compute a clipping score for each trace, based on the
-<a id="__codelineno-0-226" name="__codelineno-0-226" href="#__codelineno-0-226"></a>#    shape of the kernel density estimation of the trace amplitude values.
-<a id="__codelineno-0-227" name="__codelineno-0-227" href="#__codelineno-0-227"></a>#    A high clipping score will be obtained for traces with a high number of
-<a id="__codelineno-0-228" name="__codelineno-0-228" href="#__codelineno-0-228"></a>#    samples whose amplitude is close to the trace highest or lowest
-<a id="__codelineno-0-229" name="__codelineno-0-229" href="#__codelineno-0-229"></a>#    amplitude values. Clipping scores for each trace are printed on the
-<a id="__codelineno-0-230" name="__codelineno-0-230" href="#__codelineno-0-230"></a>#    terminal and in the log file.
-<a id="__codelineno-0-231" name="__codelineno-0-231" href="#__codelineno-0-231"></a>#    Note: if &quot;remove_baseline&quot; is True (see above), clipping scores are
-<a id="__codelineno-0-232" name="__codelineno-0-232" href="#__codelineno-0-232"></a>#    computed on the baseline-corrected signal.
-<a id="__codelineno-0-233" name="__codelineno-0-233" href="#__codelineno-0-233"></a>#  - &#39;clipping_peaks&#39;: count the number of peaks in the kernel density
-<a id="__codelineno-0-234" name="__codelineno-0-234" href="#__codelineno-0-234"></a>#    estimation of the trace amplitude values. The trace is considered clipped
-<a id="__codelineno-0-235" name="__codelineno-0-235" href="#__codelineno-0-235"></a>#    if at least one peak is found within the trace highest or lowest amplitude
-<a id="__codelineno-0-236" name="__codelineno-0-236" href="#__codelineno-0-236"></a>#    values. Kernel density peaks for each trace are printed on the terminal
-<a id="__codelineno-0-237" name="__codelineno-0-237" href="#__codelineno-0-237"></a>#    and in the log file.
-<a id="__codelineno-0-238" name="__codelineno-0-238" href="#__codelineno-0-238"></a>clipping_detection_algorithm = option(&#39;none&#39;, &#39;clipping_score&#39;, &#39;clipping_peaks&#39;, default=&#39;clipping_score&#39;)
-<a id="__codelineno-0-239" name="__codelineno-0-239" href="#__codelineno-0-239"></a># Plot a debug figure for each trace with the results of the clipping algorithm
-<a id="__codelineno-0-240" name="__codelineno-0-240" href="#__codelineno-0-240"></a># Note: the figures are always shown, even if &quot;plot_show&quot; is False (see below)
-<a id="__codelineno-0-241" name="__codelineno-0-241" href="#__codelineno-0-241"></a>clipping_debug_plot = boolean(default=False)
-<a id="__codelineno-0-242" name="__codelineno-0-242" href="#__codelineno-0-242"></a># Threshold for the &#39;clipping_score&#39; algorithm (between 0 and 100).
-<a id="__codelineno-0-243" name="__codelineno-0-243" href="#__codelineno-0-243"></a># A value of 100 means no clipping detection.
-<a id="__codelineno-0-244" name="__codelineno-0-244" href="#__codelineno-0-244"></a># This parameter is ignored if &quot;clipping_detection_algorithm&quot; is not set to
-<a id="__codelineno-0-245" name="__codelineno-0-245" href="#__codelineno-0-245"></a># &#39;clipping_score&#39;.
-<a id="__codelineno-0-246" name="__codelineno-0-246" href="#__codelineno-0-246"></a>clipping_score_threshold = float(min=0, max=100, default=10)
-<a id="__codelineno-0-247" name="__codelineno-0-247" href="#__codelineno-0-247"></a># Sensitivity for the &#39;clipping_peaks&#39; algorithm (between 1 and 5).
-<a id="__codelineno-0-248" name="__codelineno-0-248" href="#__codelineno-0-248"></a># Higher values mean more peaks are detected.
-<a id="__codelineno-0-249" name="__codelineno-0-249" href="#__codelineno-0-249"></a># This parameter is ignored if &quot;clipping_detection_algorithm&quot; is not set to
-<a id="__codelineno-0-250" name="__codelineno-0-250" href="#__codelineno-0-250"></a># &#39;clipping_peaks&#39;.
-<a id="__codelineno-0-251" name="__codelineno-0-251" href="#__codelineno-0-251"></a>clipping_peaks_sensitivity = integer(min=1, max=5, default=3)
-<a id="__codelineno-0-252" name="__codelineno-0-252" href="#__codelineno-0-252"></a># Trace amplitude percentile for the &#39;clipping_peaks&#39; algorithm (between 0
-<a id="__codelineno-0-253" name="__codelineno-0-253" href="#__codelineno-0-253"></a># and 100). Example:
-<a id="__codelineno-0-254" name="__codelineno-0-254" href="#__codelineno-0-254"></a>#   clipping_peaks_percentile = 10
-<a id="__codelineno-0-255" name="__codelineno-0-255" href="#__codelineno-0-255"></a># means that the 10% highest and lowest values of the trace amplitude will be
-<a id="__codelineno-0-256" name="__codelineno-0-256" href="#__codelineno-0-256"></a># checked for clipping.
-<a id="__codelineno-0-257" name="__codelineno-0-257" href="#__codelineno-0-257"></a># A value of 0 means that no clipping check will be performed.
-<a id="__codelineno-0-258" name="__codelineno-0-258" href="#__codelineno-0-258"></a># This parameter is ignored if &quot;clipping_detection_algorithm&quot; is not set to
-<a id="__codelineno-0-259" name="__codelineno-0-259" href="#__codelineno-0-259"></a># &#39;clipping_peaks&#39;.
-<a id="__codelineno-0-260" name="__codelineno-0-260" href="#__codelineno-0-260"></a>clipping_peaks_percentile = float(min=0, max=100, default=10)
-<a id="__codelineno-0-261" name="__codelineno-0-261" href="#__codelineno-0-261"></a>
-<a id="__codelineno-0-262" name="__codelineno-0-262" href="#__codelineno-0-262"></a># Maximum gap length for the whole trace, in seconds
-<a id="__codelineno-0-263" name="__codelineno-0-263" href="#__codelineno-0-263"></a>gap_max = float(min=0, default=None)
-<a id="__codelineno-0-264" name="__codelineno-0-264" href="#__codelineno-0-264"></a># Maximum overlap length for the whole trace, in seconds
-<a id="__codelineno-0-265" name="__codelineno-0-265" href="#__codelineno-0-265"></a>overlap_max = float(min=0, default=None)
-<a id="__codelineno-0-266" name="__codelineno-0-266" href="#__codelineno-0-266"></a>
-<a id="__codelineno-0-267" name="__codelineno-0-267" href="#__codelineno-0-267"></a># Spectral S/N ratio min, below which a spectrum will be skipped
-<a id="__codelineno-0-268" name="__codelineno-0-268" href="#__codelineno-0-268"></a>spectral_sn_min = float(min=0, default=0)
-<a id="__codelineno-0-269" name="__codelineno-0-269" href="#__codelineno-0-269"></a># Frequency range (Hz) to compute the spectral S/N ratio
-<a id="__codelineno-0-270" name="__codelineno-0-270" href="#__codelineno-0-270"></a># (comment out or use None to indicate the whole frequency range)
-<a id="__codelineno-0-271" name="__codelineno-0-271" href="#__codelineno-0-271"></a># Example:
-<a id="__codelineno-0-272" name="__codelineno-0-272" href="#__codelineno-0-272"></a>#  spectral_sn_freq_range = 0.1, 2
-<a id="__codelineno-0-273" name="__codelineno-0-273" href="#__codelineno-0-273"></a>spectral_sn_freq_range = float_list(min=0, default=None)
-<a id="__codelineno-0-274" name="__codelineno-0-274" href="#__codelineno-0-274"></a># -------- SIGNAL/NOISE PARAMETERS
-<a id="__codelineno-0-275" name="__codelineno-0-275" href="#__codelineno-0-275"></a>
-<a id="__codelineno-0-276" name="__codelineno-0-276" href="#__codelineno-0-276"></a>
-<a id="__codelineno-0-277" name="__codelineno-0-277" href="#__codelineno-0-277"></a># SPECTRAL MODEL PARAMETERS --------
-<a id="__codelineno-0-278" name="__codelineno-0-278" href="#__codelineno-0-278"></a># P and S wave velocity close to the source (km/s)
-<a id="__codelineno-0-279" name="__codelineno-0-279" href="#__codelineno-0-279"></a>vp_source = float(min=0, default=5.5)
-<a id="__codelineno-0-280" name="__codelineno-0-280" href="#__codelineno-0-280"></a>vs_source = float(min=0, default=3.2)
-<a id="__codelineno-0-281" name="__codelineno-0-281" href="#__codelineno-0-281"></a># P and S wave velocity close to the stations (km/s)
-<a id="__codelineno-0-282" name="__codelineno-0-282" href="#__codelineno-0-282"></a># If set to None, velocity values close to the source will be used
-<a id="__codelineno-0-283" name="__codelineno-0-283" href="#__codelineno-0-283"></a>vp_stations = float(min=0, default=None)
-<a id="__codelineno-0-284" name="__codelineno-0-284" href="#__codelineno-0-284"></a>vs_stations = float(min=0, default=None)
-<a id="__codelineno-0-285" name="__codelineno-0-285" href="#__codelineno-0-285"></a># Note: if both v(p,s)_source and v(p,s)_stations are set to None, then
-<a id="__codelineno-0-286" name="__codelineno-0-286" href="#__codelineno-0-286"></a># velocities will be extracted from the global velocity model &#39;iasp91&#39;
-<a id="__codelineno-0-287" name="__codelineno-0-287" href="#__codelineno-0-287"></a># As an alternative, a directory containing a NonLinLoc model can be specified
-<a id="__codelineno-0-288" name="__codelineno-0-288" href="#__codelineno-0-288"></a># In this case, the values provided above will be ignored
-<a id="__codelineno-0-289" name="__codelineno-0-289" href="#__codelineno-0-289"></a>NLL_model_dir = string(default=None)
-<a id="__codelineno-0-290" name="__codelineno-0-290" href="#__codelineno-0-290"></a># Density (kg/m3):
-<a id="__codelineno-0-291" name="__codelineno-0-291" href="#__codelineno-0-291"></a>rho = float(min=0, default=2500)
-<a id="__codelineno-0-292" name="__codelineno-0-292" href="#__codelineno-0-292"></a># P-wave average radiation pattern coefficient:
-<a id="__codelineno-0-293" name="__codelineno-0-293" href="#__codelineno-0-293"></a>rpp = float(min=0, default=0.52)
-<a id="__codelineno-0-294" name="__codelineno-0-294" href="#__codelineno-0-294"></a># S-wave average radiation pattern coefficient:
-<a id="__codelineno-0-295" name="__codelineno-0-295" href="#__codelineno-0-295"></a>rps = float(min=0, default=0.62)
-<a id="__codelineno-0-296" name="__codelineno-0-296" href="#__codelineno-0-296"></a># Radiation pattern from focal mechanism, if available
-<a id="__codelineno-0-297" name="__codelineno-0-297" href="#__codelineno-0-297"></a>rp_from_focal_mechanism = boolean(default=False)
-<a id="__codelineno-0-298" name="__codelineno-0-298" href="#__codelineno-0-298"></a># Geometrical spreading correction of wave amplitude.
-<a id="__codelineno-0-299" name="__codelineno-0-299" href="#__codelineno-0-299"></a># Spectra will be multiplied by this value to correct for the lost amplitude.
-<a id="__codelineno-0-300" name="__codelineno-0-300" href="#__codelineno-0-300"></a># Possible options are:
-<a id="__codelineno-0-301" name="__codelineno-0-301" href="#__codelineno-0-301"></a>#    &#39;r_power_n&#39;:  &quot;r&quot; to the power of &quot;n&quot; (rⁿ).
-<a id="__codelineno-0-302" name="__codelineno-0-302" href="#__codelineno-0-302"></a>#                  You must provide the value of the exponent &quot;n&quot;
-<a id="__codelineno-0-303" name="__codelineno-0-303" href="#__codelineno-0-303"></a>#                  (see &quot;geom_spread_n_exponent&quot; below).
-<a id="__codelineno-0-304" name="__codelineno-0-304" href="#__codelineno-0-304"></a>#    &#39;boatwright&#39;: &quot;r&quot; (body waves) geometrical spreading for hypocentral
-<a id="__codelineno-0-305" name="__codelineno-0-305" href="#__codelineno-0-305"></a>#                  distances below a cutoff distance; frequency-dependent
-<a id="__codelineno-0-306" name="__codelineno-0-306" href="#__codelineno-0-306"></a>#                  geometrical spreading above the cutoff distance (Boatwright
-<a id="__codelineno-0-307" name="__codelineno-0-307" href="#__codelineno-0-307"></a>#                  et al., 2002). You must provide the cutoff distance (see
-<a id="__codelineno-0-308" name="__codelineno-0-308" href="#__codelineno-0-308"></a>#                  &quot;geom_spread_cutoff_distance&quot; below).
-<a id="__codelineno-0-309" name="__codelineno-0-309" href="#__codelineno-0-309"></a>geom_spread_model = option(&#39;r_power_n&#39;, &#39;boatwright&#39;, default=&#39;r_power_n&#39;)
-<a id="__codelineno-0-310" name="__codelineno-0-310" href="#__codelineno-0-310"></a># Exponent &quot;n&quot; for the &quot;r_power_n&quot; geometrical spreading coefficient (positive
-<a id="__codelineno-0-311" name="__codelineno-0-311" href="#__codelineno-0-311"></a># float). Examples:
-<a id="__codelineno-0-312" name="__codelineno-0-312" href="#__codelineno-0-312"></a>#   geom_spread_n_exponent = 1 (default, body wave in a homogeneous full-space)
-<a id="__codelineno-0-313" name="__codelineno-0-313" href="#__codelineno-0-313"></a>#   geom_spread_n_exponent = 0.5 (surface wave in a homogeneous half-space)
-<a id="__codelineno-0-314" name="__codelineno-0-314" href="#__codelineno-0-314"></a>geom_spread_n_exponent = float(min=0, default=1)
-<a id="__codelineno-0-315" name="__codelineno-0-315" href="#__codelineno-0-315"></a># Geometrical spreading cutoff distance, in km, for the &quot;boatwright&quot; model:
-<a id="__codelineno-0-316" name="__codelineno-0-316" href="#__codelineno-0-316"></a>geom_spread_cutoff_distance = float(min=0, default=100)
-<a id="__codelineno-0-317" name="__codelineno-0-317" href="#__codelineno-0-317"></a># -------- SPECTRAL MODEL PARAMETERS
-<a id="__codelineno-0-318" name="__codelineno-0-318" href="#__codelineno-0-318"></a>
-<a id="__codelineno-0-319" name="__codelineno-0-319" href="#__codelineno-0-319"></a>
-<a id="__codelineno-0-320" name="__codelineno-0-320" href="#__codelineno-0-320"></a># INVERSION PARAMETERS --------
-<a id="__codelineno-0-321" name="__codelineno-0-321" href="#__codelineno-0-321"></a># Weighting type: &#39;noise&#39;, &#39;frequency&#39; or &#39;no_weight&#39;
-<a id="__codelineno-0-322" name="__codelineno-0-322" href="#__codelineno-0-322"></a>weighting = option(&#39;noise&#39;, &#39;frequency&#39;, &#39;no_weight&#39;, default=&#39;noise&#39;)
-<a id="__codelineno-0-323" name="__codelineno-0-323" href="#__codelineno-0-323"></a># Parameters for &#39;frequency&#39; weighting (ignored for &#39;noise&#39; weighting):
-<a id="__codelineno-0-324" name="__codelineno-0-324" href="#__codelineno-0-324"></a>#   weight for f&lt;=f_weight (Hz)
-<a id="__codelineno-0-325" name="__codelineno-0-325" href="#__codelineno-0-325"></a>#   1      for f&gt; f_weight (Hz)
-<a id="__codelineno-0-326" name="__codelineno-0-326" href="#__codelineno-0-326"></a>f_weight = float(min=0, default=7.)
-<a id="__codelineno-0-327" name="__codelineno-0-327" href="#__codelineno-0-327"></a>weight = float(min=0, default=10.)
-<a id="__codelineno-0-328" name="__codelineno-0-328" href="#__codelineno-0-328"></a>
-<a id="__codelineno-0-329" name="__codelineno-0-329" href="#__codelineno-0-329"></a># Initial value for t_star (seconds)
-<a id="__codelineno-0-330" name="__codelineno-0-330" href="#__codelineno-0-330"></a>t_star_0 = float(default=0.045)
-<a id="__codelineno-0-331" name="__codelineno-0-331" href="#__codelineno-0-331"></a># Try to invert for t_star_0.
-<a id="__codelineno-0-332" name="__codelineno-0-332" href="#__codelineno-0-332"></a># If the inverted t_star_0 is non-positive, then fixed t_star_0 will be used
-<a id="__codelineno-0-333" name="__codelineno-0-333" href="#__codelineno-0-333"></a>invert_t_star_0 = boolean(default=False)
-<a id="__codelineno-0-334" name="__codelineno-0-334" href="#__codelineno-0-334"></a># Allowed variability around inverted t_star_0 in the main inversion
-<a id="__codelineno-0-335" name="__codelineno-0-335" href="#__codelineno-0-335"></a># (expressed as a fraction of t_star_0, between 0 and 1).
-<a id="__codelineno-0-336" name="__codelineno-0-336" href="#__codelineno-0-336"></a># If the inverted t_star_0 is non-positive, then t_star_min_max is used
-<a id="__codelineno-0-337" name="__codelineno-0-337" href="#__codelineno-0-337"></a># (see below).
-<a id="__codelineno-0-338" name="__codelineno-0-338" href="#__codelineno-0-338"></a>t_star_0_variability = float(min=0, default=0.1)
-<a id="__codelineno-0-339" name="__codelineno-0-339" href="#__codelineno-0-339"></a># Inversion algorithm:
-<a id="__codelineno-0-340" name="__codelineno-0-340" href="#__codelineno-0-340"></a># TNC: truncated Newton algorithm (with bounds)
-<a id="__codelineno-0-341" name="__codelineno-0-341" href="#__codelineno-0-341"></a># LM: Levenberg-Marquardt algorithm
-<a id="__codelineno-0-342" name="__codelineno-0-342" href="#__codelineno-0-342"></a># (warning: Trust Region Reflective algorithm will be used instead if
-<a id="__codelineno-0-343" name="__codelineno-0-343" href="#__codelineno-0-343"></a>#  bounds are provided)
-<a id="__codelineno-0-344" name="__codelineno-0-344" href="#__codelineno-0-344"></a># BH: basin-hopping algorithm
-<a id="__codelineno-0-345" name="__codelineno-0-345" href="#__codelineno-0-345"></a># GS: grid search
-<a id="__codelineno-0-346" name="__codelineno-0-346" href="#__codelineno-0-346"></a># IS: importance sampling of misfit grid, using k-d tree
-<a id="__codelineno-0-347" name="__codelineno-0-347" href="#__codelineno-0-347"></a>inv_algorithm = option(&#39;TNC&#39;, &#39;LM&#39;, &#39;BH&#39;, &#39;GS&#39;, &#39;IS&#39;, default=&#39;TNC&#39;)
-<a id="__codelineno-0-348" name="__codelineno-0-348" href="#__codelineno-0-348"></a># Parameter bounds:
-<a id="__codelineno-0-349" name="__codelineno-0-349" href="#__codelineno-0-349"></a># Notes:
-<a id="__codelineno-0-350" name="__codelineno-0-350" href="#__codelineno-0-350"></a># 1. Mw bounds are autoset between 0.9*min(Mw(f)) and 1.1*max(Mw(f)),
-<a id="__codelineno-0-351" name="__codelineno-0-351" href="#__codelineno-0-351"></a>#    where Mw(f) is the low frequency spectral plateau in magnitude units.
-<a id="__codelineno-0-352" name="__codelineno-0-352" href="#__codelineno-0-352"></a>#    If noise weighting is used, frequencies for which S/N(f) &lt; 0.5*max(S/N(f))
-<a id="__codelineno-0-353" name="__codelineno-0-353" href="#__codelineno-0-353"></a>#    will be ignored, where S/N(f) is the spectral signal to noise ratio.
-<a id="__codelineno-0-354" name="__codelineno-0-354" href="#__codelineno-0-354"></a># 2. If not specified, fc bounds will be autoset to fc0/10 and fc0*10, i.e. two
-<a id="__codelineno-0-355" name="__codelineno-0-355" href="#__codelineno-0-355"></a>#    decades around fc0. The value of fc0 is set as the first maximum of
-<a id="__codelineno-0-356" name="__codelineno-0-356" href="#__codelineno-0-356"></a>#    spectral S/N (noise weighting), or at &quot;f_weight&quot; (frequency weighting),
-<a id="__codelineno-0-357" name="__codelineno-0-357" href="#__codelineno-0-357"></a>#    or at half of the frequency window (no weighting)
-<a id="__codelineno-0-358" name="__codelineno-0-358" href="#__codelineno-0-358"></a># 3. Specify bounds as a list, ex.:
-<a id="__codelineno-0-359" name="__codelineno-0-359" href="#__codelineno-0-359"></a>#      fc_min_max = 0.1, 40
-<a id="__codelineno-0-360" name="__codelineno-0-360" href="#__codelineno-0-360"></a>#    (comment out or use None to indicate no bound)
-<a id="__codelineno-0-361" name="__codelineno-0-361" href="#__codelineno-0-361"></a>fc_min_max = float_list(min=0, default=None)
-<a id="__codelineno-0-362" name="__codelineno-0-362" href="#__codelineno-0-362"></a># t_star_min_max does not supersede t_star_0_variability
-<a id="__codelineno-0-363" name="__codelineno-0-363" href="#__codelineno-0-363"></a>t_star_min_max = float_list(default=list(0.001, 0.25))
-<a id="__codelineno-0-364" name="__codelineno-0-364" href="#__codelineno-0-364"></a># optional : Qo bounds (converted into t_star bounds in the code).
-<a id="__codelineno-0-365" name="__codelineno-0-365" href="#__codelineno-0-365"></a># (comment out or use None to indicate no bound)
-<a id="__codelineno-0-366" name="__codelineno-0-366" href="#__codelineno-0-366"></a># Note: if you want to explore negative t_star values, you have to specify
-<a id="__codelineno-0-367" name="__codelineno-0-367" href="#__codelineno-0-367"></a># -Qo_min, Qo_min. This because t_star is proportional to 1/Qo.
-<a id="__codelineno-0-368" name="__codelineno-0-368" href="#__codelineno-0-368"></a># Example, for searching only positive t_star values:
-<a id="__codelineno-0-369" name="__codelineno-0-369" href="#__codelineno-0-369"></a>#   Qo_min_max = 10, 1000
-<a id="__codelineno-0-370" name="__codelineno-0-370" href="#__codelineno-0-370"></a># If you want to search also negative t_star values:
-<a id="__codelineno-0-371" name="__codelineno-0-371" href="#__codelineno-0-371"></a>#   Qo_min_max = -10, 10
-<a id="__codelineno-0-372" name="__codelineno-0-372" href="#__codelineno-0-372"></a>Qo_min_max = float_list(default=None)
-<a id="__codelineno-0-373" name="__codelineno-0-373" href="#__codelineno-0-373"></a># -------- INVERSION PARAMETERS
-<a id="__codelineno-0-374" name="__codelineno-0-374" href="#__codelineno-0-374"></a>
-<a id="__codelineno-0-375" name="__codelineno-0-375" href="#__codelineno-0-375"></a># POST-INVERSION PARAMETERS --------
-<a id="__codelineno-0-376" name="__codelineno-0-376" href="#__codelineno-0-376"></a># Post-inversion bounds: use this bounds to reject certain inversion
-<a id="__codelineno-0-377" name="__codelineno-0-377" href="#__codelineno-0-377"></a># results, per station.
-<a id="__codelineno-0-378" name="__codelineno-0-378" href="#__codelineno-0-378"></a># Sometimes it is better to be more permissive with inversion parameters and
-<a id="__codelineno-0-379" name="__codelineno-0-379" href="#__codelineno-0-379"></a># reject &quot;bad&quot; solutions after the inversion, rather than forcing the
-<a id="__codelineno-0-380" name="__codelineno-0-380" href="#__codelineno-0-380"></a># inversion to converge within strict bounds.
-<a id="__codelineno-0-381" name="__codelineno-0-381" href="#__codelineno-0-381"></a># fc bounds, in Hz
-<a id="__codelineno-0-382" name="__codelineno-0-382" href="#__codelineno-0-382"></a>pi_fc_min_max = float_list(min=0, default=None)
-<a id="__codelineno-0-383" name="__codelineno-0-383" href="#__codelineno-0-383"></a># t_star bounds, in s
-<a id="__codelineno-0-384" name="__codelineno-0-384" href="#__codelineno-0-384"></a>pi_t_star_min_max = float_list(default=None)
-<a id="__codelineno-0-385" name="__codelineno-0-385" href="#__codelineno-0-385"></a># Brune stress drop bounds, in MPa
-<a id="__codelineno-0-386" name="__codelineno-0-386" href="#__codelineno-0-386"></a>pi_bsd_min_max = float_list(min=0, default=None)
-<a id="__codelineno-0-387" name="__codelineno-0-387" href="#__codelineno-0-387"></a># Maximum acceptable misfit between inverted and observed spectrum
-<a id="__codelineno-0-388" name="__codelineno-0-388" href="#__codelineno-0-388"></a>pi_misfit_max = float(min=0, default=None)
-<a id="__codelineno-0-389" name="__codelineno-0-389" href="#__codelineno-0-389"></a># -------- POST-INVERSION PARAMETERS
-<a id="__codelineno-0-390" name="__codelineno-0-390" href="#__codelineno-0-390"></a>
-<a id="__codelineno-0-391" name="__codelineno-0-391" href="#__codelineno-0-391"></a>
-<a id="__codelineno-0-392" name="__codelineno-0-392" href="#__codelineno-0-392"></a># RADIATED-ENERGY PARAMETERS --------
-<a id="__codelineno-0-393" name="__codelineno-0-393" href="#__codelineno-0-393"></a># Maximum frequency (Hz) to measure radiated energy Er
-<a id="__codelineno-0-394" name="__codelineno-0-394" href="#__codelineno-0-394"></a># (above this frequency, the finite-band correction
-<a id="__codelineno-0-395" name="__codelineno-0-395" href="#__codelineno-0-395"></a># of Di Bona &amp; Rovelli, 1988, will be applied)
-<a id="__codelineno-0-396" name="__codelineno-0-396" href="#__codelineno-0-396"></a>max_freq_Er = float(min=0, default=None)
-<a id="__codelineno-0-397" name="__codelineno-0-397" href="#__codelineno-0-397"></a># -------- RADIATED-ENERGY PARAMETERS
-<a id="__codelineno-0-398" name="__codelineno-0-398" href="#__codelineno-0-398"></a>
-<a id="__codelineno-0-399" name="__codelineno-0-399" href="#__codelineno-0-399"></a>
-<a id="__codelineno-0-400" name="__codelineno-0-400" href="#__codelineno-0-400"></a># LOCAL MAGNITUDE PARAMETERS --------
-<a id="__codelineno-0-401" name="__codelineno-0-401" href="#__codelineno-0-401"></a>compute_local_magnitude = boolean(default=False)
-<a id="__codelineno-0-402" name="__codelineno-0-402" href="#__codelineno-0-402"></a># Local magnitude parameters:
-<a id="__codelineno-0-403" name="__codelineno-0-403" href="#__codelineno-0-403"></a>#   ml = log10(A) + a * log10(R/100) + b * (R-100) + c
-<a id="__codelineno-0-404" name="__codelineno-0-404" href="#__codelineno-0-404"></a># where A is the maximum W-A amplitude (in mm)
-<a id="__codelineno-0-405" name="__codelineno-0-405" href="#__codelineno-0-405"></a># and R is the hypocentral distance (in km)
-<a id="__codelineno-0-406" name="__codelineno-0-406" href="#__codelineno-0-406"></a># Default values (for California) are:
-<a id="__codelineno-0-407" name="__codelineno-0-407" href="#__codelineno-0-407"></a>#   a = 1., b = 0.00301, c = 3.
-<a id="__codelineno-0-408" name="__codelineno-0-408" href="#__codelineno-0-408"></a>a = float(default=1.)
-<a id="__codelineno-0-409" name="__codelineno-0-409" href="#__codelineno-0-409"></a>b = float(default=0.00301)
-<a id="__codelineno-0-410" name="__codelineno-0-410" href="#__codelineno-0-410"></a>c = float(default=3.)
-<a id="__codelineno-0-411" name="__codelineno-0-411" href="#__codelineno-0-411"></a># Band-pass filtering frequencies (Hz) for local magnitude
-<a id="__codelineno-0-412" name="__codelineno-0-412" href="#__codelineno-0-412"></a>ml_bp_freqmin = float(min=0, default=0.1)
-<a id="__codelineno-0-413" name="__codelineno-0-413" href="#__codelineno-0-413"></a>ml_bp_freqmax = float(min=0, default=20.0)
-<a id="__codelineno-0-414" name="__codelineno-0-414" href="#__codelineno-0-414"></a># -------- LOCAL MAGNITUDE PARAMETERS
-<a id="__codelineno-0-415" name="__codelineno-0-415" href="#__codelineno-0-415"></a>
-<a id="__codelineno-0-416" name="__codelineno-0-416" href="#__codelineno-0-416"></a>
-<a id="__codelineno-0-417" name="__codelineno-0-417" href="#__codelineno-0-417"></a># SUMMARY STATISTICS PARAMETERS --------
-<a id="__codelineno-0-418" name="__codelineno-0-418" href="#__codelineno-0-418"></a># For each spectral parameter, SourceSpec computes three different summary
-<a id="__codelineno-0-419" name="__codelineno-0-419" href="#__codelineno-0-419"></a># estimates (from station estimates), using the following statistics:
-<a id="__codelineno-0-420" name="__codelineno-0-420" href="#__codelineno-0-420"></a>#  - mean
-<a id="__codelineno-0-421" name="__codelineno-0-421" href="#__codelineno-0-421"></a>#  - weighted_mean
-<a id="__codelineno-0-422" name="__codelineno-0-422" href="#__codelineno-0-422"></a>#  - percentiles
-<a id="__codelineno-0-423" name="__codelineno-0-423" href="#__codelineno-0-423"></a># All the three summary estimates are stored in the YAML and SQLite output,
-<a id="__codelineno-0-424" name="__codelineno-0-424" href="#__codelineno-0-424"></a># but only a reference one is used for map plots, QuakeML and HYPO output,
-<a id="__codelineno-0-425" name="__codelineno-0-425" href="#__codelineno-0-425"></a># as well as for the &quot;Event Summary&quot; section in HTML report and for computing
-<a id="__codelineno-0-426" name="__codelineno-0-426" href="#__codelineno-0-426"></a># station spectral residuals.
-<a id="__codelineno-0-427" name="__codelineno-0-427" href="#__codelineno-0-427"></a># Use the parameter &quot;reference_statistics&quot; to specify the reference summary
-<a id="__codelineno-0-428" name="__codelineno-0-428" href="#__codelineno-0-428"></a># statistics that will be used in the cases described above.
-<a id="__codelineno-0-429" name="__codelineno-0-429" href="#__codelineno-0-429"></a>reference_statistics = option(&#39;mean&#39;, &#39;weighted_mean&#39;, &#39;percentiles&#39;, default=&#39;weighted_mean&#39;)
-<a id="__codelineno-0-430" name="__codelineno-0-430" href="#__codelineno-0-430"></a># Number of sigmas (standard deviations) for average and weighted average
-<a id="__codelineno-0-431" name="__codelineno-0-431" href="#__codelineno-0-431"></a># uncertainty estimation
-<a id="__codelineno-0-432" name="__codelineno-0-432" href="#__codelineno-0-432"></a>n_sigma = float(min=0.1, max=10, default=1)
-<a id="__codelineno-0-433" name="__codelineno-0-433" href="#__codelineno-0-433"></a># Percentage levels to compute lower, mid and upper percentiles
-<a id="__codelineno-0-434" name="__codelineno-0-434" href="#__codelineno-0-434"></a>#   Example: to mimic a Gaussian distribution (one-sigma, 68.2% confidence):
-<a id="__codelineno-0-435" name="__codelineno-0-435" href="#__codelineno-0-435"></a>#       lower_percentage = 15.9
-<a id="__codelineno-0-436" name="__codelineno-0-436" href="#__codelineno-0-436"></a>#       mid_percentage = 50
-<a id="__codelineno-0-437" name="__codelineno-0-437" href="#__codelineno-0-437"></a>#       upper_percentage = 84.1
-<a id="__codelineno-0-438" name="__codelineno-0-438" href="#__codelineno-0-438"></a># Note: the confidence level is upper_percentage - lower_percentage
-<a id="__codelineno-0-439" name="__codelineno-0-439" href="#__codelineno-0-439"></a>lower_percentage = float(min=0, max=100, default=15.9)
-<a id="__codelineno-0-440" name="__codelineno-0-440" href="#__codelineno-0-440"></a>mid_percentage = float(min=0, max=100, default=50)
-<a id="__codelineno-0-441" name="__codelineno-0-441" href="#__codelineno-0-441"></a>upper_percentage = float(min=0, max=100, default=84.1)
-<a id="__codelineno-0-442" name="__codelineno-0-442" href="#__codelineno-0-442"></a># Reject outliers before computing means (standard and weighted),
-<a id="__codelineno-0-443" name="__codelineno-0-443" href="#__codelineno-0-443"></a># using the IQR method.
-<a id="__codelineno-0-444" name="__codelineno-0-444" href="#__codelineno-0-444"></a># IQR is the interquartile range Q3-Q1, where Q1 is the 25% percentile
-<a id="__codelineno-0-445" name="__codelineno-0-445" href="#__codelineno-0-445"></a># and Q3 is the 75% percentile.
-<a id="__codelineno-0-446" name="__codelineno-0-446" href="#__codelineno-0-446"></a># Values that are smaller than (Q1 - nIQR*IQR) or larger than (Q3 + nIQR*IQR)
-<a id="__codelineno-0-447" name="__codelineno-0-447" href="#__codelineno-0-447"></a># will be rejected as outliers.
-<a id="__codelineno-0-448" name="__codelineno-0-448" href="#__codelineno-0-448"></a># Set nIQR to None to disable outlier rejection.
-<a id="__codelineno-0-449" name="__codelineno-0-449" href="#__codelineno-0-449"></a># Note: this parameter also controls the position of &quot;whiskers&quot; on the source
-<a id="__codelineno-0-450" name="__codelineno-0-450" href="#__codelineno-0-450"></a># parameter box plots.
-<a id="__codelineno-0-451" name="__codelineno-0-451" href="#__codelineno-0-451"></a>nIQR = float(min=0, default=1.5)
-<a id="__codelineno-0-452" name="__codelineno-0-452" href="#__codelineno-0-452"></a># -------- SUMMARY STATISTICS PARAMETERS
-<a id="__codelineno-0-453" name="__codelineno-0-453" href="#__codelineno-0-453"></a>
-<a id="__codelineno-0-454" name="__codelineno-0-454" href="#__codelineno-0-454"></a>
-<a id="__codelineno-0-455" name="__codelineno-0-455" href="#__codelineno-0-455"></a># PLOT PARAMETERS --------
-<a id="__codelineno-0-456" name="__codelineno-0-456" href="#__codelineno-0-456"></a># Show interactive plots (slower)
-<a id="__codelineno-0-457" name="__codelineno-0-457" href="#__codelineno-0-457"></a>plot_show = boolean(default=False)
-<a id="__codelineno-0-458" name="__codelineno-0-458" href="#__codelineno-0-458"></a># Save plots to disk
-<a id="__codelineno-0-459" name="__codelineno-0-459" href="#__codelineno-0-459"></a>plot_save = boolean(default=True)
-<a id="__codelineno-0-460" name="__codelineno-0-460" href="#__codelineno-0-460"></a># Plot file format: &#39;png&#39;, &#39;pdf&#39;, &#39;pdf_multipage&#39; or &#39;svg&#39;
-<a id="__codelineno-0-461" name="__codelineno-0-461" href="#__codelineno-0-461"></a>plot_save_format = option(&#39;png&#39;, &#39;pdf&#39;, &#39;pdf_multipage&#39;, &#39;svg&#39;, default=&#39;png&#39;)
-<a id="__codelineno-0-462" name="__codelineno-0-462" href="#__codelineno-0-462"></a># Plots an extra synthetic spectrum with no attenuation
-<a id="__codelineno-0-463" name="__codelineno-0-463" href="#__codelineno-0-463"></a>plot_spectra_no_attenuation = boolean(default=False)
-<a id="__codelineno-0-464" name="__codelineno-0-464" href="#__codelineno-0-464"></a># Plots an extra synthetic spectrum with no fc
-<a id="__codelineno-0-465" name="__codelineno-0-465" href="#__codelineno-0-465"></a>plot_spectra_no_fc = boolean(default=False)
-<a id="__codelineno-0-466" name="__codelineno-0-466" href="#__codelineno-0-466"></a># Max number of rows in plots
-<a id="__codelineno-0-467" name="__codelineno-0-467" href="#__codelineno-0-467"></a>plot_spectra_maxrows = integer(min=1, default=3)
-<a id="__codelineno-0-468" name="__codelineno-0-468" href="#__codelineno-0-468"></a>plot_traces_maxrows = integer(min=1, default=3)
-<a id="__codelineno-0-469" name="__codelineno-0-469" href="#__codelineno-0-469"></a># Plot ignored traces (clipped or low S/N)
-<a id="__codelineno-0-470" name="__codelineno-0-470" href="#__codelineno-0-470"></a>plot_traces_ignored = boolean(default=True)
-<a id="__codelineno-0-471" name="__codelineno-0-471" href="#__codelineno-0-471"></a># Plot ignored spectra (low S/N)
-<a id="__codelineno-0-472" name="__codelineno-0-472" href="#__codelineno-0-472"></a>plot_spectra_ignored = boolean(default=True)
-<a id="__codelineno-0-473" name="__codelineno-0-473" href="#__codelineno-0-473"></a># Plot station map
-<a id="__codelineno-0-474" name="__codelineno-0-474" href="#__codelineno-0-474"></a>plot_station_map = boolean(default=False)
-<a id="__codelineno-0-475" name="__codelineno-0-475" href="#__codelineno-0-475"></a># Plot station names on map
-<a id="__codelineno-0-476" name="__codelineno-0-476" href="#__codelineno-0-476"></a>plot_station_names_on_map = boolean(default=False)
-<a id="__codelineno-0-477" name="__codelineno-0-477" href="#__codelineno-0-477"></a># Text size for station names
-<a id="__codelineno-0-478" name="__codelineno-0-478" href="#__codelineno-0-478"></a>plot_station_text_size = float(min=0, default=8)
-<a id="__codelineno-0-479" name="__codelineno-0-479" href="#__codelineno-0-479"></a># Coastline resolution
-<a id="__codelineno-0-480" name="__codelineno-0-480" href="#__codelineno-0-480"></a># Use None to let the code autoset the coastline resolution.
-<a id="__codelineno-0-481" name="__codelineno-0-481" href="#__codelineno-0-481"></a># Otherwise choose one of: &#39;full&#39;, &#39;high&#39;, &#39;intermediate&#39;, &#39;low&#39; or &#39;crude&#39;
-<a id="__codelineno-0-482" name="__codelineno-0-482" href="#__codelineno-0-482"></a>plot_coastline_resolution = option(&#39;full&#39;, &#39;high&#39;, &#39;intermediate&#39;, &#39;low&#39;, &#39;crude&#39;, default=None)
-<a id="__codelineno-0-483" name="__codelineno-0-483" href="#__codelineno-0-483"></a># Zoom level for map tiles
-<a id="__codelineno-0-484" name="__codelineno-0-484" href="#__codelineno-0-484"></a># Use None to let the code autoset the zoom level
-<a id="__codelineno-0-485" name="__codelineno-0-485" href="#__codelineno-0-485"></a># Otherwise choose an integer between 1 (minimum zoom) and 18 (maximum zoom)
-<a id="__codelineno-0-486" name="__codelineno-0-486" href="#__codelineno-0-486"></a># Note: for zoom levels larger than 11, some map tiles could be missing
-<a id="__codelineno-0-487" name="__codelineno-0-487" href="#__codelineno-0-487"></a>plot_map_tiles_zoom_level = integer(min=1, max=18, default=None)
-<a id="__codelineno-0-488" name="__codelineno-0-488" href="#__codelineno-0-488"></a># -------- PLOT PARAMETERS
-<a id="__codelineno-0-489" name="__codelineno-0-489" href="#__codelineno-0-489"></a>
-<a id="__codelineno-0-490" name="__codelineno-0-490" href="#__codelineno-0-490"></a>
-<a id="__codelineno-0-491" name="__codelineno-0-491" href="#__codelineno-0-491"></a># HTML REPORT --------
-<a id="__codelineno-0-492" name="__codelineno-0-492" href="#__codelineno-0-492"></a># Generate an HTML page summarizing the results of this run
-<a id="__codelineno-0-493" name="__codelineno-0-493" href="#__codelineno-0-493"></a># Note: &quot;plot_save_format&quot; (above) must be &quot;png&quot; or &quot;svg&quot;
-<a id="__codelineno-0-494" name="__codelineno-0-494" href="#__codelineno-0-494"></a>html_report = boolean(default=False)
-<a id="__codelineno-0-495" name="__codelineno-0-495" href="#__codelineno-0-495"></a># Link to event page. If set, the event ID on the HTML page will be a link to
-<a id="__codelineno-0-496" name="__codelineno-0-496" href="#__codelineno-0-496"></a># the event page. Use $EVENTID to indicate the current event ID.
-<a id="__codelineno-0-497" name="__codelineno-0-497" href="#__codelineno-0-497"></a># Example:
-<a id="__codelineno-0-498" name="__codelineno-0-498" href="#__codelineno-0-498"></a>#   event_url = https://earthquake.usgs.gov/earthquakes/eventpage/$EVENTID/executive
-<a id="__codelineno-0-499" name="__codelineno-0-499" href="#__codelineno-0-499"></a>event_url = string(default=None)
-<a id="__codelineno-0-500" name="__codelineno-0-500" href="#__codelineno-0-500"></a># -------- HTML REPORT
-<a id="__codelineno-0-501" name="__codelineno-0-501" href="#__codelineno-0-501"></a>
-<a id="__codelineno-0-502" name="__codelineno-0-502" href="#__codelineno-0-502"></a>
-<a id="__codelineno-0-503" name="__codelineno-0-503" href="#__codelineno-0-503"></a># QUAKEML PARAMETERS ----------------
-<a id="__codelineno-0-504" name="__codelineno-0-504" href="#__codelineno-0-504"></a># Parameters for QuakeML output.
-<a id="__codelineno-0-505" name="__codelineno-0-505" href="#__codelineno-0-505"></a>#
-<a id="__codelineno-0-506" name="__codelineno-0-506" href="#__codelineno-0-506"></a># A QuakeML file will be generated only if QuakeML is used for input.
-<a id="__codelineno-0-507" name="__codelineno-0-507" href="#__codelineno-0-507"></a># The output file will be based on the input file, with additional information
-<a id="__codelineno-0-508" name="__codelineno-0-508" href="#__codelineno-0-508"></a># on seismic moment, Mw and source parameters computed by SourceSpec.
-<a id="__codelineno-0-509" name="__codelineno-0-509" href="#__codelineno-0-509"></a># Note: if you don&#39;t understand the parameters below, then probably you
-<a id="__codelineno-0-510" name="__codelineno-0-510" href="#__codelineno-0-510"></a># don&#39;t need QuakeML output and you can leave all the parameters to their
-<a id="__codelineno-0-511" name="__codelineno-0-511" href="#__codelineno-0-511"></a># default value
-<a id="__codelineno-0-512" name="__codelineno-0-512" href="#__codelineno-0-512"></a>
-<a id="__codelineno-0-513" name="__codelineno-0-513" href="#__codelineno-0-513"></a># Set SourceSpec Mw as preferred
-<a id="__codelineno-0-514" name="__codelineno-0-514" href="#__codelineno-0-514"></a>set_preferred_magnitude = boolean(default=False)
-<a id="__codelineno-0-515" name="__codelineno-0-515" href="#__codelineno-0-515"></a># Base for all the object ids (smi)
-<a id="__codelineno-0-516" name="__codelineno-0-516" href="#__codelineno-0-516"></a>smi_base = string(default=&quot;smi:local&quot;)
-<a id="__codelineno-0-517" name="__codelineno-0-517" href="#__codelineno-0-517"></a># String to strip from the Origin id when constructing the
-<a id="__codelineno-0-518" name="__codelineno-0-518" href="#__codelineno-0-518"></a># Magnitude and stationMagnitude ids.
-<a id="__codelineno-0-519" name="__codelineno-0-519" href="#__codelineno-0-519"></a>smi_strip_from_origin_id = string(default=&quot;&quot;)
-<a id="__codelineno-0-520" name="__codelineno-0-520" href="#__codelineno-0-520"></a># Template for the Magnitude object id (smi).
-<a id="__codelineno-0-521" name="__codelineno-0-521" href="#__codelineno-0-521"></a># Use $SMI_BASE to indicate smi_base defined above
-<a id="__codelineno-0-522" name="__codelineno-0-522" href="#__codelineno-0-522"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
-<a id="__codelineno-0-523" name="__codelineno-0-523" href="#__codelineno-0-523"></a>smi_magnitude_template = string(default=&quot;$SMI_BASE/Magnitude/Origin/$ORIGIN_ID#sourcespec&quot;)
-<a id="__codelineno-0-524" name="__codelineno-0-524" href="#__codelineno-0-524"></a># Template for the stationMagnitude object id (smi).
-<a id="__codelineno-0-525" name="__codelineno-0-525" href="#__codelineno-0-525"></a># Use $SMI_BASE to indicate smi_base defined above
-<a id="__codelineno-0-526" name="__codelineno-0-526" href="#__codelineno-0-526"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
-<a id="__codelineno-0-527" name="__codelineno-0-527" href="#__codelineno-0-527"></a># Use $SMI_MAGNITUDE_TEMPLATE to reuse the template for Magnitude object
-<a id="__codelineno-0-528" name="__codelineno-0-528" href="#__codelineno-0-528"></a># Use $WAVEFORM_ID to indicate the id of the associated waveform.
-<a id="__codelineno-0-529" name="__codelineno-0-529" href="#__codelineno-0-529"></a>smi_station_magnitude_template = string(default=&quot;$SMI_MAGNITUDE_TEMPLATE#$WAVEFORM_ID&quot;)
-<a id="__codelineno-0-530" name="__codelineno-0-530" href="#__codelineno-0-530"></a># Template for the MomentTensor object id (smi) which is used to store
-<a id="__codelineno-0-531" name="__codelineno-0-531" href="#__codelineno-0-531"></a># the scalar moment value.
-<a id="__codelineno-0-532" name="__codelineno-0-532" href="#__codelineno-0-532"></a># Use $SMI_BASE to indicate smi_base defined above
-<a id="__codelineno-0-533" name="__codelineno-0-533" href="#__codelineno-0-533"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
-<a id="__codelineno-0-534" name="__codelineno-0-534" href="#__codelineno-0-534"></a>smi_moment_tensor_template = string(default=&quot;$SMI_BASE/MomentTensor/Origin/$ORIGIN_ID#sourcespec&quot;)
-<a id="__codelineno-0-535" name="__codelineno-0-535" href="#__codelineno-0-535"></a># Template for the FocalMechanism object id (smi) which is used to store
-<a id="__codelineno-0-536" name="__codelineno-0-536" href="#__codelineno-0-536"></a># the scalar moment value.
-<a id="__codelineno-0-537" name="__codelineno-0-537" href="#__codelineno-0-537"></a># Use $SMI_BASE to indicate smi_base defined above
-<a id="__codelineno-0-538" name="__codelineno-0-538" href="#__codelineno-0-538"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
-<a id="__codelineno-0-539" name="__codelineno-0-539" href="#__codelineno-0-539"></a>smi_focal_mechanism_template = string(default=&quot;$SMI_BASE/FocalMechanism/Origin/$ORIGIN_ID#sourcespec&quot;)
-<a id="__codelineno-0-540" name="__codelineno-0-540" href="#__codelineno-0-540"></a># -----------------QUAKEML PARAMETERS
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># GENERAL PARAMETERS --------
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a># All the fields are optional.
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a># The filled in fields will be written to output files.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a># Author information
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>author_name = SurfQuakeCore
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>author_email = https://projectisp.github.io/ISP_tutorial.github.io/
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a># Agency information
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>agency_full_name = Spanish Navy Observatory
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>agency_short_name = ROA
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>agency_url = https://armada.defensa.gob.es/ArmadaPortal/page/Portal/ArmadaEspannola/cienciaobservatorio/prefLang-es/02InfoGeneral
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a># -------- GENERAL PARAMETERS
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a># TRACE AND METADATA PARAMETERS --------
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a># Channel naming for mis-oriented channels (vertical, horiz1, horiz2):
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a># Example:
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>#   mis_oriented_channels = Z,1,2
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>mis_oriented_channels = Z, 1, 2
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a># Option to specify non standard instrument codes (e.g., &quot;L&quot; for accelerometer)
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>instrument_code_acceleration = None
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>instrument_code_velocity = None
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a># For more complex network.station.location.channel (SCNL) naming scenarios,
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a># you can provide a file, in json format, with traceid (SCNL) mapping
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>traceid_mapping_file = None
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a># List of traceids to ignore.
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a># Use network.station.location.channel; wildcards are accepted
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a># Example:
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>#   ignore_traceids = FR.CIEL.*.*, AM.RA0D3.00.*
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>ignore_traceids = None
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a># List of traceids to use.
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a># Use network.station.location.channel; wildcards are accepted
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a># Example:
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>#   use_traceids = FR.CIEL.*.*, AM.RA0D3.00.*
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>use_traceids = None
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a># Epicentral distance ranges (km) to select stations to be processed.
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a># Use a list of alternating min/max values, ex.:
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>#   to only use stations between 0 and 100 km:
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>#       epi_dist_ranges = 0, 100
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>#   to avoid teleseismic distances between 14Â° (1300 km) and 29Â° (3200 km)
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>#   where the P-wave undergoes travel time triplications:
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>#       epi_dist_ranges = 0, 1300, 3200, 999999
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a># Leave it to None to use all stations.
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>epi_dist_ranges = 0, 400.0
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a># Directory or single file name containing station metadata
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a># (instrument response and station coordinates).
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a># Note: this parameter can be overridden by the command line option
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>#       with the same name.
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a># Station metadata files can be in one of the following formats:
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>#   StationXML, dataless SEED, SEED RESP, PAZ (SAC polezero format)
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a># Notes:
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a># 1. SourceSpec will not enter in subdirectories of the given directory
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>#    (only one level allowed)
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a># 2. Traceid for PAZ files is specified through their name.
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>#    The traceid (network.station.location.channel) must be in the last four
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>#    fields (separated by a dot &quot;.&quot;) before the file suffix (which can be
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>#    &quot;.paz&quot;, &quot;.pz&quot;, or no suffix).
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>#    Example:
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>#      PREFIX.NET.STA.LOC.CHAN.paz
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>#    or (no prefix):
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>#      NET.STA.LOC.CHAN.paz
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>#    or (no prefix and no suffix):
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>#      NET.STA.LOC.CHAN
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a># 3. If no traceid is specified through the PAZ file name, then it is assumed
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>#    that this is a generic PAZ, valid for all the stations that do not have
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>#    a specific PAZ. Use &quot;trace_units&quot; below to specify the units of the
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>#    generic PAZ.
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a># 4. SEED RESP and PAZ files do not contain station coordinates, which
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>#    should therefore be in the trace header (traces in SAC format)
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>#station_metadata = inventory.xml
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a># It is also possible to provide a constant sensitivity (i.e., flat instrument
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a># response curve) as a numerical value or a combination of SAC header fields
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a># (in this case, traces must be in SAC format).
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a># This parameter overrides the response curve computed from station_metadata.
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a># Leave it to None to compute instrument response from station_metadata.
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a># Examples:
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>#  sensitivity = 1
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>#  sensitivity = 1e3
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>#  sensitivity = resp0
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>#  sensitivity = resp1*resp2
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>#  sensitivity = user3/user2
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>sensitivity = None
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a># SQLite database file for storing output parameters (optional):
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>database_file = source_spec.sqlite
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a># Correct_instrumental_response (optional, default=True):
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>correct_instrumental_response = True
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a># Trace units.
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a># Leave it to &#39;auto&#39; to let the code decide, based on instrument type.
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a># Manually set it to &#39;disp&#39;, &#39;vel&#39; or &#39;acc&#39; if you have already preprocessed
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a># the traces.
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>trace_units = auto
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a># -------- TRACE AND METADATA PARAMETERS
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>
+<a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>
+<a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a># TIME WINDOW PARAMETERS --------
+<a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a># P and S wave velocity (in km/s) for travel time calculation
+<a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a># (if None, the global velocity model &#39;iasp91&#39; is used)
+<a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a># Theoretical P or S arrival times are used when a manual P or S pick is not
+<a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a># available, or when the manual P or S pick is too different from the
+<a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a># theoretical arrival (see &#39;p_arrival_tolerance&#39; and &#39;s_arrival_tolerance&#39;
+<a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a># below).
+<a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a>vp_tt = None
+<a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a>vs_tt = None
+<a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a># As an alternative, a directory containing NonLinLoc travel time grids
+<a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a># can be specified and values defined above will be ignored.
+<a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a># Note that reading NonLinLoc grids takes time. For simple 1D models, you
+<a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a># can speed up considerably the process using a generic station
+<a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a># named &quot;DEFAULT&quot;. The coordinates of this default station are not important,
+<a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a># since they will be superseded by each station&#39;s coordinates.
+<a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a>NLL_time_dir = None
+<a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>
+<a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a># Arrival tolerances (in seconds) to accept a manual P or S pick
+<a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>p_arrival_tolerance = 8.0
+<a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>s_arrival_tolerance = 8.0
+<a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>
+<a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a># Start time (in seconds) of the noise window, respect to the P arrival time
+<a id="__codelineno-0-125" name="__codelineno-0-125" href="#__codelineno-0-125"></a>noise_pre_time = 15.0
+<a id="__codelineno-0-126" name="__codelineno-0-126" href="#__codelineno-0-126"></a>
+<a id="__codelineno-0-127" name="__codelineno-0-127" href="#__codelineno-0-127"></a># Start time (in seconds) of the signal window, respect to the P or S arrival
+<a id="__codelineno-0-128" name="__codelineno-0-128" href="#__codelineno-0-128"></a># times (see &quot;wave_type&quot; below)
+<a id="__codelineno-0-129" name="__codelineno-0-129" href="#__codelineno-0-129"></a>signal_pre_time = 1.0
+<a id="__codelineno-0-130" name="__codelineno-0-130" href="#__codelineno-0-130"></a>
+<a id="__codelineno-0-131" name="__codelineno-0-131" href="#__codelineno-0-131"></a># Length (in seconds) for both noise and signal windows
+<a id="__codelineno-0-132" name="__codelineno-0-132" href="#__codelineno-0-132"></a>win_length = 10.0
+<a id="__codelineno-0-133" name="__codelineno-0-133" href="#__codelineno-0-133"></a># -------- TIME WINDOW PARAMETERS
+<a id="__codelineno-0-134" name="__codelineno-0-134" href="#__codelineno-0-134"></a>
+<a id="__codelineno-0-135" name="__codelineno-0-135" href="#__codelineno-0-135"></a>
+<a id="__codelineno-0-136" name="__codelineno-0-136" href="#__codelineno-0-136"></a># SPECTRUM PARAMETERS --------
+<a id="__codelineno-0-137" name="__codelineno-0-137" href="#__codelineno-0-137"></a># Wave type to analyse: &#39;P&#39;, &#39;S&#39;, &#39;SH&#39; or &#39;SV&#39;
+<a id="__codelineno-0-138" name="__codelineno-0-138" href="#__codelineno-0-138"></a># If &#39;SH&#39; or &#39;SV&#39; are selected, traces are rotated in the radial-transverse
+<a id="__codelineno-0-139" name="__codelineno-0-139" href="#__codelineno-0-139"></a># system. Transverse component is used for &#39;SH&#39;, radial component (and
+<a id="__codelineno-0-140" name="__codelineno-0-140" href="#__codelineno-0-140"></a># optionally the vertical component, see &#39;ignore_vertical&#39; below) is used
+<a id="__codelineno-0-141" name="__codelineno-0-141" href="#__codelineno-0-141"></a># for &#39;SV&#39;
+<a id="__codelineno-0-142" name="__codelineno-0-142" href="#__codelineno-0-142"></a>wave_type = S
+<a id="__codelineno-0-143" name="__codelineno-0-143" href="#__codelineno-0-143"></a>
+<a id="__codelineno-0-144" name="__codelineno-0-144" href="#__codelineno-0-144"></a># Integrate in time domain (default: integration in spectral domain)
+<a id="__codelineno-0-145" name="__codelineno-0-145" href="#__codelineno-0-145"></a>time_domain_int = False
+<a id="__codelineno-0-146" name="__codelineno-0-146" href="#__codelineno-0-146"></a>
+<a id="__codelineno-0-147" name="__codelineno-0-147" href="#__codelineno-0-147"></a># Ignore vertical components when building S or SV spectra
+<a id="__codelineno-0-148" name="__codelineno-0-148" href="#__codelineno-0-148"></a># Note: this option has no effect when &#39;wave_type&#39; is &#39;P&#39; (the vertical
+<a id="__codelineno-0-149" name="__codelineno-0-149" href="#__codelineno-0-149"></a># component is not ignored) and when &#39;wave_type&#39; is &#39;SH&#39; (the vertical
+<a id="__codelineno-0-150" name="__codelineno-0-150" href="#__codelineno-0-150"></a># component is not needed)
+<a id="__codelineno-0-151" name="__codelineno-0-151" href="#__codelineno-0-151"></a>ignore_vertical = False
+<a id="__codelineno-0-152" name="__codelineno-0-152" href="#__codelineno-0-152"></a>
+<a id="__codelineno-0-153" name="__codelineno-0-153" href="#__codelineno-0-153"></a># Taper half width: between 0 (no taper) and 0.5
+<a id="__codelineno-0-154" name="__codelineno-0-154" href="#__codelineno-0-154"></a>taper_halfwidth = 0.05
+<a id="__codelineno-0-155" name="__codelineno-0-155" href="#__codelineno-0-155"></a>
+<a id="__codelineno-0-156" name="__codelineno-0-156" href="#__codelineno-0-156"></a># Spectral window length (seconds)
+<a id="__codelineno-0-157" name="__codelineno-0-157" href="#__codelineno-0-157"></a># Signal is tapered, and then zero padded to
+<a id="__codelineno-0-158" name="__codelineno-0-158" href="#__codelineno-0-158"></a># this window length, so that the spectral
+<a id="__codelineno-0-159" name="__codelineno-0-159" href="#__codelineno-0-159"></a># sampling is fixed to 1/spectral_win_length.
+<a id="__codelineno-0-160" name="__codelineno-0-160" href="#__codelineno-0-160"></a># Comment out (or set to None) to use
+<a id="__codelineno-0-161" name="__codelineno-0-161" href="#__codelineno-0-161"></a># signal window as spectral window length.
+<a id="__codelineno-0-162" name="__codelineno-0-162" href="#__codelineno-0-162"></a>spectral_win_length = None
+<a id="__codelineno-0-163" name="__codelineno-0-163" href="#__codelineno-0-163"></a>
+<a id="__codelineno-0-164" name="__codelineno-0-164" href="#__codelineno-0-164"></a># Spectral smoothing window width in frequency decades
+<a id="__codelineno-0-165" name="__codelineno-0-165" href="#__codelineno-0-165"></a># (i.e., log10 frequency scale).
+<a id="__codelineno-0-166" name="__codelineno-0-166" href="#__codelineno-0-166"></a># Example:
+<a id="__codelineno-0-167" name="__codelineno-0-167" href="#__codelineno-0-167"></a>#  spectral_smooth_width_decades=1 means a width of 1 decade
+<a id="__codelineno-0-168" name="__codelineno-0-168" href="#__codelineno-0-168"></a>#  (generally, too large, producing a spectrum which is too smooth).
+<a id="__codelineno-0-169" name="__codelineno-0-169" href="#__codelineno-0-169"></a>#  spectrum(f0) is smoothed using values between f1 and f2, so that
+<a id="__codelineno-0-170" name="__codelineno-0-170" href="#__codelineno-0-170"></a>#  log10(f1)=log10(f0)-0.5 and log10(f2)=log10(f0)+0.5
+<a id="__codelineno-0-171" name="__codelineno-0-171" href="#__codelineno-0-171"></a>#    i.e.,
+<a id="__codelineno-0-172" name="__codelineno-0-172" href="#__codelineno-0-172"></a>#  f1=f0/(10^0.5) and f2=f0*(10^0.5)
+<a id="__codelineno-0-173" name="__codelineno-0-173" href="#__codelineno-0-173"></a>#    or,
+<a id="__codelineno-0-174" name="__codelineno-0-174" href="#__codelineno-0-174"></a>#  f2/f1=10 (1 decade width)
+<a id="__codelineno-0-175" name="__codelineno-0-175" href="#__codelineno-0-175"></a># Default value of 0.2 is generally a good choice
+<a id="__codelineno-0-176" name="__codelineno-0-176" href="#__codelineno-0-176"></a>spectral_smooth_width_decades = 0.2
+<a id="__codelineno-0-177" name="__codelineno-0-177" href="#__codelineno-0-177"></a>
+<a id="__codelineno-0-178" name="__codelineno-0-178" href="#__codelineno-0-178"></a># Residuals file path
+<a id="__codelineno-0-179" name="__codelineno-0-179" href="#__codelineno-0-179"></a># (a pickle file with the mean residuals per station,
+<a id="__codelineno-0-180" name="__codelineno-0-180" href="#__codelineno-0-180"></a># used for station correction):
+<a id="__codelineno-0-181" name="__codelineno-0-181" href="#__codelineno-0-181"></a>residuals_filepath = None
+<a id="__codelineno-0-182" name="__codelineno-0-182" href="#__codelineno-0-182"></a>
+<a id="__codelineno-0-183" name="__codelineno-0-183" href="#__codelineno-0-183"></a># Remove the signal baseline after instrument correction and before filtering
+<a id="__codelineno-0-184" name="__codelineno-0-184" href="#__codelineno-0-184"></a>remove_baseline = False
+<a id="__codelineno-0-185" name="__codelineno-0-185" href="#__codelineno-0-185"></a>
+<a id="__codelineno-0-186" name="__codelineno-0-186" href="#__codelineno-0-186"></a># Band-pass frequencies (Hz) for accelerometers, velocimeters
+<a id="__codelineno-0-187" name="__codelineno-0-187" href="#__codelineno-0-187"></a># and displacement sensors.
+<a id="__codelineno-0-188" name="__codelineno-0-188" href="#__codelineno-0-188"></a># Use bp_freqmin_STATION and bp_freqmax_STATION to provide
+<a id="__codelineno-0-189" name="__codelineno-0-189" href="#__codelineno-0-189"></a># filter frequencies for a specific STATION code.
+<a id="__codelineno-0-190" name="__codelineno-0-190" href="#__codelineno-0-190"></a># TODO: calculate from sampling rate?
+<a id="__codelineno-0-191" name="__codelineno-0-191" href="#__codelineno-0-191"></a>bp_freqmin_acc = 0.001
+<a id="__codelineno-0-192" name="__codelineno-0-192" href="#__codelineno-0-192"></a>bp_freqmax_acc = 50.0
+<a id="__codelineno-0-193" name="__codelineno-0-193" href="#__codelineno-0-193"></a>bp_freqmin_shortp = 0.01
+<a id="__codelineno-0-194" name="__codelineno-0-194" href="#__codelineno-0-194"></a>bp_freqmax_shortp = 40.0
+<a id="__codelineno-0-195" name="__codelineno-0-195" href="#__codelineno-0-195"></a>bp_freqmin_broadb = 0.001
+<a id="__codelineno-0-196" name="__codelineno-0-196" href="#__codelineno-0-196"></a>bp_freqmax_broadb = 40.0
+<a id="__codelineno-0-197" name="__codelineno-0-197" href="#__codelineno-0-197"></a>bp_freqmin_disp = 0.5
+<a id="__codelineno-0-198" name="__codelineno-0-198" href="#__codelineno-0-198"></a>bp_freqmax_disp = 40.0
+<a id="__codelineno-0-199" name="__codelineno-0-199" href="#__codelineno-0-199"></a>
+<a id="__codelineno-0-200" name="__codelineno-0-200" href="#__codelineno-0-200"></a># Spectral windowing frequencies (Hz) for accelerometers, velocimeters
+<a id="__codelineno-0-201" name="__codelineno-0-201" href="#__codelineno-0-201"></a># and displacement sensors.
+<a id="__codelineno-0-202" name="__codelineno-0-202" href="#__codelineno-0-202"></a># (spectra will be cut between these two frequencies)
+<a id="__codelineno-0-203" name="__codelineno-0-203" href="#__codelineno-0-203"></a># Use freq1_STATION and freq2_STATION to provide
+<a id="__codelineno-0-204" name="__codelineno-0-204" href="#__codelineno-0-204"></a># windowing frequencies for a specific STATION code.
+<a id="__codelineno-0-205" name="__codelineno-0-205" href="#__codelineno-0-205"></a>freq1_acc = 0.05
+<a id="__codelineno-0-206" name="__codelineno-0-206" href="#__codelineno-0-206"></a>freq2_acc = 30.0
+<a id="__codelineno-0-207" name="__codelineno-0-207" href="#__codelineno-0-207"></a>freq1_shortp = 0.05
+<a id="__codelineno-0-208" name="__codelineno-0-208" href="#__codelineno-0-208"></a>freq2_shortp = 30.0
+<a id="__codelineno-0-209" name="__codelineno-0-209" href="#__codelineno-0-209"></a>freq1_broadb = 0.05
+<a id="__codelineno-0-210" name="__codelineno-0-210" href="#__codelineno-0-210"></a>freq2_broadb = 30.0
+<a id="__codelineno-0-211" name="__codelineno-0-211" href="#__codelineno-0-211"></a>freq1_disp = 0.5
+<a id="__codelineno-0-212" name="__codelineno-0-212" href="#__codelineno-0-212"></a>freq2_disp = 30.0
+<a id="__codelineno-0-213" name="__codelineno-0-213" href="#__codelineno-0-213"></a># -------- SPECTRUM PARAMETERS
+<a id="__codelineno-0-214" name="__codelineno-0-214" href="#__codelineno-0-214"></a>
+<a id="__codelineno-0-215" name="__codelineno-0-215" href="#__codelineno-0-215"></a>
+<a id="__codelineno-0-216" name="__codelineno-0-216" href="#__codelineno-0-216"></a># SIGNAL/NOISE PARAMETERS --------
+<a id="__codelineno-0-217" name="__codelineno-0-217" href="#__codelineno-0-217"></a># Minimum rms (in trace units before instrument corrections)
+<a id="__codelineno-0-218" name="__codelineno-0-218" href="#__codelineno-0-218"></a># to consider a trace as noise
+<a id="__codelineno-0-219" name="__codelineno-0-219" href="#__codelineno-0-219"></a>rmsmin = 0.0
+<a id="__codelineno-0-220" name="__codelineno-0-220" href="#__codelineno-0-220"></a>
+<a id="__codelineno-0-221" name="__codelineno-0-221" href="#__codelineno-0-221"></a># Time domain S/N ratio min
+<a id="__codelineno-0-222" name="__codelineno-0-222" href="#__codelineno-0-222"></a>sn_min = 1.0
+<a id="__codelineno-0-223" name="__codelineno-0-223" href="#__codelineno-0-223"></a>
+<a id="__codelineno-0-224" name="__codelineno-0-224" href="#__codelineno-0-224"></a># Clipping detection algorithm
+<a id="__codelineno-0-225" name="__codelineno-0-225" href="#__codelineno-0-225"></a># Options:
+<a id="__codelineno-0-226" name="__codelineno-0-226" href="#__codelineno-0-226"></a>#  - &#39;none&#39;: no clipping detection
+<a id="__codelineno-0-227" name="__codelineno-0-227" href="#__codelineno-0-227"></a>#  - &#39;clipping_score&#39;: compute a clipping score for each trace, based on the
+<a id="__codelineno-0-228" name="__codelineno-0-228" href="#__codelineno-0-228"></a>#    shape of the kernel density estimation of the trace amplitude values.
+<a id="__codelineno-0-229" name="__codelineno-0-229" href="#__codelineno-0-229"></a>#    A high clipping score will be obtained for traces with a high number of
+<a id="__codelineno-0-230" name="__codelineno-0-230" href="#__codelineno-0-230"></a>#    samples whose amplitude is close to the trace highest or lowest
+<a id="__codelineno-0-231" name="__codelineno-0-231" href="#__codelineno-0-231"></a>#    amplitude values. Clipping scores for each trace are printed on the
+<a id="__codelineno-0-232" name="__codelineno-0-232" href="#__codelineno-0-232"></a>#    terminal and in the log file.
+<a id="__codelineno-0-233" name="__codelineno-0-233" href="#__codelineno-0-233"></a>#    Note: if &quot;remove_baseline&quot; is True (see above), clipping scores are
+<a id="__codelineno-0-234" name="__codelineno-0-234" href="#__codelineno-0-234"></a>#    computed on the baseline-corrected signal.
+<a id="__codelineno-0-235" name="__codelineno-0-235" href="#__codelineno-0-235"></a>#  - &#39;clipping_peaks&#39;: count the number of peaks in the kernel density
+<a id="__codelineno-0-236" name="__codelineno-0-236" href="#__codelineno-0-236"></a>#    estimation of the trace amplitude values. The trace is considered clipped
+<a id="__codelineno-0-237" name="__codelineno-0-237" href="#__codelineno-0-237"></a>#    if at least one peak is found within the trace highest or lowest amplitude
+<a id="__codelineno-0-238" name="__codelineno-0-238" href="#__codelineno-0-238"></a>#    values. Kernel density peaks for each trace are printed on the terminal
+<a id="__codelineno-0-239" name="__codelineno-0-239" href="#__codelineno-0-239"></a>#    and in the log file.
+<a id="__codelineno-0-240" name="__codelineno-0-240" href="#__codelineno-0-240"></a>clipping_detection_algorithm = clipping_score
+<a id="__codelineno-0-241" name="__codelineno-0-241" href="#__codelineno-0-241"></a># Plot a debug figure for each trace with the results of the clipping algorithm
+<a id="__codelineno-0-242" name="__codelineno-0-242" href="#__codelineno-0-242"></a># Note: the figures are always shown, even if &quot;plot_show&quot; is False (see below)
+<a id="__codelineno-0-243" name="__codelineno-0-243" href="#__codelineno-0-243"></a>clipping_debug_plot = False
+<a id="__codelineno-0-244" name="__codelineno-0-244" href="#__codelineno-0-244"></a># Threshold for the &#39;clipping_score&#39; algorithm (between 0 and 100).
+<a id="__codelineno-0-245" name="__codelineno-0-245" href="#__codelineno-0-245"></a># A value of 100 means no clipping detection.
+<a id="__codelineno-0-246" name="__codelineno-0-246" href="#__codelineno-0-246"></a># This parameter is ignored if &quot;clipping_detection_algorithm&quot; is not set to
+<a id="__codelineno-0-247" name="__codelineno-0-247" href="#__codelineno-0-247"></a># &#39;clipping_score&#39;.
+<a id="__codelineno-0-248" name="__codelineno-0-248" href="#__codelineno-0-248"></a>clipping_score_threshold = 10.0
+<a id="__codelineno-0-249" name="__codelineno-0-249" href="#__codelineno-0-249"></a># Sensitivity for the &#39;clipping_peaks&#39; algorithm (between 1 and 5).
+<a id="__codelineno-0-250" name="__codelineno-0-250" href="#__codelineno-0-250"></a># Higher values mean more peaks are detected.
+<a id="__codelineno-0-251" name="__codelineno-0-251" href="#__codelineno-0-251"></a># This parameter is ignored if &quot;clipping_detection_algorithm&quot; is not set to
+<a id="__codelineno-0-252" name="__codelineno-0-252" href="#__codelineno-0-252"></a># &#39;clipping_peaks&#39;.
+<a id="__codelineno-0-253" name="__codelineno-0-253" href="#__codelineno-0-253"></a>#clipping_peaks_sensitivity = 3
+<a id="__codelineno-0-254" name="__codelineno-0-254" href="#__codelineno-0-254"></a># Trace amplitude percentile for the &#39;clipping_peaks&#39; algorithm (between 0
+<a id="__codelineno-0-255" name="__codelineno-0-255" href="#__codelineno-0-255"></a># and 100). Example:
+<a id="__codelineno-0-256" name="__codelineno-0-256" href="#__codelineno-0-256"></a>#   clipping_peaks_percentile = 10
+<a id="__codelineno-0-257" name="__codelineno-0-257" href="#__codelineno-0-257"></a># means that the 10% highest and lowest values of the trace amplitude will be
+<a id="__codelineno-0-258" name="__codelineno-0-258" href="#__codelineno-0-258"></a># checked for clipping.
+<a id="__codelineno-0-259" name="__codelineno-0-259" href="#__codelineno-0-259"></a># A value of 0 means that no clipping check will be performed.
+<a id="__codelineno-0-260" name="__codelineno-0-260" href="#__codelineno-0-260"></a># This parameter is ignored if &quot;clipping_detection_algorithm&quot; is not set to
+<a id="__codelineno-0-261" name="__codelineno-0-261" href="#__codelineno-0-261"></a># &#39;clipping_peaks&#39;.
+<a id="__codelineno-0-262" name="__codelineno-0-262" href="#__codelineno-0-262"></a>#clipping_peaks_percentile = 10.0
+<a id="__codelineno-0-263" name="__codelineno-0-263" href="#__codelineno-0-263"></a>
+<a id="__codelineno-0-264" name="__codelineno-0-264" href="#__codelineno-0-264"></a># Maximum gap length for the whole trace, in seconds
+<a id="__codelineno-0-265" name="__codelineno-0-265" href="#__codelineno-0-265"></a>gap_max = None
+<a id="__codelineno-0-266" name="__codelineno-0-266" href="#__codelineno-0-266"></a># Maximum overlap length for the whole trace, in seconds
+<a id="__codelineno-0-267" name="__codelineno-0-267" href="#__codelineno-0-267"></a>overlap_max = None
+<a id="__codelineno-0-268" name="__codelineno-0-268" href="#__codelineno-0-268"></a>
+<a id="__codelineno-0-269" name="__codelineno-0-269" href="#__codelineno-0-269"></a># Spectral S/N ratio min, below which a spectrum will be skipped
+<a id="__codelineno-0-270" name="__codelineno-0-270" href="#__codelineno-0-270"></a>spectral_sn_min = 10.0
+<a id="__codelineno-0-271" name="__codelineno-0-271" href="#__codelineno-0-271"></a># Frequency range (Hz) to compute the spectral S/N ratio
+<a id="__codelineno-0-272" name="__codelineno-0-272" href="#__codelineno-0-272"></a># (comment out or use None to indicate the whole frequency range)
+<a id="__codelineno-0-273" name="__codelineno-0-273" href="#__codelineno-0-273"></a># Example:
+<a id="__codelineno-0-274" name="__codelineno-0-274" href="#__codelineno-0-274"></a>#  spectral_sn_freq_range = 0.1, 2
+<a id="__codelineno-0-275" name="__codelineno-0-275" href="#__codelineno-0-275"></a>spectral_sn_freq_range = None
+<a id="__codelineno-0-276" name="__codelineno-0-276" href="#__codelineno-0-276"></a># -------- SIGNAL/NOISE PARAMETERS
+<a id="__codelineno-0-277" name="__codelineno-0-277" href="#__codelineno-0-277"></a>
+<a id="__codelineno-0-278" name="__codelineno-0-278" href="#__codelineno-0-278"></a>
+<a id="__codelineno-0-279" name="__codelineno-0-279" href="#__codelineno-0-279"></a># SPECTRAL MODEL PARAMETERS --------
+<a id="__codelineno-0-280" name="__codelineno-0-280" href="#__codelineno-0-280"></a># Layer top depths (km, positive down), for layered models (see below)
+<a id="__codelineno-0-281" name="__codelineno-0-281" href="#__codelineno-0-281"></a>#  Note: generally, the first layer top depth should be 0 or a negative value
+<a id="__codelineno-0-282" name="__codelineno-0-282" href="#__codelineno-0-282"></a>#layer_top_depths = 0, 3
+<a id="__codelineno-0-283" name="__codelineno-0-283" href="#__codelineno-0-283"></a># P and S wave velocity close to the source (km/s)
+<a id="__codelineno-0-284" name="__codelineno-0-284" href="#__codelineno-0-284"></a># It can be a single value or a list of values (layered model)
+<a id="__codelineno-0-285" name="__codelineno-0-285" href="#__codelineno-0-285"></a># Set to None to use velocity from the global Earth model &#39;iasp91&#39;
+<a id="__codelineno-0-286" name="__codelineno-0-286" href="#__codelineno-0-286"></a>#   Note: specifying a layered model is useful when the same config file is
+<a id="__codelineno-0-287" name="__codelineno-0-287" href="#__codelineno-0-287"></a>#   used for several SourceSpec runs with sources at different depths
+<a id="__codelineno-0-288" name="__codelineno-0-288" href="#__codelineno-0-288"></a>#vp_source = 4.5, 5.5
+<a id="__codelineno-0-289" name="__codelineno-0-289" href="#__codelineno-0-289"></a>#vs_source = 2.5, 3.2
+<a id="__codelineno-0-290" name="__codelineno-0-290" href="#__codelineno-0-290"></a>vp_source = 5.0
+<a id="__codelineno-0-291" name="__codelineno-0-291" href="#__codelineno-0-291"></a>vs_source = 2.9
+<a id="__codelineno-0-292" name="__codelineno-0-292" href="#__codelineno-0-292"></a># P and S wave velocity close to the stations (km/s)
+<a id="__codelineno-0-293" name="__codelineno-0-293" href="#__codelineno-0-293"></a># If set to None, velocity values close to the source will be used
+<a id="__codelineno-0-294" name="__codelineno-0-294" href="#__codelineno-0-294"></a>vp_stations = 4.5
+<a id="__codelineno-0-295" name="__codelineno-0-295" href="#__codelineno-0-295"></a>vs_stations = 2.5
+<a id="__codelineno-0-296" name="__codelineno-0-296" href="#__codelineno-0-296"></a># As an alternative, a directory containing a NonLinLoc velocity model can be
+<a id="__codelineno-0-297" name="__codelineno-0-297" href="#__codelineno-0-297"></a># specified. In this case, the values provided above will be ignored
+<a id="__codelineno-0-298" name="__codelineno-0-298" href="#__codelineno-0-298"></a>NLL_model_dir = None
+<a id="__codelineno-0-299" name="__codelineno-0-299" href="#__codelineno-0-299"></a># Density close to the source (kg/m3)
+<a id="__codelineno-0-300" name="__codelineno-0-300" href="#__codelineno-0-300"></a># It can be a single value or a list of values (layered model)
+<a id="__codelineno-0-301" name="__codelineno-0-301" href="#__codelineno-0-301"></a># Set to None to use density from the global Earth model &#39;iasp91&#39;
+<a id="__codelineno-0-302" name="__codelineno-0-302" href="#__codelineno-0-302"></a>#   Note: specifying a layered model is useful when the same config file is
+<a id="__codelineno-0-303" name="__codelineno-0-303" href="#__codelineno-0-303"></a>#   used for several SourceSpec runs with sources at different depths
+<a id="__codelineno-0-304" name="__codelineno-0-304" href="#__codelineno-0-304"></a>#rho_source = 2400, 2500
+<a id="__codelineno-0-305" name="__codelineno-0-305" href="#__codelineno-0-305"></a>rho_source = 2400
+<a id="__codelineno-0-306" name="__codelineno-0-306" href="#__codelineno-0-306"></a># Density close to the stations (kg/m3)
+<a id="__codelineno-0-307" name="__codelineno-0-307" href="#__codelineno-0-307"></a># If set to None, density value close to the source will be used
+<a id="__codelineno-0-308" name="__codelineno-0-308" href="#__codelineno-0-308"></a>#rho_stations = 2400.0
+<a id="__codelineno-0-309" name="__codelineno-0-309" href="#__codelineno-0-309"></a># Geometrical spreading correction of wave amplitude.
+<a id="__codelineno-0-310" name="__codelineno-0-310" href="#__codelineno-0-310"></a># Spectra will be multiplied by this value to correct for the lost amplitude.
+<a id="__codelineno-0-311" name="__codelineno-0-311" href="#__codelineno-0-311"></a># Possible options are:
+<a id="__codelineno-0-312" name="__codelineno-0-312" href="#__codelineno-0-312"></a>#    &#39;r_power_n&#39;:   &quot;r&quot; to the power of &quot;n&quot; (râ¿).
+<a id="__codelineno-0-313" name="__codelineno-0-313" href="#__codelineno-0-313"></a>#                   You must provide the value of the exponent &quot;n&quot;
+<a id="__codelineno-0-314" name="__codelineno-0-314" href="#__codelineno-0-314"></a>#                   (see &quot;geom_spread_n_exponent&quot; below).
+<a id="__codelineno-0-315" name="__codelineno-0-315" href="#__codelineno-0-315"></a>#    &#39;boatwright&#39;:  &quot;r&quot; (body waves) geometrical spreading for hypocentral
+<a id="__codelineno-0-316" name="__codelineno-0-316" href="#__codelineno-0-316"></a>#                   distances below a cutoff distance; frequency-dependent
+<a id="__codelineno-0-317" name="__codelineno-0-317" href="#__codelineno-0-317"></a>#                   geometrical spreading above the cutoff distance (Boatwright
+<a id="__codelineno-0-318" name="__codelineno-0-318" href="#__codelineno-0-318"></a>#                   et al., 2002). You must provide the cutoff distance (see
+<a id="__codelineno-0-319" name="__codelineno-0-319" href="#__codelineno-0-319"></a>#                   &quot;geom_spread_cutoff_distance&quot; below). This coefficient can
+<a id="__codelineno-0-320" name="__codelineno-0-320" href="#__codelineno-0-320"></a>#                   be a valid choice for regional distances (up to 200 km),
+<a id="__codelineno-0-321" name="__codelineno-0-321" href="#__codelineno-0-321"></a>#                   where S-waves, Lg waves and surface waves are mixed.
+<a id="__codelineno-0-322" name="__codelineno-0-322" href="#__codelineno-0-322"></a>geom_spread_model = r_power_n
+<a id="__codelineno-0-323" name="__codelineno-0-323" href="#__codelineno-0-323"></a># Exponent &quot;n&quot; for the &quot;r_power_n&quot; geometrical spreading coefficient (positive
+<a id="__codelineno-0-324" name="__codelineno-0-324" href="#__codelineno-0-324"></a># float). Examples:
+<a id="__codelineno-0-325" name="__codelineno-0-325" href="#__codelineno-0-325"></a>#   geom_spread_n_exponent = 1 (default, body wave in a homogeneous full-space)
+<a id="__codelineno-0-326" name="__codelineno-0-326" href="#__codelineno-0-326"></a>#   geom_spread_n_exponent = 0.5 (surface wave in a homogeneous half-space)
+<a id="__codelineno-0-327" name="__codelineno-0-327" href="#__codelineno-0-327"></a>geom_spread_n_exponent = 1.0
+<a id="__codelineno-0-328" name="__codelineno-0-328" href="#__codelineno-0-328"></a># Geometrical spreading cutoff distance, in km, for the &quot;boatwright&quot; model:
+<a id="__codelineno-0-329" name="__codelineno-0-329" href="#__codelineno-0-329"></a>geom_spread_cutoff_distance = 100.0
+<a id="__codelineno-0-330" name="__codelineno-0-330" href="#__codelineno-0-330"></a># Minimum distance (in km) to use a teleseismic geometrical spreading
+<a id="__codelineno-0-331" name="__codelineno-0-331" href="#__codelineno-0-331"></a># model. Above this distance, the model from Okal (1992) for body waves
+<a id="__codelineno-0-332" name="__codelineno-0-332" href="#__codelineno-0-332"></a># spreading in a spherically symmetric Earth will be used.
+<a id="__codelineno-0-333" name="__codelineno-0-333" href="#__codelineno-0-333"></a>geom_spread_min_teleseismic_distance = 500.0
+<a id="__codelineno-0-334" name="__codelineno-0-334" href="#__codelineno-0-334"></a># P-wave average radiation pattern coefficient:
+<a id="__codelineno-0-335" name="__codelineno-0-335" href="#__codelineno-0-335"></a>rpp = 0.52
+<a id="__codelineno-0-336" name="__codelineno-0-336" href="#__codelineno-0-336"></a># S-wave average radiation pattern coefficient:
+<a id="__codelineno-0-337" name="__codelineno-0-337" href="#__codelineno-0-337"></a>rps = 0.62
+<a id="__codelineno-0-338" name="__codelineno-0-338" href="#__codelineno-0-338"></a># Radiation pattern coefficient from focal mechanism, if available.
+<a id="__codelineno-0-339" name="__codelineno-0-339" href="#__codelineno-0-339"></a>#   Note: radiation pattern is computed for the first arriving phase and might
+<a id="__codelineno-0-340" name="__codelineno-0-340" href="#__codelineno-0-340"></a>#   not be correct for windows involving multiple phase arrivals (e.g.,
+<a id="__codelineno-0-341" name="__codelineno-0-341" href="#__codelineno-0-341"></a>#   Lg waves, surface waves at regional distances, depth phases at teleseismic
+<a id="__codelineno-0-342" name="__codelineno-0-342" href="#__codelineno-0-342"></a>#   distances)
+<a id="__codelineno-0-343" name="__codelineno-0-343" href="#__codelineno-0-343"></a>rp_from_focal_mechanism = False
+<a id="__codelineno-0-344" name="__codelineno-0-344" href="#__codelineno-0-344"></a># &quot;kp&quot; and &quot;ks&quot; coefficients to compute source radius a from the P-wave
+<a id="__codelineno-0-345" name="__codelineno-0-345" href="#__codelineno-0-345"></a># corner frequency fc_p or the S-wave corner frequency fc_s and the shear
+<a id="__codelineno-0-346" name="__codelineno-0-346" href="#__codelineno-0-346"></a># wave speed beta (&quot;vs_source&quot;):
+<a id="__codelineno-0-347" name="__codelineno-0-347" href="#__codelineno-0-347"></a>#
+<a id="__codelineno-0-348" name="__codelineno-0-348" href="#__codelineno-0-348"></a>#   a = kp * beta / fc_p
+<a id="__codelineno-0-349" name="__codelineno-0-349" href="#__codelineno-0-349"></a>#   a = ks * beta / fc_s
+<a id="__codelineno-0-350" name="__codelineno-0-350" href="#__codelineno-0-350"></a>#
+<a id="__codelineno-0-351" name="__codelineno-0-351" href="#__codelineno-0-351"></a># (Madariaga, 2009; Kaneko and Shearer, 2014)
+<a id="__codelineno-0-352" name="__codelineno-0-352" href="#__codelineno-0-352"></a>#
+<a id="__codelineno-0-353" name="__codelineno-0-353" href="#__codelineno-0-353"></a># The default value for S-waves is &quot;ks = 0.3724&quot;, obtained by Brune (1970)
+<a id="__codelineno-0-354" name="__codelineno-0-354" href="#__codelineno-0-354"></a># for a static circular crack.
+<a id="__codelineno-0-355" name="__codelineno-0-355" href="#__codelineno-0-355"></a># Other values are discussed in Kaneko and Shearer (2014) for a dynamic
+<a id="__codelineno-0-356" name="__codelineno-0-356" href="#__codelineno-0-356"></a># circular crack, as a function of the ratio Vr/beta, where Vr is the rupture
+<a id="__codelineno-0-357" name="__codelineno-0-357" href="#__codelineno-0-357"></a># speed:
+<a id="__codelineno-0-358" name="__codelineno-0-358" href="#__codelineno-0-358"></a>#
+<a id="__codelineno-0-359" name="__codelineno-0-359" href="#__codelineno-0-359"></a>#   Vr/beta  kp(K&amp;S)   ks(K&amp;S)   kp(Mada)   ks(Mada)   kp(S&amp;H)   ks(S&amp;H)
+<a id="__codelineno-0-360" name="__codelineno-0-360" href="#__codelineno-0-360"></a>#   0.9      0.38      0.26      0.32       0.21       0.42      0.29
+<a id="__codelineno-0-361" name="__codelineno-0-361" href="#__codelineno-0-361"></a>#   0.8      0.35      0.26                            0.39      0.28
+<a id="__codelineno-0-362" name="__codelineno-0-362" href="#__codelineno-0-362"></a>#   0.7      0.32      0.26                            0.36      0.27
+<a id="__codelineno-0-363" name="__codelineno-0-363" href="#__codelineno-0-363"></a>#   0.6      0.30      0.25                            0.34      0.27
+<a id="__codelineno-0-364" name="__codelineno-0-364" href="#__codelineno-0-364"></a>#   0.5      0.28      0.22                            0.31      0.24
+<a id="__codelineno-0-365" name="__codelineno-0-365" href="#__codelineno-0-365"></a>#
+<a id="__codelineno-0-366" name="__codelineno-0-366" href="#__codelineno-0-366"></a>#   K&amp;S: Kaneko and Shearer (2014)
+<a id="__codelineno-0-367" name="__codelineno-0-367" href="#__codelineno-0-367"></a>#   Mada: Madariaga (1976)
+<a id="__codelineno-0-368" name="__codelineno-0-368" href="#__codelineno-0-368"></a>#   S&amp;H: Sato and Hirasawa (1973)
+<a id="__codelineno-0-369" name="__codelineno-0-369" href="#__codelineno-0-369"></a>#kp = 0.38
+<a id="__codelineno-0-370" name="__codelineno-0-370" href="#__codelineno-0-370"></a>#ks = 0.3724
+<a id="__codelineno-0-371" name="__codelineno-0-371" href="#__codelineno-0-371"></a># -------- SPECTRAL MODEL PARAMETERS
+<a id="__codelineno-0-372" name="__codelineno-0-372" href="#__codelineno-0-372"></a>
+<a id="__codelineno-0-373" name="__codelineno-0-373" href="#__codelineno-0-373"></a>
+<a id="__codelineno-0-374" name="__codelineno-0-374" href="#__codelineno-0-374"></a># INVERSION PARAMETERS --------
+<a id="__codelineno-0-375" name="__codelineno-0-375" href="#__codelineno-0-375"></a># Weighting type: &#39;noise&#39;, &#39;frequency&#39;, &#39;inv_frequency&#39; or &#39;no_weight&#39;
+<a id="__codelineno-0-376" name="__codelineno-0-376" href="#__codelineno-0-376"></a>#   &#39;noise&#39;:         spectral signal/noise ratio weighting
+<a id="__codelineno-0-377" name="__codelineno-0-377" href="#__codelineno-0-377"></a>#   &#39;frequency&#39;:     a constant weight is applied for f&lt;=f_weight
+<a id="__codelineno-0-378" name="__codelineno-0-378" href="#__codelineno-0-378"></a>#                    a weight of 1 is used for f&gt;f_weight
+<a id="__codelineno-0-379" name="__codelineno-0-379" href="#__codelineno-0-379"></a>#                    (see &quot;f_weight&quot; and &quot;weight&quot; below)
+<a id="__codelineno-0-380" name="__codelineno-0-380" href="#__codelineno-0-380"></a>#   &#39;inv_frequency&#39;: weight is computed as 1/(f-f0+0.25)**0.25 for f&lt;=f1,
+<a id="__codelineno-0-381" name="__codelineno-0-381" href="#__codelineno-0-381"></a>#                    weight is 0 for f&lt;f0 and f&gt;f1.
+<a id="__codelineno-0-382" name="__codelineno-0-382" href="#__codelineno-0-382"></a>#                    f0 and f1 are the first and last frequencies where
+<a id="__codelineno-0-383" name="__codelineno-0-383" href="#__codelineno-0-383"></a>#                    spectral signal/noise ratio is above 3, or the first and
+<a id="__codelineno-0-384" name="__codelineno-0-384" href="#__codelineno-0-384"></a>#                    last frequencies of the entire spectrum if no noise window
+<a id="__codelineno-0-385" name="__codelineno-0-385" href="#__codelineno-0-385"></a>#                    is available
+<a id="__codelineno-0-386" name="__codelineno-0-386" href="#__codelineno-0-386"></a>#   &#39;no_weight&#39;:     no weighting
+<a id="__codelineno-0-387" name="__codelineno-0-387" href="#__codelineno-0-387"></a>weighting = noise
+<a id="__codelineno-0-388" name="__codelineno-0-388" href="#__codelineno-0-388"></a># Parameters for &#39;frequency&#39; weighting (ignored for the other weighting types):
+<a id="__codelineno-0-389" name="__codelineno-0-389" href="#__codelineno-0-389"></a>#   weight for f&lt;=f_weight (Hz)
+<a id="__codelineno-0-390" name="__codelineno-0-390" href="#__codelineno-0-390"></a>#   1      for f&gt; f_weight (Hz)
+<a id="__codelineno-0-391" name="__codelineno-0-391" href="#__codelineno-0-391"></a>f_weight = 7.0
+<a id="__codelineno-0-392" name="__codelineno-0-392" href="#__codelineno-0-392"></a>weight = 10.0
+<a id="__codelineno-0-393" name="__codelineno-0-393" href="#__codelineno-0-393"></a>
+<a id="__codelineno-0-394" name="__codelineno-0-394" href="#__codelineno-0-394"></a># Inversion algorithm:
+<a id="__codelineno-0-395" name="__codelineno-0-395" href="#__codelineno-0-395"></a># TNC: truncated Newton algorithm (with bounds)
+<a id="__codelineno-0-396" name="__codelineno-0-396" href="#__codelineno-0-396"></a># LM: Levenberg-Marquardt algorithm
+<a id="__codelineno-0-397" name="__codelineno-0-397" href="#__codelineno-0-397"></a># (warning: Trust Region Reflective algorithm will be used instead if
+<a id="__codelineno-0-398" name="__codelineno-0-398" href="#__codelineno-0-398"></a>#  bounds are provided)
+<a id="__codelineno-0-399" name="__codelineno-0-399" href="#__codelineno-0-399"></a># BH: basin-hopping algorithm
+<a id="__codelineno-0-400" name="__codelineno-0-400" href="#__codelineno-0-400"></a># GS: grid search
+<a id="__codelineno-0-401" name="__codelineno-0-401" href="#__codelineno-0-401"></a># IS: importance sampling of misfit grid, using k-d tree
+<a id="__codelineno-0-402" name="__codelineno-0-402" href="#__codelineno-0-402"></a>inv_algorithm = GS
+<a id="__codelineno-0-403" name="__codelineno-0-403" href="#__codelineno-0-403"></a>
+<a id="__codelineno-0-404" name="__codelineno-0-404" href="#__codelineno-0-404"></a># Mw initial value and bounds.
+<a id="__codelineno-0-405" name="__codelineno-0-405" href="#__codelineno-0-405"></a># Set to True to use the magnitude (or scalar moment) from event file as
+<a id="__codelineno-0-406" name="__codelineno-0-406" href="#__codelineno-0-406"></a># initial Mw value for the inversion, instead of computing it from the average
+<a id="__codelineno-0-407" name="__codelineno-0-407" href="#__codelineno-0-407"></a># of the spectral plateau.
+<a id="__codelineno-0-408" name="__codelineno-0-408" href="#__codelineno-0-408"></a># If the event file does not contain a magnitude value or a scalar moment,
+<a id="__codelineno-0-409" name="__codelineno-0-409" href="#__codelineno-0-409"></a># then this parameter is ignored
+<a id="__codelineno-0-410" name="__codelineno-0-410" href="#__codelineno-0-410"></a># Mw_0_from_event_file = False
+<a id="__codelineno-0-411" name="__codelineno-0-411" href="#__codelineno-0-411"></a># Allowed variability for Mw in the inversion
+<a id="__codelineno-0-412" name="__codelineno-0-412" href="#__codelineno-0-412"></a># (expressed as a fraction of Mw_0, between 0 and 1).
+<a id="__codelineno-0-413" name="__codelineno-0-413" href="#__codelineno-0-413"></a># This parameter is interpreted differently, depending on whether
+<a id="__codelineno-0-414" name="__codelineno-0-414" href="#__codelineno-0-414"></a># Mw_0_from_event_file is True or False:
+<a id="__codelineno-0-415" name="__codelineno-0-415" href="#__codelineno-0-415"></a>#   - If Mw_0_from_event_file is True, then Mw_variability is interpreted as
+<a id="__codelineno-0-416" name="__codelineno-0-416" href="#__codelineno-0-416"></a>#     the allowed variability around the Mw value provided in the event file.
+<a id="__codelineno-0-417" name="__codelineno-0-417" href="#__codelineno-0-417"></a>#   - If Mw_0_from_event_file is False, then the Mw bounds are defined as
+<a id="__codelineno-0-418" name="__codelineno-0-418" href="#__codelineno-0-418"></a>#       Mw_min = min(Mw(f))*(1-Mw_0_variability)
+<a id="__codelineno-0-419" name="__codelineno-0-419" href="#__codelineno-0-419"></a>#       Mw_max = max(Mw(f))*(1+Mw_0_variability),
+<a id="__codelineno-0-420" name="__codelineno-0-420" href="#__codelineno-0-420"></a>#     where Mw(f) is the low frequency spectral plateau in magnitude units.
+<a id="__codelineno-0-421" name="__codelineno-0-421" href="#__codelineno-0-421"></a>#     If noise weighting is used, frequencies for which
+<a id="__codelineno-0-422" name="__codelineno-0-422" href="#__codelineno-0-422"></a>#     S/N(f) &lt; 0.5*max(S/N(f)) will be ignored, where S/N(f) is the spectral
+<a id="__codelineno-0-423" name="__codelineno-0-423" href="#__codelineno-0-423"></a>#     signal to noise ratio.
+<a id="__codelineno-0-424" name="__codelineno-0-424" href="#__codelineno-0-424"></a>Mw_0_variability = 0.1
+<a id="__codelineno-0-425" name="__codelineno-0-425" href="#__codelineno-0-425"></a>
+<a id="__codelineno-0-426" name="__codelineno-0-426" href="#__codelineno-0-426"></a># Bounds for fc (Hz)
+<a id="__codelineno-0-427" name="__codelineno-0-427" href="#__codelineno-0-427"></a># Specify bounds as a list, ex.:
+<a id="__codelineno-0-428" name="__codelineno-0-428" href="#__codelineno-0-428"></a>#   fc_min_max = 0.1, 40
+<a id="__codelineno-0-429" name="__codelineno-0-429" href="#__codelineno-0-429"></a># Note:
+<a id="__codelineno-0-430" name="__codelineno-0-430" href="#__codelineno-0-430"></a>#    If not specified, fc bounds will be autoset to fc0/10 and fc0*10, i.e. two
+<a id="__codelineno-0-431" name="__codelineno-0-431" href="#__codelineno-0-431"></a>#    decades around fc0. The value of fc0 is set as the first maximum of
+<a id="__codelineno-0-432" name="__codelineno-0-432" href="#__codelineno-0-432"></a>#    spectral S/N (noise weighting), or at &quot;f_weight&quot; (frequency weighting),
+<a id="__codelineno-0-433" name="__codelineno-0-433" href="#__codelineno-0-433"></a>#    or at frequency where weight is 30% below the maximum (inverse-frequency
+<a id="__codelineno-0-434" name="__codelineno-0-434" href="#__codelineno-0-434"></a>#    weighting) or at half of the frequency window (no weighting)
+<a id="__codelineno-0-435" name="__codelineno-0-435" href="#__codelineno-0-435"></a>fc_min_max = 0.05, 50.0
+<a id="__codelineno-0-436" name="__codelineno-0-436" href="#__codelineno-0-436"></a>
+<a id="__codelineno-0-437" name="__codelineno-0-437" href="#__codelineno-0-437"></a># Initial value and bounds for t_star (seconds)
+<a id="__codelineno-0-438" name="__codelineno-0-438" href="#__codelineno-0-438"></a>t_star_0 = 0.045
+<a id="__codelineno-0-439" name="__codelineno-0-439" href="#__codelineno-0-439"></a># Try to invert for t_star_0.
+<a id="__codelineno-0-440" name="__codelineno-0-440" href="#__codelineno-0-440"></a># If False, then the fixed t_star_0 defined above will be used.
+<a id="__codelineno-0-441" name="__codelineno-0-441" href="#__codelineno-0-441"></a># If the inverted t_star_0 is non-positive, then fixed t_star_0 will be used
+<a id="__codelineno-0-442" name="__codelineno-0-442" href="#__codelineno-0-442"></a>invert_t_star_0 = False
+<a id="__codelineno-0-443" name="__codelineno-0-443" href="#__codelineno-0-443"></a># Allowed variability around inverted t_star_0 in the inversion
+<a id="__codelineno-0-444" name="__codelineno-0-444" href="#__codelineno-0-444"></a># (expressed as a fraction of t_star_0, between 0 and 1).
+<a id="__codelineno-0-445" name="__codelineno-0-445" href="#__codelineno-0-445"></a># If the inverted t_star_0 is non-positive, then t_star_min_max is used
+<a id="__codelineno-0-446" name="__codelineno-0-446" href="#__codelineno-0-446"></a># (see below).
+<a id="__codelineno-0-447" name="__codelineno-0-447" href="#__codelineno-0-447"></a>t_star_0_variability = 0.1
+<a id="__codelineno-0-448" name="__codelineno-0-448" href="#__codelineno-0-448"></a># t_star_min_max does not supersede t_star_0_variability
+<a id="__codelineno-0-449" name="__codelineno-0-449" href="#__codelineno-0-449"></a>t_star_min_max = 0.001, 0.2
+<a id="__codelineno-0-450" name="__codelineno-0-450" href="#__codelineno-0-450"></a># optional : Qo bounds (converted into t_star bounds in the code).
+<a id="__codelineno-0-451" name="__codelineno-0-451" href="#__codelineno-0-451"></a># (comment out or use None to indicate no bound)
+<a id="__codelineno-0-452" name="__codelineno-0-452" href="#__codelineno-0-452"></a># Note: if you want to explore negative t_star values, you have to specify
+<a id="__codelineno-0-453" name="__codelineno-0-453" href="#__codelineno-0-453"></a># -Qo_min, Qo_min. This because t_star is proportional to 1/Qo.
+<a id="__codelineno-0-454" name="__codelineno-0-454" href="#__codelineno-0-454"></a># Example, for searching only positive t_star values:
+<a id="__codelineno-0-455" name="__codelineno-0-455" href="#__codelineno-0-455"></a>#   Qo_min_max = 10, 1000
+<a id="__codelineno-0-456" name="__codelineno-0-456" href="#__codelineno-0-456"></a># If you want to search also negative t_star values:
+<a id="__codelineno-0-457" name="__codelineno-0-457" href="#__codelineno-0-457"></a>#   Qo_min_max = -10, 10
+<a id="__codelineno-0-458" name="__codelineno-0-458" href="#__codelineno-0-458"></a>Qo_min_max = None
+<a id="__codelineno-0-459" name="__codelineno-0-459" href="#__codelineno-0-459"></a># -------- INVERSION PARAMETERS
+<a id="__codelineno-0-460" name="__codelineno-0-460" href="#__codelineno-0-460"></a>
+<a id="__codelineno-0-461" name="__codelineno-0-461" href="#__codelineno-0-461"></a># POST-INVERSION PARAMETERS --------
+<a id="__codelineno-0-462" name="__codelineno-0-462" href="#__codelineno-0-462"></a># Post-inversion bounds: use this bounds to reject certain inversion
+<a id="__codelineno-0-463" name="__codelineno-0-463" href="#__codelineno-0-463"></a># results, per station.
+<a id="__codelineno-0-464" name="__codelineno-0-464" href="#__codelineno-0-464"></a># Sometimes it is better to be more permissive with inversion parameters and
+<a id="__codelineno-0-465" name="__codelineno-0-465" href="#__codelineno-0-465"></a># reject &quot;bad&quot; solutions after the inversion, rather than forcing the
+<a id="__codelineno-0-466" name="__codelineno-0-466" href="#__codelineno-0-466"></a># inversion to converge within strict bounds.
+<a id="__codelineno-0-467" name="__codelineno-0-467" href="#__codelineno-0-467"></a># fc bounds, in Hz
+<a id="__codelineno-0-468" name="__codelineno-0-468" href="#__codelineno-0-468"></a>pi_fc_min_max = None
+<a id="__codelineno-0-469" name="__codelineno-0-469" href="#__codelineno-0-469"></a># t_star bounds, in s
+<a id="__codelineno-0-470" name="__codelineno-0-470" href="#__codelineno-0-470"></a>pi_t_star_min_max = None
+<a id="__codelineno-0-471" name="__codelineno-0-471" href="#__codelineno-0-471"></a># Static stress drop bounds, in MPa
+<a id="__codelineno-0-472" name="__codelineno-0-472" href="#__codelineno-0-472"></a># pi_ssd_min_max = None
+<a id="__codelineno-0-473" name="__codelineno-0-473" href="#__codelineno-0-473"></a># Maximum acceptable misfit between inverted and observed spectrum
+<a id="__codelineno-0-474" name="__codelineno-0-474" href="#__codelineno-0-474"></a>pi_misfit_max = None
+<a id="__codelineno-0-475" name="__codelineno-0-475" href="#__codelineno-0-475"></a># -------- POST-INVERSION PARAMETERS
+<a id="__codelineno-0-476" name="__codelineno-0-476" href="#__codelineno-0-476"></a>
+<a id="__codelineno-0-477" name="__codelineno-0-477" href="#__codelineno-0-477"></a>
+<a id="__codelineno-0-478" name="__codelineno-0-478" href="#__codelineno-0-478"></a># RADIATED-ENERGY PARAMETERS --------
+<a id="__codelineno-0-479" name="__codelineno-0-479" href="#__codelineno-0-479"></a># Maximum frequency (Hz) to measure radiated energy Er
+<a id="__codelineno-0-480" name="__codelineno-0-480" href="#__codelineno-0-480"></a># Set it to None to use the whole spectrum, i.e. up to the &quot;freq2_*&quot;
+<a id="__codelineno-0-481" name="__codelineno-0-481" href="#__codelineno-0-481"></a># windowing frequency (see above).
+<a id="__codelineno-0-482" name="__codelineno-0-482" href="#__codelineno-0-482"></a># The finite-band correction of Di Bona &amp; Rovelli (1988) will be applied
+<a id="__codelineno-0-483" name="__codelineno-0-483" href="#__codelineno-0-483"></a># to account for the missing energy above the maximum frequency.
+<a id="__codelineno-0-484" name="__codelineno-0-484" href="#__codelineno-0-484"></a>max_freq_Er = None
+<a id="__codelineno-0-485" name="__codelineno-0-485" href="#__codelineno-0-485"></a># -------- RADIATED-ENERGY PARAMETERS
+<a id="__codelineno-0-486" name="__codelineno-0-486" href="#__codelineno-0-486"></a>
+<a id="__codelineno-0-487" name="__codelineno-0-487" href="#__codelineno-0-487"></a>
+<a id="__codelineno-0-488" name="__codelineno-0-488" href="#__codelineno-0-488"></a># LOCAL MAGNITUDE PARAMETERS --------
+<a id="__codelineno-0-489" name="__codelineno-0-489" href="#__codelineno-0-489"></a>compute_local_magnitude = True
+<a id="__codelineno-0-490" name="__codelineno-0-490" href="#__codelineno-0-490"></a># Local magnitude parameters:
+<a id="__codelineno-0-491" name="__codelineno-0-491" href="#__codelineno-0-491"></a>#   ml = log10(A) + a * log10(R/100) + b * (R-100) + c
+<a id="__codelineno-0-492" name="__codelineno-0-492" href="#__codelineno-0-492"></a># where A is the maximum W-A amplitude (in mm)
+<a id="__codelineno-0-493" name="__codelineno-0-493" href="#__codelineno-0-493"></a># and R is the hypocentral distance (in km)
+<a id="__codelineno-0-494" name="__codelineno-0-494" href="#__codelineno-0-494"></a># Default values (for California) are:
+<a id="__codelineno-0-495" name="__codelineno-0-495" href="#__codelineno-0-495"></a>#   a = 1., b = 0.00301, c = 3.
+<a id="__codelineno-0-496" name="__codelineno-0-496" href="#__codelineno-0-496"></a>a = 1.0
+<a id="__codelineno-0-497" name="__codelineno-0-497" href="#__codelineno-0-497"></a>b = 0.00301
+<a id="__codelineno-0-498" name="__codelineno-0-498" href="#__codelineno-0-498"></a>c = 3.0
+<a id="__codelineno-0-499" name="__codelineno-0-499" href="#__codelineno-0-499"></a># Band-pass filtering frequencies (Hz) for local magnitude
+<a id="__codelineno-0-500" name="__codelineno-0-500" href="#__codelineno-0-500"></a>ml_bp_freqmin = 0.1
+<a id="__codelineno-0-501" name="__codelineno-0-501" href="#__codelineno-0-501"></a>ml_bp_freqmax = 20.0
+<a id="__codelineno-0-502" name="__codelineno-0-502" href="#__codelineno-0-502"></a># -------- LOCAL MAGNITUDE PARAMETERS
+<a id="__codelineno-0-503" name="__codelineno-0-503" href="#__codelineno-0-503"></a>
+<a id="__codelineno-0-504" name="__codelineno-0-504" href="#__codelineno-0-504"></a># AVERAGES PARAMETERS --------
+<a id="__codelineno-0-505" name="__codelineno-0-505" href="#__codelineno-0-505"></a># Reject outliers before averaging, using the IQR method.
+<a id="__codelineno-0-506" name="__codelineno-0-506" href="#__codelineno-0-506"></a># IQR is the interquartile range Q3-Q1, where Q1 is the 25% percentile
+<a id="__codelineno-0-507" name="__codelineno-0-507" href="#__codelineno-0-507"></a># and Q3 is the 75% percentile.
+<a id="__codelineno-0-508" name="__codelineno-0-508" href="#__codelineno-0-508"></a># Values that are smaller than (Q1 - nIQR*IQR) or larger than (Q3 + nIQR*IQR)
+<a id="__codelineno-0-509" name="__codelineno-0-509" href="#__codelineno-0-509"></a># will be rejected as outliers.
+<a id="__codelineno-0-510" name="__codelineno-0-510" href="#__codelineno-0-510"></a># Set nIQR to None to disable outlier rejection.
+<a id="__codelineno-0-511" name="__codelineno-0-511" href="#__codelineno-0-511"></a># Note: this parameter also controls the position of &quot;whiskers&quot; on the source
+<a id="__codelineno-0-512" name="__codelineno-0-512" href="#__codelineno-0-512"></a># parameter box plots.
+<a id="__codelineno-0-513" name="__codelineno-0-513" href="#__codelineno-0-513"></a>nIQR = 1.5
+<a id="__codelineno-0-514" name="__codelineno-0-514" href="#__codelineno-0-514"></a># -------- AVERAGES PARAMETERS
+<a id="__codelineno-0-515" name="__codelineno-0-515" href="#__codelineno-0-515"></a>
+<a id="__codelineno-0-516" name="__codelineno-0-516" href="#__codelineno-0-516"></a>
+<a id="__codelineno-0-517" name="__codelineno-0-517" href="#__codelineno-0-517"></a># PLOT PARAMETERS --------
+<a id="__codelineno-0-518" name="__codelineno-0-518" href="#__codelineno-0-518"></a># Show interactive plots (slower)
+<a id="__codelineno-0-519" name="__codelineno-0-519" href="#__codelineno-0-519"></a>plot_show = False
+<a id="__codelineno-0-520" name="__codelineno-0-520" href="#__codelineno-0-520"></a># Save plots to disk
+<a id="__codelineno-0-521" name="__codelineno-0-521" href="#__codelineno-0-521"></a>plot_save = True
+<a id="__codelineno-0-522" name="__codelineno-0-522" href="#__codelineno-0-522"></a># Plot file format: &#39;png&#39;, &#39;pdf&#39; or &#39;pdf_multipage&#39;
+<a id="__codelineno-0-523" name="__codelineno-0-523" href="#__codelineno-0-523"></a>plot_save_format = png
+<a id="__codelineno-0-524" name="__codelineno-0-524" href="#__codelineno-0-524"></a># Plots an extra synthetic spectrum with no attenuation
+<a id="__codelineno-0-525" name="__codelineno-0-525" href="#__codelineno-0-525"></a>plot_spectra_no_attenuation = True
+<a id="__codelineno-0-526" name="__codelineno-0-526" href="#__codelineno-0-526"></a># Plots an extra synthetic spectrum with no fc
+<a id="__codelineno-0-527" name="__codelineno-0-527" href="#__codelineno-0-527"></a>plot_spectra_no_fc = False
+<a id="__codelineno-0-528" name="__codelineno-0-528" href="#__codelineno-0-528"></a># Max number of rows in plots
+<a id="__codelineno-0-529" name="__codelineno-0-529" href="#__codelineno-0-529"></a>plot_spectra_maxrows = 3
+<a id="__codelineno-0-530" name="__codelineno-0-530" href="#__codelineno-0-530"></a>plot_traces_maxrows = 3
+<a id="__codelineno-0-531" name="__codelineno-0-531" href="#__codelineno-0-531"></a># Plot ignored traces (low S/N)
+<a id="__codelineno-0-532" name="__codelineno-0-532" href="#__codelineno-0-532"></a>plot_traces_ignored = True
+<a id="__codelineno-0-533" name="__codelineno-0-533" href="#__codelineno-0-533"></a># Plot ignored spectra (low S/N)
+<a id="__codelineno-0-534" name="__codelineno-0-534" href="#__codelineno-0-534"></a>plot_spectra_ignored = True
+<a id="__codelineno-0-535" name="__codelineno-0-535" href="#__codelineno-0-535"></a># Plot station map
+<a id="__codelineno-0-536" name="__codelineno-0-536" href="#__codelineno-0-536"></a>plot_station_map = False
+<a id="__codelineno-0-537" name="__codelineno-0-537" href="#__codelineno-0-537"></a># Plot station names on map
+<a id="__codelineno-0-538" name="__codelineno-0-538" href="#__codelineno-0-538"></a>plot_station_names_on_map = True
+<a id="__codelineno-0-539" name="__codelineno-0-539" href="#__codelineno-0-539"></a># Text size for station names
+<a id="__codelineno-0-540" name="__codelineno-0-540" href="#__codelineno-0-540"></a>plot_station_text_size = 8.0
+<a id="__codelineno-0-541" name="__codelineno-0-541" href="#__codelineno-0-541"></a># Coastline resolution
+<a id="__codelineno-0-542" name="__codelineno-0-542" href="#__codelineno-0-542"></a># Use None to let the code autoset the coastline resolution.
+<a id="__codelineno-0-543" name="__codelineno-0-543" href="#__codelineno-0-543"></a># Otherwhise choose one of: &#39;full&#39;, &#39;high&#39;, &#39;intermediate&#39;, &#39;low&#39; or &#39;crude&#39;
+<a id="__codelineno-0-544" name="__codelineno-0-544" href="#__codelineno-0-544"></a>plot_coastline_resolution = None
+<a id="__codelineno-0-545" name="__codelineno-0-545" href="#__codelineno-0-545"></a># Zoom level for map tiles
+<a id="__codelineno-0-546" name="__codelineno-0-546" href="#__codelineno-0-546"></a># Use None to let the code autoset the zoom level
+<a id="__codelineno-0-547" name="__codelineno-0-547" href="#__codelineno-0-547"></a># Otherwhise choose an integer beteen 1 (minimum zoom) and 18 (maximum zoom)
+<a id="__codelineno-0-548" name="__codelineno-0-548" href="#__codelineno-0-548"></a># Note: for zoom levels larger than 11, some map tiles could be missing
+<a id="__codelineno-0-549" name="__codelineno-0-549" href="#__codelineno-0-549"></a>plot_map_tiles_zoom_level = None
+<a id="__codelineno-0-550" name="__codelineno-0-550" href="#__codelineno-0-550"></a># -------- PLOT PARAMETERS
+<a id="__codelineno-0-551" name="__codelineno-0-551" href="#__codelineno-0-551"></a>
+<a id="__codelineno-0-552" name="__codelineno-0-552" href="#__codelineno-0-552"></a>
+<a id="__codelineno-0-553" name="__codelineno-0-553" href="#__codelineno-0-553"></a># HTML REPORT --------
+<a id="__codelineno-0-554" name="__codelineno-0-554" href="#__codelineno-0-554"></a># Generate an HTML page summarizing the results of this run
+<a id="__codelineno-0-555" name="__codelineno-0-555" href="#__codelineno-0-555"></a>html_report = True
+<a id="__codelineno-0-556" name="__codelineno-0-556" href="#__codelineno-0-556"></a># Link to event page. If set, the event ID on the HTML page will be a link to
+<a id="__codelineno-0-557" name="__codelineno-0-557" href="#__codelineno-0-557"></a># the event page. Use $EVENTID to indicate the current event ID.
+<a id="__codelineno-0-558" name="__codelineno-0-558" href="#__codelineno-0-558"></a># Example:
+<a id="__codelineno-0-559" name="__codelineno-0-559" href="#__codelineno-0-559"></a>#   event_url = https://earthquake.usgs.gov/earthquakes/eventpage/$EVENTID/executive
+<a id="__codelineno-0-560" name="__codelineno-0-560" href="#__codelineno-0-560"></a>event_url = https://projectisp.github.io/ISP_tutorial.github.io//$EVENTID
+<a id="__codelineno-0-561" name="__codelineno-0-561" href="#__codelineno-0-561"></a># -------- HTML REPORT
+<a id="__codelineno-0-562" name="__codelineno-0-562" href="#__codelineno-0-562"></a>
+<a id="__codelineno-0-563" name="__codelineno-0-563" href="#__codelineno-0-563"></a>
+<a id="__codelineno-0-564" name="__codelineno-0-564" href="#__codelineno-0-564"></a># QUAKEML PARAMETERS ----------------
+<a id="__codelineno-0-565" name="__codelineno-0-565" href="#__codelineno-0-565"></a># Parameters for QuakeML output.
+<a id="__codelineno-0-566" name="__codelineno-0-566" href="#__codelineno-0-566"></a>#
+<a id="__codelineno-0-567" name="__codelineno-0-567" href="#__codelineno-0-567"></a># A QuakeML file will be generated only if QuakeML is used for input.
+<a id="__codelineno-0-568" name="__codelineno-0-568" href="#__codelineno-0-568"></a># The output file will be based on the input file, with additional information
+<a id="__codelineno-0-569" name="__codelineno-0-569" href="#__codelineno-0-569"></a># on seismic moment, Mw and source parameters computed by SourceSpec.
+<a id="__codelineno-0-570" name="__codelineno-0-570" href="#__codelineno-0-570"></a># Note: if you don&#39;t understand the parameters below, then probably you
+<a id="__codelineno-0-571" name="__codelineno-0-571" href="#__codelineno-0-571"></a># don&#39;t need QuakeML output and you can leave all the parameters to their
+<a id="__codelineno-0-572" name="__codelineno-0-572" href="#__codelineno-0-572"></a># default value
+<a id="__codelineno-0-573" name="__codelineno-0-573" href="#__codelineno-0-573"></a>
+<a id="__codelineno-0-574" name="__codelineno-0-574" href="#__codelineno-0-574"></a># Set SourceSpec Mw as preferred
+<a id="__codelineno-0-575" name="__codelineno-0-575" href="#__codelineno-0-575"></a>set_preferred_magnitude = True
+<a id="__codelineno-0-576" name="__codelineno-0-576" href="#__codelineno-0-576"></a># Base for all the object ids (smi)
+<a id="__codelineno-0-577" name="__codelineno-0-577" href="#__codelineno-0-577"></a>smi_base = smi:local
+<a id="__codelineno-0-578" name="__codelineno-0-578" href="#__codelineno-0-578"></a># String to strip from the Origin id when constructing the
+<a id="__codelineno-0-579" name="__codelineno-0-579" href="#__codelineno-0-579"></a># Magnitude and stationMagnitude ids.
+<a id="__codelineno-0-580" name="__codelineno-0-580" href="#__codelineno-0-580"></a>smi_strip_from_origin_id = &quot;&quot;
+<a id="__codelineno-0-581" name="__codelineno-0-581" href="#__codelineno-0-581"></a># Template for the Magnitude object id (smi).
+<a id="__codelineno-0-582" name="__codelineno-0-582" href="#__codelineno-0-582"></a># Use $SMI_BASE to indicate smi_base defined above
+<a id="__codelineno-0-583" name="__codelineno-0-583" href="#__codelineno-0-583"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
+<a id="__codelineno-0-584" name="__codelineno-0-584" href="#__codelineno-0-584"></a>smi_magnitude_template = &quot;$SMI_BASE/Magnitude/Origin/$ORIGIN_ID#sourcespec&quot;
+<a id="__codelineno-0-585" name="__codelineno-0-585" href="#__codelineno-0-585"></a># Template for the stationMagnitude object id (smi).
+<a id="__codelineno-0-586" name="__codelineno-0-586" href="#__codelineno-0-586"></a># Use $SMI_BASE to indicate smi_base defined above
+<a id="__codelineno-0-587" name="__codelineno-0-587" href="#__codelineno-0-587"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
+<a id="__codelineno-0-588" name="__codelineno-0-588" href="#__codelineno-0-588"></a># Use $SMI_MAGNITUDE_TEMPLATE to reuse the template for Magnitude object
+<a id="__codelineno-0-589" name="__codelineno-0-589" href="#__codelineno-0-589"></a># Use $WAVEFORM_ID to indicate the id of the associated waveform.
+<a id="__codelineno-0-590" name="__codelineno-0-590" href="#__codelineno-0-590"></a>smi_station_magnitude_template = &quot;$SMI_MAGNITUDE_TEMPLATE#$WAVEFORM_ID&quot;
+<a id="__codelineno-0-591" name="__codelineno-0-591" href="#__codelineno-0-591"></a># Template for the MomentTensor object id (smi) which is used to store
+<a id="__codelineno-0-592" name="__codelineno-0-592" href="#__codelineno-0-592"></a># the scalar moment value.
+<a id="__codelineno-0-593" name="__codelineno-0-593" href="#__codelineno-0-593"></a># Use $SMI_BASE to indicate smi_base defined above
+<a id="__codelineno-0-594" name="__codelineno-0-594" href="#__codelineno-0-594"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
+<a id="__codelineno-0-595" name="__codelineno-0-595" href="#__codelineno-0-595"></a>smi_moment_tensor_template = &quot;$SMI_BASE/MomentTensor/Origin/$ORIGIN_ID#sourcespec&quot;
+<a id="__codelineno-0-596" name="__codelineno-0-596" href="#__codelineno-0-596"></a># Template for the FocalMechanism object id (smi) which is used to store
+<a id="__codelineno-0-597" name="__codelineno-0-597" href="#__codelineno-0-597"></a># the scalar moment value.
+<a id="__codelineno-0-598" name="__codelineno-0-598" href="#__codelineno-0-598"></a># Use $SMI_BASE to indicate smi_base defined above
+<a id="__codelineno-0-599" name="__codelineno-0-599" href="#__codelineno-0-599"></a># Use $ORIGIN_ID to indicate the id of the associated Origin.
+<a id="__codelineno-0-600" name="__codelineno-0-600" href="#__codelineno-0-600"></a>smi_focal_mechanism_template = &quot;$SMI_BASE/FocalMechanism/Origin/$ORIGIN_ID#sourcespec&quot;
+<a id="__codelineno-0-601" name="__codelineno-0-601" href="#__codelineno-0-601"></a># -----------------QUAKEML PARAMETERS
 </code></pre></div>
 <h2 id="source-parameters-from-cli"><span style="color:darkcyan;"><strong>Source Parameters from CLI</strong></span></h2>
 <h3 id="usage">Usage</h3>
