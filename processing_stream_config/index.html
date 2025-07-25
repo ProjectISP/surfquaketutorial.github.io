@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/mass_processing/">
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/processing_stream_config/">
       
       
-        <link rel="prev" href="../project/">
+        <link rel="prev" href="../processing_config/">
       
       
-        <link rel="next" href="../config_files/">
+        <link rel="next" href="../picker/">
       
       
       <link rel="icon" href="../img/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Overview - </title>
+        <title>Processing Stream - </title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mass-data-processing-with-surfquake" class="md-skip">
+        <a href="#processing-stream-options" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Processing Stream
             
           </span>
         </div>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../processing_overview/" class="md-tabs__link">
           
   
   
@@ -566,6 +566,52 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../processing_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../processing_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processing Traces
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -583,7 +629,7 @@
   
   
   <span class="md-ellipsis">
-    Overview
+    Processing Stream
     
   </span>
   
@@ -596,7 +642,7 @@
   
   
   <span class="md-ellipsis">
-    Overview
+    Processing Stream
     
   </span>
   
@@ -619,51 +665,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-process" class="md-nav__link">
+  <a href="#rotate-seismograms" class="md-nav__link">
     <span class="md-ellipsis">
-      Running the Process
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running the Process">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#surfquake-quick" class="md-nav__link">
-    <span class="md-ellipsis">
-      surfquake quick
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#surfquake-processing" class="md-nav__link">
-    <span class="md-ellipsis">
-      surfquake processing
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-plotting-file-format-yaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example Plotting File Format (YAML)
+      Rotate Seismograms
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-event-file-format" class="md-nav__link">
+  <a href="#cross-correlation" class="md-nav__link">
     <span class="md-ellipsis">
-      Example Event File Format
+      Cross Correlation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concatenate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concatenate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beamforming" class="md-nav__link">
+    <span class="md-ellipsis">
+      beamforming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#particle-motion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Particle Motion
     </span>
   </a>
   
@@ -673,29 +731,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../config_files/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Configuration
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -878,117 +913,99 @@
 
 
 
-<h1 id="mass-data-processing-with-surfquake">Mass Data Processing with SurfQuake</h1>
-<blockquote>
-<p>⚠️ <strong>Note</strong>: This feature is under active development. The expected stable release is <strong>SurfQuake 0.1.0 (July 2025)</strong>.</p>
-</blockquote>
-<p>Welcome to the <strong>Signal Processing Module</strong> of SurfQuake — a powerful and scalable command-line tool for applying signal processing pipelines to large collections of seismic waveform data.</p>
-<p>Whether you're analyzing earthquake catalogs or preparing data for machine learning models, this module allows you to define, control, and automate your signal processing workflow with precision.</p>
-<p>📘 Learn more in our <a href="https://projectisp.github.io/ISP_tutorial.github.io/sp_filtering/"><strong>Signal Processing Tutorial</strong></a></p>
-<hr />
-<p>The macro configuration (provided via a YAML file) defines your signal processing pipeline in a structured, step-by-step format. Each <code>process</code> entry specifies a method, its parameters, and the order in which it will be applied to each trace. You can process either full daily waveform files or extract and process specific segments based on an event file. Additionally, an interactive plotting tool is available to help you visually inspect and validate the processing steps.</p>
-<hr />
-<h2 id="running-the-process">Running the Process</h2>
-<p>This tool runs via the terminal. First in the terminal you can ask for help. Available commands are quick, processing and processing_daily.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-h
-</code></pre></div>
-<h3 id="surfquake-quick">surfquake quick</h3>
-<p>Let's start explaining <strong>quick</strong> command:</p>
-<p>Overview:
-        Process seismic traces.
-        You can:
-            - Apply processing steps (filtering, normalization, etc.)
-            - Optionally visualize the waveforms (interactive mode)
-            - Apply a user-defined post-processing script before or after plotting</p>
-<div class="highlight"><pre><span></span><code>Modes:
-    Default  : Interactive mode (plotting + user prompts)
-    --auto   : Non-interactive mode (no plots, no prompts, outputs written automatically)
-
-Post-Script Logic:
-    Use `--post_script` to apply a custom script to each event stream.
-    Use `--post_script_stage` to control **when** it runs:
-        • before : script runs before plotting (good for filtering, editing headers)
-        • after  : script runs after plotting (good if picks or metadata are added)
-
-    Examples:
-        Process waveform files with a config and plot interactively:
-            surfquake quick -w &quot;./data/*.mseed&quot; -c ./config.yaml -i ./inventory.xml --plot_config plot.yaml
-
-    Key Arguments:
-        -w, --wave_files         [REQUIRED] Glob pattern or path to waveform files
-        -c, --config_file        [OPTIONAL] YAML config defining processing steps
-        -i, --inventory_file     [OPTIONAL] Station metadata (StationXML or RESP)
-        -o, --output_folder      [OPTIONAL] Directory to save processed traces
-        -a, --auto               [OPTIONAL] Run in automatic (non-interactive) mode
-        --plot_config            [OPTIONAL] Plotting settings YAML
-        --post_script            [OPTIONAL] Python script to apply to each stream
-        --post_script_stage      When to run post-script: &#39;before&#39; or &#39;after&#39; (default: after)
+<h1 id="processing-stream-options">Processing Stream Options</h1>
+<h2 id="rotate-seismograms">Rotate Seismograms</h2>
+<p>This option rotates the three-component traces in the stream to either the Great Arc Circle (GAC) or a user-defined angle and inclination.</p>
+<ul>
+<li>
+<p><strong><code>type</code></strong>: Defines the rotation transformation.</p>
+<ul>
+<li><code>NE-&gt;RT</code>: Rotates North and East components to Radial and Transverse.</li>
+<li><code>RT-&gt;NE</code>: Rotates Radial and Transverse components back to North and East.</li>
+<li><code>ZNE-&gt;LQT</code>: Rotates from a left-handed Z, North, East system to an LQT (ray-based, right-handed) coordinate system.</li>
+<li><code>LQT-&gt;ZNE</code>: Rotates from an LQT system back to a left-handed Z, North, East system.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>method</code></strong>: Specifies the rotation method.</p>
+<ul>
+<li><code>GAC</code>: Rotates according to the Great Arc Circle. Requires event metadata.</li>
+<li><code>FREE</code>: Rotates to a user-defined angle and inclination (used for <code>LQT</code> transformations).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>angle</code></strong> (float) – The back azimuth from station to source in degrees.</p>
+</li>
+<li><strong><code>inclination</code></strong> (float). Inclination of the ray at the station in degrees. Only necessary for three component rotations.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rotate&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;NE-&gt;RT&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;GAC&#39;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">angle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">inclination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 </code></pre></div>
 <hr />
-<h3 id="surfquake-processing">surfquake processing</h3>
-<div class="highlight"><pre><span></span><code>Overview:
-    Process or cut waveforms associated with seismic events.
-    You can:
-        - Cut traces using event times and headers
-        - Apply processing steps (filtering, normalization, etc.)
-        - Optionally visualize the waveforms (interactive mode)
-        - Apply a user-defined post-processing script before or after plotting
-
-Modes:
-    Default  : Interactive mode (plotting + user prompts)
-    --auto   : Non-interactive mode (no plots, no prompts, outputs written automatically)
-
-Post-Script Logic:
-    Use `--post_script` to apply a custom script to each event stream.
-    Use `--post_script_stage` to control **when** it runs:
-        • before : script runs before plotting (good for filtering, editing headers)
-        • after  : script runs after plotting (good if picks or metadata are added)
-
-Usage Example:
-    surfquake processing -p &quot;./project.pkl&quot; -i inventory.xml -e events.xml -c config.yaml -o ./output_folder --phases P,S --plot_config plot_settings.yaml --post_script custom_postproc.py
-
-Key Arguments:
-    -p, --project_file         [OPTIONAL] Path to an existing project file
-    -w, --wave_files           [OPTIONAL] Path or glob pattern to waveform files
-    -i, --inventory_file       [OPTIONAL] Station metadata file (XML, RESP)
-    -e, --event_file           [OPTIONAL] Event catalog in QuakeML format
-    -c, --config_file          [OPTIONAL] Processing configuration file (YAML)
-    -l, --plots                [OPTIONAL] In case user wants seismograms interactivity
-    -o, --output_folder        [OPTIONAL] Folder where processed files are saved
-    -n, --net                  [OPTIONAL] project net filter Example: NET1,NET2,NET3
-    -s, --station              [OPTIONAL] project station filter Example: STA1,STA2,STA3
-    -ch, --channel,            [OPTIONAL]  project channel filter Example: HHZ,BHN
-    -t, --cut_time             [OPTIONAL] pre &amp; post first arrival in seconds (symmetric)
-    -cs, --cut_start_time      [OPTIONAL] cut pre-first arrival in seconds
-    -ce, --cut_end_time        [OPTIONAL] cut ppost-first arrival in seconds
-    -r, --reference            [OPTIONAL] Reference |event_time| if set the pick event origin time is the cut reference.
-    --phases                   [OPTIONAL] Comma-separated list of phases for arrival estimation (e.g., P,S)
-    --plot_config              [OPTIONAL] Optional plot configuration file (YAML)
-    --post_script              [OPTIONAL] Python script to apply per event stream
-    --post_script_stage        [OPTIONAL] When to apply the post-script: before | after (default: before)
-
-Notes:
-You might need to set -w for individual files or -p for loading your project file
-</code></pre></div>
-<h2 id="example-plotting-file-format-yaml">Example Plotting File Format (YAML)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">plotting</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">traces_per_fig</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">sort_by</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False,</span><span class="w">  </span><span class="c1"># options: distance, backazimuth, None</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">vspace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">title_fontsize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">show_legend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True,</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">plot_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;standard&quot;</span><span class="err">,</span><span class="w">  </span><span class="c1"># &#39;record&#39; for record section and overlay for all traces at the same plot</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">pick_output_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./picks.csv&quot;</span><span class="err">,</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">sharey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">show_crosshair</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False,</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">show_arrivals</span><span class="p">:</span><span class="w"> </span><span class="c1"># False Show Thereical arrival times in record section</span>
+<h2 id="cross-correlation">Cross Correlation</h2>
+<p>Performs cross-correlation between waveforms.</p>
+<ul>
+<li>
+<p><strong><code>mode</code></strong>: Defines how the cross-correlation is computed, following the <a href="https://numpy.org/doc/stable/reference/generated/numpy.correlate.html">NumPy <code>correlate</code></a> method:</p>
+<ul>
+<li><code>full</code>: Returns the complete cross-correlation function. Includes all shifts, even partial overlaps. Best if you want to scan the entire signal.</li>
+<li><code>valid</code>: Returns only correlation values where the signals fully overlap. Safer when you want to avoid edge effects.</li>
+<li><code>same</code>: Returns output of the same length as the input data, centered around zero lag.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>normalize</code></strong>: Specifies how traces are normalized before correlation.</p>
+<ul>
+<li><code>full</code>: Uses zero-normalized cross-correlation (ZNCC). Each point is normalized based on local signal energy and optional demeaning. This provides a correlation coefficient between -1 and 1 and is the most statistically meaningful</li>
+<li><code>naive</code>:Normalizes both signals by their global standard deviation. Quicker but may introduce bias if signals have amplitude variation.</li>
+<li><code>none</code>: No normalization is applied. Raw amplitudes are used, which may be sensitive to trace scaling or noise.</li>
+</ul>
+</li>
+<li><strong><code>reference_idx</code></strong>: Index of the trace to use as the reference for correlation (typically one of the traces in the stream).</li>
+<li><strong><code>strict</code></strong>: If <code>True</code>, enforces strict alignment and compatibility between trace lengths and sampling rates.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_correlate&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </code></pre></div>
 <hr />
-<h2 id="example-event-file-format">Example Event File Format</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>date;hour;latitude;longitude;depth;magnitude
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>2022-02-02;23:35:29.7;42.5089;1.4293;20.7;1.71
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>2022-02-03;12:01:21.6;42.3047;2.2741;0.0;1.65
+<h2 id="stack">Stack</h2>
+<p>Stacks multiple traces using a specified method.</p>
+<ul>
+<li>
+<p><strong><code>method</code></strong>: Specifies the stacking method:</p>
+<ul>
+<li><code>linear</code>: Simple arithmetic mean across traces.</li>
+<li><code>pw</code>: Phase-weighted stacking, emphasizing coherent phase information. Order 1 is the parameter of this method. Recommended 1.</li>
+<li><code>root</code>: nth-root stack</li>
+</ul>
+</li>
+<li>
+<p><strong><code>order</code></strong>: The exponent applied in phase-weighted stacking. A higher value gives stronger weighting to coherent signals.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stack&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;pw&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
+<hr />
+<h2 id="synchronization">Synchronization</h2>
+<hr />
+<h2 id="concatenate">Concatenate</h2>
+<hr />
+<h2 id="beamforming">beamforming</h2>
+<hr />
+<h2 id="particle-motion">Particle Motion</h2>
 <hr />
 
 
