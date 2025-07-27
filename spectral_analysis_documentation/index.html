@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/processing_stream_config/">
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/spectral_analysis_documentation/">
       
       
-        <link rel="prev" href="../processing_config/">
+        <link rel="prev" href="../particle_motion_documentation/">
       
       
-        <link rel="next" href="../beamforming_documentation/">
+        <link rel="next" href="../picker/">
       
       
       <link rel="icon" href="../img/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Processing Stream - </title>
+        <title>Time-Frequency Analysis - </title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#processing-stream-options" class="md-skip">
+        <a href="#processing-options" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Processing Stream
+              Time-Frequency Analysis
             
           </span>
         </div>
@@ -612,32 +612,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Processing Stream
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../processing_stream_config/" class="md-nav__link">
         
   
   
@@ -648,80 +626,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#rotate-seismograms" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rotate Seismograms
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cross-correlation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cross Correlation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stack" class="md-nav__link">
-    <span class="md-ellipsis">
-      Stack
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#synchronization" class="md-nav__link">
-    <span class="md-ellipsis">
-      Synchronization
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#shift" class="md-nav__link">
-    <span class="md-ellipsis">
-      shift
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#concatenate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Concatenate
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -777,10 +681,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../spectral_analysis_documentation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Time-Frequency Analysis
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -791,6 +717,194 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spectral-analysis-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spectral Analysis Tools
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spectrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spectrum
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spectrum">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spectrogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spectrogram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spectrogram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-wavelet-transform-cwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continuous Wavelet Transform (CWT)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Continuous Wavelet Transform (CWT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plotting-and-cli-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plotting and CLI Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plotting and CLI Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scientific-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scientific References
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -973,145 +1087,111 @@
 
 
 
-<h1 id="processing-stream-options">Processing Stream Options</h1>
-<h2 id="rotate-seismograms">Rotate Seismograms</h2>
-<p>This option rotates the three-component traces in the stream to either the Great Arc Circle (GAC) or a user-defined angle and inclination.</p>
+<h1 id="processing-options">Processing Options</h1>
+<h2 id="spectral-analysis-tools">Spectral Analysis Tools</h2>
+<p>SurfQuake provides three main tools for spectral analysis of seismic data: <strong>spectrum</strong>, <strong>spectrogram</strong>, and <strong>CWT</strong> (Continuous Wavelet Transform). These tools enable users to inspect frequency content in different forms—static, time-evolving, and high-resolution wavelet representations.</p>
+<hr />
+<h2 id="spectrum">Spectrum</h2>
+<p>The <code>spectrum</code> tool computes the frequency-domain representation of a single seismic trace using the <strong>multitaper method</strong> by default, which is robust against noise and spectral leakage.</p>
+<h3 id="parameters">Parameters</h3>
 <ul>
-<li>
-<p><strong><code>type</code></strong>: Defines the rotation transformation.</p>
-<ul>
-<li><code>NE-&gt;RT</code>: Rotates North and East components to Radial and Transverse.</li>
-<li><code>RT-&gt;NE</code>: Rotates Radial and Transverse components back to North and East.</li>
-<li><code>ZNE-&gt;LQT</code>: Rotates from a left-handed Z, North, East system to an LQT (ray-based, right-handed) coordinate system.</li>
-<li><code>LQT-&gt;ZNE</code>: Rotates from an LQT system back to a left-handed Z, North, East system.</li>
+<li><strong><code>method</code></strong>: Spectral estimation method. Options:</li>
+<li><code>multitaper</code> (default)</li>
+<li><code>fft</code> or others if extended</li>
 </ul>
-</li>
-<li>
-<p><strong><code>method</code></strong>: Specifies the rotation method.</p>
-<ul>
-<li><code>GAC</code>: Rotates according to the Great Arc Circle. Requires event metadata.</li>
-<li><code>FREE</code>: Rotates to a user-defined angle and inclination (used for <code>LQT</code> transformations).</li>
-</ul>
-</li>
-<li>
-<p><strong><code>angle</code></strong> (float) – The back azimuth from station to source in degrees.</p>
-</li>
-<li><strong><code>inclination</code></strong> (float). Inclination of the ray at the station in degrees. Only necessary for three component rotations.</li>
-</ul>
+<h3 id="config-example">Config Example</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rotate&#39;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;NE-&gt;RT&#39;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;GAC&#39;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">angle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">inclination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrum&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;multitaper&#39;</span>
 </code></pre></div>
+<h3 id="output">Output</h3>
+<ul>
+<li>Amplitude vs. Frequency plot</li>
+<li>Optional log-log or semi-log axes (<code>loglog</code>, <code>xlog</code>, <code>ylog</code>)</li>
+<li>Serialized result saved as <code>.sp</code></li>
+</ul>
 <hr />
-<h2 id="cross-correlation">Cross Correlation</h2>
-<p>Performs cross-correlation between waveforms.</p>
+<h2 id="spectrogram">Spectrogram</h2>
+<p>The <code>spectrogram</code> method produces a time-frequency representation of a seismic trace using short-time Fourier Transform (STFT).</p>
+<h3 id="parameters_1">Parameters</h3>
 <ul>
-<li>
-<p><strong><code>mode</code></strong>: Defines how the cross-correlation is computed, following the <a href="https://numpy.org/doc/stable/reference/generated/numpy.correlate.html">NumPy <code>correlate</code></a> method:</p>
-<ul>
-<li><code>full</code>: Returns the complete cross-correlation function. Includes all shifts, even partial overlaps. Best if you want to scan the entire signal.</li>
-<li><code>valid</code>: Returns only correlation values where the signals fully overlap. Safer when you want to avoid edge effects.</li>
-<li><code>same</code>: Returns output of the same length as the input data, centered around zero lag.</li>
+<li><strong><code>win</code></strong> (float): Window length in seconds (e.g., 5.0)</li>
+<li><strong><code>overlap_percent</code></strong> (float): Percent overlap between windows (e.g., 50.0)</li>
+<li><strong><code>linf</code>, <code>lsup</code></strong>: Lower and upper frequency limits for plotting</li>
 </ul>
-</li>
-<li>
-<p><strong><code>normalize</code></strong>: Specifies how traces are normalized before correlation.</p>
-<ul>
-<li><code>full</code>: Uses zero-normalized cross-correlation (ZNCC). Each point is normalized based on local signal energy and optional demeaning. This provides a correlation coefficient between -1 and 1 and is the most statistically meaningful</li>
-<li><code>naive</code>:Normalizes both signals by their global standard deviation. Quicker but may introduce bias if signals have amplitude variation.</li>
-<li><code>none</code>: No normalization is applied. Raw amplitudes are used, which may be sensitive to trace scaling or noise.</li>
-</ul>
-</li>
-<li><strong><code>reference_idx</code></strong>: Index of the trace to use as the reference for correlation (typically one of the traces in the stream).</li>
-<li><strong><code>strict</code></strong>: If <code>True</code>, enforces strict alignment and compatibility between trace lengths and sampling rates.</li>
-</ul>
+<h3 id="config-example_1">Config Example</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_correlate&#39;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrogram&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">overlap_percent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">linf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">lsup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
 </code></pre></div>
-<hr />
-<h2 id="stack">Stack</h2>
-<p>Stacks multiple traces using a specified method.</p>
+<h3 id="output_1">Output</h3>
 <ul>
-<li>
-<p><strong><code>method</code></strong>: Specifies the stacking method:</p>
-<ul>
-<li><code>linear</code>: Simple arithmetic mean across traces.</li>
-<li><code>pw</code>: Phase-weighted stacking, emphasizing coherent phase information. Order 1 is the parameter of this method. Recommended 1.</li>
-<li><code>root</code>: nth-root stack</li>
+<li>Power over time and frequency in decibels (dB)</li>
+<li>Plotted as a color-coded matrix</li>
+<li>Serialized result saved as <code>.spec</code></li>
 </ul>
-</li>
-<li>
-<p><strong><code>order</code></strong>: The exponent applied in phase-weighted stacking. A higher value gives stronger weighting to coherent signals.</p>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stack&#39;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;pw&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</code></pre></div>
 <hr />
-<h2 id="synchronization">Synchronization</h2>
-<p>In many processing workflows, it is necessary to synchronize all traces to a common reference point in time. This ensures consistent alignment for further processing steps such as stacking, correlation, or rotation.</p>
-<p>Two synchronization methods are supported:</p>
+<h2 id="continuous-wavelet-transform-cwt">Continuous Wavelet Transform (CWT)</h2>
+<p>CWT provides high-resolution time-frequency analysis using scalable wavelets. Ideal for transient signals and high-precision timing.</p>
+<h3 id="parameters_2">Parameters</h3>
 <ul>
-<li>
-<p><strong><code>starttime</code></strong>: Aligns all traces to a common absolute start time as defined in their metadata. This method assumes all traces are recorded simultaneously and no additional time correction is needed.</p>
-</li>
-<li>
-<p><strong><code>MCCC</code></strong>: (Multi-Channel Cross-Correlation): Dynamically aligns traces based on their waveform similarity by computing relative delays. This method maximizes coherence across all channels and is especially effective in noisy conditions or when arrival times differ slightly due to path effects or instrument drift. The MCCC approach is based on: VanDecar, J. C., &amp; Crosson, R. S. (1990).</p>
-</li>
+<li><strong><code>wavelet_type</code></strong>: </li>
+<li><code>"cm"</code>: Complex Morlet <em>(default and recommended for phase coherence)</em></li>
+<li><code>"mh"</code>: Mexican Hat</li>
+<li><code>"pa"</code>: Paul wavelet</li>
+<li><strong><code>param</code></strong>: Wavelet parameter (e.g., 6.0)</li>
+<li><strong><code>fmin</code>, <code>fmax</code></strong>: Frequency range</li>
+<li><strong><code>nf</code></strong>: Number of frequency bins</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;synch&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;starttime&#39;</span><span class="w"> </span><span class="c1"># or MCCC</span>
+<h3 id="config-example_2">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cwt&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">wavelet_type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cm&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.0</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">nf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
 </code></pre></div>
-<hr />
-<h2 id="shift">shift</h2>
-<p>This method applies temporal alignment to traces in a stream using one of several strategies. It is useful when aligning waveforms for stacking, correlation, or interpretation, and offers flexible options including theoretical models, observed picks, or manual time shifts. Please review <strong>traces header info</strong> to fully understand this method.</p>
-<p>phase_theo:
-Aligns traces based on theoretical arrival times. The expected arrival must be stored in trace.stats.geodetic['arrivals'] under the specified phase name.
-Use case: When synthetic or model-based timing is reliable (e.g., teleseismic body waves).</p>
+<h3 id="output_2">Output</h3>
 <ul>
-<li>
-<p><strong><code>phase</code></strong>: Aligns traces to observed picks, typically generated from prior picking routines or manual annotation. Pick information must be stored in trace.stats.picks. Use case: When you trust the quality of observed picks more than theoretical estimates.</p>
-</li>
-<li>
-<p><strong><code>time_shifts</code></strong>: Applies manual time shifts to each trace, using a list of per-trace time offsets in seconds (float).
-Use case: When you want full control over the alignment or need to apply empirical or experiment-specific shifts.</p>
-</li>
+<li>Scalogram in decibel power</li>
+<li>Prediction masks showing reliable analysis range</li>
+<li>Serialized result saved as <code>.cwt</code></li>
 </ul>
-<p>Note: If both phase and time_shifts are provided, phase takes precedence.
-If none of the options are valid, the stream is returned unchanged. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;shift&#39;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">phase_theo</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;P&#39;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="c1"># Optional alternatives:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="c1"># phase: &#39;P&#39;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1"># time_shifts: [0.1, -0.2, 0.05] in seconds</span>
-</code></pre></div>
 <hr />
-<h2 id="concatenate">Concatenate</h2>
-<p>This method concatenates multiple time-continuous trace segments within the same stream. It is commonly used to join split traces that were originally recorded as separate files or segments (e.g., due to daily files, instrument restarts, or transmission delays). Internally, it uses ObsPy's Stream.merge() functionality with:</p>
-<p>method=1: Linear interpolation for filling gaps</p>
-<p>fill_value='interpolate': Gaps are filled using interpolated values</p>
-<p>Behavior
-Overlapping traces are merged into a single continuous trace. Gaps are filled using linear interpolation between adjacent segments. Non-overlapping or incompatible traces (e.g. different IDs or sampling rates) are left unmerged.</p>
-<p>Note: Trace concatenation is automatically done when command is <strong>surfquake process</strong> or <strong>surfquake process_daily</strong> but not for <strong>surfquake quick</strong> for full control. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;concat&#39;</span>
+<h2 id="plotting-and-cli-usage">Plotting and CLI Usage</h2>
+<p>All spectral results can be visualized via the CLI:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Plot a spectrum</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>--file<span class="w"> </span>path/to/file.sp<span class="w"> </span>--type<span class="w"> </span>spectrum
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Plot a spectrogram</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>--file<span class="w"> </span>path/to/file.spec<span class="w"> </span>--type<span class="w"> </span>spectrogram
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Plot a wavelet scalogram with optional clipping</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>--file<span class="w"> </span>path/to/file.cwt<span class="w"> </span>--type<span class="w"> </span>cwt<span class="w"> </span>--clip<span class="w"> </span>-60
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Save output to file</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>file.spec<span class="w"> </span>-t<span class="w"> </span>spectrogram<span class="w"> </span>--save_path<span class="w"> </span>output.png
 </code></pre></div>
+<h3 id="cli-options">CLI Options</h3>
+<ul>
+<li><code>--file</code>, <code>-f</code>: Path to serialized <code>.sp</code>, <code>.spec</code>, or <code>.cwt</code> file</li>
+<li><code>--type</code>, <code>-t</code>: Type of spectral result to plot (<code>spectrum</code>, <code>spectrogram</code>, <code>cwt</code>)</li>
+<li><code>--clip</code>, <code>-c</code>: Optional clipping in dB for spectrogram or CWT</li>
+<li><code>--save_path</code>: Output path to save the figure</li>
+</ul>
+<hr />
+<h3 id="scientific-references">Scientific References</h3>
+<ul>
+<li>Percival, D. B., &amp; Walden, A. T. (1993). <em>Spectral Analysis for Physical Applications: Multitaper and Conventional Univariate Techniques</em>.</li>
+<li>Torrence, C., &amp; Compo, G. P. (1998). A practical guide to wavelet analysis. <em>Bulletin of the American Meteorological Society</em>, 79(1), 61–78.</li>
+</ul>
 
 
 
