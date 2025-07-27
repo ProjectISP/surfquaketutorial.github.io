@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/db/">
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/scripts/">
       
       
-        <link rel="prev" href="../mti/">
+        <link rel="prev" href="../trace_header_documentation/">
       
       
-        <link rel="next" href="../utils/">
+        <link rel="next" href="../processing_config/">
       
       
       <link rel="icon" href="../img/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Data Base - </title>
+        <title>My Scripts - </title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#database" class="md-skip">
+        <a href="#custom-user-scripts-in-surfquake" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Data Base
+              My Scripts
             
           </span>
         </div>
@@ -263,10 +263,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../processing_overview/" class="md-tabs__link">
           
   
@@ -378,11 +380,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../db/" class="md-tabs__link">
         
   
   
@@ -518,26 +518,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -550,7 +555,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Signal Processing
@@ -607,10 +612,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../scripts/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    My Scripts
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -621,6 +648,110 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#script-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Script Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Script Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-in-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage in CLI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage in CLI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#surfquake-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      surfquake process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surfquake-quick" class="md-nav__link">
+    <span class="md-ellipsis">
+      surfquake quick
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Use
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -862,32 +993,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Data Base
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../db/" class="md-nav__link">
         
   
   
@@ -898,62 +1007,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#populate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Populate
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#queryng" class="md-nav__link">
-    <span class="md-ellipsis">
-      Queryng
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-information" class="md-nav__link">
-    <span class="md-ellipsis">
-      Phase Information
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#visual-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      Visual Options
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -996,24 +1049,95 @@
 
 
 
-<h1 id="database"><span style="color:darkcyan;"><strong>DataBase</strong></span></h1>
-<p><img alt="Screenshot" src="../img/db_events.png" />
-<img alt="Screenshot" src="../img/db_statistics.png" /></p>
-<h2 id="populate"><span style="color:darkcyan;"><strong>Populate</strong></span></h2>
+<h1 id="custom-user-scripts-in-surfquake">Custom User Scripts in SurfQuake</h1>
+<p>SurfQuake allows users to inject their own custom Python logic into waveform processing workflows. This functionality is available in both <strong>batch processing (<code>surfquake process</code>)</strong> and <strong>quick interactive workflows (<code>surfquake quick</code>)</strong>.</p>
+<hr />
+<h2 id="purpose">Purpose</h2>
+<p>User scripts provide a flexible, programmable interface to manipulate seismic traces beyond standard configuration options. You can implement your own algorythm in the workflow such as:</p>
 <ul>
-<li>Pick in File/Read Hyp Folder to incorporate all information contained inside hyp folders. Hyp folders are the file output from location.</li>
-<li>Pick in File/Magnitudes to populate your database with the information from the output file obtained in source toolbox.</li>
-<li>Pick in File/MTI to populate your database with the information from the output file obtained in MTI toolbox.</li>
+<li>Apply custom filtering, transformations, or corrections</li>
+<li>Modify or inspect waveform data (<code>tr.data</code>)</li>
+<li>Inject or update metadata in <code>tr.stats</code>. These scripts have direct access to each trace and its metadata (<code>trace.stats</code>), allowing you to inspect, modify, or annotate data based on custom logic. Be in mind the modified header of traces in surfquake.</li>
+<li>Run scientific algorithms (e.g., polarization, machine learning)</li>
+<li>Export trace summaries or diagnostics</li>
 </ul>
-<h2 id="queryng"><span style="color:darkcyan;"><strong>Queryng</strong></span></h2>
-<p>Choose the options on the left widget to filter the hypocenter inside your DataBase. The eartquakes shown in the table can be used in the MTI GUI when runs the inversion.</p>
-<h2 id="phase-information"><span style="color:darkcyan;"><strong>Phase Information</strong></span></h2>
-<p>Click with right button to get the phases information corresponding to the selected event</p>
-<p><img alt="Screenshot" src="../img/db_phases.png" /></p>
-<h2 id="visual-options"><span style="color:darkcyan;"><strong>Visual Options</strong></span></h2>
-<p>Double Clik near an epicenter in the map and it will be hilighted the corresponding row in the table.</p>
-<p>Double Click in a epicenter in the table and (if here is MTI information) it will be plot the beachball in the map</p>
-<p>Click with right button in a table row and select highlight event to visualize the exact event in the map.</p>
+<hr />
+<h2 id="script-structure">Script Structure</h2>
+<p>Each script must define a <code>run(stream, **kwargs)</code> function that takes:
+- <code>stream</code>: an ObsPy <code>Stream</code> object containing the current event or waveform group
+- <code>kwargs</code>: optional keyword arguments, such as <code>inventory</code> or <code>event</code> info</p>
+<h3 id="example">Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    User-defined post-processing hook for each event.</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    :param stream: obspy Stream</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    :param inventory: obspy Inventory (passed via kwargs)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    :param event: dict with keys like origin_time, latitude, longitude, depth (passed via kwargs)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    &#39;&#39;&#39;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">inventory</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">event</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">if</span> <span class="n">event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span><span class="si">}</span><span class="s2"> traces from event at </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;origin_time&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span><span class="si">}</span><span class="s2"> traces (no event info provided)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="c1"># Example: calculate global mean amplitude</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">all_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">])</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean amplitude:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_data</span><span class="p">))</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="c1"># Example: apply a simple differencing operator to each trace</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">tr</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="k">return</span> <span class="n">stream</span>
+</code></pre></div>
+<hr />
+<h2 id="usage-in-cli">Usage in CLI</h2>
+<h3 id="surfquake-process"><code>surfquake process</code></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>process<span class="w"> </span>--config<span class="w"> </span>config.yaml<span class="w"> </span>--post_script<span class="w"> </span>myscript.py
+</code></pre></div>
+<ul>
+<li>Executes your script after all config steps are complete.</li>
+<li>Useful for event-level operations or header editing before writing to disk.</li>
+</ul>
+<h3 id="surfquake-quick"><code>surfquake quick</code></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;./data/*.mseed&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-i<span class="w"> </span>inventory.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--post_script<span class="w"> </span>myscript.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--post_script_stage<span class="w"> </span>before
+</code></pre></div>
+<ul>
+<li><code>--post_script</code>: Path to the user script.</li>
+<li><code>--post_script_stage</code>:</li>
+<li><code>before</code>: Runs the script before plotting (good for data transforms)</li>
+<li><code>after</code>: Runs after plotting (useful if user interaction modifies data)</li>
+</ul>
+<hr />
+<h2 id="best-practices">Best Practices</h2>
+<ul>
+<li>Always return the modified stream from <code>run()</code>.</li>
+<li>Use <code>tr.stats</code> to store temporary or derived metadata.</li>
+<li>Print useful info for logging/debugging.</li>
+<li>Test your script independently before integrating it into batch workflows.</li>
+</ul>
+<hr />
+<h2 id="advanced-use">Advanced Use</h2>
+<p>You may combine user scripts with processing configs to create hybrid workflows. For example, normalize traces with a config, then use a user script to detect and annotate phase arrivals using custom logic.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># config.yaml</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;normalize&#39;</span>
+</code></pre></div>
+<p>Then:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>process<span class="w"> </span>--config<span class="w"> </span>config.yaml<span class="w"> </span>--user_script<span class="w"> </span>annotate_picks.py
+</code></pre></div>
+<hr />
+<p>This feature makes SurfQuake highly adaptable for both research and operational seismic processing pipelines.</p>
 
 
 

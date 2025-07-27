@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/db/">
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/trace_header_documentation/">
       
       
-        <link rel="prev" href="../mti/">
+        <link rel="prev" href="../processing_overview/">
       
       
-        <link rel="next" href="../utils/">
+        <link rel="next" href="../scripts/">
       
       
       <link rel="icon" href="../img/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Data Base - </title>
+        <title>Trace Header - </title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#database" class="md-skip">
+        <a href="#trace-header" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Data Base
+              Trace Header
             
           </span>
         </div>
@@ -263,10 +263,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../processing_overview/" class="md-tabs__link">
           
   
@@ -378,11 +380,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../db/" class="md-tabs__link">
         
   
   
@@ -518,26 +518,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -550,7 +555,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Signal Processing
@@ -584,10 +589,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../trace_header_documentation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Trace Header
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -598,6 +625,152 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-header-fields-obspy-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Header Fields (ObsPy Standard)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#surfquake-extended-header-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      SurfQuake-Extended Header Fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SurfQuake-Extended Header Fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tracestatspicks-list-of-dicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      trace.stats.picks (list of dicts)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracestatsreferences-list-of-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      trace.stats.references (list of float)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracestatsgeodetic" class="md-nav__link">
+    <span class="md-ellipsis">
+      trace.stats.geodetic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trace-header-management-in-surfquake" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trace Header Management in SurfQuake
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Trace Header Management in SurfQuake">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#during-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      During Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#during-plotting" class="md-nav__link">
+    <span class="md-ellipsis">
+      During Plotting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why This Matters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -862,32 +1035,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Data Base
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../db/" class="md-nav__link">
         
   
   
@@ -898,62 +1049,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#populate" class="md-nav__link">
-    <span class="md-ellipsis">
-      Populate
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#queryng" class="md-nav__link">
-    <span class="md-ellipsis">
-      Queryng
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#phase-information" class="md-nav__link">
-    <span class="md-ellipsis">
-      Phase Information
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#visual-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      Visual Options
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -996,24 +1091,162 @@
 
 
 
-<h1 id="database"><span style="color:darkcyan;"><strong>DataBase</strong></span></h1>
-<p><img alt="Screenshot" src="../img/db_events.png" />
-<img alt="Screenshot" src="../img/db_statistics.png" /></p>
-<h2 id="populate"><span style="color:darkcyan;"><strong>Populate</strong></span></h2>
+<h1 id="trace-header">Trace Header</h1>
+<p>SurfQuake processing and visualization tools make extensive use of the metadata embedded in ObsPy Trace objects (MiniSEED format). These headers not only contain acquisition-related data (station, channel, sampling rate) but are also extended during analysis to store <strong>arrival picks</strong>, <strong>reference markers</strong>, and more.</p>
+<p>SurfQuake processing and visualization tools make extensive use of the metadata embedded in ObsPy Trace objects, which are often read from MiniSEED (MSEED) files. While MSEED is a widely accepted format for storing seismic time series, it is inherently read-only in terms of header modification—meaning users cannot persistently embed new metadata directly into the original file.</p>
+<p>To overcome this limitation, SurfQuake dynamically extends the Trace.stats header in memory during processing and interaction. This enriched metadata includes not only core acquisition parameters like network, station, channel, and sampling rate, but also a wide array of analysis results such as:</p>
+<p>Arrival picks from manual or automatic phase picking</p>
+<p>Reference markers used for alignment or annotation</p>
+<p>Geodetic attributes like source-receiver distance, backazimuth, and theoretical arrival times</p>
+<p>Since these enhancements cannot be stored back into standard MSEED files, SurfQuake writes processed trace data to HDF5 (.h5) format. This format supports flexible, hierarchical storage and allows full preservation of the enriched metadata alongside waveform data—ensuring reproducibility, traceability, and compatibility with downstream processing.</p>
+<p>By adopting HDF5 for intermediate and final outputs, SurfQuake enables a more transparent and integrated seismic analysis workflow, without losing critical contextual information during each stage of the pipeline.</p>
+<p>This guide outlines the custom fields and their use cases for SurfQuake users.</p>
+<hr />
+<h2 id="core-header-fields-obspy-standard">Core Header Fields (ObsPy Standard)</h2>
+<p>These fields are part of the default <code>trace.stats</code> dictionary and are typically populated during reading:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>network</code></td>
+<td>Network code (e.g., <code>IU</code>, <code>CI</code>)</td>
+</tr>
+<tr>
+<td><code>station</code></td>
+<td>Station code (e.g., <code>ANMO</code>)</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>Location code (e.g., <code>00</code>, <code>10</code>)</td>
+</tr>
+<tr>
+<td><code>channel</code></td>
+<td>Channel name (e.g., <code>BHZ</code>, <code>HHN</code>)</td>
+</tr>
+<tr>
+<td><code>starttime</code></td>
+<td>Trace start time (<code>UTCDateTime</code>)</td>
+</tr>
+<tr>
+<td><code>endtime</code></td>
+<td>Trace end time (<code>UTCDateTime</code>)</td>
+</tr>
+<tr>
+<td><code>sampling_rate</code></td>
+<td>Sampling rate in Hz</td>
+</tr>
+<tr>
+<td><code>npts</code></td>
+<td>Number of points</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="surfquake-extended-header-fields">SurfQuake-Extended Header Fields</h2>
+<p>These fields are dynamically added during processing or interactive analysis:</p>
+<h3 id="tracestatspicks-list-of-dicts"><code>trace.stats.picks</code> (list of dicts)</h3>
+<p>Stores manually or automatically picked phase arrivals.</p>
+<p>Each entry contains:
+- <code>time</code> (float): UTC timestamp of the pick
+- <code>phase</code> (str): Picked phase (e.g., <code>P</code>, <code>S</code>, <code>Lg</code>)
+- <code>amplitude</code> (float): Measured amplitude at pick time
+- <code>polarity</code> (str): <code>U</code> (up), <code>D</code> (down), or <code>?</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1727123830.321</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.21e-05</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;polarity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="tracestatsreferences-list-of-float"><code>trace.stats.references</code> (list of float)</h3>
+<p>Stores timestamps marking user-defined reference lines during plotting (e.g., using keypress <code>w</code>). These are used for alignment, cross-checking picks, or beamforming time tags.</p>
+<h3 id="tracestatsgeodetic"><code>trace.stats.geodetic</code></h3>
+<p>Stored during preprocessing via <code>set_header_func</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>distance</code></td>
+<td>Source-receiver distance (km)</td>
+</tr>
+<tr>
+<td><code>baz</code></td>
+<td>Backazimuth from station to source (°)</td>
+</tr>
+<tr>
+<td><code>az</code></td>
+<td>Azimuth from source to station (°)</td>
+</tr>
+<tr>
+<td><code>incidence</code></td>
+<td>Theoretical incidence angle (°)</td>
+</tr>
+<tr>
+<td><code>arrivals</code></td>
+<td>Dict of theoretical arrival times per phase name (UTC timestamp)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example:</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">geodetic</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">254.7</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mf">123.4</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;az&quot;</span><span class="p">:</span> <span class="mf">303.4</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="s2">&quot;incidence&quot;</span><span class="p">:</span> <span class="mf">31.5</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="s2">&quot;arrivals&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">1727123829.20</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">1727123844.03</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="p">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="trace-header-management-in-surfquake">Trace Header Management in SurfQuake</h2>
+<h3 id="during-processing">During Processing</h3>
 <ul>
-<li>Pick in File/Read Hyp Folder to incorporate all information contained inside hyp folders. Hyp folders are the file output from location.</li>
-<li>Pick in File/Magnitudes to populate your database with the information from the output file obtained in source toolbox.</li>
-<li>Pick in File/MTI to populate your database with the information from the output file obtained in MTI toolbox.</li>
+<li>Headers are updated by processing steps such as:</li>
+<li><code>shift</code>: aligns data using theoretical or picked times</li>
+<li><code>rotate</code>: may use <code>geodetic</code> data to perform LQT rotations</li>
+<li><code>beamforming</code>: may store attributes related to time or azimuth reference</li>
 </ul>
-<h2 id="queryng"><span style="color:darkcyan;"><strong>Queryng</strong></span></h2>
-<p>Choose the options on the left widget to filter the hypocenter inside your DataBase. The eartquakes shown in the table can be used in the MTI GUI when runs the inversion.</p>
-<h2 id="phase-information"><span style="color:darkcyan;"><strong>Phase Information</strong></span></h2>
-<p>Click with right button to get the phases information corresponding to the selected event</p>
-<p><img alt="Screenshot" src="../img/db_phases.png" /></p>
-<h2 id="visual-options"><span style="color:darkcyan;"><strong>Visual Options</strong></span></h2>
-<p>Double Clik near an epicenter in the map and it will be hilighted the corresponding row in the table.</p>
-<p>Double Click in a epicenter in the table and (if here is MTI information) it will be plot the beachball in the map</p>
-<p>Click with right button in a table row and select highlight event to visualize the exact event in the map.</p>
+<h3 id="during-plotting">During Plotting</h3>
+<ul>
+<li>Interactive actions modify headers:</li>
+<li><strong>Press <code>e</code></strong>: Add pick to <code>trace.stats.picks</code></li>
+<li><strong>Press <code>w</code></strong>: Add reference marker to <code>trace.stats.references</code></li>
+<li><strong>Press <code>d</code> or <code>p</code></strong>: Remove the last pick or reference</li>
+<li><strong>Press <code>m</code></strong>: Remove all reference lines</li>
+</ul>
+<hr />
+<h2 id="best-practices">Best Practices</h2>
+<ul>
+<li>Pick and reference data are stored in-memory and optionally exported to CSV.</li>
+<li>Ensure that when traces are saved or passed between steps, <code>trace.stats</code> is retained.</li>
+<li>You can inspect or modify these attributes using standard Python syntax:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div></li>
+</ul>
+<hr />
+<h3 id="why-this-matters">Why This Matters</h3>
+<ul>
+<li>You can <strong>add custom metadata</strong> to <code>trace.stats</code> for later use (e.g., annotations, flags, temporary calculations).</li>
+<li>You can <strong>modify waveform data</strong> directly, apply filters, or normalize traces.</li>
+<li>You can <strong>access event and station metadata</strong> for context-aware processing.</li>
+<li>Changes made in the user script are <strong>preserved</strong> if the output is saved to HDF5 or passed through the pipeline.</li>
+</ul>
+<p>This flexibility makes SurfQuake an ideal platform for advanced, reproducible seismic workflows tailored to your research or operational needs.</p>
+<h2 id="notes">Notes</h2>
+<p>These headers extend the utility of MiniSEED traces in SurfQuake workflows by embedding processing history and interactive annotations, making the data more portable and self-descriptive across analysis steps.</p>
 
 
 
