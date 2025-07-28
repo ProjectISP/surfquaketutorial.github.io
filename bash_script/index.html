@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/beamforming_documentation/">
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/bash_script/">
       
       
-        <link rel="prev" href="../processing_stream_config/">
+        <link rel="prev" href="../plotting_interaction_documentation/">
       
       
-        <link rel="next" href="../particle_motion_documentation/">
+        <link rel="next" href="../picker/">
       
       
       <link rel="icon" href="../img/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Beamforming - </title>
+        <title>Bash Script Interaction - </title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#description" class="md-skip">
+        <a href="#bash-script-interaction-with-surfquake" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Beamforming
+              Bash Script Interaction
             
           </span>
         </div>
@@ -681,30 +681,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Beamforming
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../beamforming_documentation/" class="md-nav__link">
         
   
   
@@ -715,135 +695,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    <span class="md-ellipsis">
-      Description
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Description">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parameters
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#config-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Config Example
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Outputs
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#peak-detection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Peak Detection
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Notes
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#plotting-and-cli-usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Plotting and CLI Usage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Plotting and CLI Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Basic Usage
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#peak-detection-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Peak Detection Examples
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cli-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      CLI Options
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#slowness-map" class="md-nav__link">
-    <span class="md-ellipsis">
-      Slowness map
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -945,10 +796,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../bash_script/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Bash Script Interaction
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -959,6 +832,62 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-bash-workflow-for-seismic-event-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Bash Workflow for Seismic Event Processing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-components-explained" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Components Explained
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-for-reliable-bash-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tips for Reliable Bash Integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-scheduling-or-looping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced: Scheduling or Looping
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1141,117 +1070,92 @@
 
 
 
-  <h1>Beamforming</h1>
-
-<h2 id="description">Description</h2>
-<p>The <code>beamforming</code> method performs array-based slowness and back-azimuth analysis of seismic waveforms. It is based on frequency-wavenumber (FK) analysis and supports additional methods like MUSIC, CAPON, and Multitaper Coherence. This process is useful for identifying wave arrival directions and apparent velocities in local, regional, or teleseismic arrays.</p>
-<p>This method computes slowness and azimuth values over time windows by stacking energy across an array of stations. It is particularly effective in resolving wavefront parameters and isolating coherent seismic phases in noisy environments.</p>
-<p>Internally, it calls the FK analysis provided by <code>surfquakecore.arrayanalysis</code>, and uses ObsPy’s data structures for waveforms and metadata.</p>
-<blockquote>
-<p><strong>Scientific Reference</strong>:</p>
-<p>Rost, S., &amp; Thomas, C. (2002). Array seismology: Methods and applications. <em>Reviews of Geophysics</em>, 40(3).  </p>
-</blockquote>
-<hr />
-<h3 id="parameters">Parameters</h3>
-<ul>
-<li><strong><code>timewindow</code></strong> (float): Duration of each sliding window for analysis (in seconds). Smaller windows improve temporal resolution; larger windows improve frequency resolution.</li>
-<li><strong><code>overlap</code></strong> (float): Fractional overlap between consecutive time windows. Values close to 1 provide smoother results.</li>
-<li><strong><code>fmin</code>, <code>fmax</code></strong> (float): Frequency band for filtering before beamforming. Filters out irrelevant noise and focuses on desired signal bands.</li>
-<li><strong><code>smax</code></strong> (float): Maximum slowness value (s/km) to consider in the slowness grid.</li>
-<li><strong><code>slow_grid</code></strong> (float): Resolution of the slowness grid (s/km). Smaller values yield higher-resolution slowness maps but are computationally more intensive.</li>
-</ul>
-<hr />
-<h3 id="config-example">Config Example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;beam&#39;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">timewindow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">smax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">slow_grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">output_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/documents/beam_results&quot;</span>
+<h1 id="bash-script-interaction-with-surfquake">Bash Script Interaction with SurfQuake</h1>
+<p>SurfQuake provides a command-line interface (CLI) that integrates seamlessly with bash scripting. This allows users to automate large-scale waveform processing, post-analysis scripting, and plotting tasks efficiently.</p>
+<h2 id="example-bash-workflow-for-seismic-event-processing">Example: Bash Workflow for Seismic Event Processing</h2>
+<p>Below is a sample <code>bash</code> script that chains together two major SurfQuake commands: <code>quick</code> and <code>processing</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Activate your conda or virtual environment</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with your environment manager if needed (e.g., &#39;conda activate surfquake&#39;)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Step 1: Quickly process individual waveform files with a custom post-processing script</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>surfquake<span class="w"> </span>quick<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;/Users/admin/Desktop/surf_test/nuclear/cut_event/*&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span>--post_script<span class="w"> </span>/Users/admin/Desktop/surf_test/scripts/my_script.py<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span>-c<span class="w"> </span>/Users/admin/Desktop/surf_test/config/config.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span>--plot_config<span class="w"> </span>/Users/admin/Desktop/surf_test/config/plot.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span>-o<span class="w"> </span>/Users/admin/Desktop/surf_test/output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span>-a<span class="w"> </span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># Step 2: Process a set of previously detected or catalogued events</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>surfquake<span class="w"> </span>processing<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span>-p<span class="w"> </span>/Users/admin/Desktop/surf_test/project.pkl<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span>-i<span class="w"> </span>/Users/admin/Desktop/surf_test/metadata/inv_all.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">  </span>-e<span class="w"> </span>/Users/admin/Desktop/surf_test/events/eventos.csv<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">  </span>-c<span class="w"> </span>/Users/admin/Desktop/surf_test/config/config.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span>-o<span class="w"> </span>/Users/admin/Desktop/surf_test/processed_events
 </code></pre></div>
-<hr />
-<hr />
-<h3 id="outputs">Outputs</h3>
-<p>After running the beamforming step, the following attributes are available in the result object:</p>
+<h2 id="key-components-explained">Key Components Explained</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-w</code></td>
+<td>Path or glob pattern to waveform files (MiniSEED, HDF5, etc.)</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>Configuration YAML file specifying preprocessing steps (filtering, tapering, normalization, etc.)</td>
+</tr>
+<tr>
+<td><code>--post_script</code></td>
+<td>Path to a Python script that can modify with your own processing</td>
+</tr>
+<tr>
+<td><code>--plot_config</code></td>
+<td>YAML file that defines plotting layout, styling, and pick output</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>Output directory for saving processed or modified traces</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>Path to a <code>.pkl</code> file with previously created surfquake project object</td>
+</tr>
+<tr>
+<td><code>-i</code></td>
+<td>Station inventory file (StationXML format) used for geolocation and instrument correction</td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>CSV file with origin times, locations, and hypocenter parameters for seismic events</td>
+</tr>
+<tr>
+<td><code>-a</code></td>
+<td>For automatic processing, no plotting waveforms</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tips-for-reliable-bash-integration">Tips for Reliable Bash Integration</h2>
 <ul>
-<li><strong><code>relpower</code></strong>: Relative power for each time window.</li>
-<li><strong><code>abspower</code></strong>: Absolute power estimates (if computed).</li>
-<li><strong><code>AZ</code></strong>: Back-azimuth (degrees from North) per window.</li>
-<li><strong><code>Slowness</code></strong>: Apparent slowness (s/km).</li>
-<li><strong><code>T</code></strong>: Center times of each window.</li>
+<li><strong>Use absolute paths</strong> to avoid ambiguity, especially when running the script from <code>cron</code> or remote sessions.</li>
+<li><strong>Quote paths</strong> that include wildcards (<code>*</code>) to ensure the shell doesn't prematurely expand them.</li>
+<li><strong>Always activate your environment</strong> if SurfQuake is installed via Conda or a virtualenv.</li>
+<li><strong>Use <code>--auto</code> flag</strong> if you want the quick command to run without any user interaction (headless processing).</li>
 </ul>
-<p>You may visualize the results using the built-in <code>plot_beam()</code> method, which produces:
-- Time series of relative power
-- Time evolution of slowness and azimuth
-- Optional FK/slowness maps on keypress</p>
-<hr />
-<h3 id="peak-detection">Peak Detection</h3>
-<p>To extract beamforming-derived arrivals, use the <code>detect_beam_peaks()</code> method. It supports:</p>
-<ul>
-<li><strong>Slowness filtering</strong> by phase type (regional/teleseismic)</li>
-<li><strong>Minimum power</strong> thresholding</li>
-<li><strong>Azimuth constraints</strong></li>
-<li><strong>Minimum time separation</strong> between detected peaks</li>
-</ul>
-<p>This is useful for automated or semi-automated phase picking and event localization.</p>
-<hr />
-<h3 id="notes">Notes</h3>
-<ul>
-<li>Requires an <code>ObsPy Stream</code> and corresponding <code>Inventory</code>.</li>
-<li>Trims traces to overlapping time intervals.</li>
-<li>Traces are filtered to the defined bandpass before analysis.</li>
-<li>Outputs can be saved and reloaded with <code>to_pickle()</code> and <code>from_pickle()</code> methods.</li>
-</ul>
-<hr />
-<h2 id="plotting-and-cli-usage">Plotting and CLI Usage</h2>
-<p>Beamforming results can be visualized and analyzed using the <code>surfquake beamplot</code> command-line utility. This tool reads a serialized <code>.beam</code> file and provides rich options for interactive visualization and automated peak detection.</p>
-<h3 id="basic-usage">Basic Usage</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Plot a saved FK beamforming result</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>--file<span class="w"> </span>./output/2024.123.beam
+<h2 id="advanced-scheduling-or-looping">Advanced: Scheduling or Looping</h2>
+<p>You can wrap this script into a <code>cron</code> job for periodic processing, or loop over multiple event folders:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span><span class="w"> </span>folder<span class="w"> </span><span class="k">in</span><span class="w"> </span>/data/events/day_*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$folder</span><span class="s2">/*.mseed&quot;</span><span class="w"> </span>-c<span class="w"> </span>config.yaml<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$folder</span><span class="s2">/processed&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">done</span>
 </code></pre></div>
-<h3 id="peak-detection-examples">Peak Detection Examples</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Detect phase peaks with regional constraints</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>--file<span class="w"> </span>event.beam<span class="w"> </span>--find_solutions<span class="w"> </span>regional<span class="w"> </span>--write_path<span class="w"> </span>solutions.txt
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Apply custom slowness constraints (JSON format)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>--file<span class="w"> </span>beam.beam<span class="w"> </span>--find_solutions<span class="w"> </span><span class="s1">&#39;{&quot;Pn&quot;: [0.05, 0.08], &quot;Lg&quot;: [0.18, 0.30]}&#39;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Add azimuth filtering</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>beam.beam<span class="w"> </span>--find_solutions<span class="w"> </span>regional<span class="w"> </span>--baz_range<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">150</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># Set minimum relative power threshold</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>beam.beam<span class="w"> </span>--find_solutions<span class="w"> </span>teleseismic<span class="w"> </span>--min_power<span class="w"> </span><span class="m">0</span>.2
-</code></pre></div>
-<h3 id="cli-options">CLI Options</h3>
-<ul>
-<li><code>--file</code>, <code>-f</code> (required): Path to the <code>.beam</code> file (gzip-pickled <code>TraceBeamResult</code>).</li>
-<li><code>--save_path</code>: File path to save the plotted figure.</li>
-<li><code>--find_solutions</code>: Define phase constraints for peak detection. Accepts <code>'regional'</code>, <code>'teleseismic'</code>, or a custom JSON dictionary.</li>
-<li><code>--baz_range</code>: Filter solutions within a specific backazimuth range (in degrees).</li>
-<li><code>--min_power</code>: Minimum relative power to accept a peak (default: <code>0.6</code>).</li>
-<li><code>--write_path</code>: Output file to append detected peak information.</li>
-</ul>
-<h3 id="slowness-map">Slowness map</h3>
-<ul>
-<li>The figure includes time evolution of relative power, slowness, and backazimuth.</li>
-<li>Clicking or keypresses in the GUI will trigger slowness map popups for selected time points.</li>
-<li>This visualization is highly interactive and useful for manual phase inspection.</li>
-</ul>
-<p>Poit with the mouse to the power peaks and press a key number to select a method to plot the slowness map:</p>
-<ul>
-<li><strong><code>Available methods</code></strong>: Beamforming algorithm to use:<ul>
-<li>1 <code>FK</code>: Classical frequency-wavenumber method.</li>
-<li>2 <code>CAPON</code>: Adaptive beamforming with improved resolution.</li>
-<li>3 <code>MTP.COHERENCE</code>: Multitaper-based coherence stacking.</li>
-<li>4 <code>MUSIC</code>: High-resolution direction-of-arrival estimation method. Using one cluser.</li>
-</ul>
-</li>
-</ul>
-<hr />
 
 
 
