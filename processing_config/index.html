@@ -1249,7 +1249,7 @@
 <ul>
 <li><strong>Parameter</strong>: <code>max_percentage</code> (e.g., 0.05 for 5%)</li>
 <li><strong>Supported Windows</strong>:
-  <code>cosine</code>, <code>hann</code>, <code>hamming</code>, <code>blackman</code>, <code>kaiser</code>, <code>flattop</code>, <code>slepian</code>, and many more...</li>
+  <code>cosine</code>, <code>hann</code>, <code>hamming</code>, <code>blackman</code>, <code>kaiser</code>, <code>flattop</code>, <code>slepian</code>.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
@@ -1390,7 +1390,7 @@
 <h2 id="differentiate">Differentiate</h2>
 <p>Estimate the signal’s derivative:</p>
 <ul>
-<li><strong>Methods</strong>: <code>gradient</code></li>
+<li><strong>Methods</strong>: <code>gradient</code>, <code>spectral</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">process_9</span><span class="p">:</span>
@@ -1401,7 +1401,7 @@
 <h2 id="integrate">Integrate</h2>
 <p>Reconstruct displacement or velocity:</p>
 <ul>
-<li><strong>Methods</strong>: <code>cumtrapz</code>, <code>spline</code></li>
+<li><strong>Methods</strong>: <code>cumtrapz</code>, <code>spline</code>, <code>spectral</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
@@ -1424,6 +1424,7 @@
 <hr />
 <h2 id="remove-instrument-response">Remove Instrument Response</h2>
 <p>Convert raw counts to physical units (e.g., velocity or displacement):</p>
+<p>⚠️ WARNING: Remember to includ your inventory: e.g., <code>surfquake quick -w "waveform_file" -i "inventory_file.xml"</code></p>
 <ul>
 <li><strong>Parameters</strong>: <code>pre_filt</code> (list), <code>water_level</code>, <code>units</code>, <code>inventory</code></li>
 </ul>
@@ -1436,7 +1437,7 @@
 <hr />
 <h2 id="add-noise">Add Noise</h2>
 <p><strong>White Noise</strong>:
-- <strong>Parameter</strong>: <code>SNR_dB</code> relative to original trace</p>
+- <strong>Parameter</strong>: <code>SNR_dB</code> amount of noise relative to maximum amplitude of the original trace.</p>
 <p><strong>Colored Noise</strong> (optional, not in base config):
 - Use <code>exponent</code> for control: 0 (white), 1 (pink), 2 (brown), -1 (blue), etc.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">Analysis</span><span class="p">:</span>
@@ -1461,7 +1462,7 @@
 <h2 id="time-normalization">Time Normalization</h2>
 <p>Standardize temporal energy distribution:</p>
 <ul>
-<li><strong>Methods</strong>: <code>time-normalization</code>, <code>1bit</code>, <code>clipping</code></li>
+<li><strong>Methods</strong>: <code>time-normalization</code>, <code>1bit</code>, <code>clipping</code> and  <code>clipping iteration</code>.</li>
 <li><strong>Parameters</strong>: <code>norm_win</code>, <code>iterations</code></li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">Analysis</span><span class="p">:</span>
@@ -1488,13 +1489,13 @@
 <h2 id="spike-removal">Spike Removal</h2>
 <p>Removes isolated outliers using hampel algorithm:</p>
 <ul>
-<li><strong>Parameters</strong>: <code>window_size</code>, <code>threshold</code> (in standard deviations)</li>
+<li><strong>Parameters</strong>: <code>window_size</code>, <code>sigma</code> (standard deviations from the avarage noise)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remove_spikes&#39;</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="nt">window_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">n</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nt">sigma</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
 </code></pre></div>
 <hr />
 
