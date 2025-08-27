@@ -14,7 +14,7 @@
         <link rel="prev" href="../examples/">
       
       
-        <link rel="next" href="../scripts/">
+        <link rel="next" href="../explore_data/">
       
       
       <link rel="icon" href="../img/favicon.png">
@@ -674,6 +674,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#header-info-from-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header Info from Command Line
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#surfquake-extended-header-fields" class="md-nav__link">
     <span class="md-ellipsis">
       SurfQuake-Extended Header Fields
@@ -794,6 +803,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explore_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Avalability
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1239,6 +1271,27 @@
 </tbody>
 </table>
 <hr />
+<h2 id="header-info-from-command-line">Header Info from Command Line</h2>
+<p>surfquake facilitates a tool to explore the information of your seismogram files.
+Supports standard and SurfQuake-extended headers such as picks, references, and geodetic attributes</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>-w<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>waveform<span class="w"> </span>files<span class="w"> </span><span class="o">(</span>e.g.<span class="w"> </span><span class="s1">&#39;./data/*Z or &#39;</span>./mseed1,./mseed2<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>Number<span class="w"> </span>of<span class="w"> </span>traces<span class="w"> </span><span class="o">(</span>columns<span class="o">)</span><span class="w"> </span>to<span class="w"> </span>show<span class="w"> </span>per<span class="w"> </span>file,<span class="w"> </span>default<span class="w"> </span><span class="m">1</span><span class="o">]</span>
+</code></pre></div>
+<p>Example
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;<span class="w"> </span>surfquake<span class="w"> </span>info<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./ES.ELOB..HHZ.D.2018.233,./ES.EMAZ..HHZ.D.2018.233&#39;</span><span class="w"> </span>-c<span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>File<span class="w">                 </span><span class="p">|</span><span class="w"> </span>ES.ELOB..HHZ.D.2018.233<span class="w">   </span><span class="p">|</span><span class="w"> </span>ES.EMAZ..HHZ.D.2018.233<span class="w">  </span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>Network<span class="w">              </span><span class="p">|</span><span class="w"> </span>ES<span class="w">                        </span><span class="p">|</span><span class="w"> </span>ES<span class="w">                       </span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Station<span class="w">              </span><span class="p">|</span><span class="w"> </span>ELOB<span class="w">                      </span><span class="p">|</span><span class="w"> </span>EMAZ<span class="w">                     </span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Location<span class="w">             </span><span class="p">|</span><span class="w">                           </span><span class="p">|</span><span class="w">                          </span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Channel<span class="w">              </span><span class="p">|</span><span class="w"> </span>HHZ<span class="w">                       </span><span class="p">|</span><span class="w"> </span>HHZ<span class="w">                      </span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Start<span class="w"> </span>Time<span class="w">           </span><span class="p">|</span><span class="w"> </span><span class="m">2018</span>-08-21T00:12:58.4300<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">2018</span>-08-21T00:12:56.3977<span class="w"> </span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>End<span class="w"> </span>Time<span class="w">             </span><span class="p">|</span><span class="w"> </span><span class="m">2018</span>-08-21T00:47:06.6900<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">2018</span>-08-21T00:47:03.5077<span class="w"> </span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Sampling<span class="w"> </span>Rate<span class="w"> </span><span class="o">(</span>Hz<span class="o">)</span><span class="w">   </span><span class="p">|</span><span class="w"> </span><span class="m">100</span>.0<span class="w">                     </span><span class="p">|</span><span class="w"> </span><span class="m">100</span>.0<span class="w">                    </span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>Delta<span class="w"> </span><span class="o">(</span>s<span class="o">)</span><span class="w">            </span><span class="p">|</span><span class="w"> </span><span class="m">0</span>.01<span class="w">                      </span><span class="p">|</span><span class="w"> </span><span class="m">0</span>.01<span class="w">                     </span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Npts<span class="w">                 </span><span class="p">|</span><span class="w"> </span><span class="m">204827</span><span class="w">                    </span><span class="p">|</span><span class="w"> </span><span class="m">204712</span><span class="w">                   </span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Picks<span class="w">                </span><span class="p">|</span><span class="w"> </span>None<span class="w">                      </span><span class="p">|</span><span class="w"> </span>None<span class="w">                     </span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>References<span class="w">           </span><span class="p">|</span><span class="w"> </span>None<span class="w">                      </span><span class="p">|</span><span class="w"> </span>None
+</code></pre></div></p>
 <h2 id="surfquake-extended-header-fields">SurfQuake-Extended Header Fields</h2>
 <p>These fields are dynamically added during processing or interactive analysis:</p>
 <h3 id="tracestatspicks-list-of-dicts"><code>trace.stats.picks</code> (list of dicts)</h3>
@@ -1248,12 +1301,12 @@
 - <code>phase</code> (str): Picked phase (e.g., <code>P</code>, <code>S</code>, <code>Lg</code>)
 - <code>amplitude</code> (float): Measured amplitude at pick time
 - <code>polarity</code> (str): <code>U</code> (up), <code>D</code> (down), or <code>?</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1727123830.321</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.21e-05</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;polarity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1727123830.321</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.21e-05</span><span class="p">,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;polarity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="tracestatsreferences-list-of-float"><code>trace.stats.references</code> (list of float)</h3>
 <p>Stores timestamps marking user-defined reference lines during plotting (e.g., using keypress <code>w</code>). These are used for alignment, cross-checking picks, or beamforming time tags.</p>
@@ -1290,16 +1343,16 @@
 </tbody>
 </table>
 <h3 id="example">Example:</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">geodetic</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">254.7</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mf">123.4</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;az&quot;</span><span class="p">:</span> <span class="mf">303.4</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="s2">&quot;incidence&quot;</span><span class="p">:</span> <span class="mf">31.5</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="s2">&quot;arrivals&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">1727123829.20</span><span class="p">,</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">1727123844.03</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="p">}</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">geodetic</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">254.7</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mf">123.4</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;az&quot;</span><span class="p">:</span> <span class="mf">303.4</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="s2">&quot;incidence&quot;</span><span class="p">:</span> <span class="mf">31.5</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="s2">&quot;arrivals&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">1727123829.20</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">1727123844.03</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="p">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
 </code></pre></div>
 <hr />
 <h2 id="trace-header-management-in-surfquake">Trace Header Management in SurfQuake</h2>
@@ -1324,8 +1377,8 @@
 <li>Pick and reference data are stored in-memory and optionally exported to CSV.</li>
 <li>Ensure that when traces are saved or passed between steps, <code>trace.stats</code> is retained.</li>
 <li>You can inspect or modify these attributes using standard Python syntax:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="p">[]</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div></li>
 </ul>
 <hr />
