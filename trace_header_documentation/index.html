@@ -683,6 +683,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#trace-header-modification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trace header modification
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#surfquake-extended-header-fields" class="md-nav__link">
     <span class="md-ellipsis">
       SurfQuake-Extended Header Fields
@@ -1292,6 +1301,26 @@ Supports standard and SurfQuake-extended headers such as picks, references, and 
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Picks<span class="w">                </span><span class="p">|</span><span class="w"> </span>None<span class="w">                      </span><span class="p">|</span><span class="w"> </span>None<span class="w">                     </span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>References<span class="w">           </span><span class="p">|</span><span class="w"> </span>None<span class="w">                      </span><span class="p">|</span><span class="w"> </span>None
 </code></pre></div></p>
+<h2 id="trace-header-modification">Trace header modification</h2>
+<p>If you need to modify the header of your traces, I recommend that you use <em>quick</em> or <em>process_daily</em> command and use the <strong>rename</strong> process. This process simply maps the original traces header information into the new one. Here, you will find an example of config file with the process of mapping network, station, location and channel codes.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Analysis:
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>process_1:
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">      </span>name:<span class="w"> </span><span class="s1">&#39;rename&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span>networks:
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span>IM:<span class="w"> </span>IH<span class="w">      </span><span class="c1"># Replace network XX → YY</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span>IK:<span class="w"> </span>IN
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span>stations:
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span>IL02:<span class="w"> </span>XX02
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span>ARNO:<span class="w"> </span>MELI
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span>channels:
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span>SHZ:<span class="w"> </span>BHZ<span class="w">     </span><span class="c1"># Entire channel replacement</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">      </span>components:
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span>Z:<span class="w"> </span>E<span class="w">         </span><span class="c1"># Only the last component letter (Z → E, N → Z, etc.)</span>
+</code></pre></div>
 <h2 id="surfquake-extended-header-fields">SurfQuake-Extended Header Fields</h2>
 <p>These fields are dynamically added during processing or interactive analysis:</p>
 <h3 id="tracestatspicks-list-of-dicts"><code>trace.stats.picks</code> (list of dicts)</h3>
@@ -1301,12 +1330,12 @@ Supports standard and SurfQuake-extended headers such as picks, references, and 
 - <code>phase</code> (str): Picked phase (e.g., <code>P</code>, <code>S</code>, <code>Lg</code>)
 - <code>amplitude</code> (float): Measured amplitude at pick time
 - <code>polarity</code> (str): <code>U</code> (up), <code>D</code> (down), or <code>?</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1727123830.321</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.21e-05</span><span class="p">,</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;polarity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U&quot;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1727123830.321</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;amplitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.21e-05</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&quot;polarity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="tracestatsreferences-list-of-float"><code>trace.stats.references</code> (list of float)</h3>
 <p>Stores timestamps marking user-defined reference lines during plotting (e.g., using keypress <code>w</code>). These are used for alignment, cross-checking picks, or beamforming time tags.</p>
@@ -1343,16 +1372,16 @@ Supports standard and SurfQuake-extended headers such as picks, references, and 
 </tbody>
 </table>
 <h3 id="example">Example:</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">geodetic</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">254.7</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mf">123.4</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;az&quot;</span><span class="p">:</span> <span class="mf">303.4</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="s2">&quot;incidence&quot;</span><span class="p">:</span> <span class="mf">31.5</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="s2">&quot;arrivals&quot;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">1727123829.20</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">1727123844.03</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="p">}</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">geodetic</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="s2">&quot;distance&quot;</span><span class="p">:</span> <span class="mf">254.7</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mf">123.4</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="s2">&quot;az&quot;</span><span class="p">:</span> <span class="mf">303.4</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="s2">&quot;incidence&quot;</span><span class="p">:</span> <span class="mf">31.5</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="s2">&quot;arrivals&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="s2">&quot;P&quot;</span><span class="p">:</span> <span class="mf">1727123829.20</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">1727123844.03</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="p">}</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
 </code></pre></div>
 <hr />
 <h2 id="trace-header-management-in-surfquake">Trace Header Management in SurfQuake</h2>
@@ -1377,8 +1406,8 @@ Supports standard and SurfQuake-extended headers such as picks, references, and 
 <li>Pick and reference data are stored in-memory and optionally exported to CSV.</li>
 <li>Ensure that when traces are saved or passed between steps, <code>trace.stats</code> is retained.</li>
 <li>You can inspect or modify these attributes using standard Python syntax:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="p">[]</span>
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">...</span><span class="p">})</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">trace</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">references</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div></li>
 </ul>
 <hr />
