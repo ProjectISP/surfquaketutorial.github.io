@@ -303,17 +303,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="associate/" class="md-tabs__link">
-        
-  
-  
     
+    
+      <li class="md-tabs__item">
+        <a href="associate/" class="md-tabs__link">
+          
+  
   
   Event Associator
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -360,36 +361,18 @@
   
   
   
-    <li class="md-tabs__item">
-      <a href="focmec/" class="md-tabs__link">
-        
-  
-  
     
-  
-  FocMec
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="mti/" class="md-tabs__link">
-        
-  
-  
     
+      <li class="md-tabs__item">
+        <a href="focmec/" class="md-tabs__link">
+          
   
-  Moment Tensor Inversion
+  
+  Focal Mechanism
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -995,9 +978,25 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="associate/" class="md-nav__link">
+    
+    
+    
+    
+      
+      
         
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -1006,7 +1005,65 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Event Associator
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="associate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clustering Associate
+    
+  </span>
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="coincidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Coincidence Trigger
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1061,13 +1118,56 @@
   
   
   
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Focal Mechanism
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Focal Mechanism
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="focmec/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    FocMec
+    First Motion polarity
     
   </span>
   
@@ -1076,9 +1176,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1095,6 +1196,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1177,7 +1286,15 @@
 <h2 id="news"><span style="color:darkcyan;"> <strong>News</strong> </span></h2>
 <p>Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:</p>
 <ul>
-<li><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/"><span style="color:#5DADE2"><em>surfquake 0.1.2 by August 2025: New Signal Processing Module</em></span></a></li>
+<li>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/coincidence/"><span style="color:#5DADE2"><em>surfquake 0.1.6 by October 2025: New Coincidence Trigger tool</em></span></a></p>
+</li>
+<li>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/focmec/"><span style="color:#5DADE2"><em>surfquake 0.1.6 by October 2025: New First Motion Polarity tool</em></span></a></p>
+</li>
+<li>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/"><span style="color:#5DADE2"><em>surfquake 0.1.6 by September 2025: New Signal Processing Module</em></span></a></p>
+</li>
 </ul>
 <p>Take a look at our recently published paper!</p>
 <ul>
@@ -1251,8 +1368,10 @@
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/"><span style="color:#5DADE2"><em>Signal Processing</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/picker/"><span style="color:#5DADE2"><em>Phase Picker</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/associate/"><span style="color:#5DADE2"><em>Event Associator</em> </span></a></li>
+<li><a href="https://projectisp.github.io/surfquaketutorial.github.io/coincidence/"><span style="color:#5DADE2"><em>Coincidence Trigger</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/locate/"><span style="color:#5DADE2"><em>Event Location</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/source/"><span style="color:#5DADE2"><em>Source Parameters</em> </span></a></li>
+<li><a href="https://projectisp.github.io/surfquaketutorial.github.io/focmec/"><span style="color:#5DADE2"><em>First Motion Polarity</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/mti/"><span style="color:#5DADE2"><em>Moment Tensor Inversion</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/db/"><span style="color:#5DADE2"><em>Data Base</em> </span></a></li>
 <li><a href="https://projectisp.github.io/surfquaketutorial.github.io/utils/"><span style="color:#5DADE2"><em>Utils</em> </span></a></li>
@@ -1302,7 +1421,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      &copy; 2024 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
+      &copy; 2025 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
 
     </div>
   
