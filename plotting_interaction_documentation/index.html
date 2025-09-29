@@ -1358,15 +1358,20 @@
 <hr />
 <h2 id="configuration-options">Configuration Options</h2>
 <p>The plotting interface is governed by a YAML configuration passed via <code>--plot_config</code>, which supports:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">traces_per_fig</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"> </span><span class="c1"># default 6</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">sort_by</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># options: distance, backazimuth, None</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">plot_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;standard&quot;</span><span class="w">  </span><span class="c1"># options: &#39;record&#39; for record section and overlay for all traces at the same plot</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">pick_output_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./picks.csv</span><span class="w"> </span><span class="c1"># file path where picks are saved</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">fontsize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9</span><span class="w"> </span><span class="c1"># annotations size</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">vspace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span><span class="w"> </span><span class="c1"># space between plots</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">sharey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># if the y axis is shared, usefull to compare amplitudes</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nt">show_crosshair</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># to show a common crossair marker in the mouse pointer</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nt">show_arrivals</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># if it is an event and we want to show the theoetical travl times</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">plotting</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">traces_per_fig</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"> </span><span class="c1"># default 6</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">sort_by</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">distance</span><span class="w">            </span><span class="c1"># options: &#39;distance&#39;, &#39;backazimuth&#39;, or null</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">vspace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span><span class="w">                 </span><span class="c1"># vertical space between subplots</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">show_legend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">title_fontsize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">autosave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">              </span><span class="c1"># option to save plots instead of just showing</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">plot_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span><span class="w">          </span><span class="c1"># folder to save figures if autosave is true</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">sharey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="nt">show_arrivals</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">pick_output_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./picks.csv</span><span class="w"> </span><span class="c1"># picks will be written here</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span><span class="nt">auto_load_pick_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w">   </span><span class="c1"># if user wants that picking file is automatically loaded and plot</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span><span class="nt">show_info_picks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"> </span><span class="c1"># show pick info on screen interactively</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TkAgg</span><span class="w"> </span><span class="c1"># TkAgg (maximum robustness, default), MacOSX (only for mac), Qt5Agg (fast, picking  &amp; interactive commands raise problems)</span>
 </code></pre></div>
 <hr />
 <h2 id="output-and-persistence">Output and Persistence</h2>
@@ -1385,6 +1390,30 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>1</code></td>
+<td>P-wave polarity ?</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>P-wave polarity Up</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>P-wave polarity Down</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>S-wave polarity ?</td>
+</tr>
+<tr>
+<td><code>5</code></td>
+<td>S-wave polarity Up</td>
+</tr>
+<tr>
+<td><code>6</code></td>
+<td>S-wave polarity Down</td>
+</tr>
 <tr>
 <td><code>e</code></td>
 <td>Add pick</td>
@@ -1471,6 +1500,25 @@
 </ul>
 </li>
 <li>
+<p><code>smap [options]</code>: --fmin --fmax --smax --grid --method FK|MTP.COHERENCE|CAPON|MUSIC</p>
+<p>units: frequency in Hz, smax (maximum slowness search) and grid (Slowness grid spacing) in s/km</p>
+<ul>
+<li>Example:
+           <code>smap --method CAPON --fmin 1.0 --fmax 3.0 --grid 0.01</code>
+           <code>smap --method MUSIC --fmin 1.0 --fmax 3.0 --grid 0.01  --nsignals 1</code></li>
+</ul>
+</li>
+<li>
+<p><code>stack [options]</code>: list_traces --method [mean|pw|root]</p>
+<ul>
+<li>Example:
+            <code>stack</code>
+            <code>stack 0,3,7</code>
+            <code>stack 0-5 --method root:4</code>
+            <code>stack all --method pw:2</code></li>
+</ul>
+</li>
+<li>
 <p><code>xcorr [--ref &lt;i&gt;] [--mode full] [--normalize full]</code>: Apply cross-correlation.</p>
 <ul>
 <li>Example: <code>xcorr --ref 0 --mode full --normalize full</code></li>
@@ -1506,6 +1554,9 @@
 </li>
 <li>
 <p><code>write --folder_path &lt;path&gt;</code>: Export displayed traces to <code>.h5</code>.</p>
+</li>
+<li>
+<p><code>info</code> : Print header information from displayed traces</p>
 </li>
 <li>
 <p><code>p</code>: Return to interactive pick mode.</p>
