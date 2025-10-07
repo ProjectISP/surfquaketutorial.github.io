@@ -1304,14 +1304,22 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>lta_win = 40
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>[Cluster]
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>method_preferred = SNR # or Kurtosis
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>centroid_radio = 60 # seconds around the event declaration to separate picks
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>coincidence = 4 Threshold for coincidence triggs
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>threshold_off = 5 # detection off per station for kurtosis 5
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>threshold_on = 15 # detection on per station for kurtosis 20
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>method_preferred = Kurtosis
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>centroid_radio = 60
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>coincidence = 4
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>threshold_off = 5
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>threshold_on = 35
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>fmin = 0.5
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>fmax = 8.0
 </code></pre></div>
+<p>Details:</p>
+<p><strong>CF_decay_win</strong>: The constant CF_decay_win (in seconds) determines the memory of the recursive envelope/kurtosis.</p>
+<p><strong>sta_win</strong>: signal window in seconds.</p>
+<p><strong>lta_win</strong>: noise window in seconds.</p>
+<p><strong>method_preferred</strong>: SNR or Kurtosis.</p>
+<p><strong>coincidence</strong>: Number of traces satisfying the threshold_on to declare an event.</p>
+<p><strong>threshold_on / threshold_ff</strong>: Threshold to determine when it is trigger the coincidences in the charachteristic functions.</p>
+<p><strong>fmin / fmax</strong>: Frequency range where is be applied the nawworband filter bank (kurtosis) or the bandpass filter for SNR.</p>
 <h3 id="usage">Usage</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>trigg
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
