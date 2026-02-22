@@ -1,0 +1,6 @@
+site/
+*.log
+.DS_Store
+__pycache__/
+.venv/
+surfquaketutorial.github.io/
