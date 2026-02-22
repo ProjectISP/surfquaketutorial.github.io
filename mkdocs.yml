@@ -1,0 +1,97 @@
+site_name: ""
+site_url: https://github.com/rcabdia/SurfQuake
+nav:
+    - Home: 'index.md'
+    - Installation: 'install.md'
+    - Project: 'project.md'
+    - Signal Processing: 
+      - Overview: 'processing_overview.md'
+      - Examples: 'examples.md'
+      - Trace Header: 'trace_header_documentation.md'
+      - Data Avalability: 'explore_data.md'
+      - My Scripts: 'scripts.md'
+      - Processing Traces: 'processing_config.md'
+      - Processing Stream: 'processing_stream_config.md'
+      - Beamforming: 'beamforming_documentation.md'
+      - Particle Motion: 'particle_motion_documentation.md'
+      - Time-Frequency Analysis: 'spectral_analysis_documentation.md'
+      - Characteristic Functions: 'characteristic_functions_documentation.md'
+      - Plotting Interaction: 'plotting_interaction_documentation.md'
+      - Bash Script Interaction: 'bash_script.md'
+    - Phase Picker: 'picker.md'
+    - Event Associator:
+      - Clustering Associate: 'associate.md'
+      - Coincidence Trigger: 'coincidence.md'
+    - Event Location: 'locate.md'
+    - Source Parameters: 'source.md'
+    - Focal Mechanism:
+      - First Motion polarity: 'focmec.md'
+      - Moment Tensor Inversion: 'mti.md'
+    - Data Base: 'db.md'
+    - Utilities: 'utils.md'
+theme:
+  name: material
+  logo: img/logo.png
+  favicon: img/favicon.png
+  nav_style: dark
+  analytics:
+    gtag: G-ABC123
+  shortcuts:
+    help: 191    # ?
+    next: 78     # n
+    previous: 80 # p
+    search: 83   # s
+  #custom_dir: docs
+  #css: ['docs/custom.css']
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: teal
+      accent: purple 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: teal
+      accent: lime
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/rcabdia/SurfQuake
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/ProgramSeismic
+
+#  - pymdownx.emoji:
+#      emoji_index: !!python/name:materialx.emoji.twemoji
+#      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+copyright: |
+  &copy; 2025 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
