@@ -1,7 +1,7 @@
 # <span style="color:darkcyan;"> **Welcome to** </span>
 ![Screenshot](img/logo.png)
 
-has been designed to streamline the workflow of estimating seismic source parameters. Comprehensive set of toolboxes automates the determination of arrival times, event locations, event magnitudes , attenuation, and moment tensor inversion. The software is programmed in <span style="color:#5DADE2;">*Python 3*</span> and offers the users the possibility of three programming levels for flexibility and customization.
+Surfquake has been designed to streamline the workflow of estimating seismic source parameters. Comprehensive set of toolboxes automates the determination of arrival times, event locations, event magnitudes , attenuation, and moment tensor inversion. The software is programmed in <span style="color:#5DADE2;">*Python 3*</span> and offers the users the possibility of three programming levels for flexibility and customization.
 
 - The **Core Library**  allows users to integrate the core of surfQuake into their preexisting scripts, giving advanced users full control.
 
@@ -15,11 +15,11 @@ has been designed to streamline the workflow of estimating seismic source parame
 
 Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:
 
-- [<span style="color:#5DADE2">*surfquake 0.1.6 by October 2025: New Coincidence Trigger tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/coincidence/)
+- [<span style="color:#5DADE2">*surfquake 0.1.7 by October 2025: New Coincidence Trigger tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/coincidence/)
 
 - [<span style="color:#5DADE2">*surfquake 0.1.6 by October 2025: New First Motion Polarity tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/focmec/)
 
-- [<span style="color:#5DADE2">*surfquake 0.1.6 by September 2025: New Signal Processing Module*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
+- [<span style="color:#5DADE2">*surfquake 0.1.5 by September 2025: New Signal Processing Module*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
 
 Take a look at our recently published paper!
 
