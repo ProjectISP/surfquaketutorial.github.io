@@ -3,31 +3,162 @@
 
 In this section we show some useful utilities to make easier how to create a metadata file and manage a catalog.
 
-## <span style="color:darkcyan;">**Create Metadata**</span>
+## <span style="color:darkcyan;">**Create Metadata from CLI**</span>
 
-### <span style="color:darkcyan;">**Create Metadata from CLI**</span>
+The `csv2xml` tool allows users to generate **StationXML metadata**
+required by SurfQuake modules.
 
-In many ocasions users only have a stations coordinates files. Other times they have the stations coordinates files and resp files (IMPORTANT: one per stations). In this context, we can use the csv2xml tool to create the metadata that is needed in sufquake for running many modules.
+It supports two common scenarios:
 
-First, the stations file must be in this simple way.
+1.  **Only station coordinate file available** → A valid StationXML is
+    generated with default channel information.
+2.  **Station file + RESP/Inventory files available** → Full response
+    information is incorporated automatically.
+
+------------------------------------------------------------------------
+
+### Minimum Required Station File
+
+The station table must contain at least the following columns:
 
     Net Station Lat Lon elevation start_date starttime end_date endtime
-    WM ARNO 37.0988 -6.7322 117.0 2007-01-01  00:00:00 2050-12-31  23:59:59
-    WM AVE 33.2981 -7.4133 230.0 2007-01-01  00:00:00 2050-12-31  23:59:59
-    WM CART 37.5868 -1.0012 65.0 2007-01-01  00:00:00 2050-12-31  23:59:59
-    WM CEU 35.8987 -5.3731 320.0 2007-01-01  00:00:00 2050-12-31  23:59:59
-    WM CHAS 35.1837 -2.4304 110.0 2007-01-01  00:00:00 2050-12-31  23:59:59
 
-Just separated by a simple space. Do not worry to much about starttime and end time. it can be something crazy like in the example. Optionally, the user can incorporate the root path where resp files are saved to be incorporated to the metadata.
-#### Usage
-```bash
->> surfquake csv2xml -c [csv_file_path] -r [resp_files_path] -o [output_path] -n [stations_xml_name]
+Example (space-separated or CSV format supported):
+
+    WM ARNO 37.0988 -6.7322 117.0 2007-01-01 00:00:00 2050-12-31 23:59:59
+    WM AVE 33.2981 -7.4133 230.0 2007-01-01 00:00:00 2050-12-31 23:59:59
+    WM CART 37.5868 -1.0012 65.0 2007-01-01 00:00:00 2050-12-31 23:59:59
+
+-   Columns are case-insensitive.
+-   The tool automatically detects whitespace or comma-separated files.
+-   Date format must follow:
+
+```{=html}
+<!-- -->
 ```
-#### Interactive help
+    YYYY-MM-DD HH:MM:SS
 
-```bash
->> surfquake csv2xml -h
-``` 
+Start/end times can be wide ranges (e.g., 2007 → 2050).
+
+If no channel information is provided, a **default channel** is
+created: - Channel code: `HHZ` - Sample rate: `100.0 Hz`
+
+------------------------------------------------------------------------
+
+### Optional Columns (Advanced Metadata)
+
+The tool automatically uses additional columns if present.
+
+### Station-Level Optional Columns
+
+  -----------------------------------------------------------------------
+  Column Name                              Description
+  ---------------------------------------- ------------------------------
+  `site_name`                              Human-readable station name
+
+  `clock_drift`                            Clock drift rate
+                                           (seconds/second). Applied to
+                                           all channels unless overridden
+  -----------------------------------------------------------------------
+
+### Channel-Level Optional Columns
+
+  -----------------------------------------------------------------------
+  Column Name                              Description
+  ---------------------------------------- ------------------------------
+  `channel`                                Channel code (e.g., HHZ, HHN,
+                                           HHE)
+
+  `location_code`                          SEED location code
+
+  `sample_rate`                            Sampling rate (Hz)
+
+  `dip`                                    Channel dip (degrees)
+
+  `azimuth`                                Channel azimuth (degrees)
+
+  `depth`                                  Sensor depth (meters)
+
+  `clock_drift`                            Channel-specific drift
+                                           (overrides station-level
+                                           drift)
+  -----------------------------------------------------------------------
+
+If multiple rows exist for the same station with different channels, all
+channels will be included in the StationXML.
+
+------------------------------------------------------------------------
+
+### Using RESP / Inventory Files
+
+If a RESP (or StationXML inventory) directory is provided:
+
+-   The tool scans recursively.
+-   All channels found in RESP files are indexed by:
+    `(Network, Station, Location, Channel)`
+-   If the CSV does not specify channels, RESP channels are used
+    automatically.
+-   If the CSV specifies channels, matching RESP responses are attached
+    when available.
+
+> RESP files must correspond to the correct Network and Station
+> codes.
+
+------------------------------------------------------------------------
+
+### Complete Station File
+
+    Net Station site_name Lat Lon elevation start_date starttime end_date endtime channel location_code sample_rate azimuth dip depth clock_drift
+    WM ARNO ARNO_OBS_01 37.0988 -6.7322 117.0 2007-01-01 00:00:00 2050-12-31 23:59:59 HHZ 00 100.0 0.0 -90.0 0.0 1.2e-7
+    WM ARNO ARNO_OBS_01 37.0988 -6.7322 117.0 2007-01-01 00:00:00 2050-12-31 23:59:59 HHN 00 100.0 0.0 0.0 0.0 1.2e-7
+    WM ARNO ARNO_OBS_01 37.0988 -6.7322 117.0 2007-01-01 00:00:00 2050-12-31 23:59:59 HHE 00 100.0 90.0 0.0 0.0 1.2e-7
+    WM AVE AVE_LAND_01 33.2981 -7.4133 230.0 2007-01-01 00:00:00 2050-12-31 23:59:59 EHZ  --  200.0 0.0 -90.0 0.0
+    WM AVE AVE_LAND_01 33.2981 -7.4133 230.0 2007-01-01 00:00:00 2050-12-31 23:59:59 EHN  --  200.0 0.0 0.0 0.0
+    WM AVE AVE_LAND_01 33.2981 -7.4133 230.0 2007-01-01 00:00:00 2050-12-31 23:59:59 EHE  --  200.0 90.0 0.0 0.0
+    WM CART CART_OBS_02 37.5868 -1.0012 65.0 2007-01-01 00:00:00 2050-12-31 23:59:59 BHZ 10 40.0 0.0 -90.0 1.5 8.0e-8
+    WM CART CART_OBS_02 37.5868 -1.0012 65.0 2007-01-01 00:00:00 2050-12-31 23:59:59 BHN 10 40.0 0.0 0.0 1.5 8.0e-8
+    WM CART CART_OBS_02 37.5868 -1.0012 65.0 2007-01-01 00:00:00 2050-12-31 23:59:59 BHE 10 40.0 90.0 0.0 1.5 8.0e-8
+
+### Command Line Usage
+
+``` bash
+surfquake csv2xml     -c [csv_file_path]     -r [resp_files_path]     -o [output_path]     -n [stations_xml_name]
+```
+
+### Required Arguments
+
+-   `-c, --csv_file_path` → Path to station table
+-   `-o, --output_path` → Directory for output StationXML
+-   `-n, --stations_xml_name` → Output filename
+
+### Optional Argument
+
+-   `-r, --resp_files_path` → Directory containing RESP/Inventory files
+
+------------------------------------------------------------------------
+
+### Interactive Help
+
+``` bash
+surfquake csv2xml -h
+```
+
+------------------------------------------------------------------------
+
+### Summary
+
+The updated `csv2xml` tool now:
+
+-   Accepts whitespace or comma-separated files
+-   Validates numeric and date fields
+-   Supports multi-channel stations
+-   Integrates RESP metadata robustly
+-   Supports OBS clock drift metadata
+-   Applies intelligent defaults when optional columns are missing
+
+This makes metadata creation flexible, robust, and suitable for both
+simple deployments and advanced OBS workflows.
+
 
 #### Run Create Metadatafrom CLI
 ```bash
