@@ -28,7 +28,10 @@ nav:
       - First Motion polarity: 'focmec.md'
       - Moment Tensor Inversion: 'mti.md'
     - Data Base: 'db.md'
-    - Utilities: 'utils.md'
+    - Utilities:
+      - Create Metadata: 'create_metadata.md'
+      - Manage Catalog: 'manage_catalog.md'
+      - Build MTI Config: 'build_mti.md'
 theme:
   name: material
   logo: img/logo.png
