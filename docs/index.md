@@ -15,11 +15,8 @@ Surfquake has been designed to streamline the workflow of estimating seismic sou
 
 Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:
 
-- [<span style="color:#5DADE2">*surfquake 0.1.7 by October 2025: New Coincidence Trigger tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/coincidence/)
+- [<span style="color:#5DADE2">*surfquake 1.0.0 by April 2026: Noise Power Spectral Density tool*</span>]
 
-- [<span style="color:#5DADE2">*surfquake 0.1.6 by October 2025: New First Motion Polarity tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/focmec/)
-
-- [<span style="color:#5DADE2">*surfquake 0.1.5 by September 2025: New Signal Processing Module*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
 
 Take a look at our recently published paper!
 
