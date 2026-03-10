@@ -42,7 +42,9 @@ When a user places a pick using the `e` key, a dictionary is appended to the pic
 }
 ```
 
+It is automatically added phase when users pick using shortcut numbers 1-6 (see summary table).
 Reference markers (green vertical lines placed via `w`) are stored as timestamps in `tr.stats.references`.
+
 
 ---
 
@@ -52,19 +54,46 @@ The plotting interface is governed by a YAML configuration passed via `--plot_co
 
 ```yaml
 plotting:
-  traces_per_fig: 3 # default 6
-  sort_by: distance            # options: 'distance', 'backazimuth', or null
-  vspace: 0.05                 # vertical space between subplots
+  traces_per_fig: 3
+  sort_by: distance            
+  vspace: 0.05
   show_legend: true
   title_fontsize: 9
-  plot_type: standard        # 'standard', 'record' for record section and overlay for all traces at the same plot 
+  plot_type: standard
   sharey: False
   show_arrivals: False
-  pick_output_file: ./picks.csv # picks will be written here
-  auto_load_pick_file: False   # if user wants that picking file is automatically loaded and plot
-  show_info_picks: False # show pick info on screen interactively
-  backend: TkAgg # TkAgg (maximum robustness, default), MacOSX (only for mac), Qt5Agg (fast, picking  & interactive commands raise problems)
+  pick_output_file: ./picks.csv
+  auto_load_pick_file: False
+  show_info_picks: False
+  backend: TkAgg
 ```
+
+- 
+- **`Notes`**: Specifies how traces are normalized before correlation.
+
+    - `traces_per_fig`: `int`. default: 6. Traces per plot
+
+    - `sort_by`: `str|bool` default: False. options: 'distance', 'backazimuth', or False. Sort traces y distance, in case you have traces with a editted header or you are running command processing.
+
+    - `vspace`: `float` default: 0.05. Vertical space between axis
+
+    - `show_legend`: `bool` default: True. If true, show additional information related to the trace.
+
+    - title_fontsize: `float` default: 9. Size of figure title.
+
+    - plot_type: `str`. default: 'standard', 'record' for record section and overlay for all traces at the same plot.
+
+    - sharey: `bool`. default : False. Share y-axis amplitudes. Useful to compare seismogram amplitudes in many traces
+
+    - pick_output_file: `str` default "./picks.csv". Path to the file where picks will be written
+
+    - auto_load_pick_file: `str|bool` default : False. If user wants that picking file is automatically loaded and plot (e.g. picking file NLLoc format)
+
+    - show_info_picks: `bool` default: False. Show pick info on screen interactively when user pick a phase on the trace.
+
+    - show_crosshair: `bool` default: False. Show crosshair in all traces. Helps to mark a common reference point and to interactive compare amplitudes.
+
+    - backend: `str` default: TkAgg (maximum robustness, default), MacOSX (only for mac), Qt5Agg (fast, picking  & interactive commands raise problems)
 
 ---
 
@@ -86,7 +115,7 @@ plotting:
 | `4` | S-wave polarity ?               |
 | `5` | S-wave polarity Up              |
 | `6` | S-wave polarity Down            |
-| `e` | Add pick                        |
+| `e` | Add pick  (see the terminal)    |
 | `w` | Add reference line              |
 | `d` | Delete last pick                |
 | `c` | Clear all picks                 |

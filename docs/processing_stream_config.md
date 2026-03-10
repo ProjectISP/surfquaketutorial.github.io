@@ -46,6 +46,7 @@ Performs cross-correlation between waveforms.
     - `none`: No normalization is applied. Raw amplitudes are used, which may be sensitive to trace scaling or noise.
 - **`reference_idx`**: Index of the trace to use as the reference for correlation (typically one of the traces in the stream).
 - **`strict`**: If `True`, enforces strict alignment and compatibility between trace lengths and sampling rates.
+- **`trim`**: If `True`, cut all waveforms for the maxumum start time and minimum end time.
 
 
 ```yaml
@@ -56,6 +57,7 @@ Analysis:
     normalize: 'full'
     reference_idx: 0
     strict: True
+    trim: True
 ```
 
 ---
@@ -115,6 +117,10 @@ Use case: When synthetic or model-based timing is reliable (e.g., teleseismic bo
 - **`time_shifts`**: Applies manual time shifts to each trace, using a list of per-trace time offsets in seconds (float).
 Use case: When you want full control over the alignment or need to apply empirical or experiment-specific shifts.
 
+- Optional alternatives:
+   - **`phase`**: 'P'
+   - **`time_shifts`**: [0.1, -0.2, 0.05] in seconds
+
 Note: If both phase and time_shifts are provided, phase takes precedence.
 If none of the options are valid, the stream is returned unchanged. 
 
@@ -123,9 +129,6 @@ Analysis:
   process_1:
     name: 'shift'
     phase_theo: 'P'
-    # Optional alternatives:
-    # phase: 'P'
-    # time_shifts: [0.1, -0.2, 0.05] in seconds
 ```
 
 ---
