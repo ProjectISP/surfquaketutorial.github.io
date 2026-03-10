@@ -1628,6 +1628,7 @@
 </li>
 <li><strong><code>reference_idx</code></strong>: Index of the trace to use as the reference for correlation (typically one of the traces in the stream).</li>
 <li><strong><code>strict</code></strong>: If <code>True</code>, enforces strict alignment and compatibility between trace lengths and sampling rates.</li>
+<li><strong><code>trim</code></strong>: If <code>True</code>, cut all waveforms for the maxumum start time and minimum end time.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
@@ -1636,6 +1637,7 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">trim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </code></pre></div>
 <hr />
 <h2 id="stack">Stack</h2>
@@ -1689,6 +1691,11 @@ Use case: When synthetic or model-based timing is reliable (e.g., teleseismic bo
 <p><strong><code>time_shifts</code></strong>: Applies manual time shifts to each trace, using a list of per-trace time offsets in seconds (float).
 Use case: When you want full control over the alignment or need to apply empirical or experiment-specific shifts.</p>
 </li>
+<li>
+<p>Optional alternatives:</p>
+</li>
+<li><strong><code>phase</code></strong>: 'P'</li>
+<li><strong><code>time_shifts</code></strong>: [0.1, -0.2, 0.05] in seconds</li>
 </ul>
 <p>Note: If both phase and time_shifts are provided, phase takes precedence.
 If none of the options are valid, the stream is returned unchanged. </p>
@@ -1696,9 +1703,6 @@ If none of the options are valid, the stream is returned unchanged. </p>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;shift&#39;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">phase_theo</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;P&#39;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="c1"># Optional alternatives:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="c1"># phase: &#39;P&#39;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="c1"># time_shifts: [0.1, -0.2, 0.05] in seconds</span>
 </code></pre></div>
 <hr />
 <h2 id="concatenate">Concatenate</h2>
