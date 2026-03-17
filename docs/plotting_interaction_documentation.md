@@ -68,7 +68,6 @@ plotting:
   backend: TkAgg
 ```
 
-- 
 - **`Notes`**: Specifies how traces are normalized before correlation.
 
     - `traces_per_fig`: `int`. default: 6. Traces per plot
