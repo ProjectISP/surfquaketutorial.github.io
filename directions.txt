@@ -3,6 +3,7 @@ pip install mkdocs
 pip install mkdocs-bootswatch ("https://mkdocs.github.io/mkdocs-bootswatch/")
 pip install mkdocs-material ("https://squidfunk.github.io/mkdocs-material/getting-started/")
 pip install Pygments
+pip install mkdocs-with-pdf 
 
 Point to in the browser from the folder with mkdocs.yml
 mkdocs serve
@@ -22,3 +23,8 @@ From:
 /Users/robertocabieces/Documents/ISP_doc/ISP_tutorial.github.io
 
 mkdocs gh-deploy --config-file ../mkdocs.yml --remote-branch master
+
+To generate the pdf file
+
+>> ENABLE_PDF_EXPORT=1 mkdocs build
+This will generate a nice pdf file inside site/pdf
