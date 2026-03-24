@@ -18,6 +18,9 @@ nav:
       - Characteristic Functions: 'characteristic_functions_documentation.md'
       - Plotting Interaction: 'plotting_interaction_documentation.md'
       - Bash Script Interaction: 'bash_script.md'
+    - PPSD: 
+      - DataBase: 'ppsd_DB.md'
+      - Plotting & Statistics: 'ppsd_plot.md'
     - Phase Picker: 'picker.md'
     - Event Associator:
       - Clustering Associate: 'associate.md'
@@ -98,8 +101,9 @@ plugins:
       cover_title: SurfQuake Documentation
       cover_subtitle: User Guide
       output_path: pdf/SurfQuake.pdf
+      cover_logo: img/logo.png
       enabled_if_env: ENABLE_PDF_EXPORT
-      
+
 #  - pymdownx.emoji:
 #      emoji_index: !!python/name:materialx.emoji.twemoji
 #      emoji_generator: !!python/name:materialx.emoji.to_svg
