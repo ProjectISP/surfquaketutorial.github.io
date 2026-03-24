@@ -15,7 +15,7 @@ Surfquake has been designed to streamline the workflow of estimating seismic sou
 
 Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:
 
-- [<span style="color:#5DADE2">*surfquake 1.0.0 by April 2026: Noise Power Spectral Density tool*</span>]
+- [<span style="color:#5DADE2">*surfquake 1.0.0, March 2026: Probability Power Spectral Density Functions tool for noise analysis*</span>](https://projectisp.github.io/surfquaketutorial.github.io/ppsd_DB/)
 
 
 Take a look at our recently published paper!
@@ -91,6 +91,7 @@ Take a look at our recently published paper!
 - [<span style="color:#5DADE2">*Create your Project* </span>](https://projectisp.github.io/surfquaketutorial.github.io/project/)
 - [<span style="color:#5DADE2">*Signal Processing* </span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
 - [<span style="color:#5DADE2">*Phase Picker* </span>](https://projectisp.github.io/surfquaketutorial.github.io/picker/)
+- [<span style="color:#5DADE2">*Probability Power Spectral Density Functions* </span>](https://projectisp.github.io/surfquaketutorial.github.io/ppsd_DB/)
 - [<span style="color:#5DADE2">*Event Associator* </span>](https://projectisp.github.io/surfquaketutorial.github.io/associate/)
 - [<span style="color:#5DADE2">*Coincidence Trigger* </span>](https://projectisp.github.io/surfquaketutorial.github.io/coincidence/)
 - [<span style="color:#5DADE2">*Event Location* </span>](https://projectisp.github.io/surfquaketutorial.github.io/locate/)
