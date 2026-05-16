@@ -2,7 +2,7 @@
 pip install mkdocs
 pip install mkdocs-bootswatch ("https://mkdocs.github.io/mkdocs-bootswatch/")
 pip install mkdocs-material ("https://squidfunk.github.io/mkdocs-material/getting-started/")
-pip install Pygments
+pip install "Pygments==2.19.2"
 pip install mkdocs-with-pdf 
 
 Point to in the browser from the folder with mkdocs.yml

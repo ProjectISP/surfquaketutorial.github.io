@@ -1,4 +1,3 @@
-
 # Arraival times Assocotiation
 The main goal of this tool is to associate the arrival times of different P- and S-waves to the their corresponding events. The associator algorythm used in surfquake is REAL ([<span style="color:#5DADE2;">Zhang et al., 2019</span>](https://github.com/Dal-mzhang/REAL/)). The user needs to set the input parameters and point to the folder where the picks have been storaged. In th following sections it will be describe the surfquake imprementation of REAL, for a full description of the parameters visit [<span style="color:#5DADE2;">REAL cookbook</span>](https://github.com/Dal-mzhang/REAL/blob/master/REAL_userguide_July2021.pdf
 )
@@ -47,6 +46,68 @@ MIN_NUM_P_WAVE_PICKS = 3
 MIN_NUM_S_WAVE_PICKS = 1
 NUM_STATIONS_RECORDED = 1
 ```
+The performance of REAL depends critically on parameter tuning. These parameters control:
+1) Search geometry
+2) Grid resolution
+3) Time tolerance
+4) Pick thresholds
+
+## Parametrization Details
+
+The parameters in the configuration file define the geographic limits of the study area, the search volume used by REAL, the resolution of the travel-time grid, and the minimum number of picks required to accept an association. A good configuration should cover the target region and the seismic network while avoiding search windows that are unnecessarily large.
+
+### Geographic frame
+
+The `GEOGRAPHIC_FRAME` section defines the spatial limits used by the associator.
+
+- `LAT_REF_MAX` / `LAT_REF_MIN`: Maximum and minimum latitude of the study area.
+- `LON_REF_MAX` / `LON_REF_MIN`: Maximum and minimum longitude of the study area.
+- `DEPTH`: Maximum depth, in kilometres, considered during the association.
+
+The geographic frame should include the complete station network and the expected seismicity area. It is recommended to add a small margin around the network, usually around `0.5–1.0°`. If the area is too large, REAL can generate more false associations. If it is too small, events located close to the borders may be missed.
+
+### Grid search parameters
+
+The `GRID_SEARCH_PARAMETERS` section controls the event search volume and the time window used to group picks.
+
+- `HORIZONTAL_SEARCH_RANGE`: Horizontal distance, in degrees, used during the event search.
+- `DEPTH_SEARCH_RANGE`: Maximum depth range, in kilometres, used during the event search.
+- `EVENT_TIME_WINDOW`: Time window, in seconds, used to associate picks that may belong to the same event.
+- `HORIZONTAL_SEARCH_GRID_SIZE`: Horizontal spacing, in degrees, of the search grid.
+- `DEPTH_SEARCH_GRID_SIZE`: Vertical spacing, in kilometres, of the search grid.
+
+As a general rule, the horizontal search range should be larger than twice the average station spacing. Dense networks can usually work with values around `0.5–1.0°`, medium-density networks with `1–2°`, and sparse networks with `2–4°`.
+
+The grid size defines the precision and computational cost of the search. Smaller values improve the resolution but increase the execution time. Typical values for `HORIZONTAL_SEARCH_GRID_SIZE` are `0.02–0.05°` for production runs and `0.05–0.1°` for testing. Values larger than `0.2°` should normally be avoided. For `DEPTH_SEARCH_GRID_SIZE`, common values are `2–5 km`.
+
+The `EVENT_TIME_WINDOW` should be adapted to the seismicity rate. Low-seismicity regions can use wider windows, such as `90–120 s`. For swarms or regions with many close events, shorter windows, such as `30–60 s`, usually reduce false associations.
+
+### Travel-time grid search
+
+The `TRAVEL_TIME_GRID_SEARCH` section defines the grid used to compute and store travel times.
+
+- `HORIZONTAL_RANGE`: Maximum horizontal distance, in degrees, covered by the travel-time grid.
+- `DEPTH_RANGE`: Maximum depth, in kilometres, covered by the travel-time grid.
+- `HORIZONTAL_GRID_RESOLUTION_SIZE`: Horizontal resolution, in degrees, of the travel-time grid.
+- `DEPTH_GRID_RESOLUTION_SIZE`: Depth resolution, in kilometres, of the travel-time grid.
+
+The travel-time grid must cover the maximum expected distance between stations and possible events. It is recommended to add a margin of approximately `20–30%`. If the travel-time grid is too small, REAL may not associate any events. Typical resolution values are `0.01°` horizontally and `1–2 km` in depth.
+
+### Pick thresholds
+
+The `THRESHOLD_PICKS` section defines the minimum number of observations required to accept an event candidate.
+
+- `MIN_NUM_P_WAVE_PICKS`: Minimum number of P-wave picks required.
+- `MIN_NUM_S_WAVE_PICKS`: Minimum number of S-wave picks required.
+- `NUM_STATIONS_RECORDED`: Minimum number of stations that must record the event.
+
+For small networks with `5–8` stations, a good starting value for `MIN_NUM_P_WAVE_PICKS` is usually `2–3`. For networks with `10–15` stations, values around `3–4` are commonly used. The `MIN_NUM_S_WAVE_PICKS` parameter can initially be set to `0` and increased later if S-wave picks are reliable. For `NUM_STATIONS_RECORDED`, dense networks can use `3–5`, while sparse networks may require `2–3`.
+
+### Parameter interactions
+
+The parameters should be tuned together rather than independently. Large search ranges combined with wide time windows can increase the number of false associations. Smaller grid sizes improve precision but increase computation time. Narrow search ranges and short time windows reduce noise, but they can also miss events if the expected event location or origin time is not well constrained.
+
+A practical workflow is to begin with permissive values, inspect the resulting associations, and then progressively tighten the thresholds, search ranges, and time windows until the number of false associations is reduced without losing valid events.
 
 ## Events Associator from CLI
 

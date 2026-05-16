@@ -109,7 +109,7 @@ This is a screenshot of the Event Location GUI.
 - Grid Configuration:
     - Grid Reference: SW corner of your geographic framework
     - Grid Dimension in the x, y and z number of points and dx, dy dx the size in each dimension. For example the size in the X/East axis, X = dx*(x-1)
-    - Geographic Transformation: Simple or Global. <span style="color:#5DADE2">Warning</span> if Global is selected go directly to press Run Location 
+    - Geographic Transformation: SIMPLE or GLOBAL. <span style="color:#5DADE2">Warning</span> if GLOBAL is selected go directly to press Run Location 
     - Grid Type: Slowness (Default)
     - Wave: P & S or P. This will guide the software to know wich can of velocity grid create.
     - Model: 1D or 3D

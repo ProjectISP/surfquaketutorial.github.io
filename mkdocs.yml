@@ -95,14 +95,14 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/ProgramSeismic
 
-plugins:
-  - search
-  - with-pdf:
-      cover_title: SurfQuake Documentation
-      cover_subtitle: User Guide
-      output_path: pdf/SurfQuake.pdf
-      cover_logo: img/logo.png
-      enabled_if_env: ENABLE_PDF_EXPORT
+#plugins:
+#  - search
+#  - with-pdf:
+#      cover_title: SurfQuake Documentation
+#      cover_subtitle: User Guide
+#      output_path: pdf/SurfQuake.pdf
+#      cover_logo: img/logo.png
+#      enabled_if_env: ENABLE_PDF_EXPORT
 
 #  - pymdownx.emoji:
 #      emoji_index: !!python/name:materialx.emoji.twemoji
