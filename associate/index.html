@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../img/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -1265,6 +1265,78 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parametrization-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametrization Details
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parametrization Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#geographic-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Geographic frame
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-search-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grid search parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#travel-time-grid-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Travel-time grid search
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pick-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pick thresholds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-interactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter interactions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#events-associator-from-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1782,7 +1854,7 @@
 </ul>
 <h2 id="config-files">Config files</h2>
 <p>The parametrization of the Event Assocciator tool can be storaged in a file.ini. An example of this file is as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[GEOGRAPHIC_FRAME]
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[GEOGRAPHIC_FRAME]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>LAT_REF_MAX = 43.0000
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>LAT_REF_MIN = 42.0000
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>LON_REF_MIN = 0.8000
@@ -1807,6 +1879,53 @@
 <a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>MIN_NUM_S_WAVE_PICKS = 1
 <a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>NUM_STATIONS_RECORDED = 1
 </code></pre></div>
+The performance of REAL depends critically on parameter tuning. These parameters control:
+1) Search geometry
+2) Grid resolution
+3) Time tolerance
+4) Pick thresholds</p>
+<h2 id="parametrization-details">Parametrization Details</h2>
+<p>The parameters in the configuration file define the geographic limits of the study area, the search volume used by REAL, the resolution of the travel-time grid, and the minimum number of picks required to accept an association. A good configuration should cover the target region and the seismic network while avoiding search windows that are unnecessarily large.</p>
+<h3 id="geographic-frame">Geographic frame</h3>
+<p>The <code>GEOGRAPHIC_FRAME</code> section defines the spatial limits used by the associator.</p>
+<ul>
+<li><code>LAT_REF_MAX</code> / <code>LAT_REF_MIN</code>: Maximum and minimum latitude of the study area.</li>
+<li><code>LON_REF_MAX</code> / <code>LON_REF_MIN</code>: Maximum and minimum longitude of the study area.</li>
+<li><code>DEPTH</code>: Maximum depth, in kilometres, considered during the association.</li>
+</ul>
+<p>The geographic frame should include the complete station network and the expected seismicity area. It is recommended to add a small margin around the network, usually around <code>0.5–1.0°</code>. If the area is too large, REAL can generate more false associations. If it is too small, events located close to the borders may be missed.</p>
+<h3 id="grid-search-parameters">Grid search parameters</h3>
+<p>The <code>GRID_SEARCH_PARAMETERS</code> section controls the event search volume and the time window used to group picks.</p>
+<ul>
+<li><code>HORIZONTAL_SEARCH_RANGE</code>: Horizontal distance, in degrees, used during the event search.</li>
+<li><code>DEPTH_SEARCH_RANGE</code>: Maximum depth range, in kilometres, used during the event search.</li>
+<li><code>EVENT_TIME_WINDOW</code>: Time window, in seconds, used to associate picks that may belong to the same event.</li>
+<li><code>HORIZONTAL_SEARCH_GRID_SIZE</code>: Horizontal spacing, in degrees, of the search grid.</li>
+<li><code>DEPTH_SEARCH_GRID_SIZE</code>: Vertical spacing, in kilometres, of the search grid.</li>
+</ul>
+<p>As a general rule, the horizontal search range should be larger than twice the average station spacing. Dense networks can usually work with values around <code>0.5–1.0°</code>, medium-density networks with <code>1–2°</code>, and sparse networks with <code>2–4°</code>.</p>
+<p>The grid size defines the precision and computational cost of the search. Smaller values improve the resolution but increase the execution time. Typical values for <code>HORIZONTAL_SEARCH_GRID_SIZE</code> are <code>0.02–0.05°</code> for production runs and <code>0.05–0.1°</code> for testing. Values larger than <code>0.2°</code> should normally be avoided. For <code>DEPTH_SEARCH_GRID_SIZE</code>, common values are <code>2–5 km</code>.</p>
+<p>The <code>EVENT_TIME_WINDOW</code> should be adapted to the seismicity rate. Low-seismicity regions can use wider windows, such as <code>90–120 s</code>. For swarms or regions with many close events, shorter windows, such as <code>30–60 s</code>, usually reduce false associations.</p>
+<h3 id="travel-time-grid-search">Travel-time grid search</h3>
+<p>The <code>TRAVEL_TIME_GRID_SEARCH</code> section defines the grid used to compute and store travel times.</p>
+<ul>
+<li><code>HORIZONTAL_RANGE</code>: Maximum horizontal distance, in degrees, covered by the travel-time grid.</li>
+<li><code>DEPTH_RANGE</code>: Maximum depth, in kilometres, covered by the travel-time grid.</li>
+<li><code>HORIZONTAL_GRID_RESOLUTION_SIZE</code>: Horizontal resolution, in degrees, of the travel-time grid.</li>
+<li><code>DEPTH_GRID_RESOLUTION_SIZE</code>: Depth resolution, in kilometres, of the travel-time grid.</li>
+</ul>
+<p>The travel-time grid must cover the maximum expected distance between stations and possible events. It is recommended to add a margin of approximately <code>20–30%</code>. If the travel-time grid is too small, REAL may not associate any events. Typical resolution values are <code>0.01°</code> horizontally and <code>1–2 km</code> in depth.</p>
+<h3 id="pick-thresholds">Pick thresholds</h3>
+<p>The <code>THRESHOLD_PICKS</code> section defines the minimum number of observations required to accept an event candidate.</p>
+<ul>
+<li><code>MIN_NUM_P_WAVE_PICKS</code>: Minimum number of P-wave picks required.</li>
+<li><code>MIN_NUM_S_WAVE_PICKS</code>: Minimum number of S-wave picks required.</li>
+<li><code>NUM_STATIONS_RECORDED</code>: Minimum number of stations that must record the event.</li>
+</ul>
+<p>For small networks with <code>5–8</code> stations, a good starting value for <code>MIN_NUM_P_WAVE_PICKS</code> is usually <code>2–3</code>. For networks with <code>10–15</code> stations, values around <code>3–4</code> are commonly used. The <code>MIN_NUM_S_WAVE_PICKS</code> parameter can initially be set to <code>0</code> and increased later if S-wave picks are reliable. For <code>NUM_STATIONS_RECORDED</code>, dense networks can use <code>3–5</code>, while sparse networks may require <code>2–3</code>.</p>
+<h3 id="parameter-interactions">Parameter interactions</h3>
+<p>The parameters should be tuned together rather than independently. Large search ranges combined with wide time windows can increase the number of false associations. Smaller grid sizes improve precision but increase computation time. Narrow search ranges and short time windows reduce noise, but they can also miss events if the expected event location or origin time is not well constrained.</p>
+<p>A practical workflow is to begin with permissive values, inspect the resulting associations, and then progressively tighten the thresholds, search ranges, and time windows until the number of false associations is reduced without losing valid events.</p>
 <h2 id="events-associator-from-cli">Events Associator from CLI</h2>
 <h3 id="usage">Usage</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>associate<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span>-i<span class="w"> </span>INVENTORY_FILE_PATH<span class="w"> </span>-p<span class="w"> </span>DATA_DIR<span class="w"> </span>-c<span class="w"> </span>CONFIG_FILE_PATH<span class="w"> </span>-w<span class="w"> </span>WORK_DIR_PATH<span class="w"> </span>-s<span class="w"> </span>SAVE_DIR<span class="w"> </span><span class="o">[</span>-v<span class="o">]</span>
