@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/processing_overview/">
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/ambient_noise/">
       
       
-        <link rel="prev" href="../project/">
+        <link rel="prev" href="../mti/">
       
       
-        <link rel="next" href="../examples/">
+        <link rel="next" href="../db/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Overview - </title>
+        <title>Ambient Noise Processing - </title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#data-processing-with-surfquake" class="md-skip">
+        <a href="#ambient-noise-tomography-ant" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Ambient Noise Processing
             
           </span>
         </div>
@@ -265,13 +265,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../processing_overview/" class="md-tabs__link">
           
   
   
@@ -404,9 +402,11 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../ambient_noise/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
   
@@ -577,31 +577,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -619,7 +614,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -634,37 +629,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../processing_overview/" class="md-nav__link">
         
   
   
@@ -680,98 +648,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-process" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running the Process
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running the Process">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#surfquake-quick" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        surfquake quick
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#surfquake-processing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        surfquake processing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#surfquake-processing_daily" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        surfquake processing_daily
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#event-file-format-eventtxt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Event File Format (event.txt)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sample-processing-configuration-configyaml" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sample Processing Configuration (config.yaml)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1550,10 +1426,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../ambient_noise/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1569,6 +1454,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1760,174 +1646,142 @@
 
 
 
-<h1 id="data-processing-with-surfquake">Data Processing with SurfQuake</h1>
-<p>Welcome to the <strong>Signal Processing Module</strong> of SurfQuake — a powerful and scalable command-line tool for applying signal processing pipelines to large collections of seismic waveform data.</p>
-<p>Whether you're analyzing earthquake catalogs or preparing data for machine learning models, this module allows you to define, control, and automate your signal processing workflow with precision.</p>
-<p>📘 Learn more in our <a href="https://projectisp.github.io/ISP_tutorial.github.io/sp_filtering/"><strong>Signal Processing Tutorial</strong></a></p>
-<p>Remember that you can use real data files and metadata to learn how to use surfquake processing commands with <a href="https://github.com/rcabdia/test_surfquake"><span style="color:#5DADE2;">Case of study</span></a>.</p>
-<p>In the following link, you will find <a href="https://github.com/rcabdia/SurfQuakeCore/tree/main/examples/configs" download> config file templates</a>.</p>
+<h1 id="ambient-noise-tomography-ant"><span style="color:darkcyan;"><strong>Ambient Noise Tomography (ANT)</strong></span></h1>
+<p>Ambient Noise Tomography (ANT) is a passive seismic imaging technique based on the cross-correlation of continuous background seismic noise between station pairs. SurfQuake provides a complete ANT workflow including:</p>
+<ol>
+<li>Building a waveform dictionary from MiniSEED archives</li>
+<li>Creating frequency-domain spectral matrices</li>
+<li>Cross-correlating and stacking station pairs</li>
+<li>Optional rotation of horizontal components</li>
+</ol>
+<p>The ANT module is designed for large-scale continuous seismic datasets and supports parallel processing, spectral whitening, time normalization, instrument response removal, and multiple stacking strategies.</p>
 <hr />
-<h2 id="running-the-process">Running the Process</h2>
-<p>This tool runs via the terminal. First in the terminal you can ask for help. Available commands are quick, processing and processing_daily.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-h
+<h1 id="ant-create-dictionary-cli"><span style="color:darkcyan;"><strong>ANT Create Dictionary CLI</strong></span></h1>
+<p>This command scans a MiniSEED archive recursively and builds a dictionary-based project file containing waveform paths organized by network, station and channel.</p>
+<p>The generated pickle file is later used as input for the ANT processing pipeline.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>        Key Arguments:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>            -d,  --data_path         [REQUIRED] Root directory containing MiniSEED files
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>            -i,  --inventory_file    [REQUIRED] Path to StationXML inventory file
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>            -s,  --save_file         [REQUIRED] Path to save the ANT dictionary pickle
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            -nt, --net               [OPTIONAL] Network filter, wildcards allowed (default: *)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            -st, --station           [OPTIONAL] Station filter, wildcards allowed (default: *)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            -ch, --channel           [OPTIONAL] Channel filter, wildcards allowed (default: *)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            -w,  --workers           [OPTIONAL] Number of parallel workers
 </code></pre></div>
-<h3 id="surfquake-quick">surfquake quick</h3>
-<p>Let's start explaining <strong>quick</strong> command:</p>
-<p>Overview:
-        Process seismic traces.
-        You can:
-            - Apply processing steps (filtering, normalization, etc.)
-            - Optionally visualize the waveforms (interactive mode)
-            - Apply a user-defined post-processing script before or after plotting</p>
-<div class="highlight"><pre><span></span><code>Modes:
-    Default  : Interactive mode (plotting + user prompts)
-    --auto   : Non-interactive mode (no plots, no prompts, outputs written automatically)
-
-Post-Script Logic:
-    Use `--post_script` to apply a custom script to each event stream.
-    Use `--post_script_stage` to control **when** it runs:
-        • before : script runs before plotting (good for filtering, editing headers)
-        • after  : script runs after plotting (good if picks or metadata are added)
-
-    Examples:
-        Process waveform files with a config and plot interactively:
-            surfquake quick -w &quot;./data/*.mseed&quot; -c ./config.yaml -i ./inventory.xml --plot_config plot.yaml
-
-    Key Arguments:
-        -w, --wave_files         [REQUIRED] Glob pattern or path to waveform files
-        -c, --config_file        [OPTIONAL] YAML config defining processing steps
-        -i, --inventory_file     [OPTIONAL] Station metadata (StationXML or RESP)
-        -o, --output_folder      [OPTIONAL] Directory to save processed traces
-        -a, --auto               [OPTIONAL] Run in automatic (non-interactive) mode
-        --plot_config            [OPTIONAL] Plotting settings YAML
-        --post_script            [OPTIONAL] Python script to apply to each stream
-        --post_script_stage      [OPTIONAL] When to run post-script: &#39;before&#39; or &#39;after&#39; (default: before)
+<h2 id="usage">Usage</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_create_dict<span class="w"> </span>-d<span class="w"> </span><span class="o">[</span>data_path<span class="o">]</span><span class="w"> </span>-i<span class="w"> </span><span class="o">[</span>inventory_file<span class="o">]</span><span class="w"> </span>-s<span class="w"> </span><span class="o">[</span>save_file<span class="o">]</span>
+</code></pre></div>
+<h2 id="interactive-help">Interactive help</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_create_dict<span class="w"> </span>-h
+</code></pre></div>
+<h2 id="examples-cli">Examples CLI</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Process all stations and channels</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_create_dict<span class="w"> </span>-d<span class="w"> </span>./mseed<span class="w"> </span>-i<span class="w"> </span>./meta/inventory.xml<span class="w"> </span>-s<span class="w"> </span>./output/data_dict.pkl
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Process only BHZ channels for network II</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_create_dict<span class="w"> </span>-d<span class="w"> </span>./mseed<span class="w"> </span>-i<span class="w"> </span>./meta/inventory.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>-s<span class="w"> </span>./output/data_dict.pkl<span class="w"> </span>-nt<span class="w"> </span>II<span class="w"> </span>-ch<span class="w"> </span>BHZ
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Use wildcard filters and multiple workers</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_create_dict<span class="w"> </span>-d<span class="w"> </span>./mseed<span class="w"> </span>-i<span class="w"> </span>./meta/inventory.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>-s<span class="w"> </span>./output/data_dict.pkl<span class="w"> </span>-nt<span class="w"> </span><span class="s2">&quot;IU&quot;</span><span class="w"> </span><span class="s2">&quot;II&quot;</span><span class="w"> </span>-ch<span class="w"> </span><span class="s2">&quot;BH*&quot;</span><span class="w"> </span>-w<span class="w"> </span><span class="m">8</span>
 </code></pre></div>
 <hr />
-<h3 id="surfquake-processing">surfquake processing</h3>
-<div class="highlight"><pre><span></span><code>Overview:
-    Process or cut waveforms associated with seismic events.
-    You can:
-        - Cut traces using event times and headers
-        - Apply processing steps (filtering, normalization, etc.)
-        - Optionally visualize the waveforms (interactive mode)
-        - Apply a user-defined post-processing script before or after plotting
-
-Modes:
-    Default  : Interactive mode (plotting + user prompts)
-    --auto   : Non-interactive mode (no plots, no prompts, outputs written automatically)
-
-Post-Script Logic:
-    Use `--post_script` to apply a custom script to each event stream.
-    Use `--post_script_stage` to control **when** it runs:
-        • before : script runs before plotting (good for filtering, editing headers)
-        • after  : script runs after plotting (good if picks or metadata are added)
-
-Usage Example:
-    surfquake processing -p &quot;./project.pkl&quot; -i inventory.xml -e events.xml -c config.yaml -o ./output_folder --phases P,S --plot_config plot_settings.yaml --post_script custom_postproc.py
-
-Key Arguments:
-    -p, --project_file         [OPTIONAL] Path to an existing project file
-    -w, --wave_files           [OPTIONAL] Path or glob pattern to waveform files
-    -i, --inventory_file       [OPTIONAL] Station metadata file (XML, RESP)
-    -e, --event_file           [OPTIONAL] Event catalog in QuakeML format
-    -c, --config_file          [OPTIONAL] Processing configuration file (YAML)
-    -a, --auto                 [OPTIONAL] Run in automatic mode
-    -o, --output_folder        [OPTIONAL] Folder where processed files are saved
-    -n, --net                  [OPTIONAL] project net filter Example: NET1,NET2,NET3
-    -s, --station              [OPTIONAL] project station filter Example: STA1,STA2,STA3
-    -ch, --channel,            [OPTIONAL]  project channel filter Example: HHZ,BHN
-    -t, --cut_time             [OPTIONAL] pre &amp; post first arrival in seconds (symmetric)
-    -cs, --cut_start_time      [OPTIONAL] cut pre-first arrival in seconds
-    -ce, --cut_end_time        [OPTIONAL] cut ppost-first arrival in seconds
-    -r, --reference            [OPTIONAL] The pick time for cutting the waveforms is the origin time of the event
-    --phases                   [OPTIONAL] Comma-separated list of phases for arrival estimation (e.g., P,S)
-    --plot_config              [OPTIONAL] Optional plot configuration file (YAML)
-    --post_script              [OPTIONAL] Python script to apply per event stream
-    --post_script_stage        [OPTIONAL] When to apply the post-script: before | after (default: before)
-
-Notes:
-You might need to set -w for individual files or -p for loading your project file
+<h1 id="ant-process-matrix-cli"><span style="color:darkcyan;"><strong>ANT Process Matrix CLI</strong></span></h1>
+<p>This command processes the waveform dictionary created by <code>ant_create_dict</code> and generates frequency-domain spectral matrices for each station/channel.</p>
+<p>The workflow includes:</p>
+<ol>
+<li>Reading continuous waveform files</li>
+<li>Gap checking and merging</li>
+<li>Optional instrument response removal</li>
+<li>Optional decimation</li>
+<li>Time-domain normalization</li>
+<li>Spectral whitening</li>
+<li>FFT transformation into frequency-domain matrices</li>
+</ol>
+<p>Results are stored as pickle files and later used by the cross-correlation stage.</p>
+<h2 id="usage_1">Usage</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_process_matrix<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>config.json<span class="o">]</span>
+</code></pre></div>
+<h2 id="generate-template-configuration">Generate template configuration</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_process_matrix<span class="w"> </span>--generate<span class="w"> </span>config_process_matrix.json
+</code></pre></div>
+<h2 id="interactive-help_1">Interactive help</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_process_matrix<span class="w"> </span>-h
+</code></pre></div>
+<h2 id="example-configuration">Example configuration</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nt">&quot;project_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./output/data_dict.pkl&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;inventory_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./meta/inventory.xml&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">&quot;output_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./output/matrices&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nt">&quot;processing_window&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">&quot;remove_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nt">&quot;units&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VEL&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nt">&quot;waterlevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="nt">&quot;decimate&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nt">&quot;factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="nt">&quot;time_norm&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;running avarage&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="nt">&quot;timewindow&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="nt">&quot;whiten&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span><span class="nt">&quot;freqbandwidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="nt">&quot;prefilter&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nt">&quot;filter_freqmin&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">    </span><span class="nt">&quot;filter_freqmax&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">    </span><span class="nt">&quot;filter_corners&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="examples-cli_1">Examples CLI</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Generate template config</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_process_matrix<span class="w"> </span>--generate<span class="w"> </span>config_process_matrix.json
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Run ANT spectral matrix processing</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_process_matrix<span class="w"> </span>-c<span class="w"> </span>config_process_matrix.json
 </code></pre></div>
 <hr />
-<h3 id="surfquake-processing_daily">surfquake processing_daily</h3>
-<p>This command is different to simply surfquake processing because is intended to merge daily seismograms and work for big data sets. For xample, imagine that you need three days of seismograms for normal modes analysis of an event. Or imagine you would like to process datayo your daily mseed files.</p>
-<div class="highlight"><pre><span></span><code>Overview:
-    Cut seismograms and apply processing to continuous waveforms.
-    You can perform either or both of these operations.
-
-Modes:
-    Default : Interactive mode (with plotting and prompts)
-    --auto  : Non-interactive mode (no plots, no prompts, automatic output)
-
-Post-Script Logic:
-    Use --post_script to apply a custom script per station/day stream.
-    Use --post_script_stage to control when the script is applied:
-        • before : apply script before plotting (e.g., for filtering or cleanup)
-        • after  : apply script after plotting (e.g., to act on manual picks)
-
-Usage Example:
-    surfquake processing_daily \\
-        -i inventory.xml \\
-        -c config.yaml \\
-        -o ./output_folder \\
-        --min_date &quot;2024-01-01 00:00:00&quot; \\
-        --max_date &quot;2024-01-02 00:00:00&quot; \\
-        --span_seconds  86400\\
-        --plot_config plot_settings.yaml \\
-        --post_script my_custom.py \\
-        --post_script_stage after
-
-Key Arguments:
-    -p, --project_file        [REQUIRED] Path to a saved project files
-    -o, --output_folder       [OPTIONAL] Directory for processed output
-    -i, --inventory_file      [OPTIONAL] Station metadata (XML/RESP)
-    -c, --config_file         [OPTIONAL] Processing configuration (YAML)
-    -a, --auto                [OPTIONAL] Run in automatic mode
-    -n, --net                 [OPTIONAL] Network code filter
-    -s, --station             [OPTIONAL] Station code filter
-    -ch, --channel            [OPTIONAL] Channel filter
-    --min_date                [OPTIONAL] Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT min date of the project
-    --max_date                [OPTIONAL] Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT max date of the project
-    --time_tolerance          [OPTIONAL] Tolerance in seconds for time filtering, excluded files with smaller time span
-    --span_seconds            [OPTIONAL] Select and merge files in sets of time spans, DEFAULT 86400
-    --time_segment            [OPTIONAL] If set, process entire time window as a single merged stream of traces
-    --plot_config             [OPTIONAL] Optional plotting configuration (YAML)
-    --post_script             [OPTIONAL] Path to Python script for custom post-processing
-    --post_script_stage       [OPTIONAL] When to apply the post-script: before | after (default: before)
-&quot;&quot;&quot;
+<h1 id="ant-cross-stack-cli"><span style="color:darkcyan;"><strong>ANT Cross Stack CLI</strong></span></h1>
+<p>This command reads the spectral matrices generated by <code>ant_process_matrix</code> and computes cross-correlations between station pairs.</p>
+<p>The processing workflow includes:</p>
+<ol>
+<li>Identification of common days between stations</li>
+<li>Frequency-domain cross-correlation</li>
+<li>Inverse FFT transformation</li>
+<li>Daily and full stacking</li>
+<li>Optional horizontal rotation</li>
+</ol>
+<p>The resulting cross-correlations are stored in HDF5 format.</p>
+<h2 id="usage_2">Usage</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_cross_stack<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>config.json<span class="o">]</span>
 </code></pre></div>
-<h3 id="event-file-format-eventtxt">Event File Format (<code>event.txt</code>)</h3>
-<p>Please find here a very simple event file format. This is typical input for surfquake processing -e ./event.txt</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>date;hour;latitude;longitude;depth;magnitude
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2022-02-02;23:35:29.7;42.5089;1.4293;20.7;1.71
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>2022-02-03;12:01:21.6;42.3047;2.2741;0.0;1.65
+<h2 id="generate-template-configuration_1">Generate template configuration</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_cross_stack<span class="w"> </span>--generate<span class="w"> </span>config_cross_stack.json
 </code></pre></div>
-<hr />
-<h3 id="sample-processing-configuration-configyaml">Sample Processing Configuration (<code>config.yaml</code>)</h3>
-<hr />
-<p>The macro configuration (provided via a YAML file) defines your signal processing pipeline in a structured, step-by-step format. Each <code>process</code> entry specifies a method, its parameters, and the order in which it will be applied to each trace. You can process either full daily waveform files or extract and process specific segments based on an event file. Additionally, an interactive plotting tool is available to help you visually inspect and validate the processing steps.</p>
-<p>Please find here a very simple event file format. This is the typical input file for this commands:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span>./mseed_file<span class="w"> </span>-c<span class="w"> </span>./config.yaml<span class="w"> </span><span class="c1"># reading directly mseed files</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span>./project.pkl<span class="w"> </span>-c<span class="w"> </span>./config.yaml<span class="w"> </span>-e<span class="w"> </span>./event.txt<span class="w"> </span><span class="c1"># loading a project and using event files</span>
+<h2 id="interactive-help_2">Interactive help</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_cross_stack<span class="w"> </span>-h
 </code></pre></div>
-<p><code>config.yaml</code>: Detaled information of this file in Processing traces and Processing Stream.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<h2 id="example-configuration_1">Example configuration</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nt">&quot;input_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./output/matrices&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">&quot;output_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./output/stacks&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">],</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nt">&quot;stations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">&quot;stack&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Linear&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="nt">&quot;power&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="nt">&quot;autocorr&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="nt">&quot;min_distance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">,</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="nt">&quot;daily_stacks&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="nt">&quot;overlap&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="nt">&quot;workers&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span><span class="nt">&quot;rotate&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">    </span><span class="nt">&quot;rotate_daily&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="examples-cli_2">Examples CLI</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Generate template config</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_cross_stack<span class="w"> </span>--generate<span class="w"> </span>config_cross_stack.json
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="c1"># Run cross-correlation and stacking</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_cross_stack<span class="w"> </span>-c<span class="w"> </span>config_cross_stack.json
 </code></pre></div>
 
 
