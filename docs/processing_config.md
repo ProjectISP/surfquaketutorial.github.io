@@ -49,6 +49,35 @@ Analysis:
 
 ---
 
+## Cut
+
+Cut Traces:
+
+- **Parameters**: `method` , `start`, `end`,`t_before`, `t_after`
+- **method**:`absolute`, `phase`, `reference`
+
+Cut all traces according to a date using method: `absolute` and parameters `start`, `end` or relative to a `phase` (i.e 'P'), or the last `reference` saved in the trace header.
+
+```yaml
+Analysis:
+  process_1:
+    name: 'cut'
+    method: 'absolute'
+    start: 2018-10-26T05:20:03
+    end: 2018-10-26T06:25:03
+```
+
+```yaml
+Analysis:
+  process_1:
+    name: 'cut'
+    method: 'phase'
+    t_before: 10.5
+    t_after: 120.0
+```
+
+---
+
 ## Filtering
 
 Apply filters to isolate specific frequency content.

@@ -1,40 +1,48 @@
-site_name: ""
+site_name: "SurfQuake"
 site_url: https://github.com/rcabdia/SurfQuake
 nav:
-    - Home: 'index.md'
-    - Installation: 'install.md'
-    - Project: 'project.md'
-    - Signal Processing: 
-      - Overview: 'processing_overview.md'
-      - Examples: 'examples.md'
-      - Trace Header: 'trace_header_documentation.md'
-      - Data Avalability: 'explore_data.md'
-      - My Scripts: 'scripts.md'
-      - Processing Traces: 'processing_config.md'
-      - Processing Stream: 'processing_stream_config.md'
-      - Beamforming: 'beamforming_documentation.md'
-      - Particle Motion: 'particle_motion_documentation.md'
-      - Time-Frequency Analysis: 'spectral_analysis_documentation.md'
-      - Characteristic Functions: 'characteristic_functions_documentation.md'
-      - Plotting Interaction: 'plotting_interaction_documentation.md'
-      - Bash Script Interaction: 'bash_script.md'
-    - PPSD: 
-      - DataBase: 'ppsd_DB.md'
-      - Plotting & Statistics: 'ppsd_plot.md'
-    - Phase Picker: 'picker.md'
-    - Event Associator:
-      - Clustering Associate: 'associate.md'
-      - Coincidence Trigger: 'coincidence.md'
-    - Event Location: 'locate.md'
-    - Source Parameters: 'source.md'
-    - Focal Mechanism:
-      - First Motion polarity: 'focmec.md'
-      - Moment Tensor Inversion: 'mti.md'
-    - Data Base: 'db.md'
-    - Utilities:
-      - Create Metadata: 'create_metadata.md'
-      - Manage Catalog: 'manage_catalog.md'
-      - Build MTI Config: 'build_mti.md'
+  - Home: index.md
+  - Getting Started:
+      - Installation: install.md
+      - Project: project.md
+
+  - Signal Processing:
+      - Overview: processing_overview.md
+      - Examples: examples.md
+      - Trace Header: trace_header_documentation.md
+      - Data Availability: explore_data.md
+      - My Scripts: scripts.md
+      - Processing Traces: processing_config.md
+      - Processing Stream: processing_stream_config.md
+      - Beamforming: beamforming_documentation.md
+      - Particle Motion: particle_motion_documentation.md
+      - Time-Frequency Analysis: spectral_analysis_documentation.md
+      - Characteristic Functions: characteristic_functions_documentation.md
+      - Plotting Interaction: plotting_interaction_documentation.md
+      - Bash Script Interaction: bash_script.md
+
+  - Event Analysis:
+      - Phase Picker: picker.md
+      - Event Associator:
+          - Clustering Associate: associate.md
+          - Coincidence Trigger: coincidence.md
+      - Event Location: locate.md
+      - Source Parameters: source.md
+      - Focal Mechanism:
+          - First Motion Polarity: focmec.md
+          - Moment Tensor Inversion: mti.md
+
+  - Noise Processing:
+    - PPSD:
+          - DataBase: ppsd_DB.md
+          - Plotting & Statistics: ppsd_plot.md
+    - Ambient Noise Processing: ambient_noise.md
+
+  - Database & Utilities:
+      - Data Base: db.md
+      - Create Metadata: create_metadata.md
+      - Manage Catalog: manage_catalog.md
+      - Build MTI Config: build_mti.md
 theme:
   name: material
   logo: img/logo.png
@@ -52,6 +60,9 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
     - toc.integrate
     - navigation.top
     - search.suggest

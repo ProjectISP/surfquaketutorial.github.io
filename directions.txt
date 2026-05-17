@@ -22,7 +22,7 @@ Push changes:
 From:
 /Users/robertocabieces/Documents/ISP_doc/ISP_tutorial.github.io
 
-mkdocs gh-deploy --config-file ../mkdocs.yml --remote-branch master
+mkdocs gh-deploy --config-file ./mkdocs.yml --remote-branch master
 
 To generate the pdf file
 

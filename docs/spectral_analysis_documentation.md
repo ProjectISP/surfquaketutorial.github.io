@@ -43,6 +43,9 @@ The `spectrogram` method produces a time-frequency representation of a seismic t
 - **`win`** (float): Window length in seconds (e.g., 5.0)
 - **`overlap_percent`** (float): Percent overlap between windows (e.g., 50.0)
 - **`linf`, `lsup`**: Lower and upper frequency limits for plotting
+- **`method`**: Spectral estimation method. Options:
+  - `multitaper` (default)
+  - `fft` or others if extended
 
 ### Config Example
 
@@ -50,6 +53,7 @@ The `spectrogram` method produces a time-frequency representation of a seismic t
 Analysis:
   process_1:
     name: 'spectrogram'
+    method: 'multitaper' # 'fft' for conventional spectrum with single taper
     win: 5.0
     overlap_percent: 50.0
     linf: 0 # optional
