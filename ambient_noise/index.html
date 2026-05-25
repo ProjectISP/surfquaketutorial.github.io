@@ -1813,7 +1813,7 @@
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&quot;processing_window&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">&quot;remove_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">&quot;units&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;VEL&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nt">&quot;waterlevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nt">&quot;waterlevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="nt">&quot;decimate&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">&quot;factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">&quot;time_norm&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -1827,6 +1827,19 @@
 <a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="nt">&quot;filter_corners&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
 <a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="p">}</span>
 </code></pre></div>
+<hr />
+<p><em>processing window</em>: (int) Noise time window in seconds. It is important to keep a long window to be able to capture the longest period of the EGFs. Be into account your minimum interstation distance to correctly select this parameter.</p>
+<p><em>units</em>: (str: DISP, ACC and VEL are available). The instrument response is removed and seismograms converted the physical unit output. This is important when you are mixing different types of instruments, because EGFs can have phase shifts.</p>
+<p><em>waterlevel</em> (int). Basically this parameter controls the deconvolution in the intrument response removal. Set to 90 is safe!</p>
+<p><em>decimate</em>: (bool). It is recommended to decimate your waveforms due to the later RAM memory usage and because computational efficiency.</p>
+<p><em>factor</em>: (int). Target sampling rate in Hz after decimation, if decimate is set to True.</p>
+<p><em>time_norm</em>: Apply time normalisation (see method). This is necassary in many cases due to seismogram noise use to be contaminated of transient signals.</p>
+<p><em>method</em>: (str: running avarage, 1 Bit and PCC). Time normalization methods or special phase cross correlation. If PCC is applied then whitening is skipped (because it is not totally necessary to equilibrate noise frequency band power).</p>
+<p><em>whiten</em>: (str). Apply spectral whitening using a moving avarage in the spectral domain.</p>
+<p><em>prefilter</em>: (bool). Aply a zero-phase bandpass pre-filter before noise cross correlation. recommended.</p>
+<p><em>filter_freqmin</em>: (float). Min frequency of pre-filter.</p>
+<p><em>filter_freqmax</em>: (float). Max frequency of pre-filter.</p>
+<h2 id="filter_corners-int-number-of-poles-of-the-pre-filter"><em>filter_corners</em>: (int). Number of poles of the pre-filter.</h2>
 <h2 id="examples-cli_1">Examples CLI</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Generate template config</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_process_matrix<span class="w"> </span>--generate<span class="w"> </span>config_process_matrix.json
