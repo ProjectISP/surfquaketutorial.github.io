@@ -1836,7 +1836,7 @@
 <p><em>time_norm</em>: Apply time normalisation (see method). This is necassary in many cases due to seismogram noise use to be contaminated of transient signals.</p>
 <p><em>method</em>: (str: running avarage, 1 Bit and PCC). Time normalization methods or special phase cross correlation. If PCC is applied then whitening is skipped (because it is not totally necessary to equilibrate noise frequency band power).</p>
 <p><em>whiten</em>: (str). Apply spectral whitening using a moving avarage in the spectral domain.</p>
-<p><em>prefilter</em>: (bool). Aply a zero-phase bandpass pre-filter before noise cross correlation. recommended.</p>
+<p><em>prefilter</em>: (bool). Apply a zero-phase bandpass pre-filter before noise cross correlation. recommended.</p>
 <p><em>filter_freqmin</em>: (float). Min frequency of pre-filter.</p>
 <p><em>filter_freqmax</em>: (float). Max frequency of pre-filter.</p>
 <h2 id="filter_corners-int-number-of-poles-of-the-pre-filter"><em>filter_corners</em>: (int). Number of poles of the pre-filter.</h2>
@@ -1885,6 +1885,21 @@
 <a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">    </span><span class="nt">&quot;rotate_daily&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="p">}</span>
 </code></pre></div>
+<hr />
+<p><em>input_path</em> (str), path to the folder where the storaged matrix files from the pre-processing steps are saved.</p>
+<p><em>output_path</em> (str), path to the folder where stack files will be saved.</p>
+<p><em>channels:</em> (list), Channels list to effectuate the cross correlation and stacking. Example ["N", "E", "Z"].</p>
+<p><em>stations:</em> (list), Stations list to effectuate the cross correlation and stacking. Example ["STA1", "STA2"]. If empty ALL stations will be processed.</p>
+<p><em>stack</em>: Stacking methods: Linear, PWS, nrooth.</p>
+<p><em>power</em>: Exponent for PWS or nrooth stacking.</p>
+<p><em>autocorr</em>: if user want to compute autocorrelations. This is mandatory if user wants to get Radial (RR) and  transversal (TT) EGFs.</p>
+<p><em>min_distance</em>: Threshold interstation distance to compute the cross and stacking.</p>
+<p><em>daily_stacks</em>: If you want to also compute partial stacks. Very useful for Synchronize clocks. (20 days stack).</p>
+<p><em>overlap</em>: Shift in time daily stacks. Example, if set to 50.0 the shift will be 0.5*20, then every 10 days.</p>
+<p><em>workers</em>: Number of parallel worker processes (default: null = cpu_count - 1).</p>
+<p><em>rotate</em>: Run ZNE rotation after stacking. User will obtain RR and TT components, used for Rayleigh and Love waves.</p>
+<p><em>rotate_daily</em>: If user wants to rotate daily stacks.</p>
+<hr />
 <h2 id="examples-cli_2">Examples CLI</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Generate template config</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>ant_cross_stack<span class="w"> </span>--generate<span class="w"> </span>config_cross_stack.json
