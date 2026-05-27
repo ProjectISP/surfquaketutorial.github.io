@@ -37,6 +37,7 @@ nav:
           - DataBase: ppsd_DB.md
           - Plotting & Statistics: ppsd_plot.md
     - Ambient Noise Processing: ambient_noise.md
+    - Dispersion Curves Processing: dispersion_curves_processing.md
 
   - Database & Utilities:
       - Data Base: db.md
