@@ -1,5 +1,99 @@
 # Processing Stream Options
 
+## Arithmetic Operation
+
+Compute simple arithmetic operations between traces.
+
+```yaml
+Analysis:
+  process_1:
+    name: 'algebra'
+    expression: "tr1 + tr2 - tr3"
+    trim: True
+    fill_gaps: True
+    resample: True
+```
+
+| Option | Type | Description |
+|----------|------|-------------|
+| `trim` | `bool` | Cut all traces to the common time window `[max(starttimes), min(endtimes)]` before evaluating the expression. Raises an exception if no overlap exists. |
+| `fill_gaps` | `bool` | Merge the stream and fill internal gaps or overlaps using linear interpolation. |
+| `resample` | `bool` | Resample all traces to the highest sampling rate found in the stream. |
+
+### Expression : The `expression` field accepts a mathematical expression involving one or more traces (`tr1`, `tr2`, `tr3`, ...).
+
+- Basic Functions
+
+| Category | Operators | Example |
+|-----------|-----------|---------|
+| Arithmetic | `+`, `-`, `*`, `/`, `%` | `tr1 + tr2 * 2` |
+| Power | `**` | `tr1 ** 2` |
+| Floor Division | `//` | `tr1 // 2` |
+| Unary | `+`, `-` | `-tr1` |
+
+| Function | Description |
+|-----------|-------------|
+| `abs(x)` | Absolute value |
+| `sqrt(x)` | Square root |
+| `exp(x)` | Exponential |
+| `log(x)` | Natural logarithm |
+| `log2(x)` | Base-2 logarithm |
+| `log10(x)` | Base-10 logarithm |
+
+- Trigonometric Functions
+
+| Function |
+|----------|
+| `sin`, `cos`, `tan`, `arcsin`, `arccos`, `arctan`, `arctan2` |
+| `sinh`, `cosh`, `tanh` |
+
+- Rounding Functions
+
+| Function | Description |
+|-----------|-------------|
+| `ceil(x)` | Round up |
+| `floor(x)` | Round down |
+| `round(x)` | Round to nearest value |
+
+- Signal Processing Helpers
+
+| Function | Description |
+|-----------|-------------|
+| `sign(x)` | Sign of the signal |
+| `diff(x)` | First difference |
+| `cumsum(x)` | Cumulative sum |
+| `gradient(x)` | Numerical gradient |
+
+- Complex Number Helpers
+
+| Function | Description |
+|-----------|-------------|
+| `real(x)` | Real component |
+| `imag(x)` | Imaginary component |
+
+- Constants
+
+| Constant | Value |
+|-----------|-------|
+| `pi` | π |
+| `e` | Euler's number |
+
+- Usage examples
+
+| Goal | Expression |
+|------|------------|
+| Simple sum of two traces | `tr1 + tr2 * 1e-3` |
+| Complex math pipeline | `exp(tr1) + sin(tr2) * sqrt(abs(tr3))` |
+| Multi-output (sum and difference) | `tr1 + tr2, tr1 - tr2` |
+| Negate a trace | `-tr1` |
+| Cumulative integral proxy | `cumsum(tr1)` |
+| Numerical derivative | `gradient(tr1)` |
+| Signal power | `tr1 ** 2` |
+| Normalized ratio | `tr1 / (abs(tr2) + 1e-12)` |
+| Phase extraction | `arctan2(tr2, tr1)` |
+
+---
+
 ## Rotate Seismograms
 
 This option rotates the three-component traces in the stream to either the Great Arc Circle (GAC) or a user-defined angle and inclination.

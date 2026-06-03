@@ -12,9 +12,23 @@ The ANT module is designed for large-scale continuous seismic datasets and suppo
 ```
 References
 
+
+
+Ambient Noise Processing workflow:
+
 Bensen, G. D., et al. Processing seismic ambient noise data to obtain reliable broad-band surface wave dispersion measurements. Geophysical journal international, 2007, vol. 169, no 3, p. 1239-1260.
 
+Special signal processing. Phase Wave Stack and phase Cross-correlation
+
 Schimmel, M. Phase cross-correlations: Design, comparisons, and applications. Bulletin of the Seismological Society of America, 1999, vol. 89, no 5, p. 1366-1378.
+
+Clock Synchronization:
+
+Cabieces, R., et al. Clock drift corrections for large aperture ocean bottom seismometer arrays: application to the UPFLOW array in the mid-Atlantic Ocean, Geophysical Journal International, Volume 239, Issue 3, December 2024, Pages 1709–1728.
+
+Fast Horizontal Components Rotation:
+
+Lin F.-C., Moschetti M.P., Ritzwoller M.H., 2008. Surface wave tomography of the western United States from ambient seismic noise: Rayleigh and Love wave phase velocity maps, Geophys. J. Int., 173, 281–298. doi: 10.1111/j.1365-246X.2008.03720.x 10.1111/j.1365-246X.2008.03720.x
 ```
 
 ---
@@ -109,7 +123,7 @@ Results are stored as pickle files and later used by the cross-correlation stage
     "processing_window": 900,
     "remove_response": true,
     "units": "VEL",
-    "waterlevel": 60,
+    "waterlevel": 90,
     "decimate": true,
     "factor": 5,
     "time_norm": true,
@@ -123,6 +137,32 @@ Results are stored as pickle files and later used by the cross-correlation stage
     "filter_corners": 4
 }
 ```
+
+---
+*processing window*: (int) Noise time window in seconds. It is important to keep a long window to be able to capture the longest period of the EGFs. Be into account your minimum interstation distance to correctly select this parameter.
+
+*units*: (str: DISP, ACC and VEL are available). The instrument response is removed and seismograms converted the physical unit output. This is important when you are mixing different types of instruments, because EGFs can have phase shifts.
+
+*waterlevel* (int). Basically this parameter controls the deconvolution in the intrument response removal. Set to 90 is safe!
+
+*decimate*: (bool). It is recommended to decimate your waveforms due to the later RAM memory usage and because computational efficiency.
+
+*factor*: (int). Target sampling rate in Hz after decimation, if decimate is set to True.
+
+*time_norm*: Apply time normalisation (see method). This is necassary in many cases due to seismogram noise use to be contaminated of transient signals.
+
+*method*: (str: running avarage, 1 Bit and PCC). Time normalization methods or special phase cross correlation. If PCC is applied then whitening is skipped (because it is not totally necessary to equilibrate noise frequency band power).
+
+*whiten*: (str). Apply spectral whitening using a moving avarage in the spectral domain.
+
+*prefilter*: (bool). Apply a zero-phase bandpass pre-filter before noise cross correlation. recommended.
+
+*filter_freqmin*: (float). Min frequency of pre-filter.
+
+*filter_freqmax*: (float). Max frequency of pre-filter.
+
+*filter_corners*: (int). Number of poles of the pre-filter.
+---
 
 ## Examples CLI
 
@@ -187,6 +227,36 @@ The resulting cross-correlations are stored in HDF5 format.
     "rotate_daily": false
 }
 ```
+
+---
+*input_path* (str), path to the folder where the storaged matrix files from the pre-processing steps are saved.
+
+*output_path* (str), path to the folder where stack files will be saved.
+
+*channels:* (list), Channels list to effectuate the cross correlation and stacking. Example ["N", "E", "Z"].
+
+*stations:* (list), Stations list to effectuate the cross correlation and stacking. Example ["STA1", "STA2"]. If empty ALL stations will be processed.
+
+*stack*: Stacking methods: Linear, PWS, nrooth.
+
+*power*: Exponent for PWS or nrooth stacking.
+
+*autocorr*: if user want to compute autocorrelations. This is mandatory if user wants to get Radial (RR) and  transversal (TT) EGFs.
+
+*min_distance*: Threshold interstation distance to compute the cross and stacking.
+
+*daily_stacks*: If you want to also compute partial stacks. Very useful for Synchronize clocks. (20 days stack).
+
+*overlap*: Shift in time daily stacks. Example, if set to 50.0 the shift will be 0.5*20, then every 10 days.
+
+*workers*: Number of parallel worker processes (default: null = cpu_count - 1).
+
+*rotate*: Run ZNE rotation after stacking. User will obtain RR and TT components, used for Rayleigh and Love waves.
+
+*rotate_daily*: If user wants to rotate daily stacks.
+
+---
+
 
 ## Examples CLI
 
