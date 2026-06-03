@@ -807,6 +807,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#arithmetic-operation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arithmetic Operation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arithmetic Operation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expression-the-expression-field-accepts-a-mathematical-expression-involving-one-or-more-traces-tr1-tr2-tr3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expression : The expression field accepts a mathematical expression involving one or more traces (tr1, tr2, tr3, ...).
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rotate-seismograms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1863,6 +1891,275 @@
 
 
 <h1 id="processing-stream-options">Processing Stream Options</h1>
+<h2 id="arithmetic-operation">Arithmetic Operation</h2>
+<p>Compute simple arithmetic operations between traces.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;algebra&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">expression</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tr1</span><span class="nv"> </span><span class="s">+</span><span class="nv"> </span><span class="s">tr2</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">tr3&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">trim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">fill_gaps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">resample</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trim</code></td>
+<td><code>bool</code></td>
+<td>Cut all traces to the common time window <code>[max(starttimes), min(endtimes)]</code> before evaluating the expression. Raises an exception if no overlap exists.</td>
+</tr>
+<tr>
+<td><code>fill_gaps</code></td>
+<td><code>bool</code></td>
+<td>Merge the stream and fill internal gaps or overlaps using linear interpolation.</td>
+</tr>
+<tr>
+<td><code>resample</code></td>
+<td><code>bool</code></td>
+<td>Resample all traces to the highest sampling rate found in the stream.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expression-the-expression-field-accepts-a-mathematical-expression-involving-one-or-more-traces-tr1-tr2-tr3">Expression : The <code>expression</code> field accepts a mathematical expression involving one or more traces (<code>tr1</code>, <code>tr2</code>, <code>tr3</code>, ...).</h3>
+<ul>
+<li>Basic Functions</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Operators</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arithmetic</td>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></td>
+<td><code>tr1 + tr2 * 2</code></td>
+</tr>
+<tr>
+<td>Power</td>
+<td><code>**</code></td>
+<td><code>tr1 ** 2</code></td>
+</tr>
+<tr>
+<td>Floor Division</td>
+<td><code>//</code></td>
+<td><code>tr1 // 2</code></td>
+</tr>
+<tr>
+<td>Unary</td>
+<td><code>+</code>, <code>-</code></td>
+<td><code>-tr1</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abs(x)</code></td>
+<td>Absolute value</td>
+</tr>
+<tr>
+<td><code>sqrt(x)</code></td>
+<td>Square root</td>
+</tr>
+<tr>
+<td><code>exp(x)</code></td>
+<td>Exponential</td>
+</tr>
+<tr>
+<td><code>log(x)</code></td>
+<td>Natural logarithm</td>
+</tr>
+<tr>
+<td><code>log2(x)</code></td>
+<td>Base-2 logarithm</td>
+</tr>
+<tr>
+<td><code>log10(x)</code></td>
+<td>Base-10 logarithm</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Trigonometric Functions</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>arcsin</code>, <code>arccos</code>, <code>arctan</code>, <code>arctan2</code></td>
+</tr>
+<tr>
+<td><code>sinh</code>, <code>cosh</code>, <code>tanh</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Rounding Functions</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ceil(x)</code></td>
+<td>Round up</td>
+</tr>
+<tr>
+<td><code>floor(x)</code></td>
+<td>Round down</td>
+</tr>
+<tr>
+<td><code>round(x)</code></td>
+<td>Round to nearest value</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Signal Processing Helpers</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sign(x)</code></td>
+<td>Sign of the signal</td>
+</tr>
+<tr>
+<td><code>diff(x)</code></td>
+<td>First difference</td>
+</tr>
+<tr>
+<td><code>cumsum(x)</code></td>
+<td>Cumulative sum</td>
+</tr>
+<tr>
+<td><code>gradient(x)</code></td>
+<td>Numerical gradient</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Complex Number Helpers</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real(x)</code></td>
+<td>Real component</td>
+</tr>
+<tr>
+<td><code>imag(x)</code></td>
+<td>Imaginary component</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Constants</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pi</code></td>
+<td>π</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>Euler's number</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Usage examples</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Expression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simple sum of two traces</td>
+<td><code>tr1 + tr2 * 1e-3</code></td>
+</tr>
+<tr>
+<td>Complex math pipeline</td>
+<td><code>exp(tr1) + sin(tr2) * sqrt(abs(tr3))</code></td>
+</tr>
+<tr>
+<td>Multi-output (sum and difference)</td>
+<td><code>tr1 + tr2, tr1 - tr2</code></td>
+</tr>
+<tr>
+<td>Negate a trace</td>
+<td><code>-tr1</code></td>
+</tr>
+<tr>
+<td>Cumulative integral proxy</td>
+<td><code>cumsum(tr1)</code></td>
+</tr>
+<tr>
+<td>Numerical derivative</td>
+<td><code>gradient(tr1)</code></td>
+</tr>
+<tr>
+<td>Signal power</td>
+<td><code>tr1 ** 2</code></td>
+</tr>
+<tr>
+<td>Normalized ratio</td>
+<td><code>tr1 / (abs(tr2) + 1e-12)</code></td>
+</tr>
+<tr>
+<td>Phase extraction</td>
+<td><code>arctan2(tr2, tr1)</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="rotate-seismograms">Rotate Seismograms</h2>
 <p>This option rotates the three-component traces in the stream to either the Great Arc Circle (GAC) or a user-defined angle and inclination.</p>
 <ul>
@@ -1887,13 +2184,13 @@
 </li>
 <li><strong><code>inclination</code></strong> (float). Inclination of the ray at the station in degrees. Only necessary for three component rotations.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rotate&#39;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;NE-&gt;RT&#39;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;GAC&#39;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">angle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">inclination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rotate&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;NE-&gt;RT&#39;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;GAC&#39;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">angle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30.0</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">inclination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 </code></pre></div>
 <hr />
 <h2 id="cross-correlation">Cross Correlation</h2>
@@ -1919,14 +2216,14 @@
 <li><strong><code>strict</code></strong>: If <code>True</code>, enforces strict alignment and compatibility between trace lengths and sampling rates.</li>
 <li><strong><code>trim</code></strong>: If <code>True</code>, cut all waveforms for the maxumum start time and minimum end time.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_correlate&#39;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">trim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_correlate&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">trim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </code></pre></div>
 <hr />
 <h2 id="stack">Stack</h2>
@@ -1944,10 +2241,10 @@
 <p><strong><code>order</code></strong>: The exponent applied in phase-weighted stacking. A higher value gives stronger weighting to coherent signals.</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stack&#39;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;pw&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stack&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;pw&#39;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
 <hr />
 <h2 id="synchronization">Synchronization</h2>
@@ -1961,10 +2258,10 @@
 <p><strong><code>MCCC</code></strong>: (Multi-Channel Cross-Correlation): Dynamically aligns traces based on their waveform similarity by computing relative delays. This method maximizes coherence across all channels and is especially effective in noisy conditions or when arrival times differ slightly due to path effects or instrument drift. The MCCC approach is based on: VanDecar, J. C., &amp; Crosson, R. S. (1990).</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;synch&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;starttime&#39;</span><span class="w"> </span><span class="c1"># or MCCC</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;synch&#39;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;starttime&#39;</span><span class="w"> </span><span class="c1"># or MCCC</span>
 </code></pre></div>
 <hr />
 <h2 id="shift">shift</h2>
@@ -1988,10 +2285,10 @@ Use case: When you want full control over the alignment or need to apply empiric
 </ul>
 <p>Note: If both phase and time_shifts are provided, phase takes precedence.
 If none of the options are valid, the stream is returned unchanged. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;shift&#39;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">phase_theo</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;P&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;shift&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">phase_theo</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;P&#39;</span>
 </code></pre></div>
 <hr />
 <h2 id="concatenate">Concatenate</h2>
@@ -2001,9 +2298,9 @@ If none of the options are valid, the stream is returned unchanged. </p>
 <p>Behavior
 Overlapping traces are merged into a single continuous trace. Gaps are filled using linear interpolation between adjacent segments. Non-overlapping or incompatible traces (e.g. different IDs or sampling rates) are left unmerged.</p>
 <p>Note: Trace concatenation is automatically done when command is <strong>surfquake process</strong> or <strong>surfquake process_daily</strong> but not for <strong>surfquake quick</strong> for full control. </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;concat&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;concat&#39;</span>
 </code></pre></div>
 
 
