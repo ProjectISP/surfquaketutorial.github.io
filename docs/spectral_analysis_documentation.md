@@ -45,7 +45,7 @@ The `spectrogram` method produces a time-frequency representation of a seismic t
 - **`linf`, `lsup`**: Lower and upper frequency limits for plotting
 - **`method`**: Spectral estimation method. Options:
   - `multitaper` (default)
-  - `fft` or others if extended
+  - `fft`
 
 ### Config Example
 
@@ -53,11 +53,9 @@ The `spectrogram` method produces a time-frequency representation of a seismic t
 Analysis:
   process_1:
     name: 'spectrogram'
-    method: 'multitaper' # 'fft' for conventional spectrum with single taper
+    method: 'multitaper'
     win: 5.0
     overlap_percent: 50.0
-    linf: 0 # optional
-    lsup: 20 # optional
     output_path: /Users/surf_test/spectral
 ```
 
@@ -75,12 +73,12 @@ CWT provides high-resolution time-frequency analysis using scalable wavelets. Id
 
 ### Parameters
 
-- **`wavelet_type`**: 
+- **`wavelet`**: 
   - `"cm"`: Complex Morlet *(default and recommended for phase coherence)*
   - `"mh"`: Mexican Hat
   - `"pa"`: Paul wavelet
 - **`param`**: Wavelet parameter (e.g., 6.0)
-- **`fmin`, `fmax`**: Frequency range
+- **`fmin`, `fmax`**: Frequency range (optional)
 - **`nf`**: Number of frequency bins
 
 ### Config Example
@@ -89,10 +87,10 @@ CWT provides high-resolution time-frequency analysis using scalable wavelets. Id
 Analysis:
   process_1:
     name: 'cwt'
-    wavelet_type: 'cm'
+    wavelet: 'cm'
     param: 6.0
-    fmin: 0.5 # optional
-    fmax: 20.0 #optional
+    fmin: 0.5
+    fmax: 20.0
     nf: 80
     output_path: /Users/surf_test/spectral
 ```

@@ -305,6 +305,8 @@ Flattens signal spectrum while preserving phase:
 Analysis:
   process_11:
     name: 'whitening'
+    fmin: 0.05
+    fmax: 24.5
     freq_width: 0.02
     taper_edge: True
 ```
