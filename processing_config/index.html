@@ -2101,6 +2101,11 @@
 <p>Cut Traces:</p>
 <ul>
 <li><strong>Parameters</strong>: <code>method</code> , <code>start</code>, <code>end</code>,<code>t_before</code>, <code>t_after</code></li>
+<li><strong>Optional parameters</strong>: <code>pad</code> &amp; <code>fill_value</code></li>
+</ul>
+<p><code>pad</code> (bool, Default: False). Gives the possibility to trim at time points outside the time frame of the original trace, filling the trace with the given fill_value.</p>
+<p><code>fill_value</code> (int, float or None, Default: None) – Fill value for gaps. Traces will be converted to NumPy masked arrays if no value is given and gaps are present.</p>
+<ul>
 <li><strong>method</strong>:<code>absolute</code>, <code>phase</code>, <code>reference</code></li>
 </ul>
 <p>Cut all traces according to a date using method: <code>absolute</code> and parameters <code>start</code>, <code>end</code> or relative to a <code>phase</code> (i.e 'P'), or the last <code>reference</code> saved in the trace header.</p>
