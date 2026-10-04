@@ -15,9 +15,7 @@ Surfquake has been designed to streamline the workflow of estimating seismic sou
 
 Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:
 
-- [<span style="color:#5DADE2">*surfquake 1.4.0, Jun 2026: Dispersion_curves_processing tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/dispersion_curves_processing/)
-
-- [<span style="color:#5DADE2">*surfquake 1.2.0, May 2026: Ambient Noise Processing tool*</span>](https://projectisp.github.io/surfquaketutorial.github.io/ambient_noise/)
+- [<span style="color:#5DADE2">*surfquake 1.6.0, mid Oct 2026: Refractored Signal Processing toolbox*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
 
 
 Take a look at our recently published paper!

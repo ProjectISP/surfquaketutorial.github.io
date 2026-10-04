@@ -52,9 +52,12 @@ Overview:
             -i, --inventory_file     [OPTIONAL] Station metadata (StationXML or RESP)
             -o, --output_folder      [OPTIONAL] Directory to save processed traces
             -a, --auto               [OPTIONAL] Run in automatic (non-interactive) mode
-            --plot_config            [OPTIONAL] Plotting settings YAML
-            --post_script            [OPTIONAL] Python script to apply to each stream
-            --post_script_stage      [OPTIONAL] When to run post-script: 'before' or 'after' (default: before)
+            -m, --merge              [OPTIONAL] If merge traces as fist action
+                --min_date           [OPTIONAL] Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
+                --max_date           [OPTIONAL] Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
+                --plot_config        [OPTIONAL] Plotting settings YAML
+                --post_script        [OPTIONAL] Python script to apply to each stream
+                --post_script_stage  [OPTIONAL] When to run post-script: 'before' or 'after' (default: before)
         
 ---
 

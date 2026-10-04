@@ -20,7 +20,7 @@ Analysis:
 | `fill_gaps` | `bool` | Merge the stream and fill internal gaps or overlaps using linear interpolation. |
 | `resample` | `bool` | Resample all traces to the highest sampling rate found in the stream. |
 
-### Expression : The `expression` field accepts a mathematical expression involving one or more traces (`tr1`, `tr2`, `tr3`, ...).
+- Expression : The `expression` field accepts a mathematical expression involving one or more traces (`tr1`, `tr2`, `tr3`, ...).
 
 - Basic Functions
 
@@ -125,16 +125,18 @@ Analysis:
 
 ---
 
-## Cross Correlation
+## Cross Correlation & Concolution
 
 Performs cross-correlation between waveforms.
+
+- **`name`**: `cross_correlate` or `convolve`.
 
 - **`mode`**: Defines how the cross-correlation is computed, following the [NumPy `correlate`](https://numpy.org/doc/stable/reference/generated/numpy.correlate.html) method:
     - `full`: Returns the complete cross-correlation function. Includes all shifts, even partial overlaps. Best if you want to scan the entire signal.
     - `valid`: Returns only correlation values where the signals fully overlap. Safer when you want to avoid edge effects.
     - `same`: Returns output of the same length as the input data, centered around zero lag.
 
-- **`normalize`**: Specifies how traces are normalized before correlation.
+- **`normalize`**: Specifies how traces are normalized before correlation. Not applied in convolution
     - `full`: Uses zero-normalized cross-correlation (ZNCC). Each point is normalized based on local signal energy and optional demeaning. This provides a correlation coefficient between -1 and 1 and is the most statistically meaningful
     - `naive`:Normalizes both signals by their global standard deviation. Quicker but may introduce bias if signals have amplitude variation.
     - `none`: No normalization is applied. Raw amplitudes are used, which may be sensitive to trace scaling or noise.
@@ -247,5 +249,21 @@ Analysis:
     name: 'concat'
 ```
 
+## Chop comtinuous data
 
+Chop continuous seismic data into a chunks of specific length.
+
+- `chunk_length`:  (int|float) Output window length in seconds.
+- `min_length`: (int|float) Minimum amount of REAL recorded data required, in seconds.
+- `max_interpolation_gap`: (optional: int|float) Maximum gap that we allow to interpolate, in seconds.
+- `output_dir`: (str) output path to the traces chopped in mseed files
+
+```yaml
+Analysis:
+  process_1:
+    name: 'chop'
+    chunk_length: 1800.0
+    min_length: 1760.0
+    output_dir: /continuos/chop_data
+```
 

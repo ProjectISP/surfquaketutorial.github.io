@@ -49,11 +49,43 @@ Analysis:
 
 ---
 
+## Reverse
+
+Reverse the data points of a seismic trace in-place (time-reversal)
+
+
+```yaml
+Analysis:
+  process_1:
+    name: 'reverse'
+```
+
+---
+
+## Flip
+
+Simply multiply the trace samples by -1 so that change the polarity
+
+```yaml
+Analysis:
+  process_1:
+    name: 'flip'
+```
+
+
+---
+
 ## Cut
 
 Cut Traces:
 
 - **Parameters**: `method` , `start`, `end`,`t_before`, `t_after`
+- **Optional parameters**: `pad` & `fill_value`
+
+`pad` (bool, Default: False). Gives the possibility to trim at time points outside the time frame of the original trace, filling the trace with the given fill_value.
+
+`fill_value` (int, float or None, Default: None) – Fill value for gaps. Traces will be converted to NumPy masked arrays if no value is given and gaps are present.
+
 - **method**:`absolute`, `phase`, `reference`
 
 Cut all traces according to a date using method: `absolute` and parameters `start`, `end` or relative to a `phase` (i.e 'P'), or the last `reference` saved in the trace header.
