@@ -829,10 +829,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cross-correlation" class="md-nav__link">
+  <a href="#cross-correlation-concolution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cross Correlation
+        Cross Correlation &amp; Concolution
       
     </span>
   </a>
@@ -2191,9 +2191,12 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">inclination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
 </code></pre></div>
 <hr />
-<h2 id="cross-correlation">Cross Correlation</h2>
+<h2 id="cross-correlation-concolution">Cross Correlation &amp; Concolution</h2>
 <p>Performs cross-correlation between waveforms.</p>
 <ul>
+<li>
+<p><strong><code>name</code></strong>: <code>cross_correlate</code> or <code>convolve</code>.</p>
+</li>
 <li>
 <p><strong><code>mode</code></strong>: Defines how the cross-correlation is computed, following the <a href="https://numpy.org/doc/stable/reference/generated/numpy.correlate.html">NumPy <code>correlate</code></a> method:</p>
 <ul>
@@ -2203,7 +2206,7 @@
 </ul>
 </li>
 <li>
-<p><strong><code>normalize</code></strong>: Specifies how traces are normalized before correlation.</p>
+<p><strong><code>normalize</code></strong>: Specifies how traces are normalized before correlation. Not applied in convolution</p>
 <ul>
 <li><code>full</code>: Uses zero-normalized cross-correlation (ZNCC). Each point is normalized based on local signal energy and optional demeaning. This provides a correlation coefficient between -1 and 1 and is the most statistically meaningful</li>
 <li><code>naive</code>:Normalizes both signals by their global standard deviation. Quicker but may introduce bias if signals have amplitude variation.</li>
