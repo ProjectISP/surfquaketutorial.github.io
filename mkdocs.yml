@@ -40,7 +40,6 @@ nav:
     - Dispersion Curves Processing: dispersion_curves_processing.md
 
   - Database & Utilities:
-      - Data Base: db.md
       - Create Metadata: create_metadata.md
       - Manage Catalog: manage_catalog.md
       - Build MTI Config: build_mti.md

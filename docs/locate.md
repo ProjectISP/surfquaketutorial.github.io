@@ -2,12 +2,37 @@
 # <span style="color:darkcyan;">**Event Location**</span>
 The Event Location toolbox uses [<span style="color:#5DADE2;">Non Lin Loc, Lomax et ., 2009</span>](http://alomax.free.fr/nlloc/) to locate seismic events.
 
-## <span style="color:darkcyan;">**Previous knowledge**</span>
+
+## <span style="color:darkcyan;">**Event Location from CLI**</span>
+
+```
+    Key Arguments:
+        -i, --inventory_file      [REQUIRED] Station metadata (XML, RESP)
+        -c, --config_file         [REQUIRED] Path to NonLinLoc .ini configuration
+        -o, --output_dir          [REQUIRED] Directory where location results will be saved
+        -g, --generate_tt         [REQUIRED] Generate travel time files before location
+        -s, --apply_station_corr  [OPTIONAL] Apply station corrections
+        -n, --iterations          [OPTIONAL] Number of global search iterations 
+                                  (int, number of iterations if stations corrections is set)
+```
+
+### Usage
+
+```bash
+# Interactive help
+>> surfquake locate -h
+``` 
+
+```bash
+>> surfquake locate -i /surfquake_test/metadata/inv_all.xml -c /surfquake_test/config_files/nll_config.ini -o /surfquake_test/test_nll_final -g -s
+```
+
+## <span style="color:darkcyan;">**Further Details**</span>
 First we include here, previous knowlege about files you need to set to run event locations.
 
 ### The Picking File
 
-The picking file [<span style="color:#5DADE2;">NonLinLoc Phase file format nll_input.txt</span>](http://alomax.free.fr/nlloc/) is automatically generated when the associator. However, you can make it by your own. Here, it's attached how is the file describing one event. For more events just you need yo write the picking info separated by a blank row. The location algorythm will locate all events with picking information inside the file
+The picking file [<span style="color:#5DADE2;">NonLinLoc Phase file format nll_input.txt</span>](http://alomax.free.fr/nlloc/) is automatically generated when the associator. However, you can make it by your own. Here, it's attached how is the file describing one event. For more events just you need to write the picking info separated by a blank row. The location algorythm will locate all events with picking information inside the file
 
 ```
 Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hourmin Seconds GAU Err Coda_duration   Amplitude   Period
@@ -93,32 +118,8 @@ This matrix means that, for example corresponds to geographic points long,lat (s
 (-10.0,40.0) (-9.5,40.0) ...... (-9.0,40.0) (-8.5,40.0)
     </code>
 </pre>
-Warning grid cells must be [dx = dy = dz] for a correct interpretation.
 
-
-## <span style="color:darkcyan;">**Event Location GUI**</span>
-
-This is a screenshot of the Event Location GUI.
-
-![Screenshot](img/locate.png)
-
-- Location Parameters: Just set the paths to the workflow.
-    - Work / Ouput Directory: Set the root path where the necessary working directories structure will be created. In this structure will be build the velocity grid, travel-times tables and the location output.
-    - Model Folder Path: Set the path to your 1D or 3D model folder. Go to CLI section to see further details of how to configurate your Earth Model.
-    - Pick File: Set the path to the pick file. Picking file <span style="color:#5DADE2">nll_input.txt</span> output from associator toolbox contains all phase info o run the event locations.
-- Grid Configuration:
-    - Grid Reference: SW corner of your geographic framework
-    - Grid Dimension in the x, y and z number of points and dx, dy dx the size in each dimension. For example the size in the X/East axis, X = dx*(x-1)
-    - Geographic Transformation: SIMPLE or GLOBAL. <span style="color:#5DADE2">Warning</span> if GLOBAL is selected go directly to press Run Location 
-    - Grid Type: Slowness (Default)
-    - Wave: P & S or P. This will guide the software to know wich can of velocity grid create.
-    - Model: 1D or 3D
-- Travel Times:
-    - Select type of grid GRID1D or GRID3D and the corresponding wave P & S or S
-    - Distance Limit: The maximum distance from the center of the grid  - station,  to compute the travel-time
-- Location parameters:
-    - search: algorythm to be used in the search of the location solution
-    - Method
+**Warning** grid cells must be [dx = dy = dz] for a correct interpretation.
 
 ## <span style="color:darkcyan;">**Grid Definition**</span>
 
@@ -130,6 +131,18 @@ One the most important parts is the geographic framework settings. In the figure
 
 In the next section CLI and Library the user can configurate the event location tool from a config file type file.ini, an example of the typical configuration for locate local/regional events using a 1D-model as follows:
 
+### Create a template config file
+```
+Key Arguments:
+            -c, --config_type    [REQUIRED]         Config type 
+            -o, --output_folder  [REQUIRED]         Output_folder for saving configuration
+```
+
+```bash           
+>> surfquake make_config -c nll_config -o ./configs
+``` 
+
+### Config file description
 ```
 [GRID_CONFIGURATION]
 LATITUDE = 41.0000
@@ -160,33 +173,29 @@ SEARCH = OCT-TREE
 METHOD = GAU_ANALYTIC
 ```
 
-In the section Location_Parameters SEARCH is just available **OCT** that corresponds to the Octree algorythm. 
-In Method you can change to:
+- GRID_CONFIGURATION:
+    - LATITUDE: Latitude reference of the grid (not used in GLOBAL grids)
+    - LONGITUDE: Longitude reference of the grid (not used in GLOBAL grids)
+    - DEPTH_KM: Depth reference of the grid. Please use egative values to use stations with altitude above 0 m.
+    - Grid Dimension in the `X`, `Y` and `Z` number of points and `DX`,`DY`,`DZ` the size in each dimension. For example the size in the X/East axis, X = DX*(X-1)
+    - GEO_TRANSFORMATION: `SIMPLE` or `GLOBAL`.
+    - GRID_TYPE: SLOW_LEN (Default)
+    - P_WAVE_TYPE & S_WAVE_TYPE (bool): To create the velocity grid create.
+    - MODEL: 1D or 3D
+    - PATH_TO_1D_MODEL & PATH_TO_3D_MODEL: Set the path to your 1D or 3D model folder.
+    - PATH_TO_PICKS: Set the path to the pick file. Picking file <span style="color:#5DADE2">nll_input.txt</span> output from associator toolbox contains all phase info o run the event locations. This picks can also be generated from pick the seismogram (i.e surfquake quick -w "./my_trace.mseed") 
+- TRAVEL_TIMES_CONFIGURATION:
+    - Select type of grid GRID1D or GRID3D and the corresponding wave P & S or S
+    - Distance Limit: The maximum distance from the center of the grid  - station,  to compute the travel-time
+- LOCATION_PARAMETERS:
+    - SEARCH: Algorythm to be used in the search of the location solution. Just available **OCT-TREE** that corresponds to the Octree algorythm.
+    - METHOD:
 
-- **GAU_ANALYTIC** the inversion approach of Tarantola and Valette (1982) with L2-RMS likelihood function. 
-- **EDT** Equal Differential Time likelihood function cast into the inversion approach of Tarantola and Valette (1982) 
-    - **EDT_OT_WT** Weights EDT-sum probabilities by the variance of origin-time estimates over all pairs of readings. This reduces the probability (PDF values) at points with inconsistent OT estimates, and leads to more compact location PDF's. 
-    - **EDT_OT_WT_ML** version of EDT_OT_WT with EDT origin-time weighting applied using a grid-search, maximum-likelihood estimate of the origin time. Less efficient than EDT_OT_WT which uses simple statistical estimate of the origin time.
+        - **GAU_ANALYTIC** the inversion approach of Tarantola and Valette (1982) with L2-RMS likelihood function. 
+        - **EDT** Equal Differential Time likelihood function cast into the inversion approach of Tarantola and Valette (1982) 
+        - **EDT_OT_WT** Weights EDT-sum probabilities by the variance of origin-time estimates over all pairs of readings. This reduces the probability (PDF values) at points with inconsistent OT estimates, and leads to more compact location PDF's. 
+        - **EDT_OT_WT_ML** version of EDT_OT_WT with EDT origin-time weighting applied using a grid-search, maximum-likelihood estimate of the origin time. Less efficient than EDT_OT_WT which uses simple statistical estimate of the origin time.
 
-
-
-## <span style="color:darkcyan;">**Event Location from CLI**</span>
-
-
-### Usage
-```bash
->> surfquake locate seismic event [-h] -i INVENTORY_FILE_PATH -c CONFIG_FILE_PATH -o OUT_DIR_PATH [-g] [-s]
-```
-### Interactive help
-
-```bash
->> surfquake locate -h
-``` 
-
-### Run Event Location from CLI
-```bash
->> surfquake locate -i /surfquake_test/metadata/inv_all.xml -c /surfquake_test/config_files/nll_config.ini -o /surfquake_test/test_nll_final -g -s
-```
 
 ## <span style="color:darkcyan;">**Event Location from Library**</span>
 ### Classes

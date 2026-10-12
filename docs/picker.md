@@ -7,21 +7,21 @@ The Picking algorythm of surfQuake uses the Deep Neural Network of Phasenet ([Zh
     20220131,CA.ARBS.S,2022,1,31,CA,ARBS,1,85480.59,2022-01-31T23:44:40.590000,0.30124416947364807,8481788.269042969,S
 
 
-##  <span style="color:darkcyan;"> **Phase Picker GUI** </span>
-
-We start with the GUI. This is a screenshot of the Project GUI.
-
-![Screenshot](img/picking.png)
-
-Be sure you have just created a [<span style="color:#5DADE2">Project</span>](https://projectisp.github.io/surfquaketutorial.github.io/project/) or you have loaded one. Then click on <span style="color:#5DADE2">Run Auto Pick</span>. This action will start the phase picker and will save the output in <span style="color:#5DADE2">Output Directory</span> ready to be used in the associator toolbox and <span style="color:#5DADE2">original_picks</span> as csv file for direct reading.
-
-
 ## <span style="color:darkcyan;">**Phase picker from CLI**</span>
+```
+Key Arguments:
+        -f, --project_file        [REQUIRED]    Path to your seismic project file
+        -d, --output_dir          [REQUIRED]    Directory to save pick results
+        -pt, --p_thresh           [OPTIONAL]    Threshold for P-wave probability (0–1) (default: 0.3)
+        -st, --s_thresh           [OPTIONAL]    Threshold for S-wave probability (0–1) (default: 0.3)
+        -n, --net                 [OPTIONAL]    Network code filter (default: *)
+        -s, --station             [OPTIONAL]    Station code filter (default: *, e.g. SFS|ARNO)
+        -ch, --channel            [OPTIONAL]    Channel filter (default: *, e.g. BH?)
+        --min_date                [OPTIONAL]    Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT min date of the project
+        --max_date                [OPTIONAL]    Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT max date of the project
+        -v, --verbose             [OPTIONAL]    Enable detailed logging
+```
 
-### Usage
-```bash
->> surfquake pick -f [path to your project file] -d [path to your pick saving directory] -p [P-wave threshoold] -s [S-wave threshold] --verbose
-``` 
 ### Interactive help
 
 ```bash
@@ -33,8 +33,6 @@ Be sure you have just created a [<span style="color:#5DADE2">Project</span>](htt
 ```bash
 >> surfquake pick -f /test_surfquake_core/testing_data/projectssurfquake_project_new.pkl -d /test_surfquake_core/testing_data/picks -p 0.3 -s 0.3 --verbose
 ```
-
-
 
 
 ## <span style="color:darkcyan;">**Phase Picker from Library**</span>

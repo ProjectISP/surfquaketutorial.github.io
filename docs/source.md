@@ -3,27 +3,34 @@
 
 The tool Source Parameters is designed to estimate events source parameters (i.e., Mw, ML, seismic moment, corner frequency, radiated energy, source size and stress drop) and the attenuation parameters (t-star, quality factor). It is based in the implementation of [<span style="color:#5DADE2;">Satrinano et al., 2023</span>](https://sourcespec.readthedocs.io/en/stable/index.html). A detailed theoretical background can be found [here](https://sourcespec.readthedocs.io/en/stable/theoretical_background.html#overview)
 
-## <span style="color:darkcyan;">**Source Parameters GUI**</span>
-![Screenshot](img/source.png)
+## <span style="color:darkcyan;">**Source Parameters from CLI**</span>
 
-- Time Window Parameters
-    - P- and S-wave tolerance: Difference in seconds from the detected wave and the theroretical arrival time.
-    - noise_pre_time window: Window lenght before the first arrival time
-    - signal window: Window leght of signal to be analyse after first phase arrival time
-    - spectral window: Time window before the first arrival time
-- Source Parameters
-    - Source Density: Density of the rock in the source.
-    - rpp: Radiation pattern coefficient for the P-wave
-    - rps: Radiation pattern coefficient for the S-wave
-    - Geometrical Spreading Correction: Spectra will be multiplied by this value to correct for the lost amplitude
-        - r_power_n: geom_spread_n_exponent = 1 (default, body wave in a homogeneous full-space), 0.5 (surface wave in a homogeneous half-space)
-        - boatwright: "r" (body waves) geometrical spreading for hypocentral distances below a cutoff distance; frequency-dependent geometrical spreading above the cutoff distance (Boatwright et al., 2002).
-            - Geometrical spreading cutoff distance: Geometrical spreading cutoff distance, in km, for the "boatwright" model
-- Local Magnitude: Local magnitude parameters: ml = log10(A) + a * log10(R/100) + b * (R-100) + c, where A is the maximum W-A amplitude (in mm) and R is the hypocentral distance (in km)
+```
+    Key Arguments:
+        -i, --inventory_file     [REQUIRED] Path to station metadata (XML, RESP)
+        -p, --project_file       [REQUIRED] Path to project file
+        -c, --config_file        [REQUIRED] Path to configuration for SourceSpec
+        -l, --hypocenter_dir     [REQUIRED] Directory containing NonLinLoc *.hyp files
+        -o, --output_folder      [REQUIRED] Output folder for source parameter results
+        -t, --large_scale        [OPTIONAL] Automatic long cut of teleseism event waveforms
+```
+
+### Usage
+
+```bash
+### Interactive help
+>> surfquake source -h
+``` 
+
+```bash
+>> surfquake source -i ./metadata/inv_all.xml -p ./project/surfquake_project.pkl -c ./config_files/source_spec.conf -l ./loc -o ./source_output
+```
 
 
 
 ## <span style="color:darkcyan;">**Config file**</span>
+The configuration file corresponds to SourceSpec 1.7. This template can be directly used as template
+
 ``` 
 # GENERAL PARAMETERS --------
 # All the fields are optional.
@@ -628,21 +635,6 @@ smi_focal_mechanism_template = "$SMI_BASE/FocalMechanism/Origin/$ORIGIN_ID#sourc
 # -----------------QUAKEML PARAMETERS
 ``` 
 
-## <span style="color:darkcyan;">**Source Parameters from CLI**</span>
-
-### Usage
-```bash
->> surfquake source parameters estimation [-h] -i INVENTORY_FILE_PATH -p PROJECT_FILE_PATH -c CONFIG_FILE_PATH -l LOC_FILES_PATH [-t] -o OUTPUT_DIR_PATH
-``` 
-### Interactive help
-
-```bash
->> surfquake source -h
-``` 
-
-```bash
->> surfquake source -i /surfquake_test/metadata/inv_all.xml -p /surfquake_test/project/surfquake_project.pkl -c /surfquake_test/config_files/source_spec.conf -l /surfquake_test/test_nll_final/loc -o /surfquake_test/test_source_final
-```
 
 ## Source Parameters from Library
 

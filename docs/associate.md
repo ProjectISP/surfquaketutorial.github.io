@@ -1,24 +1,46 @@
-# Arraival times Assocotiation
+# Rapid Earthquake Association and Location (REAL)
+
 The main goal of this tool is to associate the arrival times of different P- and S-waves to the their corresponding events. The associator algorythm used in surfquake is REAL ([<span style="color:#5DADE2;">Zhang et al., 2019</span>](https://github.com/Dal-mzhang/REAL/)). The user needs to set the input parameters and point to the folder where the picks have been storaged. In th following sections it will be describe the surfquake imprementation of REAL, for a full description of the parameters visit [<span style="color:#5DADE2;">REAL cookbook</span>](https://github.com/Dal-mzhang/REAL/blob/master/REAL_userguide_July2021.pdf
 )
 
+## Events Associator from CLI
 
-## Events Associator GUI
+```
+Key Arguments:
+        -i, --inventory_file     [REQUIRED] Path to station metadata (XML or RESP)
+        -p, --picks_folder       [REQUIRED] Folder containing station pick files
+        -c, --config_file        [REQUIRED] Path to REAL .ini configuration file
+        -w, --work_dir           [REQUIRED] Working directory for REAL intermediate output
+        -s, --save_dir           [REQUIRED] Output directory for associated pick results
+        -v, --verbose            [OPTIONAL] Enable detailed logging
+```
 
-This is a screenshot of the Associator GUI.
+### Interactive help
 
-![Screenshot](img/associate.png)
+```bash
+>> surfquake associate -h
+``` 
 
-The basics settings to associate inside a medium size region (300 x 300) km are show in the upper screenshot.
+### Run Phase Picker from CLI
 
-- Picking Directory: Root path to the folders containing the picking files. This files are automatically generated after running the picking tool.
-- Output Directory: Path to the forlder where the users wants the results of the arrival times association. Picking file <span style="color:blue">nll_input.txt</span> to Event Locaion tool will be also saved in this folder.
-
-- Geographic Framework: Set the coordinates of your study region and remind loading the metadata from project tool. You can plot a map to be sure tour settings are ok.
-- Associator Parameters: These parameters are described in this [link](https://github.com/Dal-mzhang/REAL/blob/master/REAL_userguide_July2021.pdf).
+```bash
+>> surfquake associate -i /surfquake_test/metadata/inv_all.xml -p /surfquake_test/test_picking_final -c /surfquake_test/config_files/real_config.ini
+```
 
 ## Config files
 The parametrization of the Event Assocciator tool can be storaged in a file.ini. An example of this file is as follows:
+
+
+### Create a template config file
+```
+Key Arguments:
+            -c, --config_type    [REQUIRED]         Config type 
+            -o, --output_folder  [REQUIRED]         Output_folder for saving configuration
+```
+
+```bash           
+>> surfquake make_config -c real_config -o ./configs
+``` 
 
 ```
 [GEOGRAPHIC_FRAME]
@@ -109,23 +131,7 @@ The parameters should be tuned together rather than independently. Large search 
 
 A practical workflow is to begin with permissive values, inspect the resulting associations, and then progressively tighten the thresholds, search ranges, and time windows until the number of false associations is reduced without losing valid events.
 
-## Events Associator from CLI
 
-### Usage
-```bash
->> surfquake associate [-h] -i INVENTORY_FILE_PATH -p DATA_DIR -c CONFIG_FILE_PATH -w WORK_DIR_PATH -s SAVE_DIR [-v]
-``` 
-### Interactive help
-
-```bash
->> surfquake associate -h
-``` 
-
-### Run Phase Picker from CLI
-
-```bash
->> surfquake associate -i /surfquake_test/metadata/inv_all.xml -p /surfquake_test/test_picking_final -c /surfquake_test/config_files/real_config.ini
-```
 
 ## Events Associator from Library
 ### Classes
@@ -158,7 +164,7 @@ def run_real(self):
     # starts the events associator
 ```
 
-### example using library
+### Example using library
 
 ```python linenums="1"
 from surfquakecore.real.real_core import RealCore

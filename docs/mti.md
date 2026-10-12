@@ -3,62 +3,36 @@
 
 The focal mechanism of the pre-located events is automatically estimated using a optimized version of Bayesian Isola ([<span style="color:#5DADE2;">Vackâr et al., 2017</span>](https://academic.oup.com/gji/article/210/2/693/3747443)). The MTI is run over a set of events. The events can be selected quering the database through the GUI, giving a folder path with mti_config.ini files or even making instances of the class for each event and running the inversion from the core library. Moreover, for Core library and CLI users, it can be automatically generated the MTI config files from a catalog object, see [<span style="color:#5DADE2;">Build MTI config files in Utilities section</span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files).
 
-## <span style="color:darkcyan;">**MTI GUI**</span>
 
-![Screenshot](img/mti.png)
-
-- Working Framework:
-    
-    - Working Dirctory (no required): Folder where Green functions a temporal files will be saved.
-    
-    - Output Directory: Rooth path to the folder where output from event inversions will be saved.
-
-    - Earth Model File: File path to he earth model. An example as follows:
-
+## <span style="color:darkcyan;">**MTI from CLI**</span>
 
 ```
-Crustal model                  IBERIA
-number of layers 
-   7
-Parameters of the layers
-depth of layer top(km)   Vp(km/s)    Vs(km/s)    Rho(g/cm**3)    Qp     Qs
-      0.0                 6.10       3.490        2.920         300    300
-     11.0                 6.40       3.660        2.980         300    300
-     24.0                 6.90       3.940        3.080         300    300
-     31.0                 8.00       4.570        3.300         300    300
-     45.6                 8.04       4.474        3.308         300    300
-     56.2                 8.04       4.478        3.309         300    300
-     66.9                 8.04       4.481        3.309         300    300
-*************************************************************************
+    Key Arguments:
+        -i, --inventory_file    [REQUIRED] Path to station metadata file (XML, RESP)
+        -p, --project_file      [REQUIRED] Path to the project file with waveforms and event metadata
+        -c, --config_file       [REQUIRED] INI configuration file for inversion settings
+        -o, --output_dir        [REQUIRED] Output directory for inversion results
+        -s, --save_plots        [OPTIONAL] If set, saves plots of MT solutions and fits
 ```
 
-- Grid search: Defines a geographic grid centered in the estimated hypocenter where surfquake will proceed with the search of the best MTI.
+### Usage
 
-    - Horizontal Location Uncertainity: Maximum horizontal range of the search.
+```bash
+# Interactive Help
+>> surfquake mti -h
+```
 
-    - Horizontal search step: Horizontal resolution of the grid search.
+### Run MTI from CLI
 
-    - Depth Uncertainty: Maximum vertical range of the search.
+```bash
+>> surfquake mti -i ./inv_surfquakecore.xml -p ./surfquake_project_mti.pkl -o ./test_mti -c ./surfquake_test/mti_configs -s
+```
 
-    - Depth Search step: Vertical resolution of the grid search.
 
-    - Time Uncertainity: Time shift around the event origin time.
+## <span style="color:darkcyan;">**Configuration**</span>
 
-- Inversion Parameters: Defines parameters realtd to the source and the inversion process.
-- Traces Selection Criteria: Defin the criteria to include or not seismograms to your inversion
 
-Now, that you have parametrized your inversion follow the steps:
-
-1. Inside Project: Load your project and load your Metadata.
-2. Inside The DataBase dedicated GUI.
-    - Fill your DataBase loading that files from the folder where you have the location files.
-    - Not required but very recommended populate your DataBase with the information from the output of Source. This will give the database information about Magnitudes and will facilitate the MTI.
-3. Make a Query to filter your Database
-4. Without closing DataBase GUI, press **Run Inversion**.
-5. Track the evolution of your inversions in the output dirctory, finally press print Results.
-6. Populate your dataBase with the information from the output of MTIs.
-
-## <span style="color:darkcyan;">**MTI Config File**</span>
+### <span style="color:darkcyan;">**MTI Config File**</span>
 
 In the following sections CLI and Core library the user can use mti_config.ini files to define each event where surfquake will carry out the MTIs. You can storage a single event per file. So, place all files inside the same folder. Please find here an example of mti_config.ini file (the name of the .ini file doen't matter just extension .ini). Additionally, be in mind that users can create automatically mti config files. Go to section [<span style="color:#5DADE2;"> Build MTI config files using the Library</span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files) inside Utils. You can use the following mti config file information to make your own template.
 
@@ -101,25 +75,48 @@ RMS_THRESH = 5.0
 Units: LOCATION_UNC [m], TIME_UNC [s], DEPTH_UNC[m], RUPTURE_VELOCITY [m/s], MIN_DIST [km], MAX_DIST [km], SOURCE_DURATION [s], 
 RMS_THRESH [avarage ratio signal / noise]. If MIN_DIST and MAX_DIST automatically will be used MIN_DIST = 2 * rupture_length, MAX_DIST = 2 ** (mti_config.magnitude) * 2
 
-## <span style="color:darkcyan;">**MTI from CLI**</span>
 
-### Usage
+- Grid search: Defines a geographic grid centered in the estimated hypocenter where surfquake will proceed with the search of the best MTI.
 
-```bash
-surfquake mti -i [inventory_file_path] -p [path_to_project] -c [path to mti_config_file.ini] 
-        -o [output_path]  -s [if save plots]
+    - Horizontal Location Uncertainity: Maximum horizontal range of the search.
+
+    - Horizontal search step: Horizontal resolution of the grid search.
+
+    - Depth Uncertainty: Maximum vertical range of the search.
+
+    - Depth Search step: Vertical resolution of the grid search.
+
+    - Time Uncertainity: Time shift around the event origin time.
+
+- Inversion Parameters: Defines parameters realtd to the source and the inversion process.
+- Traces Selection Criteria: Defin the criteria to include or not seismograms to your inversion
+
+Now, that you have parametrized your inversion follow the steps:
+
+1. Inside Project: Load your project and load your Metadata.
+2. Inside The DataBase dedicated GUI.
+    - Fill your DataBase loading that files from the folder where you have the location files.
+    - Not required but very recommended populate your DataBase with the information from the output of Source. This will give the database information about Magnitudes and will facilitate the MTI.
+3. Make a Query to filter your Database
+4. Without closing DataBase GUI, press **Run Inversion**.
+5. Track the evolution of your inversions in the output dirctory, finally press print Results.
+6. Populate your dataBase with the information from the output of MTIs.
+
+### Earth Velocity Model
 ```
-
-### Interactive help
-
-```bash
->> surfquake mti -h
-```
-
-### Run MTI from CLI
-
-```bash
->> surfquake mti -i /mti_run_inversion_resources/inv_surfquakecore.xml -p /project/surfquake_project_mti.pkl -o /test_mti -c /surfquake_test/mti_configs -s
+Crustal model                  IBERIA
+number of layers 
+   7
+Parameters of the layers
+depth of layer top(km)   Vp(km/s)    Vs(km/s)    Rho(g/cm**3)    Qp     Qs
+      0.0                 6.10       3.490        2.920         300    300
+     11.0                 6.40       3.660        2.980         300    300
+     24.0                 6.90       3.940        3.080         300    300
+     31.0                 8.00       4.570        3.300         300    300
+     45.6                 8.04       4.474        3.308         300    300
+     56.2                 8.04       4.478        3.309         300    300
+     66.9                 8.04       4.481        3.309         300    300
+*************************************************************************
 ```
 
 ## <span style="color:darkcyan;">**MTI from Library**</span>
