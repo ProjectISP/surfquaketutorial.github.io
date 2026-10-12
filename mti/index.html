@@ -319,7 +319,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../db/" class="md-tabs__link">
+        <a href="../create_metadata/" class="md-tabs__link">
           
   
   
@@ -1354,28 +1354,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#mti-gui" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MTI GUI
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mti-config-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MTI Config File
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#mti-from-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1399,10 +1377,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#interactive-help" class="md-nav__link">
+  <a href="#run-mti-from-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Interactive help
+        Run MTI from CLI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mti-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MTI Config File
       
     </span>
   </a>
@@ -1410,10 +1416,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-mti-from-cli" class="md-nav__link">
+  <a href="#earth-velocity-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run MTI from CLI
+        Earth Velocity Model
       
     </span>
   </a>
@@ -1795,34 +1801,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../db/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Data Base
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../create_metadata/" class="md-nav__link">
         
   
@@ -1926,38 +1904,59 @@
 
 <h1 id="automatic-moment-tensor-inversion"><span style="color:darkcyan;"><strong>Automatic Moment Tensor Inversion</strong></span></h1>
 <p>The focal mechanism of the pre-located events is automatically estimated using a optimized version of Bayesian Isola (<a href="https://academic.oup.com/gji/article/210/2/693/3747443"><span style="color:#5DADE2;">Vackâr et al., 2017</span></a>). The MTI is run over a set of events. The events can be selected quering the database through the GUI, giving a folder path with mti_config.ini files or even making instances of the class for each event and running the inversion from the core library. Moreover, for Core library and CLI users, it can be automatically generated the MTI config files from a catalog object, see <a href="https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files"><span style="color:#5DADE2;">Build MTI config files in Utilities section</span></a>.</p>
-<h2 id="mti-gui"><span style="color:darkcyan;"><strong>MTI GUI</strong></span></h2>
-<p><img alt="Screenshot" src="../img/mti.png" /></p>
-<ul>
-<li>
-<p>Working Framework:</p>
-<ul>
-<li>
-<p>Working Dirctory (no required): Folder where Green functions a temporal files will be saved.</p>
-</li>
-<li>
-<p>Output Directory: Rooth path to the folder where output from event inversions will be saved.</p>
-</li>
-<li>
-<p>Earth Model File: File path to he earth model. An example as follows:</p>
-</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Crustal model                  IBERIA
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>number of layers 
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   7
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Parameters of the layers
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>depth of layer top(km)   Vp(km/s)    Vs(km/s)    Rho(g/cm**3)    Qp     Qs
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      0.0                 6.10       3.490        2.920         300    300
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     11.0                 6.40       3.660        2.980         300    300
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>     24.0                 6.90       3.940        3.080         300    300
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>     31.0                 8.00       4.570        3.300         300    300
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>     45.6                 8.04       4.474        3.308         300    300
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>     56.2                 8.04       4.478        3.309         300    300
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     66.9                 8.04       4.481        3.309         300    300
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>*************************************************************************
+<h2 id="mti-from-cli"><span style="color:darkcyan;"><strong>MTI from CLI</strong></span></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    Key Arguments:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        -i, --inventory_file    [REQUIRED] Path to station metadata file (XML, RESP)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        -p, --project_file      [REQUIRED] Path to the project file with waveforms and event metadata
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        -c, --config_file       [REQUIRED] INI configuration file for inversion settings
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        -o, --output_dir        [REQUIRED] Output directory for inversion results
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        -s, --save_plots        [OPTIONAL] If set, saves plots of MT solutions and fits
 </code></pre></div>
+<h3 id="usage">Usage</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Interactive Help</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-h
+</code></pre></div>
+<h3 id="run-mti-from-cli">Run MTI from CLI</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span>./inv_surfquakecore.xml<span class="w"> </span>-p<span class="w"> </span>./surfquake_project_mti.pkl<span class="w"> </span>-o<span class="w"> </span>./test_mti<span class="w"> </span>-c<span class="w"> </span>./surfquake_test/mti_configs<span class="w"> </span>-s
+</code></pre></div>
+<h2 id="configuration"><span style="color:darkcyan;"><strong>Configuration</strong></span></h2>
+<h3 id="mti-config-file"><span style="color:darkcyan;"><strong>MTI Config File</strong></span></h3>
+<p>In the following sections CLI and Core library the user can use mti_config.ini files to define each event where surfquake will carry out the MTIs. You can storage a single event per file. So, place all files inside the same folder. Please find here an example of mti_config.ini file (the name of the .ini file doen't matter just extension .ini). Additionally, be in mind that users can create automatically mti config files. Go to section <a href="https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files"><span style="color:#5DADE2;"> Build MTI config files using the Library</span></a> inside Utils. You can use the following mti config file information to make your own template.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[ORIGIN]
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ORIGIN_DATE = 21/08/2018 00:28:57.000
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>LATITUDE = 42.7059
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>LONGITUDE= -7.6974
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>DEPTH_KM = 11.0
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>MAGNITUDE = 3.5
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>[STATIONS_AND_CHANNELS]
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a># add the station name follow by channels split by a comma , and use .+ for all channels
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>ELOB = HHZ, HHN, HHE 
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>EPON = .+
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>EMAZ = .+
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>[MTI_PARAMETERS]
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>EARTH_MODEL_FILE = /earth_models/Iberia.dat
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>LOCATION_UNC = 3000
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>TIME_UNC = 0.5
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>DEVIATORIC = True
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>DEPTH_UNC = 3000
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>COVARIANCE = True
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>RUPTURE_VELOCITY = 2500
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>SOURCE_TYPE = Triangle
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>MIN_DIST = 50
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>MAX_DIST = 500
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>MAX_NUMBER_STATIONS = 15
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>SOURCE_DURATION = 2
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>[SIGNAL_PROCESSING]
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>REMOVE_RESPONSE = True
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>MAX_FREQ = 0.08
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>MIN_FREQ = 0.04
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>RMS_THRESH = 5.0
+</code></pre></div>
+<p>Units: LOCATION_UNC [m], TIME_UNC [s], DEPTH_UNC[m], RUPTURE_VELOCITY [m/s], MIN_DIST [km], MAX_DIST [km], SOURCE_DURATION [s], 
+RMS_THRESH [avarage ratio signal / noise]. If MIN_DIST and MAX_DIST automatically will be used MIN_DIST = 2 * rupture_length, MAX_DIST = 2 ** (mti_config.magnitude) * 2</p>
 <ul>
 <li>
 <p>Grid search: Defines a geographic grid centered in the estimated hypocenter where surfquake will proceed with the search of the best MTI.</p>
@@ -1997,53 +1996,20 @@
 <li>Track the evolution of your inversions in the output dirctory, finally press print Results.</li>
 <li>Populate your dataBase with the information from the output of MTIs.</li>
 </ol>
-<h2 id="mti-config-file"><span style="color:darkcyan;"><strong>MTI Config File</strong></span></h2>
-<p>In the following sections CLI and Core library the user can use mti_config.ini files to define each event where surfquake will carry out the MTIs. You can storage a single event per file. So, place all files inside the same folder. Please find here an example of mti_config.ini file (the name of the .ini file doen't matter just extension .ini). Additionally, be in mind that users can create automatically mti config files. Go to section <a href="https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files"><span style="color:#5DADE2;"> Build MTI config files using the Library</span></a> inside Utils. You can use the following mti config file information to make your own template.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[ORIGIN]
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ORIGIN_DATE = 21/08/2018 00:28:57.000
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>LATITUDE = 42.7059
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>LONGITUDE= -7.6974
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>DEPTH_KM = 11.0
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>MAGNITUDE = 3.5
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>[STATIONS_AND_CHANNELS]
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a># add the station name follow by channels split by a comma , and use .+ for all channels
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>ELOB = HHZ, HHN, HHE 
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>EPON = .+
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>EMAZ = .+
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>[MTI_PARAMETERS]
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>EARTH_MODEL_FILE = /earth_models/Iberia.dat
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>LOCATION_UNC = 3000
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>TIME_UNC = 0.5
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>DEVIATORIC = True
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>DEPTH_UNC = 3000
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>COVARIANCE = True
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>RUPTURE_VELOCITY = 2500
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>SOURCE_TYPE = Triangle
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>MIN_DIST = 50
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>MAX_DIST = 500
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>MAX_NUMBER_STATIONS = 15
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>SOURCE_DURATION = 2
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>[SIGNAL_PROCESSING]
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>REMOVE_RESPONSE = True
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>MAX_FREQ = 0.08
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>MIN_FREQ = 0.04
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>RMS_THRESH = 5.0
-</code></pre></div>
-<p>Units: LOCATION_UNC [m], TIME_UNC [s], DEPTH_UNC[m], RUPTURE_VELOCITY [m/s], MIN_DIST [km], MAX_DIST [km], SOURCE_DURATION [s], 
-RMS_THRESH [avarage ratio signal / noise]. If MIN_DIST and MAX_DIST automatically will be used MIN_DIST = 2 * rupture_length, MAX_DIST = 2 ** (mti_config.magnitude) * 2</p>
-<h2 id="mti-from-cli"><span style="color:darkcyan;"><strong>MTI from CLI</strong></span></h2>
-<h3 id="usage">Usage</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span><span class="o">[</span>inventory_file_path<span class="o">]</span><span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>path_to_project<span class="o">]</span><span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>mti_config_file.ini<span class="o">]</span><span class="w"> </span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">        </span>-o<span class="w"> </span><span class="o">[</span>output_path<span class="o">]</span><span class="w">  </span>-s<span class="w"> </span><span class="o">[</span><span class="k">if</span><span class="w"> </span>save<span class="w"> </span>plots<span class="o">]</span>
-</code></pre></div>
-<h3 id="interactive-help">Interactive help</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-h
-</code></pre></div>
-<h3 id="run-mti-from-cli">Run MTI from CLI</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt;<span class="w"> </span>surfquake<span class="w"> </span>mti<span class="w"> </span>-i<span class="w"> </span>/mti_run_inversion_resources/inv_surfquakecore.xml<span class="w"> </span>-p<span class="w"> </span>/project/surfquake_project_mti.pkl<span class="w"> </span>-o<span class="w"> </span>/test_mti<span class="w"> </span>-c<span class="w"> </span>/surfquake_test/mti_configs<span class="w"> </span>-s
+<h3 id="earth-velocity-model">Earth Velocity Model</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Crustal model                  IBERIA
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>number of layers 
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>   7
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Parameters of the layers
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>depth of layer top(km)   Vp(km/s)    Vs(km/s)    Rho(g/cm**3)    Qp     Qs
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>      0.0                 6.10       3.490        2.920         300    300
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>     11.0                 6.40       3.660        2.980         300    300
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>     24.0                 6.90       3.940        3.080         300    300
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>     31.0                 8.00       4.570        3.300         300    300
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>     45.6                 8.04       4.474        3.308         300    300
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>     56.2                 8.04       4.478        3.309         300    300
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>     66.9                 8.04       4.481        3.309         300    300
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>*************************************************************************
 </code></pre></div>
 <h2 id="mti-from-library"><span style="color:darkcyan;"><strong>MTI from Library</strong></span></h2>
 <h3 id="classes">Classes</h3>
