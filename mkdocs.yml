@@ -2,10 +2,10 @@ site_name: "SurfQuake"
 site_url: https://github.com/rcabdia/SurfQuake
 nav:
   - Home: index.md
+  - Installation: install.md
   - Getting Started:
-      - Installation: install.md
       - Project: project.md
-
+      - Metadata: metadata.md
   - Signal Processing:
       - Overview: processing_overview.md
       - Examples: examples.md
@@ -39,7 +39,7 @@ nav:
     - Ambient Noise Processing: ambient_noise.md
     - Dispersion Curves Processing: dispersion_curves_processing.md
 
-  - Database & Utilities:
+  - Utilities:
       - Create Metadata: create_metadata.md
       - Manage Catalog: manage_catalog.md
       - Build MTI Config: build_mti.md
@@ -106,6 +106,10 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/ProgramSeismic
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  
 #plugins:
 #  - search
 #  - with-pdf:

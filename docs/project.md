@@ -1,35 +1,8 @@
 # <span style="color:darkcyan;">**Create your project**</span>
 
-In surfQuake a project is simply a python object that can store in its attributes the path to valid seismogram files plus the associated metadata. This strategy allows to proceed with fast filters or join different projects. Project is the necessary input for the toolboxes Picker, Associator, Event Locator, Seismic Source and MTI.
+In surfQuake a project is simply a python object that can store the path to valid seismogram files plus the associated metadata in its attributes . This strategy allows to proceed with fast filters or join different projects. Project is the necessary input for the toolboxes Picker, Associator, Event Locator, Seismic Source and MTI.
 
 Here we will explain how the user can manage a project and be ready to proceed with the rest of toolboxes.
-
-
-## <span style="color:darkcyan;"> **Project GUI** </span>
-
-We start with the GUI. This is a screenshot of the Project GUI.
-
-
-![Screenshot](img/project.png)
-
-First, you need to choose between: 
-
-- <span style="color:#5DADE2">Search files using Regular Expressions</span>: Click in this button will open a window explorer to select the available files based on the filter edit line. In the example (*.HHZ) and (*EMUR*). Please set to blank space if you do not desire apply filters inside the window explorer. Then just select files and accept. The project will be automatically generated. 
-- <span style="color:#5DADE2">Project Parth Files</span>: This option is intendeed to let surfQuake search for valid seismogram files from a root folder in ahead. Optionally check *Filter Time Spam* and/or *Filter Keys* to include seismograms files that only fullfills the filter.
-
-Second:
-
-- <span style="color:#5DADE2">Save Project</span> It is very remmendable to save the project. So, Proceed to give a name to the project and save it pressing Save Project for later using.
-
-Third:
-
-- <span style="color:#5DADE2">Load Project</span> This action will open a window explorer so that you can select a project file previously saved and loaded. This will let you go ahead with the following toolboxes such as Picking Phases.
-
-Finally:
-
-- [<span style="color:#5DADE2">Metadata</span>](https://docs.obspy.org/tutorial/code_snippets/stationxml_file_from_scratch.html): Metadata file with the in there is information structured as a dictionary nets/stations/channels. Personally, the best way to make your own metadata file is using either the java software [PDCC](https://ds.iris.edu/ds/nodes/dmc/software/downloads/pdcc/) or going to the [API Station Management Portal](https://smp.gempa.de/). We also give a tool to make your metadata from a stations file and response files [here](https://projectisp.github.io/surfquaketutorial.github.io/utils/#create-metadata).
-
-![Screenshot](img/metadata_structure.png)
 
 
 ## <span style="color:darkcyan;"> **Project from CLI** </span>
@@ -39,21 +12,20 @@ This command allows you to create a seismic project, which is essentially a dict
 storing the paths to seismogram files along with their corresponding metadata.
     
 ### Usage
-```bash
->>surfquake project -d [path to data files] -s [path to save directory] -n [project name] --verbose
-```
 
-### Interactive help
+    Key Arguments:
+        -d, --data           [REQUIRED]         Path to waveform data directory (or file pattern)
+        -s, --save_path      [REQUIRED]         Directory to save the project file
+        -n, --name           [REQUIRED]         Name of the project (e.g., "my_experiment")
+        -v, --verbose        [OPTIONAL]         Print detailed file discovery and indexing logs
 
 ```bash
+# Interactive help
 >> surfquake project -h
 ``` 
 
-### Create Project example from CLI
-In your termina, activate sufquake enviroment to have access to the commands. Then:
-
 ```bash
->> surfquake project -d /Volumes/LaCie/test_surfquake_core/testing_data -s /Volumes/LaCie/test_surfquake_core/testing_data/projects -n /surfquake_project_new.pkl --verbose
+>> surfquake project -d "./testing_data" -s "./Volumes/LaCie/test_surfquake_core/testing_data/projects" -n "/surfquake_project_new.pkl" --verbose
 ```
 
 
