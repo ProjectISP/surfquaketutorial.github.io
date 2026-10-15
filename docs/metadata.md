@@ -11,7 +11,7 @@ In **SurfQuake / Integrated Seismic Program (ISP)**, metadata allow the software
 
 SurfQuake / ISP uses station metadata provided as **FDSN StationXML** (`.xml`) or **SEED dataless** files. Both can describe station and channel attributes and instrument responses, although their structure and tooling differ.
 
-SurfQuake has a specific [tool to create metadata](https://projectisp.github.io/surfquaketutorial.github.io/utils/){: target="_blank" rel="noopener noreferrer" }. You can also find example of [STATIONXML file here](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata) and [RESP files](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/create_metadata)
+SurfQuake has a specific [tool to create metadata](https://projectisp.github.io/surfquaketutorial.github.io/utils/){: target="_blank" rel="noopener noreferrer" }. You can also find example of [STATIONXML file here](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata){: target="_blank" rel="noopener noreferrer" } and [RESP files](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/create_metadata){: target="_blank" rel="noopener noreferrer" }
 
 
 **StationXML is a good default for new projects**, because it is widely supported in ObsPy and other modern seismic tools. Dataless SEED remains useful when working with older networks and archives.

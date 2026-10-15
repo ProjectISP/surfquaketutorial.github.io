@@ -60,11 +60,15 @@ plotting:
   show_legend: true
   title_fontsize: 9
   plot_type: standard
+  record_option: dates
   sharey: False
   show_arrivals: False
   pick_output_file: ./picks.csv
   auto_load_pick_file: False
   show_info_picks: False
+  plot_output_path: False
+  show_plot: True
+  format_save: pdf
   backend: TkAgg
 ```
 
@@ -82,6 +86,8 @@ plotting:
 
     - plot_type: `str`. default: 'standard', 'record' for record section and overlay for all traces at the same plot.
 
+    - record_option: `str`. default: 'dates', 'egf' for specifically display record section the causal and acausal part of Empirical Green Function.
+
     - sharey: `bool`. default : False. Share y-axis amplitudes. Useful to compare seismogram amplitudes in many traces
 
     - pick_output_file: `str` default "./picks.csv". Path to the file where picks will be written
@@ -91,6 +97,10 @@ plotting:
     - show_info_picks: `bool` default: False. Show pick info on screen interactively when user pick a phase on the trace.
 
     - show_crosshair: `bool` default: False. Show crosshair in all traces. Helps to mark a common reference point and to interactive compare amplitudes.
+
+    - plot_output_path: `bool` default: False. Path to the output folder in case of Automatic saving plot.
+
+    - show_plot: `bool` default: True. If set the plot will be display if not and the plot_output_path is True, the plot will be automatically saved with no displaying.
 
     - backend: `str` default: TkAgg (maximum robustness, default), MacOSX (only for mac), Qt5Agg (fast, picking  & interactive commands raise problems)
 
@@ -124,7 +134,7 @@ plotting:
 | `b` | Previous page                   |
 | `v` | Command prompt                  |
 | `enter` / `esc` | Exit plotting       |
-
+|---------------------------------------|
 
 ---
 

@@ -6,6 +6,8 @@ nav:
   - Getting Started:
       - Project: project.md
       - Metadata: metadata.md
+  - Tutorial Book:
+      - Tutorial Signal Processing: tutorials/tutorial1.md
   - Signal Processing:
       - Overview: processing_overview.md
       - Examples: examples.md
