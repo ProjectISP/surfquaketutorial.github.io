@@ -1,4 +1,4 @@
-# <span style="color:darkcyan;"> **Signal Processing Tutorial** </span>
+# <span style="color:darkcyan;"> **Basic Signal Processing Tutorial 1** </span>
 
 In this tutorial, we will learn how to work with the commands: `make_config`, `explore`, `info` and  `quick` to process your seismic waveforms.
 
@@ -30,13 +30,14 @@ surfquake -h
 
 ## Generate Config Files
 
-When working with seismic waveforms it is necessary to follow a signal processing workflow and plotting configuration. Let's prepare the necessary files.
+When working with seismic waveforms it might be necessary to follow a signal processing workflow and plotting configuration. Let's prepare the necessary files.
 
 ```bash
 surfquake make_config -h
 surfquake make_config -c typical_config -o "./tutorial1/configs"
 surfquake make_config -c plotting_config -o "./tutorial1/configs"
 ```
+The [plotting configuration](https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/){: target="_blank" rel="noopener noreferrer" } is commented to explain the functionality. The parametrization for signal processing can be found [here for traces](https://projectisp.github.io/surfquaketutorial.github.io/processing_config/){: target="_blank" rel="noopener noreferrer" } and [here for streams](https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/){: target="_blank" rel="noopener noreferrer" }.
 
 ---
 
@@ -48,6 +49,10 @@ Sometimes we have really big datasets, A first view of your data coverage, inclu
 surfquake explore -h
 surfquake explore -w './tutorial1/data/*'
 ```
+
+In this scenario, you are using the wildcard `*` that means all files. No worries because only seismic traces will be readed.
+
+Useful wildcards `*Z*` (all vertical components), `*VALC*` (only read station VALC). Wildcards are nice, but only understand file names no file headers.
 
 ![Seismic Waveform](img/explore.png)
 
@@ -85,7 +90,7 @@ surfquake info -w './tutorial1/data/*' -c 3
 
 ## Process your waveform
 
-Finally it is time to play with processing. In the example we filter the traces between 0.5-8.0 Hz with a butterworth filter, zero-phase.
+Finally it is time to play with processing. In the example we filter the traces between [0.5-8.0] Hz with a butterworth filter, zero-phase.
 Please review the next documentation:
 
 [Trace processing](https://projectisp.github.io/surfquaketutorial.github.io/processing_config/){: target="_blank" rel="noopener noreferrer" } and [plotting](https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/){: target="_blank" rel="noopener noreferrer" }
@@ -96,3 +101,36 @@ surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" --plo
 ```
 
 ![Seismic Waveform](img/waveform1.png)
+
+## Using Bash scipt
+
+Now, how can I concatenate commands of surfquake in your terminal? The answer is creating a [bash script file](https://projectisp.github.io/surfquaketutorial.github.io/bash_script/){: target="_blank" rel="noopener noreferrer" }. 
+Please, create a file, let's name it `run_commnads.sh`. Write the following commands in your file.
+
+```bash
+#!/bin/bash
+
+# Activate your conda or virtual environment
+source activate isp  # Replace with your environment manager if needed (e.g., 'conda activate surfquake')
+surfquake explore -w './tutorial1/data/*'
+surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" --plot_config "./configs/plotting_config.yaml"
+
+```
+
+Ok, lets run the bash script. Open a terminal and go to the folder where you have the working directory and the `run_commnads.sh` file. Now write in the terminal the following commands
+
+```bash
+chmod u+x run_commnads.sh
+sh run_commnads.sh
+```
+
+---
+
+## Bonus
+
+- Hover with the mouse near a point of the seismic trace and press any number from 1-6 to quickly pick a seismic phase.
+- Pressing `u` to set a starttime and pressing `i` to set a endtime.
+- Open an interactive propt pressing `v`. See the terminal, the directions for on-air seismic interaction are there.
+
+
+
