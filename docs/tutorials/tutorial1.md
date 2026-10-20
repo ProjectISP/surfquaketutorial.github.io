@@ -166,7 +166,9 @@ sh run_commnads.sh
 ## Interactive Processing
 
 - Open an interactive propt pressing `v`. See the terminal, the directions for on-air seismic interaction are there.
-- In the new prompt `help` to open the interative signal processing menu.
+- In the new prompt `help` to open the interative signal processing menu. If you want details and examples of one command, fo example: `help filter`
+
+
 
 ```bash
 ╔══════════════════════════════════════════════════════════════╗

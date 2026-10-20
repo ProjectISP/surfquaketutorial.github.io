@@ -105,11 +105,11 @@ Take a look at our recently published paper!
 - [<span style="color:#5DADE2">*Data Base* </span>](https://projectisp.github.io/surfquaketutorial.github.io/db/)
 - [<span style="color:#5DADE2">*Utils* </span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/)
 
-## <span style="color:darkcyan;"> **How to follow surfQuake Tutorial** </span>
+## <span style="color:darkcyan;"> **How to follow surfQuake Documentation** </span>
 
-The first step is to select which programming level is the most convenient for you. SurfQuake is divided into five Toolboxes: Picking, Association, Locate, Source, and Moment Tensor Inversion (MTI). Each toolbox link below contains a description of the software according to your programming level and an example.
+if you want something quick, let's start with the [<span style="color:#5DADE2">*Tutorial* </span>](https://projectisp.github.io/surfquaketutorial.github.io/tutorials/tutorial1/) and then continue with the next toolboxes.
 
-Let's start with [<span style="color:#5DADE2">*Project* </span>](https://projectisp.github.io/surfquaketutorial.github.io/project/) and then continue with the next toolboxes.
+If you want to really undertand surfQuake go to [<span style="color:#5DADE2">*Getting Started* </span>](https://projectisp.github.io/surfquaketutorial.github.io/project/).
 
 ## <span style="color:darkcyan;"> **Case of Study and Supporting Materials** </span>
 First: [<span style="color:#5DADE2;">Case of study</span>](https://github.com/rcabdia/test_surfquake), contains a full example of using surfQuake with core Library Python scripts, Core Library bash script and expected results. Of course you can try to run the example using the GUI.

@@ -7,7 +7,8 @@ nav:
       - Project: project.md
       - Metadata: metadata.md
   - Tutorial Book:
-      - Basic Signal Processing 1: tutorials/tutorial1.md
+      - Basic Signal Processing: tutorials/tutorial1.md
+      - Time-Frequency Analysis: tutorials/tutorial2.md
   - Signal Processing:
       - Overview: processing_overview.md
       - Examples: examples.md
