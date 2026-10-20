@@ -7,7 +7,7 @@ Surfquake has been designed to streamline the workflow of estimating seismic sou
 
 - The **Command Line Interface**  gives users access to an upper layer that simplifies the use of the core, enabling task execution through simple commands.
 
-- The **Graphical User Interface (GUI)**: Wraps the SurfQuake core in a user-friendly interface, making it accessible to users who prefer visual interaction. The GUI is connected to a *SQLite database* to store all results, ensuring easy retrieval and management of data.
+- The **Graphical User Interface (GUI)**: Now SurfQuake user-friendly interface is fully included in [Integrated Seismic Program](https://projectisp.github.io/ISP_tutorial.github.io/){: target="_blank" rel="noopener noreferrer" }, making it accessible to users who prefer visual interaction. 
 
 ---
 
@@ -15,7 +15,9 @@ Surfquake has been designed to streamline the workflow of estimating seismic sou
 
 Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:
 
-- [<span style="color:#5DADE2">*surfquake 1.6.0, mid Oct 2026: Refractored Signal Processing toolbox*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
+- [<span style="color:#5DADE2">*New Tutorial book:*</span>](https://projectisp.github.io/surfquaketutorial.github.io/tutorials/tutorial1/)
+
+- [<span style="color:#5DADE2">*surfquake 1.7.0, Oct 2026: Improved Signal Processing toolbox*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
 
 
 Take a look at our recently published paper!

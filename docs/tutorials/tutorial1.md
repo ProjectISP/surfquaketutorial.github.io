@@ -102,7 +102,44 @@ surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" --plo
 
 ![Seismic Waveform](img/waveform1.png)
 
-## Using Bash scipt
+Navigate and process interatively your data, see the menu on the terminal:
+
+    =======================================================
+    Plot Interaction Help
+    =======================================================
+    KEY             | ACTION
+    ---             | ------
+    n               | Next page
+    b               | Previous page
+    w               | Add reference time
+    p               | Remove last reference
+    c               | Clear all picks
+    e               | Manual pick (interactive input)
+    1–6             | Quick picks (P/S + polarity)
+    d / Del         | Delete pick under cursor
+    v               | Open command prompt
+    u               | Set start time at cursor
+    i               | Set end time at cursor
+    Right-click drag | Select time window
+    Double left-click | Add pick
+    ESC / Enter     | Exit current mode
+    =======================================================
+
+
+Sometimes, we do not want to plot the seismogram itself. It turn out to process and write the output files in our computer. This can be done adding option `-a` to the command.
+
+```bash
+surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" -a
+```
+
+On the other hand if you are interested in automatically save your plots, edit the following fields in your file `configs/plotting_config.yaml` and run another time the command with option `-a`:
+
+    plot_output_path: /my_output_plot_folder
+    show_plot: True
+
+---
+
+## Using Bash script
 
 Now, how can I concatenate commands of surfquake in your terminal? The answer is creating a [bash script file](https://projectisp.github.io/surfquaketutorial.github.io/bash_script/){: target="_blank" rel="noopener noreferrer" }. 
 Please, create a file, let's name it `run_commnads.sh`. Write the following commands in your file.
@@ -126,11 +163,68 @@ sh run_commnads.sh
 
 ---
 
-## Bonus
+## Interactive Processing
 
-- Hover with the mouse near a point of the seismic trace and press any number from 1-6 to quickly pick a seismic phase.
-- Pressing `u` to set a starttime and pressing `i` to set a endtime.
 - Open an interactive propt pressing `v`. See the terminal, the directions for on-air seismic interaction are there.
+- In the new prompt `help` to open the interative signal processing menu.
 
+```bash
+╔══════════════════════════════════════════════════════════════╗
+║              SurfQuake Interactive Plot Console              ║
+╚══════════════════════════════════════════════════════════════╝
+
+▸ Navigation
+  ──────────────────────────────────────────────────────────
+  n                      Next trace page
+  b                      Previous trace page
+  p                      Return to picking mode
+  back2future            Restore original waveforms (undo all processing)
+  exit                   Close interactive session
+  history [N]            Show the last N commands entered at the prompt (default 10)
+
+▸ Signal Processing
+  ──────────────────────────────────────────────────────────
+  algebra                Apply a Math expression on traces
+  rmean                  Remove mean on traces
+  taper                  Apply taper window on traces
+  flip                   Flip the polarity of a seismic trace
+  reverse                Reverse the data points of seismic traces
+  filter                 Apply signal filtering
+  cut                    Trim traces using picks or UTC times
+  concat                 Merge trace segments, no parameters needed
+  rotate                 Rotate seismic components
+  shift                  Align traces by phase arrivals
+  write                  Export traces to HDF5, write --folder_path <path> [--all]
+
+▸ Spectral Analysis
+  ──────────────────────────────────────────────────────────
+  spectrum / sp          Plot amplitude spectrum
+  spectrogram / spec     Plot multitaper spectrogram
+  cwt                    Continuous wavelet transform
+  save_tf                Save Time-Frequency Anlysis
+
+▸ Array Processing
+  ──────────────────────────────────────────────────────────
+  beam                   FK beamforming analysis
+  smap                   Slowness map estimation
+  stack                  Trace stacking
+  xcorr                  Cross-correlate traces
+  conv                   Convolve traces
+
+▸ Polarization & Picking
+  ──────────────────────────────────────────────────────────
+  pm                     Particle motion analysis
+  load_picks             Import picks from file (NLL file format, load_picks --file <file_path>
+  plot_type              Change plotting mode (standard, record, overlay)
+
+▸ Seismogram Information
+  ──────────────────────────────────────────────────────────
+  info                   Show trace headers
+
+▸ Run python script
+  ──────────────────────────────────────────────────────────
+  runpy                  Run your own script
+
+```
 
 
