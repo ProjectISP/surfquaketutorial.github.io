@@ -2005,22 +2005,24 @@
 <li><em>Folder for the tutorial output:</em> tutorial/time_freq, this must be created by the user.</li>
 </ul>
 <p>For this tutorial you need to download the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/waveforms_cut" rel="noopener noreferrer" target="_blank">seismic data here</a>. Optionally, download the corresponding <a href="https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata" rel="noopener noreferrer" target="_blank">metadata</a>.</p>
-<p>Please, first open a terminal and type the following command to overviewall surfquake capabilities:</p>
+<p>Please, first open a terminal, activate your enviroment and type the following command to overviewall surfquake capabilities:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>-h
+</code></pre></div>
 <hr />
 <h2 id="generate-config-files">Generate Config Files</h2>
 <p>When working with seismic waveforms it might be necessary to follow a signal processing workflow and plotting configuration. Let's prepare the necessary files.</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-h
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>spectral_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial/configs&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>typical_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial/configs&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial/configs&quot;</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-h
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>spectral_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial/configs&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>typical_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial/configs&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial/configs&quot;</span>
 </code></pre></div>
 The <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">plotting configuration</a> is commented to explain the functionality. The parametrization for signal processing can be found <a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/" rel="noopener noreferrer" target="_blank">here for traces</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/" rel="noopener noreferrer" target="_blank">here for streams</a>.</p>
 <hr />
 <h2 id="process-your-waveform">Process your waveform</h2>
 <p>Now that you have the set up done. Let's do a spectrogram interactively and then we will save it.</p>
 <p><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/" rel="noopener noreferrer" target="_blank">Trace processing</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">plotting</a></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./configs/plotting_config.yaml&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
 <ul>
 <li>Remember in this step you can select a time window press <code>i</code> starttime and <code>o</code> endtime.</li>
@@ -2029,24 +2031,24 @@ The <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_i
 <h2 id="interactive">Interactive</h2>
 <p>We are going to compute the <code>spectrum</code>, <code>spectrogram</code> and the <code>Continouos Vavelet Transform</code>.</p>
 <ul>
-<li>Open an interactive propt pressing <code>v</code>. See the terminal, the directions for on-air seismic interaction are there.</li>
+<li>Open an interactive propt pressing <code>v</code>. See the terminal, the directions for handle interactively the traces.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">help</span><span class="w"> </span>spectrum
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>spectrum<span class="w"> </span>all<span class="w"> </span>loglog<span class="w"> </span>--mode<span class="w"> </span>fft
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">help</span><span class="w"> </span>spectrogram
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>spectrogram<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>fft<span class="w"> </span>--dates
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">help</span><span class="w"> </span>cwt
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>cwt<span class="w"> </span><span class="m">0</span><span class="w"> </span>cm<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">10</span><span class="w"> </span>-80<span class="w"> </span>--dates
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>p
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">help</span><span class="w"> </span>spectrum
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>spectrum<span class="w"> </span>all<span class="w"> </span>loglog<span class="w"> </span>--mode<span class="w"> </span>fft
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">help</span><span class="w"> </span>spectrogram
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>spectrogram<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>fft<span class="w"> </span>--dates
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">help</span><span class="w"> </span>cwt
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>cwt<span class="w"> </span><span class="m">0</span><span class="w"> </span>cm<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">10</span><span class="w"> </span>-80<span class="w"> </span>--dates
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>p
 </code></pre></div>
 <p><img alt="Seismic Waveform" src="../img/T2_1.png" /></p>
 <ul>
 <li>Now before back to picking mode, let's save for example the spectrogram.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>save_tf<span class="w"> </span>spectrogram<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>fft<span class="w"> </span>--folder_path<span class="w"> </span>./time_freq
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>p<span class="w"> </span><span class="c1">#back to picking mode</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>save_tf<span class="w"> </span>spectrogram<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>fft<span class="w"> </span>--folder_path<span class="w"> </span>./time_freq
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>p<span class="w"> </span><span class="c1">#back to picking mode</span>
 </code></pre></div>
 <hr />
 <h2 id="automatic">Automatic</h2>
@@ -2058,39 +2060,40 @@ The <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_i
 <p>Let's prepare the processing config file <code>spectral_config.yaml</code>. Below you will see that I concatenate the typical processing plus the computation of the speectrogram.</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Analysis:
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>process_1:
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span>name:<span class="w"> </span><span class="s1">&#39;rmean&#39;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span>method:<span class="w"> </span><span class="s1">&#39;linear&#39;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span>process_2:
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span>name:<span class="w"> </span><span class="s1">&#39;taper&#39;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span>method:<span class="w"> </span><span class="s1">&#39;cosine&#39;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span>max_percentage:<span class="w"> </span><span class="m">0</span>.05
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span>process_3:
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span>name:<span class="w"> </span><span class="s1">&#39;filter&#39;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span>type:<span class="w"> </span><span class="s1">&#39;bandpass&#39;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span>fmin:<span class="w"> </span><span class="m">0</span>.01
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span>fmax:<span class="w"> </span><span class="m">45</span>.0
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span>corners:<span class="w"> </span><span class="m">4</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span>zerophase:<span class="w"> </span>True
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">  </span>process_4:
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">      </span>name:<span class="w"> </span><span class="s1">&#39;spectrogram&#39;</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">      </span>win:<span class="w"> </span><span class="m">5</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">      </span>overlap:<span class="w"> </span><span class="m">75</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">      </span>method:<span class="w"> </span><span class="s1">&#39;fft&#39;</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">      </span>output_path:<span class="w"> </span>absolute_path_to_your_output_folder
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Analysis:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>process_1:
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span>name:<span class="w"> </span><span class="s1">&#39;rmean&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span>method:<span class="w"> </span><span class="s1">&#39;linear&#39;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span>process_2:
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span>name:<span class="w"> </span><span class="s1">&#39;taper&#39;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span>method:<span class="w"> </span><span class="s1">&#39;cosine&#39;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span>max_percentage:<span class="w"> </span><span class="m">0</span>.05
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span>process_3:
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span>name:<span class="w"> </span><span class="s1">&#39;filter&#39;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span>type:<span class="w"> </span><span class="s1">&#39;bandpass&#39;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span>fmin:<span class="w"> </span><span class="m">0</span>.01
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span>fmax:<span class="w"> </span><span class="m">45</span>.0
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span>corners:<span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span>zerophase:<span class="w"> </span>True
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">  </span>process_4:
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">      </span>name:<span class="w"> </span><span class="s1">&#39;spectrogram&#39;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">      </span>win:<span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">      </span>overlap:<span class="w"> </span><span class="m">75</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">      </span>method:<span class="w"> </span><span class="s1">&#39;fft&#39;</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">      </span>output_path:<span class="w"> </span>absolute_path_to_your_output_folder
 </code></pre></div>
 <ul>
 <li>In the terminal run the <code>quick</code> command. The command will filter the trace, compute the spectrogram and save the time_frequency opbject on your output folder.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/spectral_config.yaml&quot;</span><span class="w"> </span>-a
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/spectral_config.yaml&quot;</span><span class="w"> </span>-a
 </code></pre></div>
 <ul>
-<li>Finally we are going to open on of the files with the command <code>specplot</code></li>
+<li>Finally, we are going to open on of the files with the command <code>specplot</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-h
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;./tutorial/time_freq/output_file.spec&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/spectral_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./configs/plotting_config.yaml&quot;</span><span class="w"> </span>--split<span class="w"> </span>--smooth<span class="w"> </span>-a
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-h
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;./tutorial/time_freq/output_file.spec&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/spectral_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./configs/plotting_config.yaml&quot;</span><span class="w"> </span>--split<span class="w"> </span>--smooth<span class="w"> </span>-a
 </code></pre></div>
+<p>I would like to tell you that, it might be possible to loop over your time-frequency objects to simply torage the image.</p>
 
 
 

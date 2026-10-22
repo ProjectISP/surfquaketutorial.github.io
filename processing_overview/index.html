@@ -2056,18 +2056,22 @@ Post-Script Logic:
         Process waveform files with a config and plot interactively:
             surfquake quick -w &quot;./data/*.mseed&quot; -c ./config.yaml -i ./inventory.xml --plot_config plot.yaml
 
-    Key Arguments:
-        -w, --wave_files         [REQUIRED] Glob pattern or path to waveform files
+Key Arguments:
+        -w, --wave_files         [REQUIRED | OPTIONAL] Glob pattern or path to waveform files, (not needed if the config has a &#39;Source&#39; section)
+        -f, --fast               [OPTIONAL] Quick-and-Dirty plotting
         -c, --config_file        [OPTIONAL] YAML config defining processing steps
         -i, --inventory_file     [OPTIONAL] Station metadata (StationXML or RESP)
         -o, --output_folder      [OPTIONAL] Directory to save processed traces
         -a, --auto               [OPTIONAL] Run in automatic (non-interactive) mode
         -m, --merge              [OPTIONAL] If merge traces as fist action
+        -op, --order_preference  [OPTIONAL] &#39;trace_first&#39; (default) or &#39;stream_first&#39; — controls
+                                  whether trace-level steps (rmean, filter, taper...) run before
+                                  or after stream-level steps (cross_correlate, rotate, stack...)
             --min_date           [OPTIONAL] Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
             --max_date           [OPTIONAL] Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
             --plot_config        [OPTIONAL] Plotting settings YAML
             --post_script        [OPTIONAL] Python script to apply to each stream
-            --post_script_stage  [OPTIONAL] When to run post-script: &#39;before&#39; or &#39;after&#39; (default: before)
+            --post_script_stage  [OPTIONAL] When to run post-script: &#39;before
 </code></pre></div>
 <hr />
 <h3 id="surfquake-processing">surfquake processing</h3>
@@ -2095,19 +2099,24 @@ Usage Example:
 Key Arguments:
     -p, --project_file         [OPTIONAL] Path to an existing project file
     -w, --wave_files           [OPTIONAL] Path or glob pattern to waveform files
+    -f, --fast                 [OPTIONAL] Quick-and-Dirty plotting
     -i, --inventory_file       [OPTIONAL] Station metadata file (XML, RESP)
-    -e, --event_file           [OPTIONAL] Event catalog in QuakeML format
+    -e, --event_file           [OPTIONAL] Event catalog in txt format (columns: date;hour;latitude;longitude;depth;magnitude)
     -c, --config_file          [OPTIONAL] Processing configuration file (YAML)
     -a, --auto                 [OPTIONAL] Run in automatic mode
     -o, --output_folder        [OPTIONAL] Folder where processed files are saved
-    -n, --net                  [OPTIONAL] project net filter Example: NET1,NET2,NET3
-    -s, --station              [OPTIONAL] project station filter Example: STA1,STA2,STA3
-    -ch, --channel,            [OPTIONAL]  project channel filter Example: HHZ,BHN
+    -n, --net                  [OPTIONAL] Project net filter Example: NET1,NET2,NET3
+    -s, --station              [OPTIONAL] Project station filter Example: STA1,STA2,STA3
+    -ch, --channel,            [OPTIONAL] Project channel filter Example: HHZ,BHN
     -t, --cut_time             [OPTIONAL] pre &amp; post first arrival in seconds (symmetric)
-    -cs, --cut_start_time      [OPTIONAL] cut pre-first arrival in seconds
-    -ce, --cut_end_time        [OPTIONAL] cut ppost-first arrival in seconds
+    -cs, --cut_start_time      [OPTIONAL] Cut pre-first arrival in seconds
+    -ce, --cut_end_time        [OPTIONAL] Cut post-first arrival in seconds
     -r, --reference            [OPTIONAL] The pick time for cutting the waveforms is the origin time of the event
+    -op, --order_preference    [OPTIONAL] trace_first (default) | stream_first. Controls whether trace-level
+                               steps (rmean, filter, taper...) run before or after stream-level steps
+                               (cross_correlate, rotate, stack...)
     --phases                   [OPTIONAL] Comma-separated list of phases for arrival estimation (e.g., P,S)
+    --vel                      [OPTIONAL] Phase speed to estimate the first arrival time (reference for cutting waveform)
     --plot_config              [OPTIONAL] Optional plot configuration file (YAML)
     --post_script              [OPTIONAL] Python script to apply per event stream
     --post_script_stage        [OPTIONAL] When to apply the post-script: before | after (default: before)
@@ -2146,6 +2155,7 @@ Usage Example:
 
 Key Arguments:
     -p, --project_file        [REQUIRED] Path to a saved project files
+    -f, --fast                [OPTIONAL] Quick-and-Dirty plotting
     -o, --output_folder       [OPTIONAL] Directory for processed output
     -i, --inventory_file      [OPTIONAL] Station metadata (XML/RESP)
     -c, --config_file         [OPTIONAL] Processing configuration (YAML)
@@ -2153,6 +2163,9 @@ Key Arguments:
     -n, --net                 [OPTIONAL] Network code filter
     -s, --station             [OPTIONAL] Station code filter
     -ch, --channel            [OPTIONAL] Channel filter
+    -op, --order_preference   [OPTIONAL] trace_first (default) | stream_first. Controls whether trace-level
+                              steps (rmean, filter, taper...) run before or after stream-level steps
+                              (cross_correlate, rotate, stack...)
     --min_date                [OPTIONAL] Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT min date of the project
     --max_date                [OPTIONAL] Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT max date of the project
     --time_tolerance          [OPTIONAL] Tolerance in seconds for time filtering, excluded files with smaller time span

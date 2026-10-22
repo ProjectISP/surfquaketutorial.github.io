@@ -2108,8 +2108,9 @@ Double left-click | Add pick
 ESC / Enter     | Exit current mode
 =======================================================
 </code></pre></div>
-<p>Sometimes, we do not want to plot the seismogram itself. It turn out to process and write the output files in our computer. This can be done adding option <code>-a</code> to the command.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>-a
+<p>Sometimes, we do not want to plot the seismogram itself. It turn out to process and write the output files in our computer. This can be done adding option <code>-a</code> to the command.
+The files will be saved in <code>H5 format</code> with the picks, reference points and geodesic information in the <code>header</code>. The picks ae also save in the pick outputfolder set in the plot_config file. This file can be directly used in the command <code>surfquake locate</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./output&quot;</span><span class="w"> </span>-a
 </code></pre></div>
 <p>On the other hand if you are interested in automatically save your plots, edit the following fields in your file <code>configs/plotting_config.yaml</code> and run another time the command with option <code>-a</code>:</p>
 <div class="highlight"><pre><span></span><code>plot_output_path: /my_output_plot_folder
