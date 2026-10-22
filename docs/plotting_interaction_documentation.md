@@ -50,6 +50,12 @@ Reference markers (green vertical lines placed via `w`) are stored as timestamps
 
 ## Configuration Options
 
+Make a configuration file (includes full explanation) from the terminal:
+
+```bash
+surfquake make_config -c plotting_config -o "./"
+```
+
 The plotting interface is governed by a YAML configuration passed via `--plot_config`, which supports:
 
 ```yaml
@@ -58,9 +64,14 @@ plotting:
   sort_by: distance            
   vspace: 0.05
   show_legend: true
+  show_help: true
+  fast: false
+  fast_points: 1000
+  back2future: false
   title_fontsize: 9
   plot_type: standard
   record_option: dates
+  scale_factor: 1
   sharey: False
   show_arrivals: False
   pick_output_file: ./picks.csv
@@ -68,7 +79,9 @@ plotting:
   show_info_picks: False
   plot_output_path: False
   show_plot: True
-  format_save: pdf
+  show_crosshair: false
+  plot_output_path: null
+  format_save: png
   backend: TkAgg
 ```
 
@@ -88,6 +101,9 @@ plotting:
 
     - record_option: `str`. default: 'dates', 'egf' for specifically display record section the causal and acausal part of Empirical Green Function.
 
+    - scale_factor: `float` default: 1. Amplitude multiplier of the traces in the record section. 
+      Increase it to make the traces overlap neighbours, decrease it to shrink them.
+
     - sharey: `bool`. default : False. Share y-axis amplitudes. Useful to compare seismogram amplitudes in many traces
 
     - pick_output_file: `str` default "./picks.csv". Path to the file where picks will be written
@@ -103,6 +119,10 @@ plotting:
     - show_plot: `bool` default: True. If set the plot will be display if not and the plot_output_path is True, the plot will be automatically saved with no displaying.
 
     - backend: `str` default: TkAgg (maximum robustness, default), MacOSX (only for mac), Qt5Agg (fast, picking  & interactive commands raise problems)
+
+    - show_crosshair: `bool` default: False. Show a crosshair (horizontal + vertical line) following the mouse in every subplot. Useful for precise picking.
+
+    - back2future: `bool` default: False. Keep a pristine copy of the loaded traces so the interactive command "back2future" can undo all the processing (filter, cut, rotate...). The copy doubles the memory used by the traces and takes some time on large datasets, so it is disabled by default.
 
 ---
 

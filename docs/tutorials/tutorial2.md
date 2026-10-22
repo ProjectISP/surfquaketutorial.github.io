@@ -11,8 +11,11 @@ In this tutorial we will follow this structure
 
 For this tutorial you need to download the [seismic data here](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/waveforms_cut){: target="_blank" rel="noopener noreferrer" }. Optionally, download the corresponding [metadata](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata){: target="_blank" rel="noopener noreferrer" }.
 
-Please, first open a terminal and type the following command to overviewall surfquake capabilities:
+Please, first open a terminal, activate your enviroment and type the following command to overviewall surfquake capabilities:
 
+```bash
+surfquake -h
+```
 
 ---
 
@@ -50,7 +53,7 @@ surfquake quick -w "./tutorial/data/*" -c "./configs/typical_config.yaml" --plot
 
 We are going to compute the `spectrum`, `spectrogram` and the `Continouos Vavelet Transform`.
 
-- Open an interactive propt pressing `v`. See the terminal, the directions for on-air seismic interaction are there.
+- Open an interactive propt pressing `v`. See the terminal, the directions for handle interactively the traces.
 
 
 ```bash
@@ -112,11 +115,12 @@ Analysis:
 surfquake quick -w "./tutorial/data/*" -c "./configs/spectral_config.yaml" -a
 ```
 
-- Finally we are going to open on of the files with the command `specplot`
+- Finally, we are going to open on of the files with the command `specplot`
 
 ```bash
 surfquake specplot -h
 surfquake specplot -f "./tutorial/time_freq/output_file.spec" -c "./configs/spectral_config.yaml" --plot_config "./configs/plotting_config.yaml" --split --smooth -a
 ```
 
+I would like to tell you that, it might be possible to loop over your time-frequency objects to simply torage the image.
 
