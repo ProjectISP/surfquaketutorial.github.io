@@ -127,9 +127,10 @@ Navigate and process interatively your data, see the menu on the terminal:
 
 
 Sometimes, we do not want to plot the seismogram itself. It turn out to process and write the output files in our computer. This can be done adding option `-a` to the command.
+The files will be saved in `H5 format` with the picks, reference points and geodesic information in the `header`. The picks ae also save in the pick outputfolder set in the plot_config file. This file can be directly used in the command `surfquake locate`.
 
 ```bash
-surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" -a
+surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" -o "./output" -a
 ```
 
 On the other hand if you are interested in automatically save your plots, edit the following fields in your file `configs/plotting_config.yaml` and run another time the command with option `-a`:
