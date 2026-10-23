@@ -4,8 +4,9 @@ nav:
   - Home: index.md
   - Installation: install.md
   - Getting Started:
-      - Project: project.md
+      - Seismic Files: seismic_data_files.md
       - Metadata: metadata.md
+      - Project: project.md
   - Tutorial Book:
       - Basic Signal Processing: tutorials/tutorial1.md
       - Time-Frequency Analysis: tutorials/tutorial2.md
@@ -23,7 +24,6 @@ nav:
       - Characteristic Functions: characteristic_functions_documentation.md
       - Plotting Interaction: plotting_interaction_documentation.md
       - Bash Script Interaction: bash_script.md
-
   - Event Analysis:
       - Phase Picker: picker.md
       - Event Associator:

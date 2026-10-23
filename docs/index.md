@@ -1,7 +1,8 @@
 # <span style="color:darkcyan;"> **Welcome to** </span>
 ![Screenshot](img/logo.png)
 
-Surfquake has been designed to streamline the workflow of estimating seismic source parameters. Comprehensive set of toolboxes automates the determination of arrival times, event locations, event magnitudes , attenuation, and moment tensor inversion. The software is programmed in <span style="color:#5DADE2;">*Python 3*</span> and offers the users the possibility of three programming levels for flexibility and customization.
+Surfquake has been designed to processing seismic traces and to streamline the workflow of estimating seismic source parameters. 
+The signal processing toolbox is extended with a lage variety of numerical methods while the comprehensive set of workflow toolboxes automates the determination of arrival times, event locations, event magnitudes , attenuation, and moment tensor inversion. The software is programmed in <span style="color:#5DADE2;">*Python 3*</span> and offers the users the possibility of three programming levels for flexibility and customization.
 
 - The **Core Library**  allows users to integrate the core of surfQuake into their preexisting scripts, giving advanced users full control.
 
@@ -27,6 +28,7 @@ Take a look at our recently published paper!
 
 ---
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +46,7 @@ Take a look at our recently published paper!
             padding: 20px;
             border-radius: 8px;
         }
+
         .link-item {
             text-decoration: none;
             display: flex;
@@ -52,41 +55,54 @@ Take a look at our recently published paper!
             padding: 10px;
             border-radius: 8px;
         }
+
         .link-item img {
+            width: 40px;
+            height: auto;
             margin-right: 10px;
         }
+
         .link-item span {
             font-size: 16px;
             color: black;
             font-weight: bold;
         }
+
+        .link-item:hover {
+            background: #eaeaea;
+        }
+
+        @media (max-width: 600px) {
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="links-container">
-        <a href="https://github.com/rcabdia/SurfQuakeCore" target="_blank" class="link-item">
-            <img src="img/github.png" width="40">
-            <span>See surfQuake open-source core code</span>
+        <a href="https://github.com/rcabdia/SurfQuakeCore"
+           target="_blank" rel="noopener noreferrer" class="link-item">
+            <img src="img/github.png" alt="GitHub">
+            <span>Open-source code</span>
         </a>
-        <a href="https://twitter.com/ProgramSeismic" target="_blank" class="link-item">
-            <img src="img/twitter.png" width="40">
-            <span>Follow us on Twitter</span>
+
+        <a href="https://twitter.com/ProgramSeismic"
+           target="_blank" rel="noopener noreferrer" class="link-item">
+            <img src="img/twitter.png" alt="Twitter">
+            <span>Twitter</span>
         </a>
-        <a href="https://www.youtube.com/@robertocabiecesdiaz3775/videos" target="_blank" class="link-item">
-            <img src="img/youtube.png" width="40">
-            <span>Subscribe on YouTube</span>
-        </a>
-        <a href="https://github.com/ProjectISP/ISP/issues" target="_blank" class="link-item">
-            <img src="img/questions.png" width="60">
+
+        <a href="https://github.com/ProjectISP/ISP/issues"
+           target="_blank" rel="noopener noreferrer" class="link-item">
+            <img src="img/questions.png" alt="Questions and Issues">
             <span>Questions and Issues</span>
-        </a>
-        <a href="mailto:isp@roa.es?subject=Subscription Request&body=Hello, I would like to subscribe to surfQuake news and future workshops" class="link-item">
-            <img src="img/mail.png" width="60">
-            <span>Subscribe to news and future workshops</span>
         </a>
     </div>
 </body>
 </html>
+
+---
 
 
 ## <span style="color:darkcyan;"> **ToolBoxes** </span>
@@ -102,8 +118,9 @@ Take a look at our recently published paper!
 - [<span style="color:#5DADE2">*Source Parameters* </span>](https://projectisp.github.io/surfquaketutorial.github.io/source/)
 - [<span style="color:#5DADE2">*First Motion Polarity* </span>](https://projectisp.github.io/surfquaketutorial.github.io/focmec/)
 - [<span style="color:#5DADE2">*Moment Tensor Inversion* </span>](https://projectisp.github.io/surfquaketutorial.github.io/mti/)
-- [<span style="color:#5DADE2">*Data Base* </span>](https://projectisp.github.io/surfquaketutorial.github.io/db/)
 - [<span style="color:#5DADE2">*Utils* </span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/)
+
+---
 
 ## <span style="color:darkcyan;"> **How to follow surfQuake Documentation** </span>
 
@@ -111,13 +128,16 @@ if you want something quick, let's start with the [<span style="color:#5DADE2">*
 
 If you want to really undertand surfQuake go to [<span style="color:#5DADE2">*Getting Started* </span>](https://projectisp.github.io/surfquaketutorial.github.io/project/).
 
+---
+
 ## <span style="color:darkcyan;"> **Case of Study and Supporting Materials** </span>
 First: [<span style="color:#5DADE2;">Case of study</span>](https://github.com/rcabdia/test_surfquake), contains a full example of using surfQuake with core Library Python scripts, Core Library bash script and expected results. Of course you can try to run the example using the GUI.
 
 Second: [<span style="color:#5DADE2;">Earth Velocity models examples</span>](https://github.com/rcabdia/ProjectISP_3Dmodels). Event Location format and MTI format.
 
+---
 
-## <span style="color:darkcyan;"> **Cite surfQuake:** </span>
+## <span style="color:darkcyan;"> **Cite surfQuake** </span>
 
 
-Cabieces, R., Junqueira, T. C., Harris, K., Relinque, J., Satriano, C. & Vackář, J: SurfQuake: A new Python toolbox for the workflow process of seismic sources, Seismological Research Letters, may 2025.
+Cabieces, R., Junqueira, T. C., Harris, K., Relinque, J., Satriano, C. & Vackář, J. (2025). surfQuake: A new Python toolbox for the workflow process of seismic sources. Seismological Research Letters, 96(5), 3231-3243.
