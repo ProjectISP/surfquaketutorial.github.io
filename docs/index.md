@@ -12,23 +12,23 @@ The signal processing toolbox is extended with a lage variety of numerical metho
 
 ---
 
-## <span style="color:darkcyan;"> **News** </span>
 
-Combine the flexibility of command-line tools, Python scripts, and Bash to supercharge your seismic trace processing and workflow:
+## <span style="color:darkcyan;"> **Cite surfQuake** </span>
 
-- [<span style="color:#5DADE2">*New Tutorial book:*</span>](https://projectisp.github.io/surfquaketutorial.github.io/tutorials/tutorial1/)
-
-- [<span style="color:#5DADE2">*surfquake 1.7.0, Oct 2026: Improved Signal Processing toolbox*</span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
-
-
-Take a look at our recently published paper!
 
 - [<span style="color:#5DADE2">*Seismological Research Letters paper*</span>](https://pubs.geoscienceworld.org/ssa/srl/article-abstract/doi/10.1785/0220240186/654285/surfQuake-A-New-Python-Toolbox-for-the-Workflow?redirectedFrom=fulltext)
 
+---
+
+## <span style="color:darkcyan;"> **Case of Study and Supporting Materials** </span>
+First: [<span style="color:#5DADE2;">Case of study</span>](https://github.com/rcabdia/test_surfquake), contains a full example of using surfQuake with core Library Python scripts, Core Library bash script and expected results. Of course you can try to run the example using the GUI.
+
+Second: [<span style="color:#5DADE2;">Earth Velocity models examples</span>](https://github.com/rcabdia/ProjectISP_3Dmodels). Event Location format and MTI format.
 
 ---
 
 
+## <span style="color:darkcyan;"> **Keeping Updated** </span>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,34 +106,87 @@ Take a look at our recently published paper!
 
 
 ## <span style="color:darkcyan;"> **ToolBoxes** </span>
-- [<span style="color:#5DADE2">*Create your Project* </span>](https://projectisp.github.io/surfquaketutorial.github.io/project/)
-- [<span style="color:#5DADE2">*Signal Processing* </span>](https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/)
-- [<span style="color:#5DADE2">*Phase Picker* </span>](https://projectisp.github.io/surfquaketutorial.github.io/picker/)
-- [<span style="color:#5DADE2">*Probability Power Spectral Density Functions* </span>](https://projectisp.github.io/surfquaketutorial.github.io/ppsd_DB/)
-- [<span style="color:#5DADE2">*Ambient Noise Processing* </span>](https://projectisp.github.io/surfquaketutorial.github.io/ambient_noise/)
-- [<span style="color:#5DADE2">*Dispersion Curves Processing* </span>](https://projectisp.github.io/surfquaketutorial.github.io/dispersion_curves_processing/)
-- [<span style="color:#5DADE2">*Event Associator* </span>](https://projectisp.github.io/surfquaketutorial.github.io/associate/)
-- [<span style="color:#5DADE2">*Coincidence Trigger* </span>](https://projectisp.github.io/surfquaketutorial.github.io/coincidence/)
-- [<span style="color:#5DADE2">*Event Location* </span>](https://projectisp.github.io/surfquaketutorial.github.io/locate/)
-- [<span style="color:#5DADE2">*Source Parameters* </span>](https://projectisp.github.io/surfquaketutorial.github.io/source/)
-- [<span style="color:#5DADE2">*First Motion Polarity* </span>](https://projectisp.github.io/surfquaketutorial.github.io/focmec/)
-- [<span style="color:#5DADE2">*Moment Tensor Inversion* </span>](https://projectisp.github.io/surfquaketutorial.github.io/mti/)
-- [<span style="color:#5DADE2">*Utils* </span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/)
+<div class="sq-map">
+  <section class="sq-category sq-category--start" aria-label="Getting Started">
+    <h3>Getting Started</h3>
+    <div class="sq-items">
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/seismic_data_files/">Seismic Files</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/metadata/">Metadata</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/project/">Project</a>
+    </div>
+  </section>
+  <section class="sq-category sq-category--tutorial" aria-label="Tutorial Book">
+    <h3>Tutorial Book</h3>
+    <div class="sq-items">
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/tutorials/tutorial1/">Basic Signal Processing</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/tutorials/tutorial2/">Time-Frequency Analysis</a>
+    </div>
+  </section>
+  <section class="sq-category sq-category--signal" aria-label="Signal Processing">
+    <h3>Signal Processing</h3>
+    <div class="sq-items">
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/processing_overview/">Overview</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/examples/">Examples</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/">Trace Header</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/explore_data/">Data Availability</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/scripts/">My Scripts</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/">Processing Traces</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/">Processing Stream</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/beamforming_documentation/">Beamforming</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/particle_motion_documentation/">Particle Motion</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/spectral_analysis_documentation/">Time-Frequency Analysis</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/characteristic_functions_documentation/">Characteristic Functions</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/">Plotting Interaction</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/">Bash Script Interaction</a>
+    </div>
+  </section>
+  <section class="sq-category sq-category--event" aria-label="Event Analysis">
+    <h3>Event Analysis</h3>
+    <div class="sq-items">
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/picker/">Phase Picker</a>
+      <div class="sq-subgroup">
+        <h4>Event Associator</h4>
+        <div class="sq-items">
+          <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/associate/">Clustering Associate</a>
+          <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/coincidence/">Coincidence Trigger</a>
+        </div>
+      </div>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/locate/">Event Location</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/source/">Source Parameters</a>
+      <div class="sq-subgroup">
+        <h4>Focal Mechanism</h4>
+        <div class="sq-items">
+          <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/focmec/">First Motion Polarity</a>
+          <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/mti/">Moment Tensor Inversion</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="sq-category sq-category--noise" aria-label="Noise Processing">
+    <h3>Noise Processing</h3>
+    <div class="sq-items">
+      <div class="sq-subgroup">
+        <h4>PPSD</h4>
+        <div class="sq-items">
+          <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/ppsd_DB/">Database</a>
+          <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/ppsd_plot/">Plotting &amp; Statistics</a>
+        </div>
+      </div>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/ambient_noise/">Ambient Noise Processing</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/dispersion_curves_processing/">Dispersion Curves Processing</a>
+    </div>
+  </section>
+  <section class="sq-category sq-category--utils" aria-label="Utilities">
+    <h3>Utilities</h3>
+    <div class="sq-items">
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/create_metadata/">Create Metadata</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/manage_catalog/">Manage Catalog</a>
+      <a class="sq-link" href="https://projectisp.github.io/surfquaketutorial.github.io/build_mti/">Build MTI Config</a>
+    </div>
+  </section>
+</div>
 
----
 
-## <span style="color:darkcyan;"> **How to follow surfQuake Documentation** </span>
-
-if you want something quick, let's start with the [<span style="color:#5DADE2">*Tutorial* </span>](https://projectisp.github.io/surfquaketutorial.github.io/tutorials/tutorial1/) and then continue with the next toolboxes.
-
-If you want to really undertand surfQuake go to [<span style="color:#5DADE2">*Getting Started* </span>](https://projectisp.github.io/surfquaketutorial.github.io/project/).
-
----
-
-## <span style="color:darkcyan;"> **Case of Study and Supporting Materials** </span>
-First: [<span style="color:#5DADE2;">Case of study</span>](https://github.com/rcabdia/test_surfquake), contains a full example of using surfQuake with core Library Python scripts, Core Library bash script and expected results. Of course you can try to run the example using the GUI.
-
-Second: [<span style="color:#5DADE2;">Earth Velocity models examples</span>](https://github.com/rcabdia/ProjectISP_3Dmodels). Event Location format and MTI format.
 
 ---
 
