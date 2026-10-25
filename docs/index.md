@@ -189,8 +189,3 @@ Second: [<span style="color:#5DADE2;">Earth Velocity models examples</span>](htt
 
 
 ---
-
-## <span style="color:darkcyan;"> **Cite surfQuake** </span>
-
-
-Cabieces, R., Junqueira, T. C., Harris, K., Relinque, J., Satriano, C. & Vackář, J. (2025). surfQuake: A new Python toolbox for the workflow process of seismic sources. Seismological Research Letters, 96(5), 3231-3243.
