@@ -1287,6 +1287,78 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-and-accessing-spectral-result-objects-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding and Accessing Spectral Result Objects in Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding and Accessing Spectral Result Objects in Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-spectrum-object-sp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Spectrum object (.sp)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-spectrogram-object-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Spectrogram object (.spec)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cross-spectral-result-object-coh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Cross-spectral result object (.coh)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-cwt-result-object-cwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. CWT result object (.cwt)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-inspecting-an-object-and-saving-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Inspecting an object and saving results
+      
+    </span>
+  </a>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#scientific-references" class="md-nav__link">
     <span class="md-ellipsis">
@@ -2285,6 +2357,302 @@
 <li><code>--clip</code>, <code>-c</code>: Optional clipping in dB for spectrogram or CWT</li>
 <li><code>--save_path</code>: Output path to save the figure</li>
 </ul>
+<hr />
+<h2 id="understanding-and-accessing-spectral-result-objects-in-python">Understanding and Accessing Spectral Result Objects in Python</h2>
+<p>SurfQuake does not store only an image of the spectral analysis. Its serialized output files contain Python result objects that preserve the numerical arrays and the original <a href="https://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.html">ObsPy <code>Trace</code></a>. This allows users to inspect spectral values, select particular frequencies or time windows, and perform further analysis without extracting data from a figure.</p>
+<p>The examples below describe the classes implemented in <code>specrun.py</code>. The import path assumes that this module is installed as <code>surfquakecore.data_processing.specrun</code>; adjust it if your installation uses a different module layout.</p>
+<h3 id="1-spectrum-object-sp">1. Spectrum object (<code>.sp</code>)</h3>
+<p>A spectrum saved as <code>.sp</code> contains a <code>TraceSpectrumResult</code> instance. Its main attributes are:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trace</code></td>
+<td>Original (or trimmed) ObsPy <code>Trace</code>, including waveform samples in <code>trace.data</code>.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td>ObsPy trace metadata (<code>starttime</code>, <code>sampling_rate</code>, <code>network</code>, <code>station</code>, etc.).</td>
+</tr>
+<tr>
+<td><code>freq</code></td>
+<td>One-dimensional array of frequency samples in Hz.</td>
+</tr>
+<tr>
+<td><code>spectrum</code></td>
+<td>One-dimensional array of spectral amplitudes associated with <code>freq</code>.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Estimation method used, such as <code>multitaper</code> or <code>fft</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrumResult</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceSpectrumResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/trace.sp&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Method:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency bins:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">frequency_hz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">amplitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">spectrum</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># Read the amplitude at the frequency bin nearest to 5 Hz.</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequency_hz</span> <span class="o">-</span> <span class="mf">5.0</span><span class="p">))</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">frequency_hz</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> Hz: </span><span class="si">{</span><span class="n">amplitude</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>The two arrays are paired by index: <code>spectrum[i]</code> corresponds to <code>freq[i]</code>. The stored values are spectral amplitudes, not a time-frequency matrix.</p>
+<h3 id="2-spectrogram-object-spec">2. Spectrogram object (<code>.spec</code>)</h3>
+<p>A spectrogram saved as <code>.spec</code> contains a <code>TraceSpectrogramResult</code> instance. It preserves the original power matrix rather than only the decibel values displayed in the figure.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trace</code></td>
+<td>Original ObsPy <code>Trace</code>.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td>Trace metadata.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>One-dimensional array of spectrogram time coordinates, in seconds relative to trace start.</td>
+</tr>
+<tr>
+<td><code>freq</code></td>
+<td>One-dimensional array of spectrogram frequencies, in Hz.</td>
+</tr>
+<tr>
+<td><code>spectrogram</code></td>
+<td>Two-dimensional <strong>power</strong> array, indexed as <code>[frequency, time]</code>.</td>
+</tr>
+<tr>
+<td><code>num_steps</code></td>
+<td>Number of computed time steps returned by the spectral calculation.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrogramResult</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceSpectrogramResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/trace.spec&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">spectrogram</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power matrix shape:&quot;</span><span class="p">,</span> <span class="n">power</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency bins:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">))</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time steps:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="k">assert</span> <span class="n">power</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># Power at the nearest available frequency and time bin.</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">fi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">))</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">times</span> <span class="o">-</span> <span class="mf">60.0</span><span class="p">))</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power at </span><span class="si">{</span><span class="n">frequencies</span><span class="p">[</span><span class="n">fi</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Hz and </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="n">ti</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> s:&quot;</span><span class="p">,</span> <span class="n">power</span><span class="p">[</span><span class="n">fi</span><span class="p">,</span> <span class="n">ti</span><span class="p">])</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># Extract a frequency band (1–5 Hz) for subsequent calculations.</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="n">band</span> <span class="o">=</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">)</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="n">band_power</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:]</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected band matrix:&quot;</span><span class="p">,</span> <span class="n">band_power</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="c1"># Obtain absolute UTC times for the spectrogram columns.</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="n">absolute_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">]</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First spectrogram time:&quot;</span><span class="p">,</span> <span class="n">absolute_times</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+<p><strong>Important distinction:</strong> <code>result.spectrogram</code> contains linear power values. The plotting method converts them to <strong>relative decibels</strong>, taking the maximum finite power as its reference:</p>
+<div class="arithmatex">\[
+P_{\mathrm{rel}}(f,t) = 10\log_{10}\left(\frac{P(f,t)}{P_{\max}}\right).
+\]</div>
+<p>You can reproduce the conversion in Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">max_power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">max_power</span><span class="p">)</span> <span class="ow">or</span> <span class="n">max_power</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Spectrogram has no positive finite maximum&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">relative_db</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">power</span> <span class="o">/</span> <span class="n">max_power</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># Zero-power cells become -inf dB; filter them when needed.</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">finite_db</span> <span class="o">=</span> <span class="n">relative_db</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">relative_db</span><span class="p">)]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finite relative dB range:&quot;</span><span class="p">,</span> <span class="n">finite_db</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">finite_db</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</code></pre></div>
+<p>The frequency and time coordinates describe the <strong>computed bins</strong>; they should not be confused with the waveform's individual sample times. Plotting options such as <code>clip</code>, <code>split</code>, and <code>smooth</code> change the presentation, not the stored power matrix.</p>
+<h3 id="3-cross-spectral-result-object-coh">3. Cross-spectral result object (<code>.coh</code>)</h3>
+<p>The same module also provides <code>TraceCrossSpectralResult</code> for analyses between a <strong>reference</strong> (input) trace and a <strong>target</strong> (output) trace. These objects can be saved as <code>.coh</code> files.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute or property</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ref_trace</code>, <code>trace</code></td>
+<td>Reference and target ObsPy traces.</td>
+</tr>
+<tr>
+<td><code>ref_stats</code>, <code>stats</code></td>
+<td>Metadata for the respective traces.</td>
+</tr>
+<tr>
+<td><code>freq</code></td>
+<td>Frequency samples in Hz.</td>
+</tr>
+<tr>
+<td><code>gxx</code>, <code>gyy</code></td>
+<td>Reference and target autospectral estimates.</td>
+</tr>
+<tr>
+<td><code>gxy</code></td>
+<td>Complex cross spectrum, defined as <code>E[conj(X) * Y]</code>.</td>
+</tr>
+<tr>
+<td><code>n_avg</code></td>
+<td>Averaging information used by the coherence-threshold calculation.</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td>Spectral estimation method.</td>
+</tr>
+<tr>
+<td><code>coherence</code></td>
+<td>Derived magnitude-squared coherence (between 0 and 1).</td>
+</tr>
+<tr>
+<td><code>transfer</code></td>
+<td>Derived complex transfer function <code>gxy / gxx</code>.</td>
+</tr>
+<tr>
+<td><code>amplitude</code>, <code>phase_deg</code></td>
+<td>Derived transfer-function magnitude and phase in degrees.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCrossSpectralResult</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceCrossSpectralResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/pair.coh&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Input:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">ref_trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">frequency_hz</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">freq</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">coherence</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">coherence</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">transfer_function</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">transfer</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">magnitude</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">amplitude</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">phase_degrees</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">phase_deg</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># Identify frequencies with coherence of at least 0.8.</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="n">reliable</span> <span class="o">=</span> <span class="n">coherence</span> <span class="o">&gt;=</span> <span class="mf">0.8</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;High-coherence frequencies:&quot;</span><span class="p">,</span> <span class="n">frequency_hz</span><span class="p">[</span><span class="n">reliable</span><span class="p">])</span>
+</code></pre></div>
+<p>These last four quantities are computed from the stored spectral estimates when accessed; they are Python properties, not separate arrays serialized independently. High coherence measures a strong linear frequency-domain relationship, but does not by itself establish causality.</p>
+<h3 id="4-cwt-result-object-cwt">4. CWT result object (<code>.cwt</code>)</h3>
+<p>A Continuous Wavelet Transform is represented by <code>TraceCWTResult</code>, defined in <code>surfquakecore.data_processing.cwtrun</code>. Unlike the spectrogram object, the wavelet result keeps its transform and associated coordinates in a <strong>five-element tuple</strong> called <code>cwt_data</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trace</code></td>
+<td>Original ObsPy <code>Trace</code>, including waveform samples.</td>
+</tr>
+<tr>
+<td><code>stats</code></td>
+<td>Trace metadata (<code>starttime</code>, <code>sampling_rate</code>, <code>channel</code>, etc.).</td>
+</tr>
+<tr>
+<td><code>cwt_data[0]</code></td>
+<td><code>t</code>: relative time coordinates in seconds.</td>
+</tr>
+<tr>
+<td><code>cwt_data[1]</code></td>
+<td><code>f</code>: wavelet frequency coordinates in Hz, logarithmically spaced.</td>
+</tr>
+<tr>
+<td><code>cwt_data[2]</code></td>
+<td><code>scalogram</code>: wavelet-transform values, indexed as <strong><code>[frequency, time]</code></strong>.</td>
+</tr>
+<tr>
+<td><code>cwt_data[3]</code></td>
+<td><code>pred</code>: left-hand edge-effect boundary, expressed as relative time coordinates.</td>
+</tr>
+<tr>
+<td><code>cwt_data[4]</code></td>
+<td><code>pred_comp</code>: right-hand edge-effect boundary, expressed as relative time coordinates.</td>
+</tr>
+</tbody>
+</table>
+<p>Load a previously saved CWT result (the default serialization is gzip-compressed pickle):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.cwtrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCWTResult</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceCWTResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/waveform.cwt&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trace:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling rate:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sampling_rate</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">times</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">,</span> <span class="n">left_edge</span><span class="p">,</span> <span class="n">right_edge</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cwt_data</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time coordinates:&quot;</span><span class="p">,</span> <span class="n">times</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency coordinates:&quot;</span><span class="p">,</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CWT matrix:&quot;</span><span class="p">,</span> <span class="n">coefficients</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="k">assert</span> <span class="n">coefficients</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="c1"># Inspect a coefficient at the nearest sampled frequency and time.</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">fi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">))</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">times</span> <span class="o">-</span> <span class="mf">60.0</span><span class="p">))</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CWT coefficient:&quot;</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">fi</span><span class="p">,</span> <span class="n">ti</span><span class="p">])</span>
+</code></pre></div>
+<p><strong>Amplitude versus power:</strong> The stored <code>scalogram</code> is the output of <code>ConvolveWaveletScipy.scalogram()</code>. The CWT plotting method computes <strong>power</strong> as <code>abs(scalogram)**2</code> and then displays power in decibels relative to the maximum:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">max_power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">max_power</span><span class="p">)</span> <span class="ow">or</span> <span class="n">max_power</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CWT power must have a positive finite maximum&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">relative_db</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">power</span> <span class="o">/</span> <span class="n">max_power</span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># Extract CWT power between 1 and 5 Hz.</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">selected</span> <span class="o">=</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">band_power</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">selected</span><span class="p">,</span> <span class="p">:]</span>
+</code></pre></div>
+<p>The <code>left_edge</code> and <code>right_edge</code> arrays delimit regions near the beginning and end of the trace where wavelet edge effects can influence the interpretation. They are <strong>boundary coordinates</strong>, not Boolean masks. The implementation computes them using an auxiliary linearly spaced frequency vector, whereas the stored <code>frequencies</code> vector is logarithmically spaced; avoid treating the boundary arrays as exact per-bin validity flags without considering this distinction.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Display the saved CWT using its built-in plotting method.</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">result</span><span class="o">.</span><span class="n">plot_cwt</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">clip</span><span class="o">=-</span><span class="mi">80</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Save a result object; the method chooses the .cwt filename.</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">result</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral_results&quot;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>As with the other result objects, plotting parameters modify the figure presentation rather than replacing <code>result.cwt_data</code>. For the supported wavelet choices and computation parameters, see the <strong>Continuous Wavelet Transform (CWT)</strong> section above.</p>
+<h3 id="5-inspecting-an-object-and-saving-results">5. Inspecting an object and saving results</h3>
+<p>All four classes implement <code>to_pickle(folder_path, compress=True)</code> and <code>from_pickle(filepath, compress=True)</code>. <strong>Compression is enabled by default</strong>, so use the same <code>compress</code> setting when loading that was used when saving. File extensions (<code>.sp</code>, <code>.spec</code>, <code>.coh</code>, <code>.cwt</code>) identify the result type; they do not by themselves indicate whether gzip compression was enabled.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Explore attributes of an object already loaded as `result`.</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># Save the full object to a directory (file name assigned automatically).</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">result</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral_results&quot;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 <hr />
 <h3 id="scientific-references">Scientific References</h3>
 <ul>
