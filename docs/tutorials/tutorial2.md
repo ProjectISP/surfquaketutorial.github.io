@@ -81,7 +81,9 @@ p #back to picking mode
 
 ## Automatic
 
-- In this section we are going to compute Time-Frequency objects (just as the section above), but using a config file. The advantage is that we can automate big process and save this objects for later use.
+- In this section we are going to compute Time-Frequency objects (just as the section above), but using a config file. The advantage is that we can automate big process and save this objects for later use. 
+
+- Please review the section related to [Time-Frequency Objects](https://projectisp.github.io/surfquaketutorial.github.io/spectral_analysis_documentation/#understanding-and-accessing-spectral-result-objects-in-python){: target="_blank" rel="noopener noreferrer" } to understand the output files and take advange of the its design.
 
 - Let's prepare the processing config file `spectral_config.yaml`. Below you will see that I concatenate the typical processing plus the computation of the speectrogram.
 
