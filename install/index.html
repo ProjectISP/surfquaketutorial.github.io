@@ -2042,7 +2042,7 @@
 <h1 id="installation"><span style="color:darkcyan;"><strong>Installation</strong></span></h1>
 <h2 id="create-an-environment">Create an environment</h2>
 <h3 id="anaconda-env">Anaconda env</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>surfquake<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9<span class="w"> </span><span class="c1"># surfQuake for 3.9 &lt;= Python &lt;= 3.11</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>surfquake<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11<span class="w"> </span><span class="c1"># surfQuake for 3.9 &lt;= Python &lt;= 3.11</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>&gt;&gt;<span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
 </code></pre></div>
 <h3 id="pip-env">pip env</h3>
@@ -2060,7 +2060,15 @@
 </code></pre></div>
 <h2 id="install-the-core-package">Install the core package</h2>
 <p>You can install surfQuake core after creating your virtual environment (using either Anaconda env or Pip env). After activate your environment,</p>
+<ul>
+<li>Last stable version (recommended)</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>surfquake
+</code></pre></div>
+<ul>
+<li>Developing version (might be for developers..)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt;<span class="w"> </span><span class="o">(</span>surfquake<span class="o">)</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/rcabdia/SurfQuakeCore.git
 </code></pre></div>
 <h2 id="notes-about-processor-and-os"><span style="color:darkcyan;"> <strong>Notes about Processor and OS</strong> </span></h2>
 <p><strong>Linux OS</strong> and <strong>Mac</strong> computers with Intel processors can now run surQuake thanks to testing and programming. </p>
