@@ -4,7 +4,7 @@
 
 ### Anaconda env
 ```bash
->> conda create -n surfquake python=3.9 # surfQuake for 3.9 <= Python <= 3.11
+>> conda create -n surfquake python=3.11 # surfQuake for 3.9 <= Python <= 3.11
 >> conda activate surfquake
 ```
 
@@ -34,8 +34,17 @@ Type "help", "copyright", "credits" or "license" for more information
 ## Install the core package
 You can install surfQuake core after creating your virtual environment (using either Anaconda env or Pip env). After activate your environment,
 
+
+- Last stable version (recommended)
+
 ```bash
 >> (surfquake) pip install surfquake
+```
+
+- Developing version (might be for developers..)
+
+```bash
+>> (surfquake) pip install git+https://github.com/rcabdia/SurfQuakeCore.git
 ```
 
 ## <span style="color:darkcyan;"> **Notes about Processor and OS** </span>

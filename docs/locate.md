@@ -1,7 +1,10 @@
 
 # <span style="color:darkcyan;">**Event Location**</span>
-The Event Location toolbox uses [<span style="color:#5DADE2;">Non Lin Loc, Lomax et ., 2009</span>](http://alomax.free.fr/nlloc/) to locate seismic events.
 
+!!! info Reference
+    The Event Location toolbox uses [<span style="color:#5DADE2;">Non Lin Loc, Lomax et ., 2009</span>](http://alomax.free.fr/nlloc/) to locate seismic events.
+
+---
 
 ## <span style="color:darkcyan;">**Event Location from CLI**</span>
 
@@ -16,19 +19,17 @@ The Event Location toolbox uses [<span style="color:#5DADE2;">Non Lin Loc, Lomax
                                   (int, number of iterations if stations corrections is set)
 ```
 
-### Usage
-
 ```bash
 # Interactive help
 >> surfquake locate -h
-``` 
-
-```bash
 >> surfquake locate -i /surfquake_test/metadata/inv_all.xml -c /surfquake_test/config_files/nll_config.ini -o /surfquake_test/test_nll_final -g -s
 ```
 
+---
+
 ## <span style="color:darkcyan;">**Further Details**</span>
 First we include here, previous knowlege about files you need to set to run event locations.
+
 
 ### The Picking File
 
@@ -196,6 +197,7 @@ METHOD = GAU_ANALYTIC
         - **EDT_OT_WT** Weights EDT-sum probabilities by the variance of origin-time estimates over all pairs of readings. This reduces the probability (PDF values) at points with inconsistent OT estimates, and leads to more compact location PDF's. 
         - **EDT_OT_WT_ML** version of EDT_OT_WT with EDT origin-time weighting applied using a grid-search, maximum-likelihood estimate of the origin time. Less efficient than EDT_OT_WT which uses simple statistical estimate of the origin time.
 
+---
 
 ## <span style="color:darkcyan;">**Event Location from Library**</span>
 ### Classes
@@ -278,3 +280,5 @@ if __name__ == "__main__":
     nll_catalog = Nllcatalog(working_directory)
     nll_catalog.run_catalog(working_directory)
 ```
+
+---

@@ -27,13 +27,13 @@ nav:
   - Event Analysis:
       - Phase Picker: picker.md
       - Event Associator:
-          - Clustering Associate: associate.md
-          - Coincidence Trigger: coincidence.md
+            - Clustering Associate: associate.md
+            - Coincidence Trigger: coincidence.md
       - Event Location: locate.md
       - Source Parameters: source.md
       - Focal Mechanism:
-          - First Motion Polarity: focmec.md
-          - Moment Tensor Inversion: mti.md
+            - First Motion Polarity: focmec.md
+            - Moment Tensor Inversion: mti.md
 
   - Noise Processing:
     - PPSD:

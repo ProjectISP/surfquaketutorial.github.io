@@ -1,7 +1,15 @@
 
 # <span style="color:darkcyan;">**Automatic Moment Tensor Inversion**</span>
 
-The focal mechanism of the pre-located events is automatically estimated using a optimized version of Bayesian Isola ([<span style="color:#5DADE2;">Vackâr et al., 2017</span>](https://academic.oup.com/gji/article/210/2/693/3747443)). The MTI is run over a set of events. The events can be selected quering the database through the GUI, giving a folder path with mti_config.ini files or even making instances of the class for each event and running the inversion from the core library. Moreover, for Core library and CLI users, it can be automatically generated the MTI config files from a catalog object, see [<span style="color:#5DADE2;">Build MTI config files in Utilities section</span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files).
+
+!!! info Reference
+    The focal mechanism of the pre-located events is automatically estimated using a optimized version of Bayesian Isola ([<span style="color:#5DADE2;">Vackâr et al., 2017</span>](https://academic.oup.com/gji/article/210/2/693/3747443)).
+
+
+!!! Warning 
+    Please do not mix in your project seismic files with same net, station, channel but with different location.
+
+---
 
 
 ## <span style="color:darkcyan;">**MTI from CLI**</span>
@@ -13,21 +21,34 @@ The focal mechanism of the pre-located events is automatically estimated using a
         -c, --config_file       [REQUIRED] INI configuration file for inversion settings
         -o, --output_dir        [REQUIRED] Output directory for inversion results
         -s, --save_plots        [OPTIONAL] If set, saves plots of MT solutions and fits
-```
+            --save_green        [OPTIONAL] If set, green functions are saved at output_dir/green
+            --use_pre_green     [OPTIONAL] If set, green functions are directly load from output_dir/green
 
-### Usage
-
-```bash
-# Interactive Help
->> surfquake mti -h
+    Warning:  --save_green leads over --use_pre_green
+    Comments: --use_pre_green, makes only sense if user wants to improve later an old solution by selecting stations/channels.
+              Please, green functions are frequency dependent, so do not change the frequency range.
 ```
 
 ### Run MTI from CLI
 
+- Create quickly a template for a single event.
+
+- The MTI is run over a set of events. The Core library and CLI users, it can be automatically generated the MTI config files from a catalog object, see [<span style="color:#5DADE2;">Build MTI config files in Utilities section</span>](https://projectisp.github.io/surfquaketutorial.github.io/utils/#build-mti-config-files).
+
 ```bash
->> surfquake mti -i ./inv_surfquakecore.xml -p ./surfquake_project_mti.pkl -o ./test_mti -c ./surfquake_test/mti_configs -s
+surfquake make_config -c mti_config -o ./configs
 ```
 
+- Normally, you would like to review the solution so make a first run using `--save_green`. Once the solucion is generated review the fit of stations and proceed to depurate it., and run the command with option  `--use_pre_green`. Do not touch the frequency range, only the stations/channels combination!.
+
+```bash
+# Interactive Help
+>> surfquake mti -h
+>> surfquake mti -i ./inv_surfquakecore.xml -p ./surfquake_project_mti.pkl -o ./test_mti -c ./surfquake_test/mti_configs -s --save_green
+>> surfquake mti -i ./inv_surfquakecore.xml -p ./surfquake_project_mti.pkl -o ./test_mti -c ./surfquake_test/mti_configs -s --use_pre_green
+```
+
+---
 
 ## <span style="color:darkcyan;">**Configuration**</span>
 
@@ -118,6 +139,8 @@ depth of layer top(km)   Vp(km/s)    Vs(km/s)    Rho(g/cm**3)    Qp     Qs
      66.9                 8.04       4.481        3.309         300    300
 *************************************************************************
 ```
+
+---
 
 ## <span style="color:darkcyan;">**MTI from Library**</span>
 
@@ -275,3 +298,6 @@ for result_file in iversion_json_files:
 wm = WriteMTI(parsed_args.output_dir_path)
 wm.mti_summary()
 ```
+
+---
+
