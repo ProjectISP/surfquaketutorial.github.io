@@ -768,10 +768,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#process-your-waveform" class="md-nav__link">
+  <a href="#process-your-waveforms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Process your waveform
+        Process your waveforms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatic-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic processing
       
     </span>
   </a>
@@ -824,6 +835,34 @@
     
   
     Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamfoming
   
 
     
@@ -2048,50 +2087,55 @@
 
 
 <h1 id="basic-signal-processing-tutorial-1"><span style="color:darkcyan;"> <strong>Basic Signal Processing Tutorial 1</strong> </span></h1>
-<p>In this tutorial, we will learn how to work with the commands: <code>make_config</code>, <code>explore</code>, <code>info</code> and  <code>quick</code> to process your seismic waveforms.</p>
-<p>In this tutorial we will follow this structure
-- <em>Seismic files:</em> tutorial1/data
-- <em>Metadata:</em> tutorial1/metadata
-- <em>Config Files:</em> tutorial1/configs</p>
-<div class="highlight"><pre><span></span><code>--tutorial
-    --data
-        --CA.ARBS..HH1.D.2022.32
-        --CA.ARBS..HH2.D.2022.32
-        --CA.ARBS..HHZ.D.2022.32
-        ......
-    --metadata
-        --inv_all.xml
-    --configs
-        --typical_config.yaml
-        --plotting_config.yaml
+<p>In this tutorial, we will learn how to work with the commands: <code>make_config</code>, <code>explore</code>, <code>info</code> and <code>quick</code> to process your seismic waveforms.</p>
+<p>In this tutorial we will follow this structure:</p>
+<ul>
+<li><em>Seismic files:</em> tutorial1/data</li>
+<li><em>Metadata:</em> tutorial1/metadata</li>
+<li><em>Config Files:</em> tutorial1/configs</li>
+<li><em>Folder for the tutorial output:</em> tutorial1/output, this will be created by surfquake.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--tutorial1
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    --data
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        --CA.ARBS..HH1.D.2022.32
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        --CA.ARBS..HH2.D.2022.32
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        --CA.ARBS..HHZ.D.2022.32
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ......
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    --metadata
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        --inv_all.xml
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    --configs
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        --typical_config.yaml
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        --plotting_config.yaml
 </code></pre></div>
 <p>For this tutorial you need to download the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/waveforms_cut" rel="noopener noreferrer" target="_blank">seismic data here</a>. Optionally, download the corresponding <a href="https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata" rel="noopener noreferrer" target="_blank">metadata</a>.</p>
-<p>Please, first open a terminal and type the following command to overviewall surfquake capabilities:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>-h
+<p>All the commands of this tutorial are run from the folder that contains <code>tutorial1</code>.</p>
+<p>Please, first open a terminal, activate your environment and type the following command to overview all surfquake capabilities:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>-h
 </code></pre></div>
+<hr />
 <h2 id="generate-config-files">Generate Config Files</h2>
-<p>When working with seismic waveforms it might be necessary to follow a signal processing workflow and plotting configuration. Let's prepare the necessary files.</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-h
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>typical_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/configs&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/configs&quot;</span>
+<p>When working with seismic waveforms, it is useful to describe the signal processing workflow and the plotting options in configuration files. Let's prepare the necessary files.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-h
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>typical_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/configs&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/configs&quot;</span>
 </code></pre></div>
-The <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">plotting configuration</a> is commented to explain the functionality. The parametrization for signal processing can be found <a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/" rel="noopener noreferrer" target="_blank">here for traces</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/" rel="noopener noreferrer" target="_blank">here for streams</a>.</p>
+<p>The <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">plotting configuration</a> is commented to explain the functionality. The parametrization for signal processing can be found <a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/" rel="noopener noreferrer" target="_blank">here for traces</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/" rel="noopener noreferrer" target="_blank">here for streams</a>.</p>
 <hr />
 <h2 id="explore-your-data">Explore your data</h2>
-<p>Sometimes we have really big datasets, A first view of your data coverage, including gaps.  </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-h
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./tutorial1/data/*&#39;</span>
+<p>Sometimes we have really big datasets. Before processing, it is good to have a first view of the data coverage, including gaps.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-h
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./tutorial1/data/*&#39;</span>
 </code></pre></div>
-<p>In this scenario, you are using the wildcard <code>*</code> that means all files. No worries because only seismic traces will be readed.</p>
-<p>Useful wildcards <code>*Z*</code> (all vertical components), <code>*VALC*</code> (only read station VALC). Wildcards are nice, but only understand file names no file headers.</p>
+<p>In this example we use the wildcard <code>*</code>, which means all files. No worries, only seismic files will be read.</p>
+<p>Other useful wildcards are <code>*Z*</code> (all vertical components) or <code>*VALC*</code> (only station VALC). Keep in mind that wildcards work on the <strong>file names</strong>, not on the file headers.</p>
 <p><img alt="Seismic Waveform" src="../img/explore.png" /></p>
 <hr />
 <h2 id="look-at-the-files-header">Look at the files header</h2>
-<p>Now let see the header of your files. This tell you a lot of infomation about what is inside the files, such as sampling rate, number of points, start time of the header...</p>
+<p>Now let's look at the header of your files. It tells you a lot about what is inside them, such as the sampling rate, the number of points or the start time.</p>
 <p>Please review the following documentation:</p>
 <p><a href="https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/" rel="noopener noreferrer" target="_blank">Trace Header</a></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>surfquake<span class="w"> </span>info<span class="w"> </span>-h
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>surfquake<span class="w"> </span>info<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./tutorial1/data/*&#39;</span><span class="w"> </span>-c<span class="w"> </span><span class="m">3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>info<span class="w"> </span>-h
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>surfquake<span class="w"> </span>info<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./tutorial1/data/*&#39;</span><span class="w"> </span>-c<span class="w"> </span><span class="m">3</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>[INFO] 30 files retained after filtering.
 File                 | CA.ARBS..HH1.D.2022.32    | CA.ARBS..HH2.D.2022.32    | CA.ARBS..HHZ.D.2022.32
@@ -2107,16 +2151,33 @@ Npts                 | 479960                    | 479960                    | 4
 Picks                | None                      | None                      | None
 References           | None                      | None                      | None
 </code></pre></div>
+<p>The option <code>-c</code> sets how many traces (columns) are shown side by side.</p>
 <hr />
-<h2 id="process-your-waveform">Process your waveform</h2>
-<p>Finally it is time to play with processing. In the example we filter the traces between [0.5-8.0] Hz with a butterworth filter, zero-phase.
-Please review the next documentation:</p>
+<h2 id="process-your-waveforms">Process your waveforms</h2>
+<p>Finally, it is time to play with processing. The file <code>typical_config.yaml</code> removes the mean, applies a taper and filters the traces between 0.5 and 8.5 Hz with a zero-phase Butterworth bandpass filter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.5</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<p>Please review the following documentation:</p>
 <p><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/" rel="noopener noreferrer" target="_blank">Trace processing</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">plotting</a></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./configs/plotting_config.yaml&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
 <p><img alt="Seismic Waveform" src="../img/waveform1.png" /></p>
-<p>Navigate and process interatively your data, see the menu on the terminal:</p>
+<p>Navigate and process your data interactively. The keyboard shortcuts are printed in the terminal:</p>
 <div class="highlight"><pre><span></span><code>=======================================================
 Plot Interaction Help
 =======================================================
@@ -2138,91 +2199,131 @@ Double left-click | Add pick
 ESC / Enter     | Exit current mode
 =======================================================
 </code></pre></div>
-<p>Sometimes, we do not want to plot the seismogram itself. It turn out to process and write the output files in our computer. This can be done adding option <code>-a</code> to the command.
-The files will be saved in <code>H5 format</code> with the picks, reference points and geodesic information in the <code>header</code>. The picks ae also save in the pick outputfolder set in the plot_config file. This file can be directly used in the command <code>surfquake locate</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./output&quot;</span><span class="w"> </span>-a
+<p>Your picks are saved in the file set by <code>pick_output_file</code> in <code>plotting_config.yaml</code> (default <code>./picks.csv</code>).</p>
+<hr />
+<h2 id="automatic-processing">Automatic processing</h2>
+<p>Sometimes we do not want to plot the seismograms, only to process them and write the output files to disk. This is done by adding the option <code>-a</code> (automatic mode) and an output folder with <code>-o</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/typical_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/output&quot;</span><span class="w"> </span>-a
 </code></pre></div>
-<p>On the other hand if you are interested in automatically save your plots, edit the following fields in your file <code>configs/plotting_config.yaml</code> and run another time the command with option <code>-a</code>:</p>
-<div class="highlight"><pre><span></span><code>plot_output_path: /my_output_plot_folder
-show_plot: True
+<p>The processed traces are saved in <code>H5 format</code>. Picks, reference times and geodesic information travel with the traces in the <code>header</code>.</p>
+<p>If you also want to save the figures automatically, edit these fields in <code>./tutorial1/configs/plotting_config.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">plot_output_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./tutorial1/figures</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">show_plot</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
+<p>and run the command again, now passing the plotting configuration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/plotting_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/output&quot;</span><span class="w"> </span>-a
+</code></pre></div>
+<p>With <code>show_plot: false</code> nothing is displayed on screen: all pages are written to <code>plot_output_path</code> and surfquake does not ask any question. This is the mode to automate your plots.</p>
+<table>
+<thead>
+<tr>
+<th>show_plot</th>
+<th>plot_output_path</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>true</td>
+<td>null</td>
+<td>displayed, not saved</td>
+</tr>
+<tr>
+<td>true</td>
+<td>./figures</td>
+<td>displayed and saved</td>
+</tr>
+<tr>
+<td>false</td>
+<td>./figures</td>
+<td>not displayed, saved (batch)</td>
+</tr>
+<tr>
+<td>false</td>
+<td>null</td>
+<td>nothing shown or saved</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In automatic mode (<code>-a</code>) the figures are only saved when <code>show_plot: false</code> <strong>and</strong> <code>plot_output_path</code> is set.</p>
+</div>
 <hr />
 <h2 id="using-bash-script">Using Bash script</h2>
-<p>Now, how can I concatenate commands of surfquake in your terminal? The answer is creating a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. 
-Please, create a file, let's name it <code>run_commnads.sh</code>. Write the following commands in your file.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="ch">#!/bin/bash</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Activate your conda or virtual environment</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>isp<span class="w">  </span><span class="c1"># Replace with your environment manager if needed (e.g., &#39;conda activate surfquake&#39;)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./tutorial1/data/*&#39;</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./configs/plotting_config.yaml&quot;</span>
+<p>Now, how can you chain several surfquake commands? The answer is a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>.
+Please, create a file named <code>run_commands.sh</code> and write the following commands in it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./tutorial1/data/*&#39;</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/typical_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/output&quot;</span><span class="w"> </span>-a
 </code></pre></div>
-<p>Ok, lets run the bash script. Open a terminal and go to the folder where you have the working directory and the <code>run_commnads.sh</code> file. Now write in the terminal the following commands</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_commnads.sh
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sh<span class="w"> </span>run_commnads.sh
+<p>Ok, let's run the bash script. Open a terminal in your working directory, where the <code>run_commands.sh</code> file is, and type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_commands.sh
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>./run_commands.sh
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Run the script with <code>./run_commands.sh</code> or <code>bash run_commands.sh</code>. On many Linux systems <code>sh</code> is not bash, and the activation of the environment fails.</p>
+</div>
 <hr />
 <h2 id="interactive-processing">Interactive Processing</h2>
-<ul>
-<li>Open an interactive propt pressing <code>v</code>. See the terminal, the directions for on-air seismic interaction are there.</li>
-<li>In the new prompt <code>help</code> to open the interative signal processing menu. If you want details and examples of one command, fo example: <code>help filter</code></li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>╔══════════════════════════════════════════════════════════════╗
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>║<span class="w">              </span>SurfQuake<span class="w"> </span>Interactive<span class="w"> </span>Plot<span class="w"> </span>Console<span class="w">              </span>║
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>╚══════════════════════════════════════════════════════════════╝
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>▸<span class="w"> </span>Navigation
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span>n<span class="w">                      </span>Next<span class="w"> </span>trace<span class="w"> </span>page
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span>b<span class="w">                      </span>Previous<span class="w"> </span>trace<span class="w"> </span>page
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span>p<span class="w">                      </span>Return<span class="w"> </span>to<span class="w"> </span>picking<span class="w"> </span>mode
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">  </span>back2future<span class="w">            </span>Restore<span class="w"> </span>original<span class="w"> </span>waveforms<span class="w"> </span><span class="o">(</span>undo<span class="w"> </span>all<span class="w"> </span>processing<span class="o">)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">  </span><span class="nb">exit</span><span class="w">                   </span>Close<span class="w"> </span>interactive<span class="w"> </span>session
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">  </span><span class="nb">history</span><span class="w"> </span><span class="o">[</span>N<span class="o">]</span><span class="w">            </span>Show<span class="w"> </span>the<span class="w"> </span>last<span class="w"> </span>N<span class="w"> </span>commands<span class="w"> </span>entered<span class="w"> </span>at<span class="w"> </span>the<span class="w"> </span>prompt<span class="w"> </span><span class="o">(</span>default<span class="w"> </span><span class="m">10</span><span class="o">)</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>▸<span class="w"> </span>Signal<span class="w"> </span>Processing
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span>algebra<span class="w">                </span>Apply<span class="w"> </span>a<span class="w"> </span>Math<span class="w"> </span>expression<span class="w"> </span>on<span class="w"> </span>traces
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span>rmean<span class="w">                  </span>Remove<span class="w"> </span>mean<span class="w"> </span>on<span class="w"> </span>traces
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">  </span>taper<span class="w">                  </span>Apply<span class="w"> </span>taper<span class="w"> </span>window<span class="w"> </span>on<span class="w"> </span>traces
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">  </span>flip<span class="w">                   </span>Flip<span class="w"> </span>the<span class="w"> </span>polarity<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>seismic<span class="w"> </span>trace
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">  </span>reverse<span class="w">                </span>Reverse<span class="w"> </span>the<span class="w"> </span>data<span class="w"> </span>points<span class="w"> </span>of<span class="w"> </span>seismic<span class="w"> </span>traces
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">  </span>filter<span class="w">                 </span>Apply<span class="w"> </span>signal<span class="w"> </span>filtering
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="w">  </span>cut<span class="w">                    </span>Trim<span class="w"> </span>traces<span class="w"> </span>using<span class="w"> </span>picks<span class="w"> </span>or<span class="w"> </span>UTC<span class="w"> </span><span class="nb">times</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">  </span>concat<span class="w">                 </span>Merge<span class="w"> </span>trace<span class="w"> </span>segments,<span class="w"> </span>no<span class="w"> </span>parameters<span class="w"> </span>needed
-<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">  </span>rotate<span class="w">                 </span>Rotate<span class="w"> </span>seismic<span class="w"> </span>components
-<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">  </span><span class="nb">shift</span><span class="w">                  </span>Align<span class="w"> </span>traces<span class="w"> </span>by<span class="w"> </span>phase<span class="w"> </span>arrivals
-<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">  </span>write<span class="w">                  </span>Export<span class="w"> </span>traces<span class="w"> </span>to<span class="w"> </span>HDF5,<span class="w"> </span>write<span class="w"> </span>--folder_path<span class="w"> </span>&lt;path&gt;<span class="w"> </span><span class="o">[</span>--all<span class="o">]</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>
-<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>▸<span class="w"> </span>Spectral<span class="w"> </span>Analysis
-<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">  </span>spectrum<span class="w"> </span>/<span class="w"> </span>sp<span class="w">          </span>Plot<span class="w"> </span>amplitude<span class="w"> </span>spectrum
-<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">  </span>spectrogram<span class="w"> </span>/<span class="w"> </span>spec<span class="w">     </span>Plot<span class="w"> </span>multitaper<span class="w"> </span>spectrogram
-<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="w">  </span>cwt<span class="w">                    </span>Continuous<span class="w"> </span>wavelet<span class="w"> </span>transform
-<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="w">  </span>save_tf<span class="w">                </span>Save<span class="w"> </span>Time-Frequency<span class="w"> </span>Anlysis
-<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a>
-<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a>▸<span class="w"> </span>Array<span class="w"> </span>Processing
-<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="w">  </span>beam<span class="w">                   </span>FK<span class="w"> </span>beamforming<span class="w"> </span>analysis
-<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="w">  </span>smap<span class="w">                   </span>Slowness<span class="w"> </span>map<span class="w"> </span>estimation
-<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a><span class="w">  </span>stack<span class="w">                  </span>Trace<span class="w"> </span>stacking
-<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="w">  </span>xcorr<span class="w">                  </span>Cross-correlate<span class="w"> </span>traces
-<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="w">  </span>conv<span class="w">                   </span>Convolve<span class="w"> </span>traces
-<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a>
-<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a>▸<span class="w"> </span>Polarization<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>Picking
-<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a><span class="w">  </span>pm<span class="w">                     </span>Particle<span class="w"> </span>motion<span class="w"> </span>analysis
-<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a><span class="w">  </span>load_picks<span class="w">             </span>Import<span class="w"> </span>picks<span class="w"> </span>from<span class="w"> </span>file<span class="w"> </span><span class="o">(</span>NLL<span class="w"> </span>file<span class="w"> </span>format,<span class="w"> </span>load_picks<span class="w"> </span>--file<span class="w"> </span>&lt;file_path&gt;
-<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a><span class="w">  </span>plot_type<span class="w">              </span>Change<span class="w"> </span>plotting<span class="w"> </span>mode<span class="w"> </span><span class="o">(</span>standard,<span class="w"> </span>record,<span class="w"> </span>overlay<span class="o">)</span>
-<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a>
-<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a>▸<span class="w"> </span>Seismogram<span class="w"> </span>Information
-<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a><span class="w">  </span>info<span class="w">                   </span>Show<span class="w"> </span>trace<span class="w"> </span>headers
-<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a>
-<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a>▸<span class="w"> </span>Run<span class="w"> </span>python<span class="w"> </span>script
-<a id="__codelineno-8-54" name="__codelineno-8-54" href="#__codelineno-8-54"></a><span class="w">  </span>──────────────────────────────────────────────────────────
-<a id="__codelineno-8-55" name="__codelineno-8-55" href="#__codelineno-8-55"></a><span class="w">  </span>runpy<span class="w">                  </span>Run<span class="w"> </span>your<span class="w"> </span>own<span class="w"> </span>script
+<p>Open again the plot with the <code>quick</code> command (interactive mode, without <code>-a</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial1/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/typical_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial1/configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
+<ul>
+<li>Open an interactive prompt pressing <code>v</code>. The directions for interacting with the traces are printed in the terminal.</li>
+<li>In the new prompt type <code>help</code> to open the interactive signal processing menu. To get details and examples of one command, type for example <code>help filter</code>.</li>
+</ul>
+<p>This is an excerpt of the menu (type <code>help</code> to see the full and updated list):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>▸ Navigation
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  n                      Next trace page
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>  b                      Previous trace page
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  p                      Return to picking mode
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>  back2future / b2f      Restore original waveforms (undo all processing)
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>  exit                   Close interactive session
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>▸ Signal Processing
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  algebra                Apply a Math expression on traces
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>  rmean                  Remove mean on traces
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  taper                  Apply taper window on traces
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  normalize / norm       Normalize traces
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  remove_spikes          Remove spikes from traces
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>  filter                 Apply signal filtering
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>  cut                    Trim traces using picks or UTC times
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>  concat                 Merge trace segments
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>  rotate                 Rotate seismic components
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>  shift                  Align traces by phase arrivals
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>  write                  Export traces to HDF5
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>▸ Spectral Analysis
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>  spectrum / sp          Plot amplitude spectrum
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>  spectrogram / spec     Plot spectrogram
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>  cwt                    Continuous wavelet transform
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>  save_tf                Save Time-Frequency Analysis
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>▸ Array Processing
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>  beam                   FK beamforming analysis
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>  smap                   Slowness map estimation
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>  stack                  Trace stacking
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>  xcorr                  Cross-correlate traces
+</code></pre></div>
+<p>Let's try a few commands. First, filter the displayed traces between 1 and 5 Hz:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nb">help</span><span class="w"> </span>filter
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>filter<span class="w"> </span>bandpass<span class="w"> </span><span class="m">1</span>.0<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span>--corners<span class="w"> </span><span class="m">4</span><span class="w"> </span>--zerophase<span class="w"> </span>True
+</code></pre></div>
+<p>The commands that modify the traces (<code>filter</code>, <code>rmean</code>, <code>taper</code>, <code>back2future</code>...) redraw the figure and take you back to picking mode. Look at the result and press <code>v</code> again to reopen the prompt.</p>
+<p>Now restore the original waveforms, undoing all the processing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>back2future
+</code></pre></div>
+<p>Press <code>v</code> again. To export the traces you have processed interactively:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>write<span class="w"> </span>--folder_path<span class="w"> </span>./tutorial1/output
+</code></pre></div>
+<p>To go back to picking mode without modifying the traces type <code>p</code>, and to close the session type <code>exit</code>.</p>
 
 
 
