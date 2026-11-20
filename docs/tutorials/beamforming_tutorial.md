@@ -275,8 +275,6 @@ surfquake beamplot -f "./tutorial3/beam/2017.246.beam"
 
 You will get the same figure as in the interactive section, and you can also open the slowness maps with the keys `1`–`6` and `e`.
 
-![Beamplot](img/T3_beamplot.png)
-
 Now let's ask surfquake to find the power peaks that match a P wave. The option `--find_solutions` accepts the shortcuts `regional` and `teleseismic`, or your own slowness ranges in JSON format. The `teleseismic` shortcut uses 0.04–0.07 s/km for P, and our expected value (0.068 s/km) is very close to the limit, so we define our own range:
 
 ```bash
