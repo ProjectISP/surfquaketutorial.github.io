@@ -1,58 +1,66 @@
 # <span style="color:darkcyan;"> **Basic Signal Processing Tutorial 1** </span>
 
-In this tutorial, we will learn how to work with the commands: `make_config`, `explore`, `info` and  `quick` to process your seismic waveforms.
+In this tutorial, we will learn how to work with the commands: `make_config`, `explore`, `info` and `quick` to process your seismic waveforms.
 
-In this tutorial we will follow this structure
+In this tutorial we will follow this structure:
+
 - *Seismic files:* tutorial1/data
 - *Metadata:* tutorial1/metadata
 - *Config Files:* tutorial1/configs
+- *Folder for the tutorial output:* tutorial1/output, this will be created by surfquake.
 
-    --tutorial
-        --data
-            --CA.ARBS..HH1.D.2022.32
-            --CA.ARBS..HH2.D.2022.32
-            --CA.ARBS..HHZ.D.2022.32
-            ......
-        --metadata
-            --inv_all.xml
-        --configs
-            --typical_config.yaml
-            --plotting_config.yaml
-
+```
+--tutorial1
+    --data
+        --CA.ARBS..HH1.D.2022.32
+        --CA.ARBS..HH2.D.2022.32
+        --CA.ARBS..HHZ.D.2022.32
+        ......
+    --metadata
+        --inv_all.xml
+    --configs
+        --typical_config.yaml
+        --plotting_config.yaml
+```
 
 For this tutorial you need to download the [seismic data here](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/waveforms_cut){: target="_blank" rel="noopener noreferrer" }. Optionally, download the corresponding [metadata](https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata){: target="_blank" rel="noopener noreferrer" }.
 
-Please, first open a terminal and type the following command to overviewall surfquake capabilities:
+All the commands of this tutorial are run from the folder that contains `tutorial1`.
+
+Please, first open a terminal, activate your environment and type the following command to overview all surfquake capabilities:
 
 ```bash
 surfquake -h
 ```
 
+---
+
 ## Generate Config Files
 
-When working with seismic waveforms it might be necessary to follow a signal processing workflow and plotting configuration. Let's prepare the necessary files.
+When working with seismic waveforms, it is useful to describe the signal processing workflow and the plotting options in configuration files. Let's prepare the necessary files.
 
 ```bash
 surfquake make_config -h
 surfquake make_config -c typical_config -o "./tutorial1/configs"
 surfquake make_config -c plotting_config -o "./tutorial1/configs"
 ```
+
 The [plotting configuration](https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/){: target="_blank" rel="noopener noreferrer" } is commented to explain the functionality. The parametrization for signal processing can be found [here for traces](https://projectisp.github.io/surfquaketutorial.github.io/processing_config/){: target="_blank" rel="noopener noreferrer" } and [here for streams](https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/){: target="_blank" rel="noopener noreferrer" }.
 
 ---
 
 ## Explore your data
 
-Sometimes we have really big datasets, A first view of your data coverage, including gaps.  
+Sometimes we have really big datasets. Before processing, it is good to have a first view of the data coverage, including gaps.
 
 ```bash
 surfquake explore -h
 surfquake explore -w './tutorial1/data/*'
 ```
 
-In this scenario, you are using the wildcard `*` that means all files. No worries because only seismic traces will be readed.
+In this example we use the wildcard `*`, which means all files. No worries, only seismic files will be read.
 
-Useful wildcards `*Z*` (all vertical components), `*VALC*` (only read station VALC). Wildcards are nice, but only understand file names no file headers.
+Other useful wildcards are `*Z*` (all vertical components) or `*VALC*` (only station VALC). Keep in mind that wildcards work on the **file names**, not on the file headers.
 
 ![Seismic Waveform](img/explore.png)
 
@@ -60,8 +68,7 @@ Useful wildcards `*Z*` (all vertical components), `*VALC*` (only read station VA
 
 ## Look at the files header
 
-
-Now let see the header of your files. This tell you a lot of infomation about what is inside the files, such as sampling rate, number of points, start time of the header...
+Now let's look at the header of your files. It tells you a lot about what is inside them, such as the sampling rate, the number of points or the start time.
 
 Please review the following documentation:
 
@@ -86,23 +93,44 @@ surfquake info -w './tutorial1/data/*' -c 3
     Picks                | None                      | None                      | None
     References           | None                      | None                      | None
 
+The option `-c` sets how many traces (columns) are shown side by side.
+
 ---
 
-## Process your waveform
+## Process your waveforms
 
-Finally it is time to play with processing. In the example we filter the traces between [0.5-8.0] Hz with a butterworth filter, zero-phase.
-Please review the next documentation:
+Finally, it is time to play with processing. The file `typical_config.yaml` removes the mean, applies a taper and filters the traces between 0.5 and 8.5 Hz with a zero-phase Butterworth bandpass filter:
+
+```yaml
+Analysis:
+  process_1:
+    name: 'rmean'
+    method: 'linear'
+  process_2:
+    name: 'taper'
+    method: 'cosine'
+    max_percentage: 0.05
+  process_3:
+    name: 'filter'
+    type: 'bandpass'
+    fmin: 0.5
+    fmax: 8.5
+    corners: 4
+    zerophase: True
+```
+
+Please review the following documentation:
 
 [Trace processing](https://projectisp.github.io/surfquaketutorial.github.io/processing_config/){: target="_blank" rel="noopener noreferrer" } and [plotting](https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/){: target="_blank" rel="noopener noreferrer" }
 
 ```bash
 surfquake quick -h
-surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" --plot_config "./configs/plotting_config.yaml"
+surfquake quick -w "./tutorial1/data/*" -c "./tutorial1/configs/typical_config.yaml" --plot_config "./tutorial1/configs/plotting_config.yaml"
 ```
 
 ![Seismic Waveform](img/waveform1.png)
 
-Navigate and process interatively your data, see the menu on the terminal:
+Navigate and process your data interactively. The keyboard shortcuts are printed in the terminal:
 
     =======================================================
     Plot Interaction Help
@@ -125,109 +153,141 @@ Navigate and process interatively your data, see the menu on the terminal:
     ESC / Enter     | Exit current mode
     =======================================================
 
+Your picks are saved in the file set by `pick_output_file` in `plotting_config.yaml` (default `./picks.csv`).
 
-Sometimes, we do not want to plot the seismogram itself. It turn out to process and write the output files in our computer. This can be done adding option `-a` to the command.
-The files will be saved in `H5 format` with the picks, reference points and geodesic information in the `header`. The picks ae also save in the pick outputfolder set in the plot_config file. This file can be directly used in the command `surfquake locate`.
+---
+
+## Automatic processing
+
+Sometimes we do not want to plot the seismograms, only to process them and write the output files to disk. This is done by adding the option `-a` (automatic mode) and an output folder with `-o`:
 
 ```bash
-surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" -o "./output" -a
+surfquake quick -w "./tutorial1/data/*" -c "./tutorial1/configs/typical_config.yaml" -o "./tutorial1/output" -a
 ```
 
-On the other hand if you are interested in automatically save your plots, edit the following fields in your file `configs/plotting_config.yaml` and run another time the command with option `-a`:
+The processed traces are saved in `H5 format`. Picks, reference times and geodesic information travel with the traces in the `header`.
 
-    plot_output_path: /my_output_plot_folder
-    show_plot: True
+If you also want to save the figures automatically, edit these fields in `./tutorial1/configs/plotting_config.yaml`:
+
+```yaml
+plot_output_path: ./tutorial1/figures
+show_plot: false
+```
+
+and run the command again, now passing the plotting configuration:
+
+```bash
+surfquake quick -w "./tutorial1/data/*" -c "./tutorial1/configs/typical_config.yaml" --plot_config "./tutorial1/configs/plotting_config.yaml" -o "./tutorial1/output" -a
+```
+
+With `show_plot: false` nothing is displayed on screen: all pages are written to `plot_output_path` and surfquake does not ask any question. This is the mode to automate your plots.
+
+| show_plot | plot_output_path | Result                       |
+|-----------|------------------|------------------------------|
+| true      | null             | displayed, not saved         |
+| true      | ./figures        | displayed and saved          |
+| false     | ./figures        | not displayed, saved (batch) |
+| false     | null             | nothing shown or saved       |
+
+!!! note
+    In automatic mode (`-a`) the figures are only saved when `show_plot: false` **and** `plot_output_path` is set.
 
 ---
 
 ## Using Bash script
 
-Now, how can I concatenate commands of surfquake in your terminal? The answer is creating a [bash script file](https://projectisp.github.io/surfquaketutorial.github.io/bash_script/){: target="_blank" rel="noopener noreferrer" }. 
-Please, create a file, let's name it `run_commnads.sh`. Write the following commands in your file.
+Now, how can you chain several surfquake commands? The answer is a [bash script file](https://projectisp.github.io/surfquaketutorial.github.io/bash_script/){: target="_blank" rel="noopener noreferrer" }.
+Please, create a file named `run_commands.sh` and write the following commands in it:
 
 ```bash
 #!/bin/bash
 
-# Activate your conda or virtual environment
-source activate isp  # Replace with your environment manager if needed (e.g., 'conda activate surfquake')
-surfquake explore -w './tutorial1/data/*'
-surfquake quick -w "./tutorial1/data/*" -c "./configs/typical_config.yaml" --plot_config "./configs/plotting_config.yaml"
+# Activate your conda environment
+eval "$(conda shell.bash hook)"
+conda activate surfquake  # Replace with the name of your environment
 
+surfquake explore -w './tutorial1/data/*'
+surfquake quick -w "./tutorial1/data/*" -c "./tutorial1/configs/typical_config.yaml" -o "./tutorial1/output" -a
 ```
 
-Ok, lets run the bash script. Open a terminal and go to the folder where you have the working directory and the `run_commnads.sh` file. Now write in the terminal the following commands
+Ok, let's run the bash script. Open a terminal in your working directory, where the `run_commands.sh` file is, and type:
 
 ```bash
-chmod u+x run_commnads.sh
-sh run_commnads.sh
+chmod u+x run_commands.sh
+./run_commands.sh
 ```
+
+!!! tip
+    Run the script with `./run_commands.sh` or `bash run_commands.sh`. On many Linux systems `sh` is not bash, and the activation of the environment fails.
 
 ---
 
 ## Interactive Processing
 
-- Open an interactive propt pressing `v`. See the terminal, the directions for on-air seismic interaction are there.
-- In the new prompt `help` to open the interative signal processing menu. If you want details and examples of one command, fo example: `help filter`
-
-
+Open again the plot with the `quick` command (interactive mode, without `-a`):
 
 ```bash
-╔══════════════════════════════════════════════════════════════╗
-║              SurfQuake Interactive Plot Console              ║
-╚══════════════════════════════════════════════════════════════╝
+surfquake quick -w "./tutorial1/data/*" -c "./tutorial1/configs/typical_config.yaml" --plot_config "./tutorial1/configs/plotting_config.yaml"
+```
 
+- Open an interactive prompt pressing `v`. The directions for interacting with the traces are printed in the terminal.
+- In the new prompt type `help` to open the interactive signal processing menu. To get details and examples of one command, type for example `help filter`.
+
+This is an excerpt of the menu (type `help` to see the full and updated list):
+
+```
 ▸ Navigation
-  ──────────────────────────────────────────────────────────
   n                      Next trace page
   b                      Previous trace page
   p                      Return to picking mode
-  back2future            Restore original waveforms (undo all processing)
+  back2future / b2f      Restore original waveforms (undo all processing)
   exit                   Close interactive session
-  history [N]            Show the last N commands entered at the prompt (default 10)
 
 ▸ Signal Processing
-  ──────────────────────────────────────────────────────────
   algebra                Apply a Math expression on traces
   rmean                  Remove mean on traces
   taper                  Apply taper window on traces
-  flip                   Flip the polarity of a seismic trace
-  reverse                Reverse the data points of seismic traces
+  normalize / norm       Normalize traces
+  remove_spikes          Remove spikes from traces
   filter                 Apply signal filtering
   cut                    Trim traces using picks or UTC times
-  concat                 Merge trace segments, no parameters needed
+  concat                 Merge trace segments
   rotate                 Rotate seismic components
   shift                  Align traces by phase arrivals
-  write                  Export traces to HDF5, write --folder_path <path> [--all]
+  write                  Export traces to HDF5
 
 ▸ Spectral Analysis
-  ──────────────────────────────────────────────────────────
   spectrum / sp          Plot amplitude spectrum
-  spectrogram / spec     Plot multitaper spectrogram
+  spectrogram / spec     Plot spectrogram
   cwt                    Continuous wavelet transform
-  save_tf                Save Time-Frequency Anlysis
+  save_tf                Save Time-Frequency Analysis
 
 ▸ Array Processing
-  ──────────────────────────────────────────────────────────
   beam                   FK beamforming analysis
   smap                   Slowness map estimation
   stack                  Trace stacking
   xcorr                  Cross-correlate traces
-  conv                   Convolve traces
-
-▸ Polarization & Picking
-  ──────────────────────────────────────────────────────────
-  pm                     Particle motion analysis
-  load_picks             Import picks from file (NLL file format, load_picks --file <file_path>
-  plot_type              Change plotting mode (standard, record, overlay)
-
-▸ Seismogram Information
-  ──────────────────────────────────────────────────────────
-  info                   Show trace headers
-
-▸ Run python script
-  ──────────────────────────────────────────────────────────
-  runpy                  Run your own script
-
 ```
 
+Let's try a few commands. First, filter the displayed traces between 1 and 5 Hz:
 
+```bash
+help filter
+filter bandpass 1.0 5.0 --corners 4 --zerophase True
+```
+
+The commands that modify the traces (`filter`, `rmean`, `taper`, `back2future`...) redraw the figure and take you back to picking mode. Look at the result and press `v` again to reopen the prompt.
+
+Now restore the original waveforms, undoing all the processing:
+
+```bash
+back2future
+```
+
+Press `v` again. To export the traces you have processed interactively:
+
+```bash
+write --folder_path ./tutorial1/output
+```
+
+To go back to picking mode without modifying the traces type `p`, and to close the session type `exit`.

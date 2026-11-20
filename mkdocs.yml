@@ -10,6 +10,7 @@ nav:
   - Tutorial Book:
       - Basic Signal Processing: tutorials/tutorial1.md
       - Time-Frequency Analysis: tutorials/tutorial2.md
+      - Beamfoming: tutorials/beamforming_tutorial.md
   - Signal Processing:
       - Overview: processing_overview.md
       - Examples: examples.md
