@@ -975,34 +975,40 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#script-structure" class="md-nav__link">
+  <a href="#where-the-script-runs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Script Structure
+        Where the script runs
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Script Structure">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#pipeline-post-script-runstream-kwargs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline post-script: run(stream, **kwargs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline post-script: run(stream, **kwargs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#usage-in-cli" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1011,14 +1017,30 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage in CLI">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#surfquake-process" class="md-nav__link">
+  <a href="#quality-control-remove-dead-and-flat-traces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        surfquake process
+        Quality control: remove dead and flat traces
       
     </span>
   </a>
@@ -1026,10 +1048,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#surfquake-quick" class="md-nav__link">
+  <a href="#a-custom-automatic-picker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        surfquake quick
+        A custom automatic picker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signal-to-noise-ratio-around-the-theoretical-p-with-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signal-to-noise ratio around the theoretical P (with processing)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-a-table-of-measurements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export a table of measurements
       
     </span>
   </a>
@@ -1042,10 +1086,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
+  <a href="#interactive-scripts-runpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Best Practices
+        Interactive scripts: runpy
       
     </span>
   </a>
@@ -1053,10 +1097,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#advanced-use" class="md-nav__link">
+  <a href="#combining-scripts-and-config-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Advanced Use
+        Combining scripts and config files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
       
     </span>
   </a>
@@ -2082,94 +2137,329 @@
 
 
 <h1 id="custom-user-scripts-in-surfquake">Custom User Scripts in SurfQuake</h1>
-<p>SurfQuake allows users to inject their own custom Python logic into waveform processing workflows. This functionality is available in both <strong>batch processing (<code>surfquake process</code>)</strong> and <strong>quick interactive workflows (<code>surfquake quick</code>)</strong>.</p>
+<p>The config files cover the standard processing methods. But research is rarely standard: you may want to test a new algorithm, apply a correction only you know about, reject bad traces with your own criteria, or export a table of measurements. <strong>User scripts</strong> let you plug your own Python code into any SurfQuake workflow, with full access to the waveforms, their headers, the station metadata and the event.</p>
+<p>You write a small Python file with one function. SurfQuake does the rest: reading the files, cutting around events, processing, plotting and writing the output. Your function receives the stream of traces in the middle of the workflow and returns it, possibly modified.</p>
+<p>There are two ways to use a script:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Pipeline post-script</th>
+<th>Interactive script</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Where</td>
+<td><code>quick</code>, <code>processing</code>, <code>processing_daily</code></td>
+<td>the interactive command prompt of the plot</td>
+</tr>
+<tr>
+<td>How</td>
+<td><code>--post_script myscript.py</code></td>
+<td><code>runpy myscript.py</code></td>
+</tr>
+<tr>
+<td>Function</td>
+<td><code>run(stream, **kwargs)</code></td>
+<td><code>process(stream)</code></td>
+</tr>
+<tr>
+<td>Runs</td>
+<td>automatically, for every stream (each event, each day...)</td>
+<td>once, when you type the command</td>
+</tr>
+<tr>
+<td>Receives</td>
+<td>stream + <code>inventory</code> (+ <code>event</code> with <code>processing</code>)</td>
+<td>stream of the plotted traces</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="purpose">Purpose</h2>
-<p>User scripts provide a flexible, programmable interface to manipulate seismic traces beyond standard configuration options. You can implement your own algorythm in the workflow such as:</p>
+<p>Some examples of what you can do with a script:</p>
 <ul>
-<li>Apply custom filtering, transformations, or corrections</li>
-<li>Modify or inspect waveform data (<code>tr.data</code>)</li>
-<li>Inject or update metadata in <code>tr.stats</code>. These scripts have direct access to each trace and its metadata (<code>trace.stats</code>), allowing you to inspect, modify, or annotate data based on custom logic. Be in mind the modified header of traces in surfquake.</li>
-<li>Run scientific algorithms (e.g., polarization, machine learning)</li>
-<li>Export trace summaries or diagnostics</li>
+<li><strong>Your own algorithms</strong>: a new picker, a polarisation analysis, a machine learning model, a custom filter or correction.</li>
+<li><strong>Quality control</strong>: remove dead, flat, clipped or noisy traces with your own criteria.</li>
+<li><strong>Read and write the header</strong>: use picks, theoretical arrivals and event information, and store your own results (<code>tr.stats.snr = ...</code>). See <a href="../trace_header_documentation/">Trace Header</a>.</li>
+<li><strong>Add picks</strong> automatically, which are then shown on the plot and saved in the HDF5 output.</li>
+<li><strong>Export</strong> measurements: amplitudes, SNR, peak values, spectral parameters... to a CSV table.</li>
 </ul>
 <hr />
-<h2 id="script-structure">Script Structure</h2>
-<p>Each script must define a <code>run(stream, **kwargs)</code> function that takes:
-- <code>stream</code>: an ObsPy <code>Stream</code> object containing the current event or waveform group
-- <code>kwargs</code>: optional keyword arguments, such as <code>inventory</code> or <code>event</code> info</p>
-<h3 id="example">Example</h3>
+<h2 id="where-the-script-runs">Where the script runs</h2>
+<p>For each stream, <code>quick</code>, <code>processing</code> and <code>processing_daily</code> follow these steps:</p>
+<ol>
+<li>Read the files (and, with <code>processing</code>, cut them around each event and fill the <a href="../trace_header_documentation/">header</a> with the event information).</li>
+<li>Apply the trace methods and the stream methods of your config file.</li>
+<li><strong>Your script</strong>, if <code>--post_script_stage before</code> (default).</li>
+<li>Plot (interactive mode).</li>
+<li><strong>Your script</strong>, if <code>--post_script_stage after</code>.</li>
+<li>Write the output files (<code>-o</code>, with <code>-a</code>).</li>
+</ol>
+<p>So your script always receives the <strong>processed</strong> traces, and what it returns is what is plotted and written.</p>
+<ul>
+<li><code>before</code>: the script runs before plotting. Good for data transformations, quality control, automatic picks or header editing: you will see the result on the plot.</li>
+<li><code>after</code>: the script runs after plotting. Good to act on what you did on the plot: the manual picks and references are already in the header.</li>
+</ul>
+<hr />
+<h2 id="pipeline-post-script-runstream-kwargs">Pipeline post-script: <code>run(stream, **kwargs)</code></h2>
+<p>Each script must define a function <code>run(stream, **kwargs)</code>:</p>
+<ul>
+<li><code>stream</code>: an ObsPy <code>Stream</code> with the current group of traces (one event with <code>processing</code>, one time span with <code>processing_daily</code>, all the files with <code>quick</code>).</li>
+<li><code>kwargs["inventory"]</code>: the ObsPy <code>Inventory</code> given with <code>-i</code>, or <code>None</code>.</li>
+<li><code>kwargs["event"]</code>: only with <code>processing</code>, a dict with the event of the current stream: <code>origin_time</code> (<code>UTCDateTime</code>), and <code>latitude</code>, <code>longitude</code>, <code>depth</code> (km) and <code>magnitude</code> when they are in the event file.</li>
+</ul>
+<p>The function must <strong>return the stream</strong>.</p>
+<h3 id="template">Template</h3>
+<p>You can generate this template in your working folder with <code>surfquake make_config -c script_template -o ./scripts</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    User-defined post-processing hook for each event.</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    User-defined post-processing hook for each stream.</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    :param stream: obspy Stream</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    :param inventory: obspy Inventory (passed via kwargs)</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    :param event: dict with keys like origin_time, latitude, longitude, depth (passed via kwargs)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    &#39;&#39;&#39;</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">inventory</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">event</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">if</span> <span class="n">event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span><span class="si">}</span><span class="s2"> traces from event at </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;origin_time&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span><span class="si">}</span><span class="s2"> traces (no event info provided)&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="c1"># Example: calculate global mean amplitude</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">all_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">])</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean amplitude:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_data</span><span class="p">))</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="c1"># Example: apply a simple differencing operator to each trace</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">tr</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="k">return</span> <span class="n">stream</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    :param event: dict with origin_time, latitude, longitude, depth, magnitude</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">                  (passed via kwargs, only with surfquake processing)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    &#39;&#39;&#39;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">inventory</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">event</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">if</span> <span class="n">event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span><span class="si">}</span><span class="s2"> traces from event at </span><span class="si">{</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;origin_time&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Post-processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span><span class="si">}</span><span class="s2"> traces (no event info provided)&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="c1"># Example: calculate global mean amplitude</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">all_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">])</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean amplitude:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">all_data</span><span class="p">))</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="c1"># Example: apply a simple differencing operator to each trace</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="n">tr</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="k">return</span> <span class="n">stream</span>
+</code></pre></div>
+<h3 id="usage-in-cli">Usage in CLI</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span>config.yaml<span class="w"> </span>-i<span class="w"> </span>inventory.xml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>--post_script<span class="w"> </span>myscript.py<span class="w"> </span>--post_script_stage<span class="w"> </span>before
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span>project.pkl<span class="w"> </span>-i<span class="w"> </span>inventory.xml<span class="w"> </span>-e<span class="w"> </span>events.txt<span class="w"> </span>-c<span class="w"> </span>config.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span>-o<span class="w"> </span>./output<span class="w"> </span>-a<span class="w"> </span>--post_script<span class="w"> </span>myscript.py
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>surfquake<span class="w"> </span>processing_daily<span class="w"> </span>-p<span class="w"> </span>project.pkl<span class="w"> </span>-c<span class="w"> </span>config.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span>--post_script<span class="w"> </span>myscript.py<span class="w"> </span>--post_script_stage<span class="w"> </span>after
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--post_script</code></td>
+<td>Path to your Python script.</td>
+</tr>
+<tr>
+<td><code>--post_script_stage</code></td>
+<td><code>before</code> (default) or <code>after</code> plotting.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="examples">Examples</h2>
+<h3 id="quality-control-remove-dead-and-flat-traces">Quality control: remove dead and flat traces</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># qc_traces.py</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stream</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">kept</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">()</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">data</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">data</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>                      <span class="c1"># constant signal</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.2</span>              <span class="c1"># more than 20 % of zeros</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="k">if</span> <span class="n">flat</span> <span class="ow">or</span> <span class="n">zeros</span><span class="p">:</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[qc] </span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> removed&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>            <span class="k">continue</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="k">return</span> <span class="n">kept</span>
+</code></pre></div>
+<h3 id="a-custom-automatic-picker">A custom automatic picker</h3>
+<p>This script runs a recursive STA/LTA on each trace and writes the onsets into the header as picks. With <code>--post_script_stage before</code>, the picks are drawn on the plot, where you can review, delete or add picks before saving.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># stalta_picker.py</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy.signal.trigger</span><span class="w"> </span><span class="kn">import</span> <span class="n">recursive_sta_lta</span><span class="p">,</span> <span class="n">trigger_onset</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">STA</span><span class="p">,</span> <span class="n">LTA</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">20.0</span>        <span class="c1"># seconds</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">ON</span><span class="p">,</span> <span class="n">OFF</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.0</span>          <span class="c1"># trigger thresholds</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="n">fs</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sampling_rate</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="n">cf</span> <span class="o">=</span> <span class="n">recursive_sta_lta</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">STA</span> <span class="o">*</span> <span class="n">fs</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">LTA</span> <span class="o">*</span> <span class="n">fs</span><span class="p">))</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="n">onsets</span> <span class="o">=</span> <span class="n">trigger_onset</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">ON</span><span class="p">,</span> <span class="n">OFF</span><span class="p">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">if</span> <span class="s2">&quot;picks&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="k">for</span> <span class="n">on</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">onsets</span><span class="p">:</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>            <span class="n">t</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span> <span class="o">+</span> <span class="n">on</span> <span class="o">/</span> <span class="n">fs</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>            <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">picks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>                                   <span class="s2">&quot;amplitude&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">on</span><span class="p">]),</span> <span class="s2">&quot;polarity&quot;</span><span class="p">:</span> <span class="s2">&quot;?&quot;</span><span class="p">})</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[picker] </span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">onsets</span><span class="p">)</span><span class="si">}</span><span class="s2"> pick(s)&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="k">return</span> <span class="n">stream</span>
+</code></pre></div>
+<h3 id="signal-to-noise-ratio-around-the-theoretical-p-with-processing">Signal-to-noise ratio around the theoretical P (with <code>processing</code>)</h3>
+<p>With <code>surfquake processing</code> and an event file, every trace knows its theoretical arrivals. This script measures the SNR around P, stores it in the header and removes the traces below a threshold.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># snr_filter.py</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stream</span><span class="p">,</span> <span class="n">UTCDateTime</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">NOISE</span><span class="p">,</span> <span class="n">SIGNAL</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span>     <span class="c1"># seconds before / after P</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">MIN_SNR</span> <span class="o">=</span> <span class="mf">3.0</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">rms</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">kept</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">()</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="n">arrivals</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;geodetic&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;arrivals&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="n">p</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrivals</span> <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="s2">&quot;phase&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>            <span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>              <span class="c1"># no theoretical P: keep the trace untouched</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>            <span class="k">continue</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="n">noise</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">NOISE</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="n">signal</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="n">SIGNAL</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="n">snr</span> <span class="o">=</span> <span class="n">rms</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="o">/</span> <span class="n">rms</span><span class="p">(</span><span class="n">noise</span><span class="p">)</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">snr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">snr</span><span class="p">)</span>        <span class="c1"># your own header field, saved in HDF5</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        <span class="k">if</span> <span class="n">snr</span> <span class="o">&gt;=</span> <span class="n">MIN_SNR</span><span class="p">:</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="n">kept</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[snr] </span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: SNR = </span><span class="si">{</span><span class="n">snr</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, removed&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>    <span class="k">return</span> <span class="n">kept</span>
+</code></pre></div>
+<h3 id="export-a-table-of-measurements">Export a table of measurements</h3>
+<p>A script is imported <strong>once</strong>, so variables at the top of the file keep their value from one stream to the next. This is useful to build a table over all your events. This example writes the peak amplitude of each trace, for each event; with <code>remove_response</code> (<code>units: 'VEL'</code>) in the config, it is the peak ground velocity.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># peak_table.py</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">OUTPUT</span> <span class="o">=</span> <span class="s2">&quot;./peak_values.csv&quot;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">event</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;event&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">inventory</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inventory&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">new_file</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">OUTPUT</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUTPUT</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        <span class="k">if</span> <span class="n">new_file</span><span class="p">:</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">&quot;origin_time&quot;</span><span class="p">,</span> <span class="s2">&quot;magnitude&quot;</span><span class="p">,</span> <span class="s2">&quot;trace_id&quot;</span><span class="p">,</span> <span class="s2">&quot;lat&quot;</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>                             <span class="s2">&quot;distance_km&quot;</span><span class="p">,</span> <span class="s2">&quot;peak&quot;</span><span class="p">])</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>            <span class="n">lat</span> <span class="o">=</span> <span class="n">lon</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>            <span class="k">if</span> <span class="n">inventory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>                <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>                    <span class="n">coords</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">get_coordinates</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span><span class="p">)</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>                    <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="s2">&quot;latitude&quot;</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="s2">&quot;longitude&quot;</span><span class="p">]</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>                    <span class="k">pass</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>            <span class="n">distance</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;geodetic&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;geodetic&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>            <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;origin_time&quot;</span><span class="p">),</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;magnitude&quot;</span><span class="p">),</span> <span class="n">tr</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>                             <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())])</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    <span class="k">return</span> <span class="n">stream</span>
 </code></pre></div>
 <hr />
-<h2 id="usage-in-cli">Usage in CLI</h2>
-<h3 id="surfquake-process"><code>surfquake process</code></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>process<span class="w"> </span>--config<span class="w"> </span>config.yaml<span class="w"> </span>--post_script<span class="w"> </span>myscript.py
-</code></pre></div>
+<h2 id="interactive-scripts-runpy">Interactive scripts: <code>runpy</code></h2>
+<p>Scripts can also be run from the interactive command prompt of the plot (press <code>v</code>). This is useful to try an idea on the traces you are looking at, without leaving the plot. Here the script must define a function <code>process(stream)</code>:</p>
 <ul>
-<li>Executes your script after all config steps are complete.</li>
-<li>Useful for event-level operations or header editing before writing to disk.</li>
+<li><code>stream</code>: an ObsPy <code>Stream</code> with the traces currently loaded in the plot, including your picks and references.</li>
+<li>What you return <strong>replaces</strong> the plotted traces, and the plot is redrawn. If you return <code>None</code>, the traces are left unchanged.</li>
 </ul>
-<h3 id="surfquake-quick"><code>surfquake quick</code></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;./data/*.mseed&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-i<span class="w"> </span>inventory.xml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>--post_script<span class="w"> </span>myscript.py<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>--post_script_stage<span class="w"> </span>before
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">help</span><span class="w"> </span>runpy
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>runpy<span class="w"> </span>./scripts/drop_flat_traces.py
 </code></pre></div>
-<ul>
-<li><code>--post_script</code>: Path to the user script.</li>
-<li><code>--post_script_stage</code>:</li>
-<li><code>before</code>: Runs the script before plotting (good for data transforms)</li>
-<li><code>after</code>: Runs after plotting (useful if user interaction modifies data)</li>
-</ul>
+<p>Three examples are available with <code>surfquake make_config</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Template</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>script_air_1</code></td>
+<td>Removes the mean of each trace and prints a summary.</td>
+</tr>
+<tr>
+<td><code>script_air_2</code></td>
+<td>Drops flat or empty traces.</td>
+</tr>
+<tr>
+<td><code>script_air_3</code></td>
+<td>Reads the reference times and the theoretical P arrival from the header, computes an SNR around P and tags the low-SNR traces in <code>tr.stats</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>script_air_3<span class="w"> </span>-o<span class="w"> </span>./scripts
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># drop_flat_traces.py</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stream</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">threshold</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">kept</span> <span class="o">=</span> <span class="p">[</span><span class="n">tr</span> <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span> <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">removed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">kept</span><span class="p">)</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="k">if</span> <span class="n">removed</span><span class="p">:</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[post_script] Dropped </span><span class="si">{</span><span class="n">removed</span><span class="si">}</span><span class="s2"> flat/empty trace(s).&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">return</span> <span class="n">Stream</span><span class="p">(</span><span class="n">traces</span><span class="o">=</span><span class="n">kept</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can write a single file valid for both uses, with a <code>process(stream)</code> that simply calls <code>run(stream)</code>.</p>
+</div>
+<hr />
+<h2 id="combining-scripts-and-config-files">Combining scripts and config files</h2>
+<p>Config files and scripts work together: let the config do the standard processing, and your script the part that is specific to your research. For example, filter and normalise the traces with a config, then detect and annotate phase arrivals with your own picker:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># config.yaml</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span>config.yaml<span class="w"> </span>--post_script<span class="w"> </span>stalta_picker.py<span class="w"> </span>--post_script_stage<span class="w"> </span>before
+</code></pre></div>
 <hr />
 <h2 id="best-practices">Best Practices</h2>
 <ul>
-<li>Always return the modified stream from <code>run()</code>.</li>
-<li>Use <code>tr.stats</code> to store temporary or derived metadata.</li>
-<li>Print useful info for logging/debugging.</li>
-<li>Test your script independently before integrating it into batch workflows.</li>
+<li><strong>Always return the stream</strong> from <code>run()</code>. If the script returns nothing, there is nothing to plot or to write.</li>
+<li><strong>Errors do not stop the workflow</strong>: if your script raises an exception, a warning is printed and the stream continues unchanged. Watch the terminal for <code>[WARNING] Post-script ... failed</code>.</li>
+<li><strong>Test your script on a few files first</strong>, with <code>quick</code> in interactive mode, before running it on a big dataset with <code>-a</code>.</li>
+<li><strong>Read optional header fields with a default</strong> (<code>getattr(tr.stats, "picks", [])</code>, <code>tr.stats.get("geodetic", {})</code>): traces without picks or events do not have them.</li>
+<li><strong>Store your results in the header</strong> (<code>tr.stats.my_value = ...</code>) to use them in later steps; they are kept in the HDF5 output.</li>
+<li><strong>Print</strong> useful information: it is your log.</li>
+<li><strong>Performance</strong>: when a post-script is given, the stations are processed one after the other instead of in parallel, so large runs take longer.</li>
 </ul>
 <hr />
-<h2 id="advanced-use">Advanced Use</h2>
-<p>You may combine user scripts with processing configs to create hybrid workflows. For example, normalize traces with a config, then use a user script to detect and annotate phase arrivals using custom logic.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># config.yaml</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;normalize&#39;</span>
-</code></pre></div>
-<p>Then:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>process<span class="w"> </span>--config<span class="w"> </span>config.yaml<span class="w"> </span>--user_script<span class="w"> </span>annotate_picks.py
-</code></pre></div>
-<hr />
-<p>This feature makes SurfQuake highly adaptable for both research and operational seismic processing pipelines.</p>
+<p>This feature makes SurfQuake highly adaptable for both research and operational seismic processing pipelines: everything SurfQuake does is the frame, and your science goes inside.</p>
 
 
 

@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#explore-data-avalability" class="md-skip">
+        <a href="#explore-data-availability" class="md-skip">
           Skip to content
         </a>
       
@@ -951,6 +951,28 @@
     <span class="md-ellipsis">
       
         Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-look-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to look for
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next steps
       
     </span>
   </a>
@@ -2003,17 +2025,114 @@
 
 
 
-<h1 id="explore-data-avalability">Explore Data Avalability</h1>
-<p>I personally think that it really worht it explore your data avalability before any further analysis. It is very interesing to have a tool that can show you the data availability inside your folder tree. For this reason surfquake offers a command line tool that easily will show you a plot with lines where you have data, no data and gaps in red.</p>
-<p>For big data, it can last a little bit but it shows you the progress on screen. </p>
+<h1 id="explore-data-availability">Explore Data Availability</h1>
+<p>Before any analysis, it is really worth exploring the <strong>availability</strong> of your data: which stations and channels you have, which time span they cover, and where the gaps are. A few minutes here can save hours later: a missing component makes a rotation fail, a gap creates artefacts after filtering, and a station with a different time span can silently drop out of a stack or a beamforming.</p>
+<p><code>surfquake explore</code> scans your files and draws one horizontal line per file over a time axis:</p>
+<ul>
+<li><strong>Black line</strong>: the time span with data.</li>
+<li><strong>Red line</strong>: a <strong>gap</strong> inside the file (missing samples).</li>
+<li><strong>No line</strong>: no file covers that time (for example, a missing day).</li>
+</ul>
+<p>Only the headers of the files are read, not the samples, and several files are read in parallel, so it is fast even for large archives. For big datasets the progress is shown on screen.</p>
+<hr />
 <h2 id="command-line">Command Line</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="o">[</span>Path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>mseed<span class="w"> </span>files,<span class="w"> </span>e.g.,<span class="w"> </span><span class="s1">&#39;./data/*&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-h
 </code></pre></div>
+<p>You can explore a set of files, or a project:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>files,<span class="w"> </span>e.g.<span class="w"> </span><span class="s1">&#39;./data/*&#39;</span><span class="o">]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>path<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>project<span class="w"> </span>file,<span class="w"> </span>e.g.<span class="w"> </span><span class="s1">&#39;./project.pkl&#39;</span><span class="o">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-w</code>, <code>--wave_files</code></td>
+<td>Glob pattern or path to the waveform files.</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project_file_path</code></td>
+<td>A saved surfquake <a href="../project/">project</a>.</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--net</code></td>
+<td>Network filter (with <code>-p</code>), e.g. <code>ES,IU</code>.</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--station</code></td>
+<td>Station filter (with <code>-p</code>), e.g. <code>EALB,EMAZ</code>.</td>
+</tr>
+<tr>
+<td><code>-ch</code>, <code>--channel</code></td>
+<td>Channel filter (with <code>-p</code>), e.g. <code>HHZ</code>.</td>
+</tr>
+<tr>
+<td><code>--min_date</code>, <code>--max_date</code></td>
+<td>Time window (with <code>-p</code>), format <code>YYYY-MM-DD HH:MM:SS</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Either <code>-w</code> or <code>-p</code> must be set.</p>
+<div class="admonition tip">
+<p class="admonition-title">Wildcards</p>
+<p>Wildcards select files by their <strong>file name</strong>, not by their header. With the usual naming <code>NET.STA.LOC.CHA.D.YEAR.DAY</code>:</p>
+<ul>
+<li><code>'./data/*'</code>: all files (non-seismic files are skipped).</li>
+<li><code>'./data/*Z*'</code>: all vertical components.</li>
+<li><code>'./data/*EALB*'</code>: only station EALB.</li>
+<li><code>'./data/*.2022.03*'</code>: days 030 to 039 of 2022.</li>
+</ul>
+<p>Quote the pattern (<code>'./data/*'</code>), so that surfquake, and not your terminal, expands it.</p>
+</div>
+<hr />
 <h2 id="example">Example</h2>
-<p>In the example, I simply navigate to the forder where I have placed three stations with three channels so nine files, then I run the command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./*&quot;</span>
+<p>In this example, I simply navigate to the folder where I have placed three stations with three channels each, so nine files, and run the command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./*&quot;</span>
 </code></pre></div>
 <p><img alt="Screenshot" src="../img/explore.png" /></p>
+<hr />
+<h2 id="what-to-look-for">What to look for</h2>
+<table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Red segments</td>
+<td>Gaps inside the files.</td>
+<td>Short gaps: <code>fill_gaps</code> or <code>concat</code> before processing. Long gaps: avoid analysing those windows.</td>
+</tr>
+<tr>
+<td>One component shorter than the others</td>
+<td>The three components of a station do not cover the same time.</td>
+<td><code>rotate</code> cuts them to the common window automatically; for other analyses, cut them with <code>cut_stream</code>.</td>
+</tr>
+<tr>
+<td>A station starting later or ending earlier</td>
+<td>Different time span.</td>
+<td>For stream methods (stacking, beamforming), cut all traces to a common window.</td>
+</tr>
+<tr>
+<td>A missing line</td>
+<td>A channel or a day is missing.</td>
+<td>Check your download, or exclude that station.</td>
+</tr>
+</tbody>
+</table>
+<p>ℹ️ All the files of the same channel are drawn on the same row (<code>NET.STA.CHANNEL</code>), so consecutive daily files appear as one continuous line, and the location code is not shown.</p>
+<hr />
+<h2 id="next-steps">Next steps</h2>
+<p>Once you know what you have, look at the details of each file with <code>surfquake info</code>: sampling rate, number of samples, picks... See <a href="../trace_header_documentation/">Trace Header</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>surfquake<span class="w"> </span>info<span class="w"> </span>-w<span class="w"> </span><span class="s1">&#39;./data/*&#39;</span><span class="w"> </span>-c<span class="w"> </span><span class="m">3</span>
+</code></pre></div>
 
 
 
