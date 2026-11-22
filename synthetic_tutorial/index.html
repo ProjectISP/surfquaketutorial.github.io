@@ -2350,7 +2350,7 @@
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/test_sign_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
 <p>Note that there is <strong>no <code>-w</code></strong>: the traces come from the <code>Source</code> section. Move through the pages with <code>n</code> and <code>b</code>.</p>
-<p><img alt="Synthetic signals" src="img/T4_signals.png" /></p>
+<p><img alt="Synthetic signals" src="../img/T4_signals.png" /></p>
 <p>To save the traces as files, use the automatic mode with an output folder:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/test_sign_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial4/output&quot;</span><span class="w"> </span>-a
 </code></pre></div>
@@ -2388,7 +2388,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>spectrum<span class="w"> </span><span class="m">0</span><span class="w"> </span>loglog
 </code></pre></div>
 <p>Now change <code>zerophase: True</code> to <code>zerophase: False</code>, and run it again. Close the window and type <code>r</code> in the terminal to reprocess with the new config, or run the command again.</p>
-<p><img alt="Impulse response" src="img/T4_impulse.png" /></p>
+<p><img alt="Impulse response" src="../img/T4_impulse.png" /></p>
 <p>What you should see:</p>
 <table>
 <thead>
@@ -2485,7 +2485,7 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="Detrending" src="img/T4_trends.png" /></p>
+<p><img alt="Detrending" src="../img/T4_trends.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Use the simplest method that removes your trend: high polynomial orders can also remove real long-period signals.</p>
@@ -2527,7 +2527,7 @@
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="nt">integers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
 <p>Run it again and compare the spectrograms.</p>
-<p><img alt="Aliasing" src="img/T4_aliasing.png" /></p>
+<p><img alt="Aliasing" src="../img/T4_aliasing.png" /></p>
 <p>What you should see:</p>
 <table>
 <thead>
@@ -2600,7 +2600,7 @@
 <p>First run it <strong>without</strong> the filter (delete or comment the <code>process_3</code> block), then with it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/ex4_noise.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
-<p><img alt="Noise" src="img/T4_noise.png" /></p>
+<p><img alt="Noise" src="../img/T4_noise.png" /></p>
 <p>What you should see (peak of the wavelet divided by the standard deviation of the noise):</p>
 <table>
 <thead>
@@ -2681,7 +2681,7 @@
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/ex5_delay.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial4/configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
-<p><img alt="Cross-correlation" src="img/T4_xcorr.png" /></p>
+<p><img alt="Cross-correlation" src="../img/T4_xcorr.png" /></p>
 <p>What you should see:</p>
 <ul>
 <li><code>XX.STA1_STA1..BXZ</code>: the <strong>autocorrelation</strong> of the reference, with its maximum (1.0) at lag <strong>0 s</strong>.</li>
