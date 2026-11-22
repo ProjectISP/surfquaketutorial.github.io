@@ -15,14 +15,14 @@ nav:
       - Overview: processing_overview.md
       - Trace Header: trace_header_documentation.md
       - Data Availability: explore_data.md
-      - My Scripts: scripts.md
       - Processing Traces: processing_config.md
       - Processing Stream: processing_stream_config.md
-      - Beamforming: beamforming_documentation.md
       - Particle Motion: particle_motion_documentation.md
       - Time-Frequency Analysis: spectral_analysis_documentation.md
+      - Beamforming: beamforming_documentation.md
       - Characteristic Functions: characteristic_functions_documentation.md
       - Plotting Interaction: plotting_interaction_documentation.md
+      - My Scripts: scripts.md
       - Bash Script Interaction: bash_script.md
   - Event Analysis:
       - Phase Picker: picker.md
