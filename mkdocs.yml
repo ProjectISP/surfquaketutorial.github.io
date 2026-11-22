@@ -22,6 +22,7 @@ nav:
       - Beamforming: beamforming_documentation.md
       - Characteristic Functions: characteristic_functions_documentation.md
       - Plotting Interaction: plotting_interaction_documentation.md
+      - Generate Test Signals: synthetic_tutorial.md
       - My Scripts: scripts.md
       - Bash Script Interaction: bash_script.md
   - Event Analysis:

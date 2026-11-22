@@ -128,6 +128,11 @@ surfquake quick -h
 surfquake quick -w "./tutorial1/data/*" -c "./tutorial1/configs/typical_config.yaml" --plot_config "./tutorial1/configs/plotting_config.yaml"
 ```
 
+!!! note
+    You can also select the specific files that you want to process
+    surfquake quick -w "./file1,./file2,./file3"
+
+
 ![Seismic Waveform](img/waveform1.png)
 
 Navigate and process your data interactively. The keyboard shortcuts are printed in the terminal:
