@@ -355,7 +355,7 @@ plotting:
 | `false` | `./figures` | Not displayed, all pages saved (**batch mode**, for scripts and servers). |
 | `false` | `null` | Nothing is shown or saved. |
 
-In automatic mode (`-a`), the figures are only produced in batch mode (`show_plot: false` with a `plot_output_path`). The figures are named `sqProject_page<NNN>_<date-time>.<format>`.
+In automatic mode (`-a`), the figures are only produced in batch mode (`show_plot: false` with a `plot_output_path`). The figures are named after the plot type, the page and the **start time of the plotted data**: `sqProject_page<NNN>_<YYYYmmdd-HHMMSS>.<format>` for standard pages, `sqProject_record_page...` and `sqProject_overlay_page...` for the other types (e.g. `sqProject_record_page000_20220201-020256.png`). Each event or time span gets its own figures, and if a file already exists `_1`, `_2`... is added, so figures are never overwritten.
 
 ### Picks, references and processed traces
 
