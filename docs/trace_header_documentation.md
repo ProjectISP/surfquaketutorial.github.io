@@ -1,109 +1,109 @@
 # Trace Header
 
-SurfQuake processing and visualization tools make extensive use of the metadata embedded in ObsPy Trace objects (MiniSEED format). These headers not only contain acquisition-related data (station, channel, sampling rate) but are also extended during analysis to store **arrival picks**, **reference markers**, and more.
+Every seismic trace carries two things: the **samples** (`tr.data`, a NumPy array) and the **header** (`tr.stats`), the metadata that gives the samples a meaning: which station and channel recorded them, when the first sample was taken, how many samples per second...
 
-SurfQuake processing and visualization tools make extensive use of the metadata embedded in ObsPy Trace objects, which are often read from MiniSEED (MSEED) files. While MSEED is a widely accepted format for storing seismic time series, it is inherently read-only in terms of header modification—meaning users cannot persistently embed new metadata directly into the original file.
+SurfQuake reads your files with ObsPy, so every trace is an ObsPy `Trace` with a `tr.stats` header. During processing and interaction, SurfQuake **extends** this header with the results of your analysis:
 
-To overcome this limitation, SurfQuake dynamically extends the Trace.stats header in memory during processing and interaction. This enriched metadata includes not only core acquisition parameters like network, station, channel, and sampling rate, but also a wide array of analysis results such as:
+- **Picks**: phase arrivals picked manually or automatically.
+- **References**: reference times marked on the plot, used to cut or align traces.
+- **Geodetic information**: event location, source–receiver distance, azimuths and theoretical arrival times.
 
-Arrival picks from manual or automatic phase picking
+The header is the memory of the workflow: what you add in one step can be used by the next one. A pick made on the plot is used by `cut` (`method: phase`) or `shift` (`phase`); the theoretical arrivals computed by `surfquake processing` are used by `shift` (`phase_theo`); the back-azimuth is used by `rotate` (`GAC`); and your own [scripts](scripts.md) can read and write any field.
 
-Reference markers used for alignment or annotation
+---
 
-Geodetic attributes like source-receiver distance, backazimuth, and theoretical arrival times
+## Why HDF5?
 
-Since these enhancements cannot be stored back into standard MSEED files, SurfQuake writes processed trace data to HDF5 (.h5) format. This format supports flexible, hierarchical storage and allows full preservation of the enriched metadata alongside waveform data—ensuring reproducibility, traceability, and compatibility with downstream processing.
+MiniSEED, the standard format of seismic archives, has a **fixed header**: it stores the station codes, the start time and the sampling rate, but there is no place for picks, references or event information. If a processed trace were written back to MiniSEED, all this information would be lost.
 
-By adopting HDF5 for intermediate and final outputs, SurfQuake enables a more transparent and integrated seismic analysis workflow, without losing critical contextual information during each stage of the pipeline.
+For this reason SurfQuake writes processed traces in **HDF5** (`.h5`) format. HDF5 is a hierarchical format that stores the samples together with the **whole** `tr.stats` dictionary, including the SurfQuake fields. When you read the file again (with surfquake or with ObsPy), the trace comes back exactly as you left it: data, picks, references and geodetic information.
 
-This guide outlines the custom fields and their use cases for SurfQuake users.
+```bash
+surfquake quick -w "./data/*" -c ./config.yaml -o ./processed -a
+```
+
+The output files are named `<trace_id>.D.<year>.<julday>.h5`, e.g. `ES.EALB..HHZ.D.2018.233.h5`. They can be read like any other waveform file by every surfquake command, and in Python:
+
+```python
+from obspy import read
+
+tr = read("./processed/ES.EALB..HHZ.D.2018.233.h5")[0]
+print(tr.stats.picks)       # the picks are still there
+print(tr.stats.geodetic)    # and the event information
+```
+
+ℹ️ Reading HDF5 in your own Python code needs the `obspyh5` plugin, which is installed with surfquake.
 
 ---
 
 ## Core Header Fields (ObsPy Standard)
 
-These fields are part of the default `trace.stats` dictionary and are typically populated during reading:
+These fields are part of the default `trace.stats` dictionary and are filled when the file is read:
 
 | Field            | Description                                |
 |------------------|--------------------------------------------|
-| `network`        | Network code (e.g., `IU`, `CI`)            |
+| `network`        | Network code (e.g., `IU`, `ES`)            |
 | `station`        | Station code (e.g., `ANMO`)                |
-| `location`       | Location code (e.g., `00`, `10`)           |
-| `channel`        | Channel name (e.g., `BHZ`, `HHN`)          |
-| `starttime`      | Trace start time (`UTCDateTime`)           |
-| `endtime`        | Trace end time (`UTCDateTime`)             |
-| `sampling_rate`  | Sampling rate in Hz                        |
-| `npts`           | Number of points                           |
+| `location`       | Location code (e.g., `00`, `10`, or empty) |
+| `channel`        | Channel code (e.g., `BHZ`, `HHN`)          |
+| `starttime`      | Time of the first sample (`UTCDateTime`)   |
+| `endtime`        | Time of the last sample (`UTCDateTime`)    |
+| `sampling_rate`  | Samples per second, in Hz                  |
+| `delta`          | Time between samples, in s (1 / sampling_rate) |
+| `npts`           | Number of samples                          |
+
+The **trace id** is `network.station.location.channel`, e.g. `ES.EALB..HHZ` (the location is empty here). The channel code follows the SEED convention: the first letter is the band (sampling rate and period: `H` = high broadband, `B` = broadband, `S` = short period), the second the instrument (`H` = high-gain seismometer, `N` = accelerometer), and the third the **component** (`Z`, `N`, `E`, or `1`, `2` for sensors not oriented to North and East).
 
 ---
 
 ## Header Info from Command Line
 
-surfquake facilitates a tool to explore the information of your seismogram files.
-Supports standard and SurfQuake-extended headers such as picks, references, and geodetic attributes
+The `info` command prints the header of your files on screen, including the SurfQuake fields (picks, references and, when available, the event and geodetic information). It is the quickest way to check your data before processing: are all sampling rates the same? Do the start times match? Do the processed files keep their picks?
 
 ```bash
-surfquake -w [path to waveform files (e.g. './data/*Z or './mseed1,./mseed2] -c [Number of traces (columns) to show per file, default 1]
+surfquake info -h
+surfquake info -w [path to waveform files, e.g. './data/*Z' or './mseed1,./mseed2'] -c [number of traces (columns) shown side by side, default 1]
 ```
 
-Example
+The files can be given with a wildcard (`'./data/*Z'`) or as a list separated by commas.
+
+Example:
+
 ```bash
 > surfquake info -w './ES.ELOB..HHZ.D.2018.233,./ES.EMAZ..HHZ.D.2018.233' -c 2
 
-File                 | ES.ELOB..HHZ.D.2018.233   | ES.EMAZ..HHZ.D.2018.233  
-Network              | ES                        | ES                       
-Station              | ELOB                      | EMAZ                     
-Location             |                           |                          
-Channel              | HHZ                       | HHZ                      
-Start Time           | 2018-08-21T00:12:58.4300  | 2018-08-21T00:12:56.3977 
-End Time             | 2018-08-21T00:47:06.6900  | 2018-08-21T00:47:03.5077 
-Sampling Rate (Hz)   | 100.0                     | 100.0                    
-Delta (s)            | 0.01                      | 0.01                     
-Npts                 | 204827                    | 204712                   
-Picks                | None                      | None                     
+File                 | ES.ELOB..HHZ.D.2018.233   | ES.EMAZ..HHZ.D.2018.233
+Network              | ES                        | ES
+Station              | ELOB                      | EMAZ
+Location             |                           |
+Channel              | HHZ                       | HHZ
+Start Time           | 2018-08-21T00:12:58.4300  | 2018-08-21T00:12:56.3977
+End Time             | 2018-08-21T00:47:06.6900  | 2018-08-21T00:47:03.5077
+Sampling Rate (Hz)   | 100.0                     | 100.0
+Delta (s)            | 0.01                      | 0.01
+Npts                 | 204827                    | 204712
+Picks                | None                      | None
 References           | None                      | None
 ```
 
+When the traces carry event information (files processed with `surfquake processing` and an event file), `info` also shows the rows `Origin Time`, `Event Lat`, `Event Long`, `Distance (km)`, `Az (°)`, `Baz (°)`, `Incidence (°)` and `Arrivals`.
 
-## Trace header modification
-
-If you need to modify the header of your traces, I recommend that you use *quick* or *process_daily* command and use the **rename** process. This process simply maps the original traces header information into the new one. Here, you will find an example of config file with the process of mapping network, station, location and channel codes.
-
-
-```bash
-Analysis:
-  process_1:
-      name: 'rename'
-      
-      networks:
-        IM: IH      # Replace network XX → YY
-        IK: IN
-      
-      stations:
-        IL02: XX02
-        ARNO: MELI
-      
-      channels:
-        SHZ: BHZ     # Entire channel replacement
-
-      components:
-        Z: E         # Only the last component letter (Z → E, N → Z, etc.)
-```
-
+---
 
 ## SurfQuake-Extended Header Fields
 
-These fields are dynamically added during processing or interactive analysis:
+These fields are added during processing or interactive analysis. A trace that has never been picked has no `picks` field: always access them safely, e.g. `getattr(tr.stats, "picks", [])`.
 
 ### `trace.stats.picks` (list of dicts)
 
-Stores manually or automatically picked phase arrivals.
+Phase arrivals picked manually on the plot, or added by your scripts. Each entry contains:
 
-Each entry contains:
-- `time` (float): UTC timestamp of the pick
-- `phase` (str): Picked phase (e.g., `P`, `S`, `Lg`)
-- `amplitude` (float): Measured amplitude at pick time
-- `polarity` (str): `U` (up), `D` (down), or `?`
+| Key | Type | Description |
+|-----|------|-------------|
+| `time` | float | Time of the pick, as a UTC timestamp (seconds since 1970-01-01). Convert it with `UTCDateTime(p["time"])`. |
+| `phase` | str | Phase name (e.g., `P`, `S`, `Pg`, `Lg`). |
+| `amplitude` | float | Amplitude of the trace at the pick time. |
+| `polarity` | str | First-motion polarity: `U` (up), `D` (down) or `?` (unknown). |
 
 ```json
 {
@@ -114,83 +114,122 @@ Each entry contains:
 }
 ```
 
-### `trace.stats.references` (list of float)
+The picks are also written to the CSV file set by `pick_output_file` in the plotting configuration (default `./picks.csv`).
 
-Stores timestamps marking user-defined reference lines during plotting (e.g., using keypress `w`). These are used for alignment, cross-checking picks, or beamforming time tags.
+### `trace.stats.references` (list of floats)
 
-### `trace.stats.geodetic`
+Reference times (UTC timestamps) marked on the plot with the key `w`. A reference is added to **all** the traces of the plot at the same time, so it is a common time mark: for example the origin time of an event, or the start of a window you want to cut (`cut`, `method: reference`, uses the last reference).
 
-Stored during preprocessing via `set_header_func`:
+### `trace.stats.geodetic` (dict)
 
-| Field            | Description                             |
-|------------------|-----------------------------------------|
-| `distance`       | Source-receiver distance (km)           |
-| `baz`            | Backazimuth from station to source (°)  |
-| `az`             | Azimuth from source to station (°)      |
-| `incidence`      | Theoretical incidence angle (°)         |
-| `arrivals`       | Dict of theoretical arrival times per phase name (UTC timestamp) |
+Event and source–receiver information. It is filled by `surfquake processing` when you give an event file (`-e`) and an inventory (`-i`), for each event and station:
 
-### Example:
+| Key | Content |
+|-----|---------|
+| `otime` | Origin time of the event. |
+| `event` | `[latitude, longitude, depth]` of the event (depth in km). |
+| `geodetic` | `[distance_km, azimuth, back_azimuth, incidence]`: source–receiver distance (km); azimuth from the source to the station (°); back-azimuth from the station to the source (°); incidence angle of the first arrival (°). |
+| `arrivals` | List of theoretical arrivals (TauP), one dict per phase: `phase`, `time` (UTC timestamp), `ray_param` (s/°) and `incident_angle` (°). |
 
 ```python
 trace.stats.geodetic = {
-    "distance": 254.7,
-    "baz": 123.4,
-    "az": 303.4,
-    "incidence": 31.5,
-    "arrivals": {
-        "P": 1727123829.20,
-        "S": 1727123844.03
-    }
+    "otime": UTCDateTime("2018-08-21T00:27:00.5"),
+    "event": [42.51, 1.43, 10.0],
+    "geodetic": [254.7, 303.4, 123.4, 31.5],
+    "arrivals": [
+        {"phase": "P", "time": 1534811249.2, "ray_param": 13.1, "incident_angle": 31.5},
+        {"phase": "S", "time": 1534811264.0, "ray_param": 23.6, "incident_angle": 31.9},
+    ],
 }
 ```
 
----
+With `quick` and `processing_daily` there is no event, so the geodetic values are set to `-1` and the event to `None`.
 
-## Trace Header Management in SurfQuake
-
-### During Processing
-
-- Headers are updated by processing steps such as:
-  - `shift`: aligns data using theoretical or picked times
-  - `rotate`: may use `geodetic` data to perform LQT rotations
-  - `beamforming`: may store attributes related to time or azimuth reference
-
-### During Plotting
-
-- Interactive actions modify headers:
-  - **Press `e`**: Add pick to `trace.stats.picks`
-  - **Press `w`**: Add reference marker to `trace.stats.references`
-  - **Press `d` or `p`**: Remove the last pick or reference
-  - **Press `m`**: Remove all reference lines
+SurfQuake also copies the back-azimuth and the incidence angle to the ObsPy fields `trace.stats.back_azimuth` and `trace.stats.inclination`, which are the ones used by `rotate` with `method: 'GAC'`.
 
 ---
 
-## Best Practices
+## Who writes and who reads the header
 
-- Pick and reference data are stored in-memory and optionally exported to CSV.
-- Ensure that when traces are saved or passed between steps, `trace.stats` is retained.
-- You can inspect or modify these attributes using standard Python syntax:
-  ```python
-  trace.stats.picks.append({...})
-  trace.stats.references = []
-  ```
+| Action | Writes | Read by |
+|--------|--------|---------|
+| Double left-click on a trace, keys `1`–`6`, key `e` | `picks` | `cut` / `cut_stream` (`phase`), `shift` (`phase`), scripts |
+| Key `w` | `references` (all traces) | `cut` / `cut_stream` (`reference`), scripts |
+| `surfquake processing -e events.txt -i inventory.xml` | `geodetic`, `back_azimuth`, `inclination` | `shift` (`phase_theo`), `rotate` (`GAC`), `info`, scripts |
+| Your post-scripts | anything you want | the following steps, the plot, the HDF5 output |
+
+Interactive keys that edit the header (see [Plotting](plotting_interaction_documentation.md)):
+
+| Key | Action |
+|-----|--------|
+| Double left-click | Add a pick (you are asked for the phase and polarity) |
+| `1` / `2` / `3` | Quick P pick with polarity `?` / `U` / `D` |
+| `4` / `5` / `6` | Quick S pick with polarity `?` / `U` / `D` |
+| `e` | Manual pick (interactive input) |
+| `d` / `Del` | Delete the pick under the cursor |
+| `c` | Clear all picks |
+| `w` | Add a reference time (all traces) |
+| `p` | Remove the last reference time |
 
 ---
 
+## Trace header modification
 
-### Why This Matters
+To change the codes of your traces (network, station, location, channel), use the **rename** method with `quick` or `processing_daily`. It maps the original codes to the new ones, for example to harmonise data from different providers or to change `1/2` components into `N/E`:
 
-- You can **add custom metadata** to `trace.stats` for later use (e.g., annotations, flags, temporary calculations).
-- You can **modify waveform data** directly, apply filters, or normalize traces.
-- You can **access event and station metadata** for context-aware processing.
-- Changes made in the user script are **preserved** if the output is saved to HDF5 or passed through the pipeline.
+```yaml
+Analysis:
+  process_1:
+    name: 'rename'
+    networks:
+      'IM': 'IH'
+    stations:
+      'IL02': 'XX02'
+    channels:
+      'SHZ': 'BHZ'      # whole channel replacement
+    components:
+      '1': 'N'          # only the last letter of the channel
+      '2': 'E'
+```
 
-This flexibility makes SurfQuake an ideal platform for advanced, reproducible seismic workflows tailored to your research or operational needs.
+⚠️ Always quote the codes: unquoted `00` becomes `0`, and `NO` (Norway) becomes `False`. See [Processing Traces](processing_config.md) for all the options.
 
+---
 
+## Working with the header in Python
+
+In your [scripts](scripts.md), or in any Python session, the header is a dictionary-like object:
+
+```python
+from obspy import UTCDateTime
+
+for tr in stream:
+    # read: always with a default, the field may not exist
+    picks = getattr(tr.stats, "picks", [])
+    p_picks = [p for p in picks if p["phase"] == "P"]
+
+    # write a pick
+    if "picks" not in tr.stats:
+        tr.stats.picks = []
+    tr.stats.picks.append({"time": UTCDateTime("2018-08-21T00:27:15").timestamp,
+                           "phase": "P", "amplitude": 0.0, "polarity": "?"})
+
+    # theoretical P arrival (only after surfquake processing with an event file)
+    arrivals = tr.stats.get("geodetic", {}).get("arrivals", [])
+    p_theo = next((UTCDateTime(a["time"]) for a in arrivals if a["phase"] == "P"), None)
+
+    # your own fields
+    tr.stats.quality = "good"
+```
+
+!!! tip "Best practices"
+    - Store times as UTC timestamps (floats), like SurfQuake does: they are simple, sortable and safe to write in HDF5.
+    - Read optional fields with a default (`getattr`, `.get`), because traces without picks or events do not have them.
+    - Keep the `tr.stats` when you create new traces in a script (`tr.copy()`), otherwise the picks and geodetic information are lost.
+    - Write your results in HDF5 (`-o` with `-a`) to keep the header between runs.
+
+---
 
 ## Notes
 
-These headers extend the utility of MiniSEED traces in SurfQuake workflows by embedding processing history and interactive annotations, making the data more portable and self-descriptive across analysis steps.
-
+The extended header turns each trace into a self-descriptive object: the waveform travels together with its acquisition information, its picks, its event and the results of your own analysis, from one processing step to the next and from one run to the next.

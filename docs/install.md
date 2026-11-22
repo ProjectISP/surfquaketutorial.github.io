@@ -47,6 +47,14 @@ You can install surfQuake core after creating your virtual environment (using ei
 >> (surfquake) pip install git+https://github.com/rcabdia/SurfQuakeCore.git
 ```
 
+- Check surfquake
+
+```bash
+conda activate surfquake
+>> (surfquake) surfquake -h # see surfquake functionality
+>> (surfquake) surfquake play # run a small videogame from my childhood
+```
+
 ## <span style="color:darkcyan;"> **Notes about Processor and OS** </span>
 
 **Linux OS** and **Mac** computers with Intel processors can now run surQuake thanks to testing and programming. 

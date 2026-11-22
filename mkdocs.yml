@@ -13,7 +13,6 @@ nav:
       - Beamfoming: tutorials/beamforming_tutorial.md
   - Signal Processing:
       - Overview: processing_overview.md
-      - Examples: examples.md
       - Trace Header: trace_header_documentation.md
       - Data Availability: explore_data.md
       - My Scripts: scripts.md

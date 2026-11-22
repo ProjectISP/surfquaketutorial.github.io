@@ -129,7 +129,7 @@ Let's plot the array and look for the P arrival. We pass the metadata with `-i`,
 surfquake quick -h
 surfquake quick -w "./tutorial3/data/*" -i "./tutorial3/metadata/dataless.dlsv" --plot_config "./tutorial3/configs/plotting_config.yaml"
 ```
-- select starttime press `u` around `2017-09-03T03:38:37` and select endtime pressing `i` around `2017-09-03T03:40:39`.
+
 - Open an interactive prompt pressing `v`.
 - Filter the traces in the band where the P wave is clear:
 
@@ -141,7 +141,7 @@ filter bandpass 0.8 2.2 --corners 4 --zerophase True
 After filtering, the figure is redrawn and you are back in picking mode.
 
 - Zoom around 03:39 UTC, about 9 minutes after the origin time. You will see the P wave arriving at all stations almost at the same time.
-- Set the analysis time window: place the mouse a bit before the P wave (around `2017-09-03T03:38:37`) and press `u` (start time), then place it after the main P energy (around 2017-09-03T03:40:39) and press `i` (end time).
+- Set the analysis time window: place the mouse a bit before the P wave (around 03:38:50) and press `u` (start time), then place it after the main P energy (around 03:39:40) and press `i` (end time).
 
 ![P wave at ILAR](img/T3_pwave.png)
 
@@ -167,7 +167,7 @@ beam --fmin 0.8 --fmax 2.2 --smax 0.3 --grid 0.01 --win 3 --overlap 0.05
 - `--smax`: maximum slowness of the grid (s/km). 0.3 s/km covers all P and S phases.
 - `--grid`: slowness grid spacing (s/km). With 0.01 we can separate 0.06 from 0.07 s/km, the default 0.05 is too coarse for a teleseismic P.
 - `--win`: length of each sliding window (s). It should contain a few cycles of the lowest frequency.
-- `--overlap`: overlap between consecutive windows (fraction, 0.05 = 5 %).
+- `--overlap`: step between consecutive windows, as a fraction of `--win`. With 0.05 the window moves 5 % of its length each time (0.15 s), i.e. consecutive windows overlap by 95 %.
 
 The figure shows, from top to bottom, the relative power, the slowness and the back-azimuth of each window, colored by relative power.
 
@@ -227,18 +227,15 @@ Analysis:
     name: 'rmean'
     method: 'linear'
   process_2:
-    name: 'rmean'
-    method: 'simple'
-  process_3:
     name: 'taper'
     method: 'cosine'
     max_percentage: 0.05
-  process_4:
+  process_3:
     name: 'cut_stream'
     method: 'absolute'
-    start: 2017-09-03T03:37:00
+    start: 2017-09-03T03:38:30
     end: 2017-09-03T03:41:30
-  process_5:
+  process_4:
     name: 'beam'
     method: 'FK'
     timewindow: 3.0
