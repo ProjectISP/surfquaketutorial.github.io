@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bash-script-interaction-with-surfquake" class="md-skip">
+        <a href="#bash-scripts-with-surfquake" class="md-skip">
           Skip to content
         </a>
       
@@ -1188,10 +1188,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#example-bash-workflow-for-seismic-event-processing" class="md-nav__link">
+  <a href="#what-is-bash" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example: Bash Workflow for Seismic Event Processing
+        What is bash?
       
     </span>
   </a>
@@ -1199,10 +1199,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-components-explained" class="md-nav__link">
+  <a href="#your-first-script" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Components Explained
+        Your first script
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Your first script">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-the-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Create the file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-make-it-executable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Make it executable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Run it
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activating-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Activating your environment
       
     </span>
   </a>
@@ -1210,10 +1260,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tips-for-reliable-bash-integration" class="md-nav__link">
+  <a href="#basic-tools-to-write-better-scripts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tips for Reliable Bash Integration
+        Basic tools to write better scripts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic tools to write better scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#long-commands-on-several-lines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Long commands on several lines
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quotes-around-paths-and-wildcards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quotes around paths and wildcards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-on-the-first-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stop on the first error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-a-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep a log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-without-questions-automatic-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running without questions: automatic mode
       
     </span>
   </a>
@@ -1221,10 +1343,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#advanced-scheduling-or-looping" class="md-nav__link">
+  <a href="#example-a-complete-workflow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Advanced: Scheduling or Looping
+        Example: a complete workflow
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example: a complete workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-options-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The options used
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repeating-a-task-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeating a task: loops
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-a-script-automatically-cron" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running a script automatically: cron
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips
       
     </span>
   </a>
@@ -2025,92 +2197,222 @@
 
 
 
-<h1 id="bash-script-interaction-with-surfquake">Bash Script Interaction with SurfQuake</h1>
-<p>SurfQuake provides a command-line interface (CLI) that integrates seamlessly with bash scripting. This allows users to automate large-scale waveform processing, post-analysis scripting, and plotting tasks efficiently.</p>
-<h2 id="example-bash-workflow-for-seismic-event-processing">Example: Bash Workflow for Seismic Event Processing</h2>
-<p>Below is a sample <code>bash</code> script that chains together two major SurfQuake commands: <code>quick</code> and <code>processing</code>.</p>
+<h1 id="bash-scripts-with-surfquake">Bash Scripts with SurfQuake</h1>
+<p>SurfQuake is used from the <strong>terminal</strong>, by typing commands. That is perfect to explore a few files, but when you have to repeat the same steps many times (every day, for every event, for every station), typing them again and again is slow and error-prone. A <strong>bash script</strong> solves this: you write the commands once in a text file, and run them all with a single command.</p>
+<p>This page is for beginners: no previous experience with bash is needed.</p>
+<hr />
+<h2 id="what-is-bash">What is bash?</h2>
+<ul>
+<li>The <strong>terminal</strong> (or console) is the window where you type commands instead of clicking.</li>
+<li><strong>Bash</strong> is the program inside the terminal that reads your commands and runs them. It is the standard on Linux and macOS (on recent macOS the default is <code>zsh</code>, which understands the same commands used here).</li>
+<li>A <strong>bash script</strong> is a plain text file (usually ending in <code>.sh</code>) containing a list of commands. Bash runs them one after the other, from top to bottom, exactly as if you had typed them.</li>
+</ul>
+<p>So, if you can run a SurfQuake command in the terminal, you can already write a bash script: just put the commands in a file.</p>
+<div class="admonition note">
+<p class="admonition-title">Windows users</p>
+<p>Bash is not the default on Windows. You can use it through <strong>WSL</strong> (Windows Subsystem for Linux) or <strong>Git Bash</strong>. Alternatively, write the same commands in a PowerShell or <code>.bat</code> file, one per line.</p>
+</div>
+<hr />
+<h2 id="your-first-script">Your first script</h2>
+<h3 id="1-create-the-file">1. Create the file</h3>
+<p>Open any text editor (VS Code, gedit, nano, TextEdit in plain-text mode...) and create a file named <code>run_surfquake.sh</code> in your working folder:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="ch">#!/bin/bash</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Activate your conda or virtual environment</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with your environment manager if needed (e.g., &#39;conda activate surfquake&#39;)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Step 1: Quickly process individual waveform files with a custom post-processing script</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>surfquake<span class="w"> </span>quick<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;/Users/admin/Desktop/surf_test/nuclear/cut_event/*&quot;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span>--post_script<span class="w"> </span>/Users/admin/Desktop/surf_test/scripts/my_script.py<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span>-c<span class="w"> </span>/Users/admin/Desktop/surf_test/config/config.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span>--plot_config<span class="w"> </span>/Users/admin/Desktop/surf_test/config/plot.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span>-o<span class="w"> </span>/Users/admin/Desktop/surf_test/output<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span>-a<span class="w"> </span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="c1"># Step 2: Process a set of previously detected or catalogued events</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>surfquake<span class="w"> </span>processing<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span>-p<span class="w"> </span>/Users/admin/Desktop/surf_test/project.pkl<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span>-i<span class="w"> </span>/Users/admin/Desktop/surf_test/metadata/inv_all.xml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">  </span>-e<span class="w"> </span>/Users/admin/Desktop/surf_test/events/eventos.csv<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">  </span>-c<span class="w"> </span>/Users/admin/Desktop/surf_test/config/config.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span>-o<span class="w"> </span>/Users/admin/Desktop/surf_test/processed_events
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># My first SurfQuake script</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>surfquake<span class="w"> </span>explore<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span>./configs/typical_config.yaml<span class="w"> </span>-o<span class="w"> </span>./output<span class="w"> </span>-a
 </code></pre></div>
-<h2 id="key-components-explained">Key Components Explained</h2>
+<ul>
+<li>The first line, <code>#!/bin/bash</code>, tells the system that this file must be run with bash. Always keep it as the first line.</li>
+<li>Lines starting with <code>#</code> are <strong>comments</strong>: they are ignored, and you can use them to explain what each part does.</li>
+<li>The other lines are normal SurfQuake commands.</li>
+</ul>
+<h3 id="2-make-it-executable">2. Make it executable</h3>
+<p>The first time, give the file permission to be run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_surfquake.sh
+</code></pre></div>
+<h3 id="3-run-it">3. Run it</h3>
+<p>From the folder where the script is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./run_surfquake.sh
+</code></pre></div>
+<p>You can also run it with <code>bash run_surfquake.sh</code>. Avoid <code>sh run_surfquake.sh</code>: on many Linux systems <code>sh</code> is not bash, and some lines may fail.</p>
+<hr />
+<h2 id="activating-your-environment">Activating your environment</h2>
+<p>If you installed SurfQuake in a <strong>conda</strong> environment, the script must activate it before using <code>surfquake</code>, otherwise the command will not be found. Inside scripts, conda needs one extra line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Activate the conda environment where SurfQuake is installed</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">        </span><span class="c1"># replace &#39;surfquake&#39; with the name of your environment</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span>./configs/typical_config.yaml<span class="w"> </span>-o<span class="w"> </span>./output<span class="w"> </span>-a
+</code></pre></div>
+<p>If you use a Python virtual environment instead, replace those two lines with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">source</span><span class="w"> </span>/path/to/your/venv/bin/activate
+</code></pre></div>
+<hr />
+<h2 id="basic-tools-to-write-better-scripts">Basic tools to write better scripts</h2>
+<h3 id="long-commands-on-several-lines">Long commands on several lines</h3>
+<p>A command can be split over several lines by ending each line with a backslash <code>\</code>. It is much easier to read. The backslash must be the <strong>last character</strong> of the line (no spaces after it):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>-c<span class="w"> </span>./configs/typical_config.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span>-o<span class="w"> </span>./output<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span>-a
+</code></pre></div>
+<h3 id="variables">Variables</h3>
+<p>A variable stores a value (often a path) that you can reuse. Define it with <code>NAME=value</code> (no spaces around <code>=</code>) and use it with <code>$NAME</code>. If you change your data folder, you only change one line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">DATA</span><span class="o">=</span>./data
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">CONFIGS</span><span class="o">=</span>./configs
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">OUTPUT</span><span class="o">=</span>./output
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$DATA</span><span class="s2">/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIGS</span><span class="s2">/typical_config.yaml&quot;</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$OUTPUT</span><span class="s2">&quot;</span><span class="w"> </span>-a
+</code></pre></div>
+<h3 id="quotes-around-paths-and-wildcards">Quotes around paths and wildcards</h3>
+<p>Always write paths with wildcards between <strong>quotes</strong>: <code>"./data/*"</code>. Without them, bash expands the <code>*</code> itself and passes a long list of files to SurfQuake, which may fail or be slow. With quotes, SurfQuake receives the pattern and finds the files itself. Quotes also protect paths that contain spaces.</p>
+<h3 id="stop-on-the-first-error">Stop on the first error</h3>
+<p>By default, bash continues with the next line even if a command fails. Add this line after <code>#!/bin/bash</code> to stop the script as soon as a command fails, so a broken step does not produce wrong results downstream:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">set</span><span class="w"> </span>-e
+</code></pre></div>
+<h3 id="keep-a-log">Keep a log</h3>
+<p>To save everything the script prints (messages, warnings, errors) in a file, run it like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>./run_surfquake.sh<span class="w"> </span>&gt;<span class="w"> </span>run.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</code></pre></div>
+<hr />
+<h2 id="running-without-questions-automatic-mode">Running without questions: automatic mode</h2>
+<p>In a script nobody is watching the screen, so SurfQuake must not open plot windows or ask questions. Use the option <strong><code>-a</code></strong> (<code>--auto</code>) with <code>quick</code>, <code>processing</code> and <code>processing_daily</code>:</p>
+<ul>
+<li>The traces are processed and written to the output folder (<code>-o</code>) in HDF5 format.</li>
+<li>No interactive window is opened.</li>
+<li>If you also want the <strong>figures</strong> saved automatically, set <code>show_plot: false</code> and a <code>plot_output_path</code> in your plotting configuration (see <a href="../plotting_interaction_documentation/">Plotting</a>).</li>
+</ul>
+<hr />
+<h2 id="example-a-complete-workflow">Example: a complete workflow</h2>
+<p>This script chains two SurfQuake steps: it processes some waveform files with your own Python script, and then cuts and processes the waveforms of a list of events from a project.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nb">set</span><span class="w"> </span>-e
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># --- Environment</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># --- Paths (change them once here)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nv">BASE</span><span class="o">=</span>/home/user/surf_test
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="nv">CONFIG</span><span class="o">=</span><span class="nv">$BASE</span>/config/config.yaml
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c1"># --- Step 1: process waveform files, with your own post-processing script</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>surfquake<span class="w"> </span>quick<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/nuclear/cut_event/*&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">  </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">  </span>--post_script<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/scripts/my_script.py&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">  </span>--plot_config<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/config/plot.yaml&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/output&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">  </span>-a
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="c1"># --- Step 2: cut and process the waveforms of a list of events</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>surfquake<span class="w"> </span>processing<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">  </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/project.pkl&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">  </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/metadata/inv_all.xml&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/events/events.txt&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">  </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIG</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">  </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/processed_events&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">  </span>-a
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Workflow finished&quot;</span>
+</code></pre></div>
+<h3 id="the-options-used">The options used</h3>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Option</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>-w</code></td>
-<td>Path or glob pattern to waveform files (MiniSEED, HDF5, etc.)</td>
+<td>Path or wildcard pattern of the waveform files (MiniSEED, HDF5, ...). Always in quotes.</td>
 </tr>
 <tr>
 <td><code>-c</code></td>
-<td>Configuration YAML file specifying preprocessing steps (filtering, tapering, normalization, etc.)</td>
+<td>Processing configuration file (YAML): detrend, taper, filter... See <a href="../processing_overview/">Processing</a>.</td>
 </tr>
 <tr>
 <td><code>--post_script</code></td>
-<td>Path to a Python script that can modify with your own processing</td>
+<td>Your own Python script, applied to each stream. See <a href="../scripts/">Scripts</a>.</td>
 </tr>
 <tr>
 <td><code>--plot_config</code></td>
-<td>YAML file that defines plotting layout, styling, and pick output</td>
+<td>Plotting configuration file (YAML).</td>
 </tr>
 <tr>
 <td><code>-o</code></td>
-<td>Output directory for saving processed or modified traces</td>
+<td>Output folder for the processed traces (HDF5).</td>
 </tr>
 <tr>
 <td><code>-p</code></td>
-<td>Path to a <code>.pkl</code> file with previously created surfquake project object</td>
+<td>A SurfQuake project file (<code>.pkl</code>). See <a href="../project/">Project</a>.</td>
 </tr>
 <tr>
 <td><code>-i</code></td>
-<td>Station inventory file (StationXML format) used for geolocation and instrument correction</td>
+<td>Station metadata (StationXML or dataless): station coordinates and instrument response.</td>
 </tr>
 <tr>
 <td><code>-e</code></td>
-<td>CSV file with origin times, locations, and hypocenter parameters for seismic events</td>
+<td>Event file (date, time, latitude, longitude, depth, magnitude). See <a href="../processing_overview/">Processing</a>.</td>
 </tr>
 <tr>
 <td><code>-a</code></td>
-<td>For automatic processing, no plotting waveforms</td>
+<td>Automatic mode: no plots, no questions.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="tips-for-reliable-bash-integration">Tips for Reliable Bash Integration</h2>
-<ul>
-<li><strong>Use absolute paths</strong> to avoid ambiguity, especially when running the script from <code>cron</code> or remote sessions.</li>
-<li><strong>Quote paths</strong> that include wildcards (<code>*</code>) to ensure the shell doesn't prematurely expand them.</li>
-<li><strong>Always activate your environment</strong> if SurfQuake is installed via Conda or a virtualenv.</li>
-<li><strong>Use <code>--auto</code> flag</strong> if you want the quick command to run without any user interaction (headless processing).</li>
-</ul>
-<h2 id="advanced-scheduling-or-looping">Advanced: Scheduling or Looping</h2>
-<p>You can wrap this script into a <code>cron</code> job for periodic processing, or loop over multiple event folders:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span><span class="w"> </span>folder<span class="w"> </span><span class="k">in</span><span class="w"> </span>/data/events/day_*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$folder</span><span class="s2">/*.mseed&quot;</span><span class="w"> </span>-c<span class="w"> </span>config.yaml<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$folder</span><span class="s2">/processed&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">done</span>
+<p><code>echo</code> simply prints a message on the screen.</p>
+<hr />
+<h2 id="repeating-a-task-loops">Repeating a task: loops</h2>
+<p>A <code>for</code> loop repeats commands for every item of a list. For example, to process every event folder separately:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">for</span><span class="w"> </span>folder<span class="w"> </span><span class="k">in</span><span class="w"> </span>/data/events/event_*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing </span><span class="nv">$folder</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$folder</span><span class="s2">/*&quot;</span><span class="w"> </span>-c<span class="w"> </span>./configs/typical_config.yaml<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$folder</span><span class="s2">/processed&quot;</span><span class="w"> </span>-a
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="k">done</span>
 </code></pre></div>
+<ul>
+<li><code>folder</code> takes, one by one, the value of every folder whose name starts with <code>event_</code>.</li>
+<li>The commands between <code>do</code> and <code>done</code> run once for each folder.</li>
+</ul>
+<p>Another example: save an image of every spectrogram in a folder.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>./time_freq/*.spec<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span>--split<span class="w"> </span>-d<span class="w"> </span>--save_path<span class="w"> </span>./figures
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">done</span>
+</code></pre></div>
+<hr />
+<h2 id="running-a-script-automatically-cron">Running a script automatically: cron</h2>
+<p>On Linux and macOS, <strong>cron</strong> runs a script at fixed times, for example every night, without you being there. Open your cron table with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>crontab<span class="w"> </span>-e
+</code></pre></div>
+<p>and add a line like this one, which runs the script every day at 02:00 and saves the messages in a log file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>0 2 * * * /home/user/surf_test/run_surfquake.sh &gt;&gt; /home/user/surf_test/run.log 2&gt;&amp;1
+</code></pre></div>
+<p>The five fields are: minute, hour, day of the month, month and day of the week (<code>*</code> = every).</p>
+<div class="admonition warning">
+<p class="admonition-title">Paths in scheduled scripts</p>
+<p>Cron does not start in your working folder, so relative paths like <code>./data</code> point somewhere else. In scripts run by cron, use <strong>absolute paths</strong> (starting with <code>/</code>), or add <code>cd /home/user/surf_test</code> at the beginning of the script.</p>
+</div>
+<hr />
+<h2 id="tips">Tips</h2>
+<ul>
+<li><strong>Test first</strong>: run each command by hand on a few files, and only then put it in the script.</li>
+<li><strong>Use <code>-a</code></strong> in scripts, so nothing waits for an answer.</li>
+<li><strong>Quote</strong> paths with wildcards or spaces: <code>"./data/*"</code>.</li>
+<li><strong>Activate the environment</strong> at the beginning of every script.</li>
+<li><strong>Use variables</strong> for the paths you repeat.</li>
+<li><strong>Use <code>set -e</code></strong> to stop at the first error, and keep a <strong>log</strong> of long runs.</li>
+<li><strong>Use absolute paths</strong> in scripts run by cron or from another folder.</li>
+</ul>
 
 
 
