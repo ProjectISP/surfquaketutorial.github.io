@@ -14,7 +14,7 @@
         <link rel="prev" href="../particle_motion_documentation/">
       
       
-        <link rel="next" href="../characteristic_functions_documentation/">
+        <link rel="next" href="../beamforming_documentation/">
       
       
         
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#processing-options" class="md-skip">
+        <a href="#time-frequency-analysis" class="md-skip">
           Skip to content
         </a>
       
@@ -904,34 +904,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../scripts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    My Scripts
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../processing_config/" class="md-nav__link">
         
   
@@ -968,34 +940,6 @@
     
   
     Processing Stream
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../beamforming_documentation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Beamforming
   
 
     
@@ -1104,13 +1048,52 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#spectral-analysis-tools" class="md-nav__link">
+  <a href="#basic-concepts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Spectral Analysis Tools
+        Basic concepts
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Basic concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#time-and-frequency-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time and frequency resolution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tapering-and-spectral-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tapering and spectral leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#units-fourier-amplitude-or-spectral-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Units: Fourier amplitude or spectral density
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1125,6 +1108,17 @@
   
     <nav class="md-nav" aria-label="Spectrum">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
@@ -1149,10 +1143,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#output" class="md-nav__link">
+  <a href="#interactive" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Output
+        Interactive
       
     </span>
   </a>
@@ -1199,10 +1193,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#output_1" class="md-nav__link">
+  <a href="#interactive_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Output
+        Interactive
       
     </span>
   </a>
@@ -1227,6 +1221,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#wavelets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wavelets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#parameters_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1249,10 +1254,110 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#output_2" class="md-nav__link">
+  <a href="#interactive_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Output
+        Interactive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cepstrum-and-cepstrogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cepstrum and Cepstrogram
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cepstrum and Cepstrogram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kinds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kinds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-spectrum-coherence-and-transfer-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-spectrum: coherence and transfer function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the analysis
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running the analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-file-automatic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config file (automatic)
       
     </span>
   </a>
@@ -1293,22 +1398,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#understanding-and-accessing-spectral-result-objects-in-python" class="md-nav__link">
+  <a href="#accessing-the-results-in-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Understanding and Accessing Spectral Result Objects in Python
+        Accessing the results in Python
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Understanding and Accessing Spectral Result Objects in Python">
+    <nav class="md-nav" aria-label="Accessing the results in Python">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-spectrum-object-sp" class="md-nav__link">
+  <a href="#1-spectrum-sp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Spectrum object (.sp)
+        1. Spectrum (.sp)
       
     </span>
   </a>
@@ -1316,10 +1421,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-spectrogram-object-spec" class="md-nav__link">
+  <a href="#2-spectrogram-spec" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Spectrogram object (.spec)
+        2. Spectrogram (.spec)
       
     </span>
   </a>
@@ -1327,10 +1432,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-cross-spectral-result-object-coh" class="md-nav__link">
+  <a href="#3-continuous-wavelet-transform-cwt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Cross-spectral result object (.coh)
+        3. Continuous Wavelet Transform (.cwt)
       
     </span>
   </a>
@@ -1338,10 +1443,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-cwt-result-object-cwt" class="md-nav__link">
+  <a href="#4-cepstrum-cep-and-cepstrogram-ceps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. CWT result object (.cwt)
+        4. Cepstrum (.cep) and Cepstrogram (.ceps)
       
     </span>
   </a>
@@ -1349,10 +1454,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-inspecting-an-object-and-saving-results" class="md-nav__link">
+  <a href="#5-cross-spectrum-coh" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Inspecting an object and saving results
+        5. Cross-spectrum (.coh)
       
     </span>
   </a>
@@ -1360,10 +1465,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scientific-references" class="md-nav__link">
+  <a href="#computing-in-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Scientific References
+        Computing in Python
       
     </span>
   </a>
@@ -1375,10 +1480,49 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#scientific-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scientific References
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamforming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1427,6 +1571,34 @@
     
   
     Plotting Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Scripts
   
 
     
@@ -2253,166 +2425,656 @@
 
 
 
-<h1 id="processing-options">Processing Options</h1>
-<h2 id="spectral-analysis-tools">Spectral Analysis Tools</h2>
-<p>SurfQuake provides three main tools for spectral analysis of seismic data: <strong>spectrum</strong>, <strong>spectrogram</strong>, and <strong>CWT</strong> (Continuous Wavelet Transform). These tools enable users to inspect frequency content in different forms—static, time-evolving, and high-resolution wavelet representations.</p>
+<h1 id="time-frequency-analysis">Time-Frequency Analysis</h1>
+<p>A seismogram is a function of time, but much of what it tells us is hidden in its <strong>frequency content</strong>: the corner frequency of an earthquake, the resonance of a site, the microseism peak, the tones of a ship's engine, the dispersion of surface waves. Spectral analysis moves the trace to the frequency domain to look at these properties.</p>
+<p>SurfQuake offers six tools, each answering a different question:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Question it answers</th>
+<th>Output file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Spectrum</strong></td>
+<td>Which frequencies are in the whole trace, and how strong are they?</td>
+<td><code>.sp</code></td>
+</tr>
+<tr>
+<td><strong>Spectrogram</strong></td>
+<td>How does the frequency content change with time?</td>
+<td><code>.spec</code></td>
+</tr>
+<tr>
+<td><strong>CWT</strong> (Continuous Wavelet Transform)</td>
+<td>Same as the spectrogram, with a resolution that adapts to each frequency. Best for short transients.</td>
+<td><code>.cwt</code></td>
+</tr>
+<tr>
+<td><strong>Cepstrum</strong></td>
+<td>Does the signal contain a pattern that repeats (echoes, pulse trains, harmonics)? With which period?</td>
+<td><code>.cep</code></td>
+</tr>
+<tr>
+<td><strong>Cepstrogram</strong></td>
+<td>How does that repetition period change with time?</td>
+<td><code>.ceps</code></td>
+</tr>
+<tr>
+<td><strong>Cross-spectrum</strong></td>
+<td>Are two traces related at each frequency (coherence)? How does one transform into the other (transfer function)?</td>
+<td><code>.coh</code></td>
+</tr>
+</tbody>
+</table>
+<p>Each tool can be used in three ways:</p>
+<ol>
+<li><strong>Interactively</strong>, from the command prompt of the plot (<code>surfquake quick</code>, then <code>v</code>), to explore your data.</li>
+<li><strong>In a config file</strong>, to compute and save the results of many traces automatically.</li>
+<li><strong>Plotting</strong> the saved results with <code>surfquake specplot</code>, or reading them in <strong>Python</strong> for your own analysis.</li>
+</ol>
+<p>A step-by-step example is the <a href="../tutorials/tutorial2/">Time-Frequency Tutorial</a>.</p>
+<hr />
+<h2 id="basic-concepts">Basic concepts</h2>
+<h3 id="time-and-frequency-resolution">Time and frequency resolution</h3>
+<p>A spectrum computed from a window of length <span class="arithmatex">\(T\)</span> seconds has a frequency resolution of about <span class="arithmatex">\(\Delta f \approx 1/T\)</span> Hz. Long windows separate close frequencies, short windows locate events precisely in time, but no window does both: this is the <strong>time–frequency uncertainty principle</strong>. Each time-frequency method is a different way of choosing this compromise:</p>
+<ul>
+<li><strong>Spectrogram</strong>: one window length for all frequencies (you choose it with <code>win</code>).</li>
+<li><strong>CWT</strong>: long windows for low frequencies and short windows for high frequencies, automatically.</li>
+</ul>
+<h3 id="tapering-and-spectral-leakage">Tapering and spectral leakage</h3>
+<p>The FFT assumes that the window repeats periodically. If the signal does not start and end at zero, the jump at the edges spreads energy over all frequencies: this is <strong>spectral leakage</strong>, which hides weak peaks next to strong ones. SurfQuake always removes the mean and applies a taper:</p>
+<ul>
+<li><strong>FFT</strong>: a single 5 % cosine taper on each side of the window.</li>
+<li><strong>Multitaper</strong>: several orthogonal tapers (Slepian sequences), each one giving an independent estimate; their average has much less variance (less "noisy" spectra) and very little leakage. It is slower.</li>
+</ul>
+<p>The data are also <strong>zero-padded</strong> to the next power of 2, which interpolates the spectrum (more frequency samples), but does not improve the real resolution, which depends only on the window length.</p>
+<h3 id="units-fourier-amplitude-or-spectral-density">Units: Fourier amplitude or spectral density</h3>
+<p>The spectrum is given in one of two physical scalings, the same for every method, so spectra computed with different methods can be compared directly:</p>
+<table>
+<thead>
+<tr>
+<th><code>scaling</code></th>
+<th>Units</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fourier</code> (default)</td>
+<td>trace unit × s (e.g. m/s · s)</td>
+<td><strong>Transients</strong> (earthquakes, explosions): $</td>
+</tr>
+<tr>
+<td><code>asd</code></td>
+<td>trace unit / √Hz</td>
+<td><strong>Continuous signals</strong> (noise, microseism, tremor): amplitude spectral density, <span class="arithmatex">\(\sqrt{\text{PSD}}\)</span>. The value does not depend on the record length, so it can be compared with noise models.</td>
+</tr>
+</tbody>
+</table>
+<p>The spectrograms store the <strong>power spectral density</strong> (PSD, unit²/Hz) of each window. In the figures, spectrograms and scalograms are shown in <strong>dB relative to their maximum</strong>:</p>
+<div class="arithmatex">\[P_{\mathrm{dB}}(f,t) = 10\log_{10}\left(\frac{P(f,t)}{P_{\max}}\right)\]</div>
+<p>so 0 dB is the strongest point, and −60 dB is a million times weaker in power.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remove the instrument response first (<code>remove_response</code>) if you want the spectra in ground-motion units (m/s, m). Otherwise they are in counts.</p>
+</div>
 <hr />
 <h2 id="spectrum">Spectrum</h2>
-<p>The <code>spectrum</code> tool computes the frequency-domain representation of a single seismic trace using the <strong>multitaper method</strong> by default, which is robust against noise and spectral leakage.</p>
+<p>The <strong>spectrum</strong> shows how the energy of the whole trace (or of the selected window) is distributed in frequency. It is the tool to measure the corner frequency and the high-frequency decay of an earthquake, to identify the frequency band of a signal before filtering, or to find spectral lines (tones) in continuous data.</p>
+<h3 id="methods">Methods</h3>
+<table>
+<thead>
+<tr>
+<th><code>method</code></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fft</code></td>
+<td>Fast Fourier transform with a 5 % cosine taper. Fast, keeps the full resolution and also stores the <strong>phase</strong>. The standard choice for transients.</td>
+</tr>
+<tr>
+<td><code>multitaper</code></td>
+<td>Adaptive multitaper estimate. Smoother, lower variance, very little leakage. The best choice for noise and for weak peaks.</td>
+</tr>
+<tr>
+<td><code>burg</code>, <code>yule</code>, <code>covar</code>, <code>modcovar</code></td>
+<td><strong>Parametric</strong> (autoregressive, AR) methods: they fit a model of <code>order</code> poles to the samples and draw the spectrum from the model. They give smooth spectra and sharp peaks from short records. <code>burg</code> is the recommended one; <code>yule</code> is the smoothest and least resolving.</td>
+</tr>
+<tr>
+<td><code>minvar</code></td>
+<td>Minimum variance (Capon) spectrum.</td>
+</tr>
+<tr>
+<td><code>music</code>, <code>ev</code></td>
+<td><strong>Pseudo-spectra</strong>: they separate signal and noise subspaces to find the frequencies of pure tones with very high resolution. Their amplitudes have no physical meaning: look at where the peaks are, not at how high they are.</td>
+</tr>
+</tbody>
+</table>
+<p>The parametric methods need the optional package <code>spectrum</code> (<code>pip install spectrum</code>). The data are not tapered or zero-padded for them.</p>
 <h3 id="parameters">Parameters</h3>
-<ul>
-<li><strong><code>method</code></strong>: Spectral estimation method. Options:</li>
-<li><code>multitaper</code> (default)</li>
-<li><code>fft</code> or others if extended</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td>One of the methods above (default <code>fft</code>).</td>
+</tr>
+<tr>
+<td><code>scaling</code></td>
+<td><code>fourier</code> (default) or <code>asd</code>, see <a href="#units-fourier-amplitude-or-spectral-density">Units</a>. Ignored by <code>music</code> and <code>ev</code>.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Parametric methods: model order (default 20). Each spectral peak needs about 2 poles, and they are spread from 0 Hz to Nyquist; to study low frequencies, <strong>decimate</strong> the trace first rather than raising the order a lot. Capped at 1/3 of the number of samples.</td>
+</tr>
+<tr>
+<td><code>nsig</code></td>
+<td><code>music</code> and <code>ev</code> only (required): 2 per pure tone you expect in the data (1 tone → 2, 3 tones → 6). Must be smaller than <code>order</code>.</td>
+</tr>
+<tr>
+<td><code>output_path</code></td>
+<td>Folder for the results (created if missing).</td>
+</tr>
+</tbody>
+</table>
 <h3 id="config-example">Config Example</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrum&#39;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;multitaper&#39;</span><span class="w"> </span><span class="c1"># &#39;fft&#39; for conventional spectrum with single taper</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Users/surf_test/spectral</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;fft&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">scaling</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;fourier&#39;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
 </code></pre></div>
-<h3 id="output">Output</h3>
-<ul>
-<li>Amplitude vs. Frequency plot</li>
-<li>Optional log-log or semi-log axes (<code>loglog</code>, <code>xlog</code>, <code>ylog</code>)</li>
-<li>Serialized result saved as <code>.sp</code></li>
-</ul>
-<hr />
-<h2 id="spectrogram">Spectrogram</h2>
-<p>The <code>spectrogram</code> method produces a time-frequency representation of a seismic trace using short-time Fourier Transform (STFT).</p>
-<h3 id="parameters_1">Parameters</h3>
-<ul>
-<li><strong><code>win</code></strong> (float): Window length in seconds (e.g., 5.0)</li>
-<li><strong><code>overlap_percent</code></strong> (float): Percent overlap between windows (e.g., 50.0)</li>
-<li><strong><code>linf</code>, <code>lsup</code></strong>: Lower and upper frequency limits for plotting</li>
-<li><strong><code>method</code></strong>: Spectral estimation method. Options:</li>
-<li><code>multitaper</code> (default)</li>
-<li><code>fft</code></li>
-</ul>
-<h3 id="config-example_1">Config Example</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrogram&#39;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrum&#39;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;multitaper&#39;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">overlap_percent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Users/surf_test/spectral</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">scaling</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;asd&#39;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
 </code></pre></div>
-<h3 id="output_1">Output</h3>
-<ul>
-<li>Power over time and frequency in decibels (dB)</li>
-<li>Plotted as a color-coded matrix</li>
-<li>Serialized result saved as <code>.spec</code></li>
-</ul>
-<hr />
-<h2 id="continuous-wavelet-transform-cwt">Continuous Wavelet Transform (CWT)</h2>
-<p>CWT provides high-resolution time-frequency analysis using scalable wavelets. Ideal for transient signals and high-precision timing.</p>
-<h3 id="parameters_2">Parameters</h3>
-<ul>
-<li><strong><code>wavelet</code></strong>: </li>
-<li><code>"cm"</code>: Complex Morlet <em>(default and recommended for phase coherence)</em></li>
-<li><code>"mh"</code>: Mexican Hat</li>
-<li><code>"pa"</code>: Paul wavelet</li>
-<li><strong><code>param</code></strong>: Wavelet parameter (e.g., 6.0)</li>
-<li><strong><code>fmin</code>, <code>fmax</code></strong>: Frequency range (optional)</li>
-<li><strong><code>nf</code></strong>: Number of frequency bins</li>
-</ul>
-<h3 id="config-example_2">Config Example</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cwt&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">wavelet</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cm&#39;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.0</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">nf</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/Users/surf_test/spectral</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrum&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;music&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">nsig</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
 </code></pre></div>
-<h3 id="output_2">Output</h3>
-<ul>
-<li>Scalogram in decibel power</li>
-<li>Prediction masks showing reliable analysis range</li>
-<li>Serialized result saved as <code>.cwt</code></li>
-</ul>
-<hr />
-<h2 id="plotting-and-cli-usage">Plotting and CLI Usage</h2>
-<p>All spectral results can be visualized via the CLI:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Plot a spectrum</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>--file<span class="w"> </span>path/to/file.sp
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Plot a spectrogram</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>--file<span class="w"> </span>path/to/file.spec<span class="w"> </span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Plot a wavelet scalogram with optional clipping</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>--file<span class="w"> </span>path/to/file.cwt<span class="w"> </span>--type<span class="w"> </span>cwt<span class="w"> </span>--clip<span class="w"> </span>-120
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Save output to file</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>file.spec<span class="w"> </span>--save_path<span class="w"> </span>output.png
+<h3 id="interactive">Interactive</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">help</span><span class="w"> </span>spectrum
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>spectrum<span class="w"> </span><span class="m">0</span><span class="w">                                  </span><span class="c1"># first trace, log-log axes, FFT</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>spectrum<span class="w"> </span>all<span class="w"> </span>loglog<span class="w"> </span>--mode<span class="w"> </span>multitaper<span class="w">       </span><span class="c1"># all displayed traces</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>sp<span class="w"> </span><span class="m">2</span><span class="w"> </span>xlog<span class="w"> </span>--mode<span class="w"> </span>burg<span class="w"> </span>--order<span class="w"> </span><span class="m">30</span><span class="w">            </span><span class="c1"># &#39;sp&#39; is an alias</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>sp<span class="w"> </span><span class="m">0</span><span class="w"> </span>--mode<span class="w"> </span>music<span class="w"> </span>--order<span class="w"> </span><span class="m">20</span><span class="w"> </span>--nsig<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
-<h3 id="cli-options">CLI Options</h3>
-<ul>
-<li><code>--file</code>, <code>-f</code>: Path to serialized <code>.sp</code>, <code>.spec</code>, or <code>.cwt</code> file</li>
-<li><code>--type</code>, <code>-t</code>: Type of spectral result to plot (<code>spectrum</code>, <code>spectrogram</code>, <code>cwt</code>)</li>
-<li><code>--clip</code>, <code>-c</code>: Optional clipping in dB for spectrogram or CWT</li>
-<li><code>--save_path</code>: Output path to save the figure</li>
-</ul>
+<p><code>axis_type</code>: <code>loglog</code> (default), <code>xlog</code>, <code>ylog</code> or <code>linlin</code>.</p>
 <hr />
-<h2 id="understanding-and-accessing-spectral-result-objects-in-python">Understanding and Accessing Spectral Result Objects in Python</h2>
-<p>SurfQuake does not store only an image of the spectral analysis. Its serialized output files contain Python result objects that preserve the numerical arrays and the original <a href="https://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.html">ObsPy <code>Trace</code></a>. This allows users to inspect spectral values, select particular frequencies or time windows, and perform further analysis without extracting data from a figure.</p>
-<p>The examples below describe the classes implemented in <code>specrun.py</code>. The import path assumes that this module is installed as <code>surfquakecore.data_processing.specrun</code>; adjust it if your installation uses a different module layout.</p>
-<h3 id="1-spectrum-object-sp">1. Spectrum object (<code>.sp</code>)</h3>
-<p>A spectrum saved as <code>.sp</code> contains a <code>TraceSpectrumResult</code> instance. Its main attributes are:</p>
+<h2 id="spectrogram">Spectrogram</h2>
+<p>The <strong>spectrogram</strong> cuts the trace into overlapping windows and computes the spectrum of each one (short-time Fourier transform). The result is a picture of power as a function of time and frequency. It shows how a signal evolves: the arrival of P and S waves with their different frequency content, the dispersion of surface waves, the gliding tones of tremor, the passage of a ship, the daily cycle of cultural noise.</p>
+<h3 id="parameters_1">Parameters</h3>
 <table>
 <thead>
 <tr>
-<th>Attribute</th>
-<th>Contents</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>trace</code></td>
-<td>Original (or trimmed) ObsPy <code>Trace</code>, including waveform samples in <code>trace.data</code>.</td>
+<td><code>win</code></td>
+<td>Window length in seconds (required). Longer → finer frequency resolution (about 1/<code>win</code> Hz) but coarser time resolution. It should contain several cycles of the lowest frequency of interest.</td>
 </tr>
 <tr>
-<td><code>stats</code></td>
-<td>ObsPy trace metadata (<code>starttime</code>, <code>sampling_rate</code>, <code>network</code>, <code>station</code>, etc.).</td>
-</tr>
-<tr>
-<td><code>freq</code></td>
-<td>One-dimensional array of frequency samples in Hz.</td>
-</tr>
-<tr>
-<td><code>spectrum</code></td>
-<td>One-dimensional array of spectral amplitudes associated with <code>freq</code>.</td>
+<td><code>overlap</code></td>
+<td>Overlap between consecutive windows, in percent (default 50). Larger values give a smoother image in time (more windows), not more resolution.</td>
 </tr>
 <tr>
 <td><code>method</code></td>
-<td>Estimation method used, such as <code>multitaper</code> or <code>fft</code>.</td>
+<td><code>multitaper</code> (default): smoother, less noisy, slower. <code>fft</code>: fast, 5 % cosine taper per window, also stores the phase.</td>
+</tr>
+<tr>
+<td><code>nw</code></td>
+<td>Multitaper only: time-bandwidth product. Larger = smoother spectrum, lower frequency resolution. If not set, an adaptive low-bias estimate is used (recommended: <code>nw</code> &lt; 4).</td>
+</tr>
+<tr>
+<td><code>output_path</code></td>
+<td>Folder for the results.</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrumResult</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceSpectrumResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/trace.sp&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span><span class="p">)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Method:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency bins:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">frequency_hz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="n">amplitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">spectrum</span><span class="p">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># Read the amplitude at the frequency bin nearest to 5 Hz.</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequency_hz</span> <span class="o">-</span> <span class="mf">5.0</span><span class="p">))</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">frequency_hz</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> Hz: </span><span class="si">{</span><span class="n">amplitude</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<h3 id="config-example_1">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;spectrogram&#39;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;multitaper&#39;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
 </code></pre></div>
-<p>The two arrays are paired by index: <code>spectrum[i]</code> corresponds to <code>freq[i]</code>. The stored values are spectral amplitudes, not a time-frequency matrix.</p>
-<h3 id="2-spectrogram-object-spec">2. Spectrogram object (<code>.spec</code>)</h3>
-<p>A spectrogram saved as <code>.spec</code> contains a <code>TraceSpectrogramResult</code> instance. It preserves the original power matrix rather than only the decibel values displayed in the figure.</p>
+<h3 id="interactive_1">Interactive</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">help</span><span class="w"> </span>spectrogram
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>spectrogram<span class="w"> </span><span class="m">0</span><span class="w">                                       </span><span class="c1"># first trace, defaults (5 s, 50 %)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>spec<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">3</span>.0<span class="w"> </span><span class="m">75</span><span class="w">                                       </span><span class="c1"># 3 s windows, 75 % overlap</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>spec<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>-120<span class="w">                                  </span><span class="c1"># clip the colour scale at -120 dB</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>spectrogram<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>fft<span class="w"> </span>--dates<span class="w">           </span><span class="c1"># dates on the time axis</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>spectrogram<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">5</span>.0<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>multitaper<span class="w"> </span>--nw<span class="w"> </span><span class="m">3</span>.5
+</code></pre></div>
+<hr />
+<h2 id="continuous-wavelet-transform-cwt">Continuous Wavelet Transform (CWT)</h2>
+<p>The CWT compares the trace with a <strong>wavelet</strong>, a short oscillation, stretched and compressed to many frequencies. At high frequencies the wavelet is short, so the CWT is sharp in time; at low frequencies it is long, so the CWT is sharp in frequency. This adaptive resolution makes it the best tool for <strong>transient</strong> signals: onsets, short bursts, dispersed wave trains, and signals with energy over a wide band. The result is called a <strong>scalogram</strong>.</p>
+<p>The frequencies are sampled logarithmically (<code>voices_per_octave</code> frequencies per octave, i.e. per doubling of frequency), which matches the adaptive resolution.</p>
+<p><strong>Cone of influence</strong>: near the beginning and the end of the trace, the wavelet partially falls outside the data and the scalogram is unreliable. This edge region is wider at low frequencies (longer wavelets) and is marked in the figure.</p>
+<h3 id="wavelets">Wavelets</h3>
+<table>
+<thead>
+<tr>
+<th><code>wavelet</code></th>
+<th>Shape</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cm</code></td>
+<td><strong>Complex Morlet</strong>: a sine wave inside a Gaussian envelope. Good balance between time and frequency resolution; with <code>param: 6</code> its scales match Fourier frequencies.</td>
+<td>The default and recommended choice.</td>
+</tr>
+<tr>
+<td><code>mh</code></td>
+<td><strong>Mexican Hat</strong>: real wavelet, second derivative of a Gaussian. Very short, excellent time resolution, poor frequency resolution.</td>
+<td>Locating sharp onsets.</td>
+</tr>
+<tr>
+<td><code>pa</code></td>
+<td><strong>Paul</strong>: complex, asymmetric, short. Good time resolution.</td>
+<td>Impulsive signals.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_2">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wavelet</code></td>
+<td><code>cm</code>, <code>mh</code> or <code>pa</code> (required).</td>
+</tr>
+<tr>
+<td><code>param</code></td>
+<td>Main wavelet parameter (required). For <code>cm</code> it is the number of cycles (6 = standard; larger = better frequency resolution, worse time resolution).</td>
+</tr>
+<tr>
+<td><code>fmin</code>, <code>fmax</code></td>
+<td>Frequency band analysed (Hz). <code>fmax</code> must be below Nyquist. Defaults: 4 cycles in the trace length, and Nyquist.</td>
+</tr>
+<tr>
+<td><code>voices_per_octave</code></td>
+<td>Frequency sampling: 8 = coarse, 16 = standard (default), 32 = fine.</td>
+</tr>
+<tr>
+<td><code>output_path</code></td>
+<td>Folder for the results (required).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="config-example_2">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cwt&#39;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">wavelet</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cm&#39;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">param</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.0</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">voices_per_octave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
+</code></pre></div>
+<h3 id="interactive_2">Interactive</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">help</span><span class="w"> </span>cwt
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>cwt<span class="w"> </span><span class="m">0</span><span class="w"> </span>cm<span class="w"> </span><span class="m">6</span><span class="w">                         </span><span class="c1"># first trace, complex Morlet</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cwt<span class="w"> </span><span class="m">2</span><span class="w"> </span>mh<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">10</span><span class="w">                  </span><span class="c1"># Mexican hat between 0.5 and 10 Hz</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>cwt<span class="w"> </span><span class="m">2</span><span class="w"> </span>pa<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">10</span><span class="w"> </span>-120<span class="w"> </span>--dates<span class="w">     </span><span class="c1"># clip at -120 dB, dates on the time axis</span>
+</code></pre></div>
+<hr />
+<h2 id="cepstrum-and-cepstrogram">Cepstrum and Cepstrogram</h2>
+<p>The <strong>cepstrum</strong> is the "spectrum of the log-spectrum". When a signal contains a pattern that <strong>repeats</strong> every <span class="arithmatex">\(T\)</span> seconds (an echo, a reverberation in a water or sediment layer, a train of pulses, the harmonics of a ship's propeller or of volcanic tremor), its spectrum shows regularly spaced ripples, every <span class="arithmatex">\(1/T\)</span> Hz. The cepstrum turns these ripples into a single <strong>peak at quefrency <span class="arithmatex">\(T\)</span></strong> (in seconds), which is much easier to detect and measure.</p>
+<p>The <strong>cepstrogram</strong> computes the cepstrum in sliding windows, like the spectrogram, to follow how the repetition period changes with time (for example a ship approaching and moving away).</p>
+<h3 id="kinds">Kinds</h3>
+<table>
+<thead>
+<tr>
+<th><code>kind</code></th>
+<th>Definition</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><span class="arithmatex">\(c = \mathrm{IFFT}(\log\lvert X(f)\rvert)\)</span>. Keeps the sign.</td>
+<td>Harmonic combs (propellers, tremor).</td>
+</tr>
+<tr>
+<td><code>power</code></td>
+<td><span class="arithmatex">\(c = \lvert\mathrm{IFFT}(\log\lvert X(f)\rvert^2)\rvert^2\)</span>. Always positive.</td>
+<td><strong>Echoes and multipath</strong>, where the reflection can make the peak negative in <code>real</code>.</td>
+</tr>
+<tr>
+<td><code>complex</code></td>
+<td>Uses the unwrapped phase too. Cepstrum only.</td>
+<td>Separating a signal from its echoes (deconvolution).</td>
+</tr>
+</tbody>
+</table>
+<p>The low quefrencies (the first few samples) describe the smooth shape of the spectrum, not repetitions; they are hidden in the plots by default.</p>
+<h3 id="parameters_3">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kind</code></td>
+<td><code>real</code>, <code>power</code> (or <code>complex</code> for the cepstrum).</td>
+</tr>
+<tr>
+<td><code>win</code></td>
+<td>Cepstrogram: window length in seconds. It must hold <strong>several repetitions</strong>: the longest detectable period is about <code>win</code>.</td>
+</tr>
+<tr>
+<td><code>overlap_percent</code></td>
+<td>Cepstrogram: overlap between windows, in percent.</td>
+</tr>
+<tr>
+<td><code>qmin</code>, <code>qmax</code></td>
+<td>Cepstrogram (optional): quefrency range kept, in seconds.</td>
+</tr>
+<tr>
+<td><code>output_path</code></td>
+<td>Folder for the results.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="config-example_3">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cepstrum&#39;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;real&#39;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cepstrogram&#39;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;real&#39;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">overlap_percent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">75.0</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
+</code></pre></div>
+<hr />
+<h2 id="cross-spectrum-coherence-and-transfer-function">Cross-spectrum: coherence and transfer function</h2>
+<p>The cross-spectrum compares a <strong>reference</strong> trace with every other trace, frequency by frequency:</p>
+<ul>
+<li><strong>Coherence</strong> (0–1): how linearly related the two traces are at each frequency. 1 = one trace is a filtered version of the other; 0 = unrelated. It shows the band where two sensors record the same signal, and a dashed line marks the significance threshold.</li>
+<li><strong>Transfer function</strong> <span class="arithmatex">\(H(f) = G_{xy}/G_{xx}\)</span>: the amplitude and phase of the filter that transforms the reference into the other trace. Use it to compare two sensors (huddle tests), to measure site amplification against a rock station, or to check the response of an instrument.</li>
+</ul>
+<p>It needs averaging to be meaningful (coherence of a single window is always 1): <code>welch</code> averages overlapping windows, <code>multitaper</code> averages over tapers. It is a stream method; see <a href="../processing_stream_config/">Processing Stream</a> for all its parameters.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_spectrum&#39;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;welch&#39;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">overlap_percent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">75.0</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./spectral&#39;</span>
+</code></pre></div>
+<p>Interactive:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">help</span><span class="w"> </span>coh
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>coh<span class="w"> </span>--ref<span class="w"> </span><span class="m">0</span><span class="w"> </span>--kind<span class="w"> </span>both<span class="w"> </span>--win<span class="w"> </span><span class="m">20</span>
+</code></pre></div>
+<hr />
+<h2 id="running-the-analysis">Running the analysis</h2>
+<h3 id="interactive-commands">Interactive commands</h3>
+<p>Open the plot with <code>surfquake quick</code>, select a time window with <code>u</code> (start) and <code>i</code> (end) if you want to analyse only a part of the traces, and press <code>v</code> to open the command prompt. The traces are referred to by their position in the current page (<code>0</code>, <code>1</code>, ...) or <code>all</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spectrum</code> / <code>sp</code></td>
+<td>Amplitude spectrum</td>
+</tr>
+<tr>
+<td><code>spectrogram</code> / <code>spec</code></td>
+<td>Spectrogram</td>
+</tr>
+<tr>
+<td><code>cwt</code></td>
+<td>Continuous wavelet transform</td>
+</tr>
+<tr>
+<td><code>coh</code> / <code>tf</code></td>
+<td>Coherence and transfer function</td>
+</tr>
+<tr>
+<td><code>save_tf</code></td>
+<td>Save one of the above to disk</td>
+</tr>
+</tbody>
+</table>
+<p>These commands only compute and display: the traces are not modified. To keep a result, save it with <code>save_tf</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">help</span><span class="w"> </span>save_tf
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>save_tf<span class="w"> </span>spectrum<span class="w"> </span>all<span class="w"> </span>--folder_path<span class="w"> </span>./spectral
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>save_tf<span class="w"> </span>spectrogram<span class="w"> </span><span class="m">0</span><span class="w"> </span>--win<span class="w"> </span><span class="m">5</span>.0<span class="w"> </span>--overlap<span class="w"> </span><span class="m">50</span><span class="w"> </span>--method<span class="w"> </span>fft<span class="w"> </span>--folder_path<span class="w"> </span>./spectral
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>save_tf<span class="w"> </span>cwt<span class="w"> </span><span class="m">0</span><span class="w"> </span>--wavelet<span class="w"> </span>cm<span class="w"> </span>--param<span class="w"> </span><span class="m">6</span><span class="w"> </span>--fmin<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>--fmax<span class="w"> </span><span class="m">10</span><span class="w"> </span>--folder_path<span class="w"> </span>./spectral
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>save_tf<span class="w"> </span>coh<span class="w"> </span>all<span class="w"> </span>--ref<span class="w"> </span><span class="m">0</span><span class="w"> </span>--folder_path<span class="w"> </span>./spectral
+</code></pre></div>
+<p>If a time window is selected (<code>u</code>, <code>i</code>), only that window is saved.</p>
+<h3 id="config-file-automatic">Config file (automatic)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>spectral_config<span class="w"> </span>-o<span class="w"> </span>./configs
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span>./configs/spectral_config.yaml<span class="w"> </span>-a
+</code></pre></div>
+<p>The template contains commented examples of every tool. The spectral steps can follow any pre-processing step (detrend, filter, remove response...) and they do not modify the traces: the next steps receive the same waveforms.</p>
+<p>The results are saved in <code>output_path</code> as:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>File name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spectrum</td>
+<td><code>&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.sp</code></td>
+</tr>
+<tr>
+<td>spectrogram</td>
+<td><code>&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.spec</code></td>
+</tr>
+<tr>
+<td>cwt</td>
+<td><code>&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.cwt</code></td>
+</tr>
+<tr>
+<td>cepstrum</td>
+<td><code>&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.cep</code></td>
+</tr>
+<tr>
+<td>cepstrogram</td>
+<td><code>&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.ceps</code></td>
+</tr>
+<tr>
+<td>cross-spectrum</td>
+<td><code>&lt;ref_id&gt;__&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.coh</code></td>
+</tr>
+</tbody>
+</table>
+<p>If a file already exists, a number is added (<code>_1</code>, <code>_2</code>...).</p>
+<hr />
+<h2 id="plotting-and-cli-usage">Plotting and CLI Usage</h2>
+<p>All the saved results are plotted with <code>surfquake specplot</code>. The type of result is recognised from the file extension.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-h
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Spectrum</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>./spectral/IU.HKT.00.BHZ.D.2024.123.sp<span class="w"> </span>-a<span class="w"> </span>xlog
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># Spectrogram, split into low/high frequency panels, dates on the x axis</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>./spectral/IU.HKT.00.BHZ.D.2024.123.spec<span class="w"> </span>--clip<span class="w"> </span>-120<span class="w"> </span>--split<span class="w"> </span>-d
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># Scalogram, smoothed, saved to a folder</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>./spectral/WM.OBS01..SHZ.D.2015.260.cwt<span class="w"> </span>-d<span class="w"> </span>--split<span class="w"> </span>--smooth<span class="w"> </span>--save_path<span class="w"> </span>./figures<span class="w"> </span>--cmap<span class="w"> </span>gnuplot2
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="c1"># Cepstrogram, repetition periods between 0.05 and 2 s, with the dominant period tracked</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>./spectral/IU.HKT.00.BHZ.D.2024.123.ceps<span class="w"> </span>--qmin<span class="w"> </span><span class="m">0</span>.05<span class="w"> </span>--qmax<span class="w"> </span><span class="m">2</span><span class="w"> </span>--track
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="c1"># Coherence and transfer function</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span>./spectral/IU.HKT.00.BHZ__IU.HKT.10.BHZ.D.2024.123.coh
+</code></pre></div>
+<p>To save all the figures of a folder, loop over the files in a <a href="../bash_script/">bash script</a>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>./spectral/*.spec<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span>--split<span class="w"> </span>--smooth<span class="w"> </span>-d<span class="w"> </span>--save_path<span class="w"> </span>./figures
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">done</span>
+</code></pre></div>
+<h3 id="cli-options">CLI Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Applies to</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-f</code>, <code>--file</code></td>
+<td>all</td>
+<td>(required) Path to the <code>.sp</code>, <code>.spec</code>, <code>.cwt</code>, <code>.cep</code>, <code>.ceps</code> or <code>.coh</code> file.</td>
+</tr>
+<tr>
+<td><code>-a</code>, <code>--axis_type</code></td>
+<td><code>.sp</code>, <code>.coh</code></td>
+<td>Axes: <code>loglog</code> (default), <code>xlog</code>, <code>ylog</code>, <code>linlin</code>.</td>
+</tr>
+<tr>
+<td><code>-c</code>, <code>--clip</code></td>
+<td><code>.spec</code>, <code>.cwt</code>, <code>.ceps</code></td>
+<td>Minimum displayed power, in dB (e.g. <code>-120</code>).</td>
+</tr>
+<tr>
+<td><code>-v</code>, <code>--vmax_db</code></td>
+<td><code>.spec</code>, <code>.cwt</code>, <code>.ceps</code></td>
+<td>Maximum displayed power, in dB (default 0).</td>
+</tr>
+<tr>
+<td><code>--split</code></td>
+<td><code>.spec</code>, <code>.cwt</code></td>
+<td>Split the plot into low and high frequency panels, each with its own colour scale. Cutoff 1 Hz by default, or <code>--split 0.5</code>. Useful when the microseism dominates the colour scale.</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--smooth</code></td>
+<td><code>.spec</code>, <code>.cwt</code>, <code>.ceps</code></td>
+<td>Smooth the time-frequency image (slower, prettier).</td>
+</tr>
+<tr>
+<td><code>-d</code>, <code>--dates</code></td>
+<td><code>.spec</code>, <code>.cwt</code>, <code>.ceps</code></td>
+<td>Dates on the x axis instead of seconds.</td>
+</tr>
+<tr>
+<td><code>--cmap</code></td>
+<td><code>.spec</code>, <code>.cwt</code>, <code>.ceps</code></td>
+<td>Matplotlib colormap (default <code>rainbow</code>).</td>
+</tr>
+<tr>
+<td><code>--qmin</code>, <code>--qmax</code></td>
+<td><code>.cep</code>, <code>.ceps</code></td>
+<td>Quefrency range shown, in seconds.</td>
+</tr>
+<tr>
+<td><code>--track</code></td>
+<td><code>.ceps</code></td>
+<td>Overlay the dominant quefrency of every window.</td>
+</tr>
+<tr>
+<td><code>--save_path</code></td>
+<td>all</td>
+<td><strong>Folder</strong> where the figure is saved (named automatically); the figure is then not shown.</td>
+</tr>
+<tr>
+<td><code>--extension</code></td>
+<td>all</td>
+<td>Image format: <code>png</code> (default), <code>pdf</code>, <code>svg</code>...</td>
+</tr>
+</tbody>
+</table>
+<p>The plotting options change the figure only, never the stored values.</p>
+<hr />
+<h2 id="accessing-the-results-in-python">Accessing the results in Python</h2>
+<p>SurfQuake does not store only an image. Each file contains a Python object with the numerical arrays and the original <a href="https://docs.obspy.org/packages/autogen/obspy.core.trace.Trace.html" rel="noopener noreferrer" target="_blank">ObsPy <code>Trace</code></a>. You can load it, select frequencies or time windows, and continue your analysis without extracting data from a figure.</p>
+<p>All the classes have <code>from_pickle(filepath)</code> to load a file, <code>to_pickle(folder_path)</code> to save it, and a plotting method. The files are gzip-compressed by default.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Class</th>
+<th>Import</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.sp</code></td>
+<td><code>TraceSpectrumResult</code></td>
+<td><code>from surfquakecore.spectral.specrun import TraceSpectrumResult</code></td>
+</tr>
+<tr>
+<td><code>.spec</code></td>
+<td><code>TraceSpectrogramResult</code></td>
+<td><code>from surfquakecore.spectral.specrun import TraceSpectrogramResult</code></td>
+</tr>
+<tr>
+<td><code>.coh</code></td>
+<td><code>TraceCrossSpectralResult</code></td>
+<td><code>from surfquakecore.spectral.specrun import TraceCrossSpectralResult</code></td>
+</tr>
+<tr>
+<td><code>.cwt</code></td>
+<td><code>TraceCWTResult</code></td>
+<td><code>from surfquakecore.spectral.cwtrun import TraceCWTResult</code></td>
+</tr>
+<tr>
+<td><code>.cep</code></td>
+<td><code>TraceCepstrumResult</code></td>
+<td><code>from surfquakecore.spectral.ceprun import TraceCepstrumResult</code></td>
+</tr>
+<tr>
+<td><code>.ceps</code></td>
+<td><code>TraceCepstrogramResult</code></td>
+<td><code>from surfquakecore.spectral.ceprun import TraceCepstrogramResult</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-spectrum-sp">1. Spectrum (<code>.sp</code>)</h3>
 <table>
 <thead>
 <tr>
@@ -2422,78 +3084,184 @@
 </thead>
 <tbody>
 <tr>
-<td><code>trace</code></td>
-<td>Original ObsPy <code>Trace</code>.</td>
-</tr>
-<tr>
-<td><code>stats</code></td>
-<td>Trace metadata.</td>
-</tr>
-<tr>
-<td><code>time</code></td>
-<td>One-dimensional array of spectrogram time coordinates, in seconds relative to trace start.</td>
+<td><code>trace</code>, <code>stats</code></td>
+<td>The analysed ObsPy <code>Trace</code> and its header.</td>
 </tr>
 <tr>
 <td><code>freq</code></td>
-<td>One-dimensional array of spectrogram frequencies, in Hz.</td>
+<td>Frequencies (Hz).</td>
 </tr>
 <tr>
-<td><code>spectrogram</code></td>
-<td>Two-dimensional <strong>power</strong> array, indexed as <code>[frequency, time]</code>.</td>
+<td><code>spectrum</code></td>
+<td>Spectral amplitudes, paired with <code>freq</code> by index, in the units given by <code>scaling</code>.</td>
 </tr>
 <tr>
-<td><code>num_steps</code></td>
-<td>Number of computed time steps returned by the spectral calculation.</td>
+<td><code>phase</code></td>
+<td>Phase (radians) of each frequency, <code>fft</code> method only (otherwise <code>None</code>).</td>
+</tr>
+<tr>
+<td><code>method</code>, <code>scaling</code></td>
+<td>Method and scaling used. <code>order</code>, <code>nsig</code> for the parametric methods.</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrogramResult</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceSpectrogramResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/trace.spec&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">spectrogram</span><span class="p">)</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power matrix shape:&quot;</span><span class="p">,</span> <span class="n">power</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency bins:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">))</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time steps:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="k">assert</span> <span class="n">power</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># Power at the nearest available frequency and time bin.</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">fi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">))</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">times</span> <span class="o">-</span> <span class="mf">60.0</span><span class="p">))</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Power at </span><span class="si">{</span><span class="n">frequencies</span><span class="p">[</span><span class="n">fi</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Hz and </span><span class="si">{</span><span class="n">times</span><span class="p">[</span><span class="n">ti</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> s:&quot;</span><span class="p">,</span> <span class="n">power</span><span class="p">[</span><span class="n">fi</span><span class="p">,</span> <span class="n">ti</span><span class="p">])</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1"># Extract a frequency band (1–5 Hz) for subsequent calculations.</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="n">band</span> <span class="o">=</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">)</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="n">band_power</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:]</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected band matrix:&quot;</span><span class="p">,</span> <span class="n">band_power</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="c1"># Obtain absolute UTC times for the spectrogram columns.</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="n">absolute_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">]</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First spectrogram time:&quot;</span><span class="p">,</span> <span class="n">absolute_times</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.spectral.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrumResult</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceSpectrumResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral/IU.HKT.00.BHZ.D.2024.123.sp&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">scaling</span><span class="p">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">spectrum</span><span class="p">)</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="c1"># Amplitude at the frequency nearest to 5 Hz</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">freq</span> <span class="o">-</span> <span class="mf">5.0</span><span class="p">))</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">freq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> Hz: </span><span class="si">{</span><span class="n">amp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.6g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="c1"># Frequency of the spectral peak between 1 and 20 Hz</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="n">band</span> <span class="o">=</span> <span class="p">(</span><span class="n">freq</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">freq</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">)</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Peak at&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="p">[</span><span class="n">band</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">amp</span><span class="p">[</span><span class="n">band</span><span class="p">])],</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Important distinction:</strong> <code>result.spectrogram</code> contains linear power values. The plotting method converts them to <strong>relative decibels</strong>, taking the maximum finite power as its reference:</p>
-<div class="arithmatex">\[
-P_{\mathrm{rel}}(f,t) = 10\log_{10}\left(\frac{P(f,t)}{P_{\max}}\right).
-\]</div>
-<p>You can reproduce the conversion in Python:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">max_power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">max_power</span><span class="p">)</span> <span class="ow">or</span> <span class="n">max_power</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Spectrogram has no positive finite maximum&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">relative_db</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">power</span> <span class="o">/</span> <span class="n">max_power</span><span class="p">)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1"># Zero-power cells become -inf dB; filter them when needed.</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">finite_db</span> <span class="o">=</span> <span class="n">relative_db</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">relative_db</span><span class="p">)]</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finite relative dB range:&quot;</span><span class="p">,</span> <span class="n">finite_db</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">finite_db</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<h3 id="2-spectrogram-spec">2. Spectrogram (<code>.spec</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trace</code>, <code>stats</code></td>
+<td>The analysed ObsPy <code>Trace</code> and its header.</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>Centre of each window, in seconds from the trace start.</td>
+</tr>
+<tr>
+<td><code>freq</code></td>
+<td>Frequencies (Hz).</td>
+</tr>
+<tr>
+<td><code>spectrogram</code></td>
+<td>2D array of <strong>power spectral density</strong> (linear, unit²/Hz), indexed <code>[frequency, time]</code>.</td>
+</tr>
+<tr>
+<td><code>phase</code></td>
+<td>2D phase array (radians), <code>fft</code> method only.</td>
+</tr>
+<tr>
+<td><code>num_steps</code></td>
+<td>Number of windows.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.spectral.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrogramResult</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceSpectrogramResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral/IU.HKT.00.BHZ.D.2024.123.spec&quot;</span><span class="p">)</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">spectrogram</span><span class="p">)</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="k">assert</span> <span class="n">power</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="c1"># Power at the nearest frequency and time</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="n">fi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">freq</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">))</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">time</span> <span class="o">-</span> <span class="mf">60.0</span><span class="p">))</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PSD at </span><span class="si">{</span><span class="n">freq</span><span class="p">[</span><span class="n">fi</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Hz and </span><span class="si">{</span><span class="n">time</span><span class="p">[</span><span class="n">ti</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> s:&quot;</span><span class="p">,</span> <span class="n">power</span><span class="p">[</span><span class="n">fi</span><span class="p">,</span> <span class="n">ti</span><span class="p">])</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="c1"># Energy in the 1-5 Hz band as a function of time</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="n">band</span> <span class="o">=</span> <span class="p">(</span><span class="n">freq</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">freq</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">)</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="n">band_energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">power</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:],</span> <span class="n">freq</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="c1"># Absolute UTC times of the windows</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="n">utc_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">starttime</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">time</span><span class="p">]</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="c1"># Relative dB, as in the figure</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>    <span class="n">db</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">power</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">power</span><span class="p">))</span>
 </code></pre></div>
-<p>The frequency and time coordinates describe the <strong>computed bins</strong>; they should not be confused with the waveform's individual sample times. Plotting options such as <code>clip</code>, <code>split</code>, and <code>smooth</code> change the presentation, not the stored power matrix.</p>
-<h3 id="3-cross-spectral-result-object-coh">3. Cross-spectral result object (<code>.coh</code>)</h3>
-<p>The same module also provides <code>TraceCrossSpectralResult</code> for analyses between a <strong>reference</strong> (input) trace and a <strong>target</strong> (output) trace. These objects can be saved as <code>.coh</code> files.</p>
+<h3 id="3-continuous-wavelet-transform-cwt">3. Continuous Wavelet Transform (<code>.cwt</code>)</h3>
+<p>The result is stored in the tuple <code>cwt_data</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cwt_data[0]</code></td>
+<td><code>t</code>: time in seconds from the trace start.</td>
+</tr>
+<tr>
+<td><code>cwt_data[1]</code></td>
+<td><code>f</code>: frequencies (Hz), logarithmically spaced.</td>
+</tr>
+<tr>
+<td><code>cwt_data[2]</code></td>
+<td>Scalogram: <strong>complex</strong> wavelet coefficients, indexed <code>[frequency, time]</code>. The power is <code>abs(...)**2</code>.</td>
+</tr>
+<tr>
+<td><code>cwt_data[3]</code>, <code>cwt_data[4]</code></td>
+<td>Left and right limits of the cone of influence (times, in seconds).</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.spectral.cwtrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCWTResult</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceCWTResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral/WM.OBS01..SHZ.D.2015.260.cwt&quot;</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">coi_left</span><span class="p">,</span> <span class="n">coi_right</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cwt_data</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="k">assert</span> <span class="n">power</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="c1"># Power between 1 and 5 Hz</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="n">band</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">f</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">)</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="n">band_power</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">band</span><span class="p">,</span> <span class="p">:]</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="c1"># Instantaneous phase at 2 Hz (complex wavelets only)</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="n">fi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">))</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="n">phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">fi</span><span class="p">,</span> <span class="p">:])</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="c1"># Plot again with other options</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="n">result</span><span class="o">.</span><span class="n">plot_cwt</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">clip</span><span class="o">=-</span><span class="mi">80</span><span class="p">)</span>
+</code></pre></div>
+<p>The cone-of-influence limits are times computed with a linear frequency axis, not boolean masks: use them as an approximate guide of the region affected by the edges.</p>
+<h3 id="4-cepstrum-cep-and-cepstrogram-ceps">4. Cepstrum (<code>.cep</code>) and Cepstrogram (<code>.ceps</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Attributes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TraceCepstrumResult</code></td>
+<td><code>quefrency</code> (s), <code>cepstrum</code>, <code>kind</code>, and <code>find_peaks()</code></td>
+</tr>
+<tr>
+<td><code>TraceCepstrogramResult</code></td>
+<td><code>time</code> (window centres, s), <code>quefrency</code> (s), <code>cepstrogram</code> (2D, <code>[quefrency, time]</code>), <code>kind</code>, <code>win</code>, and <code>track_peak()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.spectral.ceprun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCepstrumResult</span><span class="p">,</span> <span class="n">TraceCepstrogramResult</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">cep</span> <span class="o">=</span> <span class="n">TraceCepstrumResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral/IU.HKT.00.BHZ.D.2024.123.cep&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">for</span> <span class="n">peak</span> <span class="ow">in</span> <span class="n">cep</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span><span class="n">qmin</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">qmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">n_peaks</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Repetition every </span><span class="si">{</span><span class="n">peak</span><span class="p">[</span><span class="s1">&#39;quefrency&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> s (</span><span class="si">{</span><span class="n">peak</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Hz), SNR </span><span class="si">{</span><span class="n">peak</span><span class="p">[</span><span class="s1">&#39;snr&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="n">ceps</span> <span class="o">=</span> <span class="n">TraceCepstrogramResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral/IU.HKT.00.BHZ.D.2024.123.ceps&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="n">time</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">ceps</span><span class="o">.</span><span class="n">track_peak</span><span class="p">(</span><span class="n">qmin</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">qmax</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>   <span class="c1"># dominant period in each window</span>
+</code></pre></div>
+<p><code>find_peaks()</code> returns the strongest repetition periods, as dictionaries with <code>quefrency</code> (s), <code>frequency</code> (= 1 / quefrency, Hz), <code>value</code> and <code>snr</code> (height above the median, in robust standard deviations).</p>
+<h3 id="5-cross-spectrum-coh">5. Cross-spectrum (<code>.coh</code>)</h3>
 <table>
 <thead>
 <tr>
@@ -2504,160 +3272,75 @@ P_{\mathrm{rel}}(f,t) = 10\log_{10}\left(\frac{P(f,t)}{P_{\max}}\right).
 <tbody>
 <tr>
 <td><code>ref_trace</code>, <code>trace</code></td>
-<td>Reference and target ObsPy traces.</td>
-</tr>
-<tr>
-<td><code>ref_stats</code>, <code>stats</code></td>
-<td>Metadata for the respective traces.</td>
+<td>Reference (input) and target (output) traces.</td>
 </tr>
 <tr>
 <td><code>freq</code></td>
-<td>Frequency samples in Hz.</td>
+<td>Frequencies (Hz).</td>
 </tr>
 <tr>
 <td><code>gxx</code>, <code>gyy</code></td>
-<td>Reference and target autospectral estimates.</td>
+<td>Auto-spectra of the reference and the target.</td>
 </tr>
 <tr>
 <td><code>gxy</code></td>
-<td>Complex cross spectrum, defined as <code>E[conj(X) * Y]</code>.</td>
+<td>Complex cross-spectrum, <span class="arithmatex">\(E[X^* Y]\)</span>.</td>
 </tr>
 <tr>
 <td><code>n_avg</code></td>
-<td>Averaging information used by the coherence-threshold calculation.</td>
-</tr>
-<tr>
-<td><code>method</code></td>
-<td>Spectral estimation method.</td>
+<td>Number of averages, used for the significance threshold.</td>
 </tr>
 <tr>
 <td><code>coherence</code></td>
-<td>Derived magnitude-squared coherence (between 0 and 1).</td>
+<td>Magnitude-squared coherence (0–1).</td>
 </tr>
 <tr>
 <td><code>transfer</code></td>
-<td>Derived complex transfer function <code>gxy / gxx</code>.</td>
+<td>Complex transfer function <span class="arithmatex">\(G_{xy}/G_{xx}\)</span>.</td>
 </tr>
 <tr>
 <td><code>amplitude</code>, <code>phase_deg</code></td>
-<td>Derived transfer-function magnitude and phase in degrees.</td>
+<td>Amplitude and phase (degrees) of the transfer function.</td>
+</tr>
+<tr>
+<td><code>coherence_threshold(alpha)</code></td>
+<td>Coherence below which the result is not significant at level <code>alpha</code> (default 0.05).</td>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCrossSpectralResult</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceCrossSpectralResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/pair.coh&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Input:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">ref_trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">frequency_hz</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">freq</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">coherence</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">coherence</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">transfer_function</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">transfer</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">magnitude</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">amplitude</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">phase_degrees</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">phase_deg</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># Identify frequencies with coherence of at least 0.8.</span>
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="n">reliable</span> <span class="o">=</span> <span class="n">coherence</span> <span class="o">&gt;=</span> <span class="mf">0.8</span>
-<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;High-coherence frequencies:&quot;</span><span class="p">,</span> <span class="n">frequency_hz</span><span class="p">[</span><span class="n">reliable</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.spectral.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCrossSpectralResult</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceCrossSpectralResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral/IU.HKT.00.BHZ__IU.HKT.10.BHZ.D.2024.123.coh&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="n">threshold</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">coherence_threshold</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="n">reliable</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">coherence</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reliable band:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="n">reliable</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">freq</span><span class="p">[</span><span class="n">reliable</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean amplification there:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">amplitude</span><span class="p">[</span><span class="n">reliable</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </code></pre></div>
-<p>These last four quantities are computed from the stored spectral estimates when accessed; they are Python properties, not separate arrays serialized independently. High coherence measures a strong linear frequency-domain relationship, but does not by itself establish causality.</p>
-<h3 id="4-cwt-result-object-cwt">4. CWT result object (<code>.cwt</code>)</h3>
-<p>A Continuous Wavelet Transform is represented by <code>TraceCWTResult</code>, defined in <code>surfquakecore.data_processing.cwtrun</code>. Unlike the spectrogram object, the wavelet result keeps its transform and associated coordinates in a <strong>five-element tuple</strong> called <code>cwt_data</code>.</p>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Contents</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>trace</code></td>
-<td>Original ObsPy <code>Trace</code>, including waveform samples.</td>
-</tr>
-<tr>
-<td><code>stats</code></td>
-<td>Trace metadata (<code>starttime</code>, <code>sampling_rate</code>, <code>channel</code>, etc.).</td>
-</tr>
-<tr>
-<td><code>cwt_data[0]</code></td>
-<td><code>t</code>: relative time coordinates in seconds.</td>
-</tr>
-<tr>
-<td><code>cwt_data[1]</code></td>
-<td><code>f</code>: wavelet frequency coordinates in Hz, logarithmically spaced.</td>
-</tr>
-<tr>
-<td><code>cwt_data[2]</code></td>
-<td><code>scalogram</code>: wavelet-transform values, indexed as <strong><code>[frequency, time]</code></strong>.</td>
-</tr>
-<tr>
-<td><code>cwt_data[3]</code></td>
-<td><code>pred</code>: left-hand edge-effect boundary, expressed as relative time coordinates.</td>
-</tr>
-<tr>
-<td><code>cwt_data[4]</code></td>
-<td><code>pred_comp</code>: right-hand edge-effect boundary, expressed as relative time coordinates.</td>
-</tr>
-</tbody>
-</table>
-<p>Load a previously saved CWT result (the default serialization is gzip-compressed pickle):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.data_processing.cwtrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceCWTResult</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">result</span> <span class="o">=</span> <span class="n">TraceCWTResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;path/to/waveform.cwt&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trace:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">trace</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampling rate:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sampling_rate</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">times</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">,</span> <span class="n">left_edge</span><span class="p">,</span> <span class="n">right_edge</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cwt_data</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time coordinates:&quot;</span><span class="p">,</span> <span class="n">times</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frequency coordinates:&quot;</span><span class="p">,</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CWT matrix:&quot;</span><span class="p">,</span> <span class="n">coefficients</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="k">assert</span> <span class="n">coefficients</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frequencies</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="c1"># Inspect a coefficient at the nearest sampled frequency and time.</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">fi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">))</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">ti</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">times</span> <span class="o">-</span> <span class="mf">60.0</span><span class="p">))</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CWT coefficient:&quot;</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">[</span><span class="n">fi</span><span class="p">,</span> <span class="n">ti</span><span class="p">])</span>
-</code></pre></div>
-<p><strong>Amplitude versus power:</strong> The stored <code>scalogram</code> is the output of <code>ConvolveWaveletScipy.scalogram()</code>. The CWT plotting method computes <strong>power</strong> as <code>abs(scalogram)**2</code> and then displays power in decibels relative to the maximum:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">max_power</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">max_power</span><span class="p">)</span> <span class="ow">or</span> <span class="n">max_power</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;CWT power must have a positive finite maximum&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">relative_db</span> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">power</span> <span class="o">/</span> <span class="n">max_power</span><span class="p">)</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c1"># Extract CWT power between 1 and 5 Hz.</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">selected</span> <span class="o">=</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">frequencies</span> <span class="o">&lt;=</span> <span class="mf">5.0</span><span class="p">)</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">band_power</span> <span class="o">=</span> <span class="n">power</span><span class="p">[</span><span class="n">selected</span><span class="p">,</span> <span class="p">:]</span>
-</code></pre></div>
-<p>The <code>left_edge</code> and <code>right_edge</code> arrays delimit regions near the beginning and end of the trace where wavelet edge effects can influence the interpretation. They are <strong>boundary coordinates</strong>, not Boolean masks. The implementation computes them using an auxiliary linearly spaced frequency vector, whereas the stored <code>frequencies</code> vector is logarithmically spaced; avoid treating the boundary arrays as exact per-bin validity flags without considering this distinction.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Display the saved CWT using its built-in plotting method.</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">result</span><span class="o">.</span><span class="n">plot_cwt</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">clip</span><span class="o">=-</span><span class="mi">80</span><span class="p">)</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Save a result object; the method chooses the .cwt filename.</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">result</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral_results&quot;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</code></pre></div>
-<p>As with the other result objects, plotting parameters modify the figure presentation rather than replacing <code>result.cwt_data</code>. For the supported wavelet choices and computation parameters, see the <strong>Continuous Wavelet Transform (CWT)</strong> section above.</p>
-<h3 id="5-inspecting-an-object-and-saving-results">5. Inspecting an object and saving results</h3>
-<p>All four classes implement <code>to_pickle(folder_path, compress=True)</code> and <code>from_pickle(filepath, compress=True)</code>. <strong>Compression is enabled by default</strong>, so use the same <code>compress</code> setting when loading that was used when saving. File extensions (<code>.sp</code>, <code>.spec</code>, <code>.coh</code>, <code>.cwt</code>) identify the result type; they do not by themselves indicate whether gzip compression was enabled.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Explore attributes of an object already loaded as `result`.</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># Save the full object to a directory (file name assigned automatically).</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">result</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral_results&quot;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p><code>coherence</code>, <code>transfer</code>, <code>amplitude</code> and <code>phase_deg</code> are computed from <code>gxx</code>, <code>gyy</code> and <code>gxy</code> when you access them. High coherence means a strong linear relationship, not necessarily causality.</p>
+<h3 id="computing-in-python">Computing in Python</h3>
+<p>The same classes compute the results directly from ObsPy traces:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.spectral.specrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceSpectrumResult</span><span class="p">,</span> <span class="n">TraceSpectrogramResult</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">tr</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s2">&quot;./data/IU.HKT.00.BHZ.D.2024.123&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="n">sp</span> <span class="o">=</span> <span class="n">TraceSpectrumResult</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="n">sp</span><span class="o">.</span><span class="n">compute_spectrum</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;multitaper&quot;</span><span class="p">,</span> <span class="n">scaling</span><span class="o">=</span><span class="s2">&quot;asd&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="n">sp</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;./spectral&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="n">sg</span> <span class="o">=</span> <span class="n">TraceSpectrogramResult</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="n">sg</span><span class="o">.</span><span class="n">compute_spectrogram</span><span class="p">(</span><span class="n">win</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">overlap_percent</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;fft&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="n">sg</span><span class="o">.</span><span class="n">plot_spectrogram</span><span class="p">(</span><span class="n">clip</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h3 id="scientific-references">Scientific References</h3>
+<h2 id="scientific-references">Scientific References</h2>
 <ul>
-<li>Percival, D. B., &amp; Walden, A. T. (1993). <em>Spectral Analysis for Physical Applications: Multitaper and Conventional Univariate Techniques</em>.</li>
+<li>Percival, D. B., &amp; Walden, A. T. (1993). <em>Spectral Analysis for Physical Applications: Multitaper and Conventional Univariate Techniques</em>. Cambridge University Press.</li>
+<li>Thomson, D. J. (1982). Spectrum estimation and harmonic analysis. <em>Proceedings of the IEEE</em>, 70(9), 1055–1096.</li>
 <li>Torrence, C., &amp; Compo, G. P. (1998). A practical guide to wavelet analysis. <em>Bulletin of the American Meteorological Society</em>, 79(1), 61–78.</li>
+<li>Bogert, B. P., Healy, M. J. R., &amp; Tukey, J. W. (1963). The quefrency alanysis of time series for echoes. <em>Proceedings of the Symposium on Time Series Analysis</em>, 209–243.</li>
+<li>Bendat, J. S., &amp; Piersol, A. G. (2010). <em>Random Data: Analysis and Measurement Procedures</em> (4th ed.). Wiley.</li>
 </ul>
 
 

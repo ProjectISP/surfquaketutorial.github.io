@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/characteristic_functions_documentation/">
       
       
-        <link rel="prev" href="../spectral_analysis_documentation/">
+        <link rel="prev" href="../beamforming_documentation/">
       
       
         <link rel="next" href="../plotting_interaction_documentation/">
@@ -904,34 +904,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../scripts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    My Scripts
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../processing_config/" class="md-nav__link">
         
   
@@ -988,34 +960,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../beamforming_documentation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Beamforming
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../particle_motion_documentation/" class="md-nav__link">
         
   
@@ -1052,6 +996,34 @@
     
   
     Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamforming
   
 
     
@@ -1132,22 +1104,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-signal-to-noise-ratio-snr" class="md-nav__link">
+  <a href="#1-signal-to-noise-ratio-stalta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Signal-to-Noise Ratio (SNR)
+        1. Signal-to-Noise Ratio (STA/LTA)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Signal-to-Noise Ratio (SNR)">
+    <nav class="md-nav" aria-label="1. Signal-to-Noise Ratio (STA/LTA)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supported-methods" class="md-nav__link">
+  <a href="#methods" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Methods
+        Methods
       
     </span>
   </a>
@@ -1176,6 +1148,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1194,7 +1177,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
+  <a href="#methods_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Methods
@@ -1277,10 +1260,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reference_1" class="md-nav__link">
+  <a href="#references_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reference
+        References
       
     </span>
   </a>
@@ -1293,15 +1276,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-kurtosis" class="md-nav__link">
+  <a href="#4-kurtosis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Kurtosis
+        4. Kurtosis
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Kurtosis">
+    <nav class="md-nav" aria-label="4. Kurtosis">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1327,10 +1310,104 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reference_2" class="md-nav__link">
+  <a href="#reference_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Reference
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cwt-characteristic-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. CWT Characteristic Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. CWT Characteristic Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cf-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CF types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-several-cfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining several CFs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
       
     </span>
   </a>
@@ -1388,6 +1465,34 @@
     
   
     Plotting Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Scripts
   
 
     
@@ -2215,23 +2320,55 @@
 
 
 <h1 id="characteristic-functions-in-surfquake">Characteristic Functions in SurfQuake</h1>
-<p>Characteristic Functions (CFs) are core tools in seismic signal processing used to detect and quantify features like onset, amplitude, or signal clarity. SurfQuake supports three main CFs as part of its processing stack: <strong>Signal-to-Noise Ratio (SNR)</strong>, <strong>Envelope</strong>, <strong>Spectral Entropy</strong> and <strong>Kurtosis</strong>. Each of these functions enhances interpretability and supports tasks like phase picking, event detection, and signal classification.</p>
-<hr />
-<h2 id="1-signal-to-noise-ratio-snr">1. Signal-to-Noise Ratio (SNR)</h2>
-<p>This method measures how prominent a signal is relative to background noise, typically over short- and long-term averaging windows.</p>
-<h3 id="supported-methods">Supported Methods</h3>
-<ul>
-<li><strong>classic</strong>: Uses the classic STA/LTA (Short-Term Average / Long-Term Average) ratio<br />
-  (<a href="https://doi.org/10.1029/JB083iB08p03585">Allen, 1978</a>)</li>
-<li><strong>recursive</strong>: Applies a recursive version of STA/LTA for computational efficiency  </li>
-<li><strong>z_detect</strong>: Implements a simplified z-score detector</li>
-</ul>
-<h3 id="parameters">Parameters</h3>
-<ul>
-<li><code>sign_win</code>: Short-term window (seconds)</li>
-<li><code>noise_win</code>: Long-term window (seconds)</li>
-</ul>
-<h3 id="config-example">Config Example</h3>
+<p>A <strong>characteristic function</strong> (CF) transforms a seismogram into a curve that <strong>rises when a seismic arrival starts</strong>. Raw waveforms are difficult to scan automatically: the amplitude of the background noise changes, arrivals can be emergent, and the onset is hidden in the oscillation of the wave. A good CF is flat and low in the noise, and jumps at the onset, so a simple threshold can detect it. CFs are the core of automatic <strong>event detection</strong> (coincidence triggers), <strong>phase picking</strong> and <strong>array processing</strong>.</p>
+<p>Each CF responds to a different property of the signal:</p>
+<table>
+<thead>
+<tr>
+<th>CF</th>
+<th>Reacts to</th>
+<th>Strengths</th>
+<th>Weaknesses</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SNR</strong> (STA/LTA)</td>
+<td>An increase of <strong>energy</strong></td>
+<td>Simple, fast, the classic detector</td>
+<td>Late or missed for emergent signals; sensitive to noise bursts</td>
+</tr>
+<tr>
+<td><strong>Envelope</strong></td>
+<td><strong>Amplitude</strong></td>
+<td>Simple, robust, smooth</td>
+<td>Only amplitude: misses arrivals that change the frequency content but not the amplitude</td>
+</tr>
+<tr>
+<td><strong>Spectral entropy</strong></td>
+<td>Concentration of energy in <strong>few frequencies</strong></td>
+<td>Detects narrowband signals (tremor, LP events, later phases in a coda)</td>
+<td>Low time resolution (window based)</td>
+</tr>
+<tr>
+<td><strong>Kurtosis</strong></td>
+<td><strong>Impulsiveness</strong> (non-Gaussian samples)</td>
+<td>Sharp, precise onsets in noisy data</td>
+<td>Does not help emergent signals; sensitive to spikes</td>
+</tr>
+<tr>
+<td><strong>CWT</strong></td>
+<td>Energy, spectral contrast, entropy, centroid or kurtosis <strong>in many frequency bands at once</strong></td>
+<td>Combines several CFs from one wavelet transform; robust in low SNR</td>
+<td>More parameters to choose</td>
+</tr>
+</tbody>
+</table>
+<p>All CFs are <strong>stream methods</strong>: <em>n</em> traces in, <em>n</em> CF traces out, with the same ids and the same time axis as the input. They replace the waveforms, so they are usually the <strong>last step</strong> of the workflow. Plot them, write them (<code>-o</code>), or use them in your own <a href="../scripts/">scripts</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Pre-processing</p>
+<p>Every CF works better on clean data. Merge the segments, remove the mean, taper and <strong>filter</strong> in the band where your events have energy before computing the CF. The template <code>surfquake make_config -c ch_functions</code> contains this pre-processing and a commented block for every CF.</p>
+</div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;concat&#39;</span>
@@ -2249,120 +2386,525 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;snr&#39;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;snr&#39;</span><span class="w">          </span><span class="c1"># &lt;- the characteristic function: replace this block</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;classic&#39;</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="nt">sign_win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="nt">noise_win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">40</span>
 </code></pre></div>
+<p>In the examples below only the CF step is shown: add it after the pre-processing steps, with the next free number (<code>process_5</code> here). Each <code>process_N</code> key must be unique: a repeated key silently replaces the earlier step.</p>
+<hr />
+<h2 id="1-signal-to-noise-ratio-stalta">1. Signal-to-Noise Ratio (STA/LTA)</h2>
+<p>The <strong>STA/LTA</strong> ratio compares the average energy in a short window (Short-Term Average, the "signal") with the average energy in a long window (Long-Term Average, the "noise"). In the noise both averages are similar and the ratio stays near 1; when an arrival enters the short window, the STA grows much faster than the LTA and the ratio jumps. It is the classic detector of seismology (Allen, 1978).</p>
+<p>For a trace <span class="arithmatex">\(x_n\)</span> with STA and LTA windows of <span class="arithmatex">\(N_s\)</span> and <span class="arithmatex">\(N_l\)</span> samples:</p>
+<div class="arithmatex">\[\mathrm{STA}_n = \frac{1}{N_s}\sum_{k=n-N_s+1}^{n} x_k^2, \qquad \mathrm{LTA}_n = \frac{1}{N_l}\sum_{k=n-N_l+1}^{n} x_k^2, \qquad \mathrm{CF}_n = \frac{\mathrm{STA}_n}{\mathrm{LTA}_n}\]</div>
+<p>The recursive version updates both averages with exponential decay, <span class="arithmatex">\(\mathrm{STA}_n = \tfrac{1}{N_s}x_n^2 + \left(1-\tfrac{1}{N_s}\right)\mathrm{STA}_{n-1}\)</span> (and likewise the LTA with <span class="arithmatex">\(N_l\)</span>).</p>
+<h3 id="methods">Methods</h3>
+<table>
+<thead>
+<tr>
+<th><code>method</code></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>classic</code></td>
+<td>Classic STA/LTA: both averages over sliding windows that end at the current sample.</td>
+</tr>
+<tr>
+<td><code>recursive</code></td>
+<td>Recursive STA/LTA: the averages are updated with exponential decay. Faster and smoother.</td>
+</tr>
+<tr>
+<td><code>z_detect</code></td>
+<td>Z-detector: the STA expressed in standard deviations from its mean over the trace. Uses only <code>sign_win</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sign_win</code></td>
+<td>STA window, in seconds. About 1–2 periods of the dominant frequency of the arrivals: short windows react faster but are noisier.</td>
+</tr>
+<tr>
+<td><code>noise_win</code></td>
+<td>LTA window, in seconds. Typically 10–40 times <code>sign_win</code>. Ignored by <code>z_detect</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="config-example">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;snr&#39;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;classic&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">sign_win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">noise_win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">40</span>
+</code></pre></div>
+<h3 id="references">References</h3>
+<ul>
+<li>Allen, Rex V. "Automatic earthquake recognition and timing from single traces." <em>Bulletin of the Seismological Society of America</em> 68.5 (1978): 1521-1532.</li>
+<li>Withers, Mitchell, et al. "A comparison of select trigger algorithms for automated global seismic phase and event detection." <em>Bulletin of the Seismological Society of America</em> 88.1 (1998): 95-106.</li>
+</ul>
 <hr />
 <h2 id="2-envelope">2. Envelope</h2>
-<p>The envelope of a seismic trace provides a smooth representation of amplitude over time, often used for locating energy bursts and improving event visibility.</p>
-<h3 id="methods">Methods</h3>
-<ul>
-<li><strong>FULL</strong> (default): Uses the analytic signal (Hilbert transform) to compute the full envelope.</li>
-<li><strong>SMOOTH</strong>: Optionally applies lowpass filtering after envelope extraction.</li>
-</ul>
+<p>The <strong>envelope</strong> is the instantaneous amplitude of the signal. It is computed from the <strong>analytic signal</strong> <span class="arithmatex">\(x(t) + i\,\mathcal{H}[x(t)]\)</span>, where <span class="arithmatex">\(\mathcal{H}\)</span> is the Hilbert transform: the envelope is its modulus,</p>
+<div class="arithmatex">\[E(t) = \sqrt{x(t)^2 + \mathcal{H}[x](t)^2}\]</div>
+<p>It follows the amplitude of the wave without its oscillation, so an arrival appears as a smooth bump instead of a wave train. It is simple and robust, but it only reacts to amplitude.</p>
+<h3 id="methods_1">Methods</h3>
+<table>
+<thead>
+<tr>
+<th><code>method</code></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FULL</code></td>
+<td>Raw envelope.</td>
+</tr>
+<tr>
+<td><code>SMOOTH</code></td>
+<td>Envelope followed by a low-pass filter at <code>corner_freq</code>. Recommended for triggering and for long records.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="parameters_1">Parameters</h3>
-<ul>
-<li><code>method</code>: <code>'FULL'</code> or <code>'SMOOTH'</code></li>
-<li><code>corner_freq</code>: Lowpass filter cutoff (only for <code>'SMOOTH'</code>)</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td><code>FULL</code> or <code>SMOOTH</code>.</td>
+</tr>
+<tr>
+<td><code>corner_freq</code></td>
+<td><code>SMOOTH</code> only: low-pass corner in Hz, written as a float (<code>0.15</code>, not <code>1</code>). Lower values give smoother envelopes and less time resolution.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="config-example_1">Config Example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;concat&#39;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;envelope&#39;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;SMOOTH&#39;</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="nt">corner_freq</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;envelope&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;SMOOTH&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">corner_freq</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.15</span>
 </code></pre></div>
 <h3 id="reference">Reference</h3>
 <ul>
-<li>Kanasewich, E. R. (1981). <em>Time Sequence Analysis in Geophysics</em>.</li>
+<li>Kanasewich, Ernest R. <em>Time Sequence Analysis in Geophysics</em>. 3rd ed., University of Alberta Press, 1981.</li>
 </ul>
 <hr />
 <h2 id="3-spectral-entropy">3. Spectral Entropy</h2>
-<p>Spectral entropy quantifies the disorder in the frequency content of a seismic trace over time. High entropy indicates noise or dispersed signals, while low entropy points to coherent, narrowband energy.</p>
-<h3 id="parameters_2">Parameters</h3>
+<p>The <strong>spectral entropy</strong> measures how spread the energy is over frequencies. In each sliding window, the power spectrum is normalised so it sums to 1, like a probability distribution <span class="arithmatex">\(p_k\)</span>, and its Shannon entropy is computed and divided by its maximum value:</p>
+<div class="arithmatex">\[H = -\frac{1}{\log_2 N}\sum_{k=1}^{N} p_k \log_2 p_k \qquad (0 \le H \le 1)\]</div>
 <ul>
-<li><code>win</code>: Window length in seconds (default: 2.0)</li>
-<li><code>overlap</code>: Overlap between windows as a fraction (0.0–1.0)</li>
-<li><code>normalize</code>: Normalize entropy values between 0 and 1</li>
+<li><strong>High entropy</strong> (close to 1): the energy is spread over all frequencies, as in broadband noise.</li>
+<li><strong>Low entropy</strong>: the energy is concentrated in a few frequencies, as in a seismic arrival, tremor or a long-period event.</li>
 </ul>
+<p>So, unlike the other CFs, the entropy <strong>drops</strong> at an arrival. It is useful for narrowband signals and for arrivals that change the frequency content more than the amplitude.</p>
+<h3 id="parameters_2">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>win</code></td>
+<td>Window length in seconds. It must contain several periods of the lowest frequency of interest. Longer windows give a more stable entropy but less time resolution.</td>
+</tr>
+<tr>
+<td><code>overlap</code></td>
+<td>Overlap between windows, in <strong>percent</strong> (default 50).</td>
+</tr>
+</tbody>
+</table>
 <h3 id="config-example_2">Config Example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;entropy&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;entropy&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For a CF that <strong>rises</strong> at arrivals and is whitened against the background noise, use <code>cwt_cf</code> with <code>cf_type: 'entropy'</code> (section 5).</p>
+</div>
+<h3 id="references_1">References</h3>
+<ul>
+<li>Shannon, Claude E. "A mathematical theory of communication." <em>The Bell System Technical Journal</em> 27.3 (1948): 379-423.</li>
+<li>da Silva, Sérgio Luiz E. F., and Gilberto Corso. "Microseismic event detection in noisy environments with instantaneous spectral Shannon entropy." <em>Physical Review E</em> 106.1 (2022): 014133.</li>
+</ul>
+<hr />
+<h2 id="4-kurtosis">4. Kurtosis</h2>
+<p>The <strong>kurtosis</strong> is the fourth-order statistical moment of the signal, normalised by the variance. Gaussian noise has a fixed kurtosis, while an impulsive arrival produces a few samples much larger than the rest and the kurtosis rises sharply. It is therefore very sensitive to the <strong>onset</strong> of impulsive arrivals, even in noisy data, and gives precise onset times.</p>
+<p>In a window of samples with mean <span class="arithmatex">\(\mu\)</span> and standard deviation <span class="arithmatex">\(\sigma\)</span>:</p>
+<div class="arithmatex">\[K = \frac{\frac{1}{N}\sum_k (x_k-\mu)^4}{\sigma^4}\]</div>
+<p>which is 3 for Gaussian noise and grows when a few samples are much larger than the rest.</p>
+<p>SurfQuake follows a <strong>multi-band</strong> approach: the trace is filtered in 20 logarithmically spaced frequency bands between <code>fmin</code> and <code>fmax</code>, a recursive kurtosis CF is computed in each band, and the bands are combined. An arrival that is impulsive in any band raises the CF.</p>
+<h3 id="parameters_3">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CF_decay_win</code></td>
+<td>Memory of the recursive estimator, in seconds. Shorter windows (e.g. 2 s) give sharper responses but noisier CFs; longer windows give smoother and slower CFs.</td>
+</tr>
+<tr>
+<td><code>fmin</code>, <code>fmax</code></td>
+<td>Frequency band of the filter bank, in Hz (<code>fmax</code> is capped at 0.98 × Nyquist).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="config-example_3">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;kurtosis&#39;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">CF_decay_win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Kurtosis does not help emergent signals, and it reacts to spikes: remove them first (<code>remove_spikes</code>). To combine kurtosis with other CFs computed from the same wavelet transform, use <code>cwt_cf</code> with <code>cf_type: 'kurtosis'</code> (section 5).</p>
+</div>
 <h3 id="reference_1">Reference</h3>
 <ul>
-<li>Ince, T., &amp; Togneri, R. (2007). A new spectral entropy feature for seismic event detection. <em>Digital Signal Processing</em>, 17(3), 675–689.</li>
+<li>Poiata, Natalia, et al. "Multi-band array detection and location of seismic sources recorded by dense seismic networks." <em>Geophysical Journal International</em> 205.3 (2016): 1548-1573.</li>
 </ul>
 <hr />
-<h2 id="3-kurtosis">3. Kurtosis</h2>
-<p>The CF kurtosis is considered one of the best detector. The signal is filtered with a bank of overlapping narrow band filters and the the kurtosis is computed in sliding windows.</p>
-<h3 id="parameters_3">Parameters</h3>
-<ul>
-<li><code>CF_decay_win</code>: Window length in seconds, smaller (e.g., 2) improves detection but noiser CFs</li>
-<li><code>fmin</code>: min frequency for narrow band filter bank</li>
-<li><code>fmax</code>: max frequency for narrow band filter bank</li>
-</ul>
-<h3 id="config-example_3">Config Example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;kurtosis&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">CF_decay_win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.5</span>
+<h2 id="5-cwt-characteristic-functions">5. CWT Characteristic Functions</h2>
+<p>The <strong>Continuous Wavelet Transform</strong> decomposes each trace into many narrow frequency bands, with a time resolution adapted to each frequency (see <a href="../spectral_analysis_documentation/">Time-Frequency Analysis</a>). The result, the <strong>scalogram</strong>, shows how the energy of the trace is distributed in time and frequency. <code>cwt_cf</code> builds characteristic functions from the scalogram: since every band is analysed at the same time, the CF reacts to arrivals that are clear only in some frequencies, which makes it robust in low signal-to-noise conditions. The original CWT characteristic function was designed to turn the incoherent traces of a large, sparse array into coherent impulse functions suitable for beamforming (Cabieces et al., 2020).</p>
+<p>SurfQuake computes the bank of wavelet atoms <strong>once</strong> and convolves every trace with it, so it is efficient for many traces and long records. From the same scalogram it can compute several CFs in a single pass and combine them.</p>
+<h3 id="mathematical-description">Mathematical description</h3>
+<p><strong>Scalogram.</strong> Each trace <span class="arithmatex">\(x(t)\)</span> is convolved with a bank of <span class="arithmatex">\(N_f\)</span> wavelet atoms <span class="arithmatex">\(\psi_j\)</span> centred at the frequencies <span class="arithmatex">\(f_j\)</span> (logarithmically spaced between <code>fmin</code> and <code>fmax</code>, <code>voices_per_octave</code> per octave). The complex coefficients and the power scalogram are</p>
+<div class="arithmatex">\[W(f_j, t) = (x * \psi_j)(t), \qquad P(f_j, t) = \lvert W(f_j, t)\rvert^2\]</div>
+<p><strong><code>power</code>.</strong> The mean over frequencies of the time derivative of the log power (Cabieces et al., 2020):</p>
+<div class="arithmatex">\[\mathrm{CF}(t) = \frac{1}{N_f}\sum_{j=1}^{N_f}\frac{\partial}{\partial t}\log_{10} P(f_j, t)\]</div>
+<p>It is large when the power rises suddenly in many frequencies at the same time, which is what an onset does.</p>
+<p><strong>Whitening and windows.</strong> The other spectral CFs compare a <strong>signal window</strong> after <span class="arithmatex">\(t\)</span> with a <strong>background window</strong> before <span class="arithmatex">\(t\)</span>. First, each frequency is divided by its own background level, so all frequencies weigh the same (whitening):</p>
+<div class="arithmatex">\[\tilde P(f_j, t) = \frac{P(f_j, t)}{\operatorname{median}_t P(f_j, t)}\]</div>
+<p>Then, with <span class="arithmatex">\(T_a\)</span> = <code>win_after</code>, <span class="arithmatex">\(T_b\)</span> = <code>win_before</code> and <span class="arithmatex">\(g\)</span> = <code>gap</code>, the mean power in the two windows is</p>
+<div class="arithmatex">\[A^{+}(f_j, t) = \big\langle \tilde P(f_j, \tau) \big\rangle_{\tau \in [t,\, t+T_a]}, \qquad A^{-}(f_j, t) = \big\langle \tilde P(f_j, \tau) \big\rangle_{\tau \in [t-g-T_b,\, t-g]}\]</div>
+<p>and the log ratio of the window amplitudes is</p>
+<div class="arithmatex">\[D(f_j, t) = \tfrac{1}{2}\log_{10} A^{+}(f_j, t) - \tfrac{1}{2}\log_{10} A^{-}(f_j, t)\]</div>
+<p><strong><code>power_win</code>.</strong> The mean spectral ratio, a multi-band STA/LTA in the log domain (Gibbons et al., 2008):</p>
+<div class="arithmatex">\[\mathrm{CF}(t) = \frac{1}{N_f}\sum_j D(f_j, t)\]</div>
+<p><strong><code>power_mod</code>.</strong> The ratio weighted by the energy above the background, so only frequencies with real signal energy contribute; the signed square root brings the result back to log-amplitude units:</p>
+<div class="arithmatex">\[S(t) = \frac{1}{N_f}\sum_j D(f_j, t)\,\max\!\left(\tfrac{1}{2}\log_{10} A^{+}(f_j, t),\, 0\right), \qquad \mathrm{CF}(t) = \operatorname{sign}(S)\sqrt{\lvert S\rvert}\]</div>
+<p><strong><code>centroid</code>.</strong> The energy centroid in log-frequency (octaves) of each window, and its shift:</p>
+<div class="arithmatex">\[c^{\pm}(t) = \frac{\sum_j A^{\pm}(f_j, t)\,\log_2 f_j}{\sum_j A^{\pm}(f_j, t)}, \qquad \mathrm{CF}(t) = c^{+}(t) - c^{-}(t)\]</div>
+<p>Positive when the energy moves to higher frequencies.</p>
+<p><strong><code>entropy</code>.</strong> The normalised spectral entropy of each window, and its drop:</p>
+<div class="arithmatex">\[p_j^{\pm} = \frac{A^{\pm}(f_j, t)}{\sum_k A^{\pm}(f_k, t)}, \qquad H^{\pm}(t) = -\frac{1}{\ln N_f}\sum_j p_j^{\pm}\ln p_j^{\pm}, \qquad \mathrm{CF}(t) = H^{-}(t) - H^{+}(t)\]</div>
+<p>Positive when the energy concentrates in fewer frequencies after <span class="arithmatex">\(t\)</span> than before. With <code>direction: 'down'</code> the sign of the <code>centroid</code> and <code>entropy</code> CFs is reversed, and with <code>'both'</code> their absolute value is taken.</p>
+<p><strong><code>kurtosis</code>.</strong> The real part of each row of the scalogram, <span class="arithmatex">\(x_j(t) = \operatorname{Re} W(f_j, t)\)</span>, is a band-passed version of the trace. In a trailing window of length <span class="arithmatex">\(T_k\)</span> = <code>win_kurt</code>, the excess kurtosis of each band is averaged over the bands and compressed:</p>
+<div class="arithmatex">\[K_j(t) = \frac{m_4\big(x_j;\,[t-T_k,\, t]\big)}{m_2\big(x_j;\,[t-T_k,\, t]\big)^2} - 3, \qquad \bar K(t) = \frac{1}{N_f}\sum_j K_j(t), \qquad \mathrm{CF}(t) = \operatorname{sign}(\bar K)\,\ln\!\big(1 + \lvert\bar K\rvert\big)\]</div>
+<p>where <span class="arithmatex">\(m_2\)</span> and <span class="arithmatex">\(m_4\)</span> are the second and fourth central moments. It is about 0 for Gaussian noise and positive when the signal becomes impulsive.</p>
+<p>Finally, every CF is smoothed with a low-pass filter at <code>lowpass_freq</code>.</p>
+<h3 id="cf-types">CF types</h3>
+<table>
+<thead>
+<tr>
+<th><code>cf_type</code></th>
+<th>Idea</th>
+<th>Reacts to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>power</code></td>
+<td>Mean over frequencies of the time derivative of the log power. The original CF (Cabieces et al., 2020).</td>
+<td>A jump in energy: impulsive onsets, typically P.</td>
+</tr>
+<tr>
+<td><code>power_win</code></td>
+<td>Windowed spectral ratio: mean over frequencies of <span class="arithmatex">\(\log(A_{after}/A_{before})\)</span>, a multi-band STA/LTA in the log domain (Gibbons et al., 2008).</td>
+<td>Energy contrast.</td>
+</tr>
+<tr>
+<td><code>power_mod</code></td>
+<td>As <code>power_win</code>, weighted by the energy above the background (Gibbons et al., 2008).</td>
+<td>High contrast <strong>and</strong> high energy: strong, impulsive arrivals.</td>
+</tr>
+<tr>
+<td><code>entropy</code></td>
+<td>Drop of the spectral entropy of the whitened scalogram.</td>
+<td>Energy concentrating in a narrow band, even if the total energy barely changes: later phases inside a coda (typically S), narrowband signals (tremor, LP events).</td>
+</tr>
+<tr>
+<td><code>centroid</code></td>
+<td>Shift of the energy centroid in log-frequency (octaves).</td>
+<td>A signal spectrally different from the noise, e.g. a local event above the microseism band.</td>
+</tr>
+<tr>
+<td><code>kurtosis</code></td>
+<td>Multi-band excess kurtosis of the band-passed signals in a trailing window.</td>
+<td>Impulsive signals: weak sharp onsets, precise timing. Not emergent signals; sensitive to spikes.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Which one?</p>
+<p>In our tests <code>power_mod</code> found the P waves (broadband, impulsive) and <code>entropy</code> found the S waves inside the P coda, which the energy CFs missed; <code>kurtosis</code> added weak impulsive onsets and sharper picks. Combining them with <code>combine: 'stouffer'</code> gave the best detections: <code>cf_type: 'power_mod,entropy,kurtosis'</code>.</p>
+</div>
+<h3 id="required-parameters">Required parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fmin</code>, <code>fmax</code></td>
+<td>Analysis band in Hz. Keep it inside the band of the pre-processing filter.</td>
+</tr>
+<tr>
+<td><code>cycles</code></td>
+<td>Number of cycles of the wavelet. Larger = better frequency resolution, worse time resolution. 6 is recommended for <code>cm</code>.</td>
+</tr>
+<tr>
+<td><code>voices_per_octave</code></td>
+<td>Frequency sampling: 8 = coarse, 16 = standard, 32 = fine.</td>
+</tr>
+<tr>
+<td><code>wavelet_type</code></td>
+<td><code>cm</code> = Complex Morlet (recommended), <code>mh</code> = Mexican Hat (real wavelet, <code>power</code> CF only), <code>pa</code> = Paul.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-parameters">Optional parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cf_type</code></td>
+<td><code>power</code></td>
+<td>One type, or several separated by commas. With several types they are combined into <strong>one</strong> CF per trace.</td>
+</tr>
+<tr>
+<td><code>lowpass_freq</code></td>
+<td>0.15</td>
+<td>Low-pass corner applied to the CF (Hz). Lower = smoother CF, less time resolution. The window-based CFs are already smoothed by their windows: use 0.5–1.0 for them.</td>
+</tr>
+<tr>
+<td><code>win_before</code></td>
+<td>10.0</td>
+<td><code>power_win</code>, <code>power_mod</code>, <code>entropy</code>, <code>centroid</code>: background window before each sample (s).</td>
+</tr>
+<tr>
+<td><code>win_after</code></td>
+<td>2.0</td>
+<td>Same CFs: signal window after each sample (s). Use at least ~2 periods of <code>fmin</code> (<code>fmin</code> = 0.5 Hz → ≥ 4 s); <code>win_before</code> ~5–10 × <code>win_after</code>.</td>
+</tr>
+<tr>
+<td><code>gap</code></td>
+<td>0.5</td>
+<td>The background window ends <code>gap</code> s before each sample, so the start of an emergent arrival does not enter the background (Gibbons et al., 2008). 0 = no gap.</td>
+</tr>
+<tr>
+<td><code>direction</code></td>
+<td><code>up</code></td>
+<td><code>entropy</code> and <code>centroid</code>: <code>up</code> = increase, <code>down</code> = opposite sign, <code>both</code> = absolute value.</td>
+</tr>
+<tr>
+<td><code>win_kurt</code></td>
+<td>3.0</td>
+<td><code>kurtosis</code>: trailing window (s), 1–5 s, at least a few periods of <code>fmin</code>. Shorter = sharper and noisier.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="combining-several-cfs">Combining several CFs</h3>
+<p>When <code>cf_type</code> has several types, each CF is standardised and they are merged into one CF per trace:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>combine</code></td>
+<td><code>max</code></td>
+<td><code>max</code>: fires if <strong>any</strong> CF fires (more detections, more false alarms). <code>mean</code>: fires only if the CFs <strong>agree</strong> (conservative). <code>stouffer</code>: sum divided by the square root of the sum of their correlations: rewards agreement and does not count correlated CFs twice (<strong>recommended</strong>). <code>gmean</code>: between <code>mean</code> and <code>max</code>, controlled by <code>p</code>.</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>3.0</td>
+<td><code>gmean</code> power: 1 = mean, large = max.</td>
+</tr>
+<tr>
+<td><code>tolerance</code></td>
+<td>0.0</td>
+<td>Running maximum of each CF over ± <code>tolerance</code> s before combining, so peaks slightly offset in time add up. 0.3–0.5 s recommended; the trigger can move up to this amount earlier.</td>
+</tr>
+<tr>
+<td><code>norm</code></td>
+<td><code>mad</code></td>
+<td>Standardisation of each CF. <code>mad</code>: <span class="arithmatex">\((x - \text{median}) / (1.4826 \cdot \text{MAD})\)</span>. <code>tail</code>: the <code>tail_quantile</code> is mapped to its Gaussian value (0.99 → 2.33 σ), so the same threshold gives a similar false-alarm rate for every CF (<strong>recommended</strong>).</td>
+</tr>
+<tr>
+<td><code>tail_quantile</code></td>
+<td>0.99</td>
+<td>Quantile used by <code>norm: 'tail'</code>. It must be above the fraction of time occupied by events: 0.95 for ~1 h windows containing an event, 0.99–0.999 for full days.</td>
+</tr>
+<tr>
+<td><code>final_norm</code></td>
+<td><code>False</code></td>
+<td>Standardise the combined CF again, so thresholds mean the same for every <code>combine</code> rule.</td>
+</tr>
+</tbody>
+</table>
+<p>In formulas, each CF <span class="arithmatex">\(x_i(t)\)</span> is first standardised:</p>
+<div class="arithmatex">\[z_i(t) = \frac{x_i(t) - \operatorname{median}(x_i)}{s_i}, \qquad s_i = \begin{cases} 1.4826\,\operatorname{median}\lvert x_i - \operatorname{median}(x_i)\rvert &amp; \texttt{norm: 'mad'} \\[4pt] \dfrac{Q_q(x_i) - \operatorname{median}(x_i)}{\Phi^{-1}(q)} &amp; \texttt{norm: 'tail'} \end{cases}\]</div>
+<p>where <span class="arithmatex">\(Q_q\)</span> is the <code>tail_quantile</code> <span class="arithmatex">\(q\)</span> of the CF and <span class="arithmatex">\(\Phi^{-1}\)</span> the inverse of the standard normal distribution. Then, for <span class="arithmatex">\(M\)</span> CFs:</p>
+<table>
+<thead>
+<tr>
+<th><code>combine</code></th>
+<th>Combined CF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max</code></td>
+<td><span class="arithmatex">\(\max_i z_i(t)\)</span></td>
+</tr>
+<tr>
+<td><code>mean</code></td>
+<td><span class="arithmatex">\(\frac{1}{M}\sum_i z_i(t)\)</span></td>
+</tr>
+<tr>
+<td><code>stouffer</code></td>
+<td><span class="arithmatex">\(\dfrac{\sum_i z_i(t)}{\sqrt{\sum_{i,k} R_{ik}}}\)</span>, with <span class="arithmatex">\(R\)</span> the correlation matrix of the <span class="arithmatex">\(z_i\)</span>. For independent CFs the denominator is <span class="arithmatex">\(\sqrt{M}\)</span> (Stouffer's method); for correlated CFs it is larger, so they are not counted twice.</td>
+</tr>
+<tr>
+<td><code>gmean</code></td>
+<td><span class="arithmatex">\(\left(\frac{1}{M}\sum_i \max(z_i(t), 0)^p\right)^{1/p}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output units</strong>: a single <code>cf_type</code> gives the raw CF (not normalised). Several types give a CF in <strong>σ units</strong>, so thresholds like 4–5 σ apply. Calibrate them on a quiet day: with <code>combine: 'max'</code> the background is higher than for a single CF.</p>
+<h3 id="config-example_4">Config Example</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cwt_cf&#39;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">cycles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">voices_per_octave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">wavelet_type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cm&#39;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">cf_type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;power_mod,entropy,kurtosis&#39;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">lowpass_freq</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">win_before</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">win_after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">gap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nt">direction</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;up&#39;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nt">win_kurt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">combine</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;stouffer&#39;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nt">tolerance</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nt">norm</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;tail&#39;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nt">tail_quantile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.99</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nt">final_norm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </code></pre></div>
-<h3 id="reference_2">Reference</h3>
+<p>A single, simple CF:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cwt_cf&#39;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">cycles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">voices_per_octave</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">16</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nt">wavelet_type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cm&#39;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nt">cf_type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;power&#39;</span>
+</code></pre></div>
+<h3 id="references_2">References</h3>
 <ul>
-<li>Poiata, N., C. Satriano, J.-P. Vilotte, P. Bernard, and K. Obara (2016). <strong>Multi-band array detection and location of seismic sources recorded by dense seismic networks</strong>, Geophys. J. Int., 205(3), 1548-1573, doi:10.1093/gji/ggw071.</li>
+<li>Cabieces, Roberto, et al. "Slowness vector estimation over large-aperture sparse arrays with the Continuous Wavelet Transform (CWT): application to Ocean Bottom Seismometers." <em>Geophysical Journal International</em> 223.3 (2020): 1919-1934.</li>
+<li>Gibbons, Steven J., Frode Ringdal, and Tormod Kværna. "Detection and characterization of seismic phases using continuous spectral estimation on incoherent and partially coherent arrays." <em>Geophysical Journal International</em> 172.1 (2008): 405-421.</li>
 </ul>
+<hr />
 <h2 id="applications">Applications</h2>
-<ul>
-<li><strong>SNR</strong>: Event detection, onset detection, phase picking</li>
-<li><strong>Envelope</strong>: Characterizing energy bursts, highlighting surface waves</li>
-<li><strong>Spectral Entropy</strong>: Identifying coherent signals vs. noise, triggering logic</li>
-<li><strong>Kurtosis</strong>: Detectect phases onset in very noise contaminated signals</li>
-</ul>
-<p>These functions can be used as standalone processors or in combination with pickers, visualizations, or further classification models.</p>
+<table>
+<thead>
+<tr>
+<th>CF</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SNR</strong></td>
+<td>Event detection, coincidence triggers, first-arrival picking.</td>
+</tr>
+<tr>
+<td><strong>Envelope</strong></td>
+<td>Energy bursts, surface waves, coda analysis, tremor.</td>
+</tr>
+<tr>
+<td><strong>Spectral Entropy</strong></td>
+<td>Narrowband signals, tremor and LP events, discrimination of signal vs noise.</td>
+</tr>
+<tr>
+<td><strong>Kurtosis</strong></td>
+<td>Precise onsets of impulsive phases in noisy signals.</td>
+</tr>
+<tr>
+<td><strong>CWT</strong></td>
+<td>Robust detection in low SNR, P and S in the same CF, array processing with sparse arrays.</td>
+</tr>
+</tbody>
+</table>
+<p>The CF traces can be plotted, written to disk (<code>-o</code>), used by the coincidence trigger, or analysed in your own <a href="../scripts/">scripts</a>.</p>
 <hr />
 <h2 id="output">Output</h2>
-<p>Each CF modifies the trace data to represent the calculated function. These modified traces can then be plotted, further processed, or used as features in detection algorithms.</p>
+<p>Each CF replaces the trace data with the calculated function, keeping the trace ids and the time axis. In the following example, all CFs were computed on the same filtered seismograms.</p>
 <ol>
-<li><strong>Filtered seismograms</strong>: bandpass [0.5-8.0] Hz</li>
+<li><strong>Filtered seismograms</strong>: bandpass 0.5–8.0 Hz.</li>
 </ol>
-<p><img alt="Screenshot" src="../img/seismograms.png" /></p>
+<p><img alt="Filtered seismograms" src="../img/seismograms.png" /></p>
 <ol>
-<li><strong>SNR</strong>: Classic sta/lta (1/40)s</li>
+<li><strong>SNR</strong>: classic STA/LTA, 1 s / 40 s.</li>
 </ol>
-<p><img alt="Screenshot" src="../img/snr.png" /></p>
+<p><img alt="SNR" src="../img/snr.png" /></p>
 <ol>
-<li><strong>Envelope</strong>: Envelope and then smoothing with a lowpass filter of 0.15 Hz</li>
+<li><strong>Envelope</strong>: smoothed with a 0.15 Hz low-pass filter.</li>
 </ol>
-<p><img alt="Screenshot" src="../img/envelope.png" /></p>
+<p><img alt="Envelope" src="../img/envelope.png" /></p>
 <ol>
-<li><strong>Kurtosis</strong>: Kurtosis wit fmin and fmax 0.5 and 8-0 Hz and CF_decay_win of 4.0</li>
+<li><strong>Kurtosis</strong>: 0.5–8.0 Hz, <code>CF_decay_win</code> 4.0 s.</li>
 </ol>
-<p><img alt="Screenshot" src="../img/kurt.png" /></p>
+<p><img alt="Kurtosis" src="../img/kurt.png" /></p>
+<ol>
+<li><strong>CWT</strong>: <code>power_mod</code>, <code>entropy</code> and <code>kurtosis</code> between 0.5 and 8.0 Hz, combined with <code>stouffer</code>.</li>
+</ol>
+<p><img alt="CWT" src="img/cwt_cf.png" /></p>
 
 
 
