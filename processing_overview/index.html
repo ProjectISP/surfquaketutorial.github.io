@@ -14,7 +14,7 @@
         <link rel="prev" href="../tutorials/beamforming_tutorial/">
       
       
-        <link rel="next" href="../examples/">
+        <link rel="next" href="../trace_header_documentation/">
       
       
         
@@ -880,6 +880,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#how-the-processing-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the processing works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How the processing works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-order-a-basic-signal-processing-recipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why this order? A basic signal processing recipe
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#running-the-process" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -925,10 +953,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#event-file-format-eventtxt" class="md-nav__link">
+  <a href="#event-file-format-eventstxt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Event File Format (event.txt)
+        Event File Format (events.txt)
       
     </span>
   </a>
@@ -955,34 +983,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../examples/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Examples
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -2082,25 +2082,168 @@
 
 
 <h1 id="data-processing-with-surfquake">Data Processing with SurfQuake</h1>
-<p>Welcome to the <strong>Signal Processing Module</strong> of SurfQuake — a powerful and scalable command-line tool for applying signal processing pipelines to large collections of seismic waveform data.</p>
-<p>Whether you're analyzing earthquake catalogs or preparing data for machine learning models, this module allows you to define, control, and automate your signal processing workflow with precision.</p>
-<p>📘 Learn more in our <a href="https://projectisp.github.io/ISP_tutorial.github.io/sp_filtering/"><strong>Signal Processing Tutorial</strong></a></p>
-<p>Remember that you can use real data files and metadata to learn how to use surfquake processing commands with <a href="https://github.com/rcabdia/test_surfquake"><span style="color:#5DADE2;">Case of study</span></a>.</p>
-<p>In the following link, you will find <a href="https://github.com/rcabdia/SurfQuakeCore/tree/main/examples/configs" download> config file templates</a>.</p>
+<p>Welcome to the <strong>Signal Processing Module</strong> of SurfQuake — a scalable command-line tool for applying signal processing pipelines to large collections of seismic waveform data.</p>
+<p>Whether you're analyzing earthquake catalogs, preparing continuous data for ambient noise or array analysis, or building datasets for machine learning models, this module lets you define, control, and automate your signal processing workflow with precision: the same config file processes one trace or ten years of data.</p>
+<p>📘 Learn more in our <a href="https://projectisp.github.io/ISP_tutorial.github.io/sp_filtering/" rel="noopener noreferrer" target="_blank"><strong>Signal Processing Tutorial</strong></a> and in the <a href="../tutorials/tutorial1/">Tutorial Book</a>.</p>
+<p>Remember that you can use real data files and metadata to learn how to use surfquake processing commands with <a href="https://github.com/rcabdia/test_surfquake" rel="noopener noreferrer" target="_blank"><span style="color:#5DADE2;">Case of study</span></a>.</p>
+<p>In the following link, you will find <a href="https://github.com/rcabdia/SurfQuakeCore/tree/main/examples/configs" target="_blank" rel="noopener noreferrer">config file templates</a>. You can also generate them in your working folder:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-h
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>config_all<span class="w"> </span>-o<span class="w"> </span>./configs<span class="w">      </span><span class="c1"># every trace method, as a reference</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>stream_config<span class="w"> </span>-o<span class="w"> </span>./configs<span class="w">   </span><span class="c1"># stream methods</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>ch_functions<span class="w"> </span>-o<span class="w"> </span>./configs<span class="w">    </span><span class="c1"># characteristic functions</span>
+</code></pre></div>
+<hr />
+<h2 id="how-the-processing-works">How the processing works</h2>
+<p>A processing workflow is a list of <strong>steps</strong> written in a YAML config file. Each step names a method and its parameters:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<p>The steps run in the order of their number: <code>process_1</code>, <code>process_2</code>, ... Before anything is computed, the config is <strong>validated</strong>: a misspelled method or a missing parameter stops the run with a message, so a long job does not fail halfway through.</p>
+<p>There are two kinds of methods:</p>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Works on</th>
+<th>Examples</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Trace methods</strong></td>
+<td>each trace independently</td>
+<td><code>rmean</code>, <code>taper</code>, <code>filter</code>, <code>remove_response</code>, <code>resample</code>, <code>whitening</code></td>
+<td><a href="../processing_config/">Processing Traces</a></td>
+</tr>
+<tr>
+<td><strong>Stream methods</strong></td>
+<td>several traces together</td>
+<td><code>rotate</code>, <code>cross_correlate</code>, <code>stack</code>, <code>shift</code>, <code>beam</code>, <code>algebra</code></td>
+<td><a href="../processing_stream_config/">Processing Stream</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Order of execution</p>
+<p>Trace methods and stream methods run as two blocks. By default (<code>-op trace_first</code>) all trace methods are applied first, and then all stream methods, each block in its own order. With <code>-op stream_first</code>, the stream methods run first. This is the natural order for most workflows: first clean each trace, then combine them.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">General rules for config files</p>
+<ul>
+<li>Each <code>process_N</code> key must be <strong>unique</strong>. A repeated key silently replaces the earlier step.</li>
+<li>Times in seconds, frequencies in Hz.</li>
+<li>Write decimals with a dot (<code>0.5</code>, <code>2.0</code>): some options require a float, and <code>fmin: 1</code> fails while <code>fmin: 1.0</code> works.</li>
+<li>Quote text values (<code>'linear'</code>) and station codes (<code>'00'</code>).</li>
+</ul>
+</div>
+<h3 id="why-this-order-a-basic-signal-processing-recipe">Why this order? A basic signal processing recipe</h3>
+<p>Most workflows start with the same preparation, and the order matters:</p>
+<ol>
+<li><strong>Merge and fill gaps</strong> (<code>concat</code>, <code>fill_gaps</code>): FFTs and filters need continuous, evenly sampled data.</li>
+<li><strong>Remove the mean and trend</strong> (<code>rmean</code>): an offset or a drift would leak into the band of interest.</li>
+<li><strong>Taper</strong> (<code>taper</code>): brings the trace ends smoothly to zero, avoiding spectral leakage and filter ringing at the edges.</li>
+<li><strong>Remove the instrument response</strong> (<code>remove_response</code>): converts counts to ground motion, so that stations can be compared.</li>
+<li><strong>Filter</strong> (<code>filter</code>): keeps the band of your signal.</li>
+<li><strong>Resample</strong> (<code>resample</code>), if needed, after the anti-alias filter.</li>
+<li><strong>Analysis</strong>: rotation, correlation, stacking, beamforming, spectral analysis...</li>
+</ol>
+<p>Some example pipelines:</p>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Typical steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local earthquakes, picking</td>
+<td><code>rmean</code> → <code>taper</code> → <code>filter</code> (bandpass 1–20 Hz, <code>zerophase: True</code>)</td>
+</tr>
+<tr>
+<td>Magnitudes / ground motion</td>
+<td><code>rmean</code> → <code>taper</code> → <code>remove_response</code> (<code>VEL</code>, <code>DISP</code> or <code>Wood Anderson</code>) → <code>filter</code></td>
+</tr>
+<tr>
+<td>Teleseismic body waves</td>
+<td><code>rmean</code> → <code>taper</code> → <code>remove_response</code> → <code>filter</code> (0.02–2 Hz) → <code>rotate</code> (<code>NE-&gt;RT</code>, <code>GAC</code>) → <code>shift</code> (<code>phase_theo</code>) → <code>stack</code></td>
+</tr>
+<tr>
+<td>Ambient noise</td>
+<td><code>rmean</code> → <code>taper</code> → <code>remove_response</code> → <code>filter</code> → <code>resample</code> → <code>time_normalization</code> → <code>whitening</code> → <code>cross_correlate</code></td>
+</tr>
+<tr>
+<td>Receiver functions</td>
+<td><code>rmean</code> → <code>taper</code> → <code>filter</code> → <code>rotate</code> (<code>ZNE-&gt;LQT</code>) → <code>deconv</code> (reference: L component)</td>
+</tr>
+<tr>
+<td>Array analysis</td>
+<td><code>rmean</code> → <code>taper</code> → <code>cut_stream</code> → <code>beam</code></td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="running-the-process">Running the Process</h2>
-<p>This tool runs via the terminal. First in the terminal you can ask for help. Available commands are quick, processing and processing_daily.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>surfquake<span class="w"> </span><span class="nb">command</span><span class="w"> </span>-h
+<p>This tool runs via the terminal. There are three processing commands: <code>quick</code>, <code>processing</code> and <code>processing_daily</code>. They share the same config files and differ in <strong>how they read the data</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Input</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>quick</code></td>
+<td>waveform files (<code>-w</code>)</td>
+<td>You want to process files directly, without a project. Fast workflows and exploration.</td>
+</tr>
+<tr>
+<td><code>processing</code></td>
+<td>a project (<code>-p</code>) or files (<code>-w</code>) and an event file (<code>-e</code>)</td>
+<td>You want to cut and process the waveforms of a list of <strong>events</strong>.</td>
+</tr>
+<tr>
+<td><code>processing_daily</code></td>
+<td>a project (<code>-p</code>)</td>
+<td>You work with <strong>continuous</strong> data: merging daily files, or processing long time spans.</td>
+</tr>
+</tbody>
+</table>
+<p>First, in the terminal you can ask for help:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
 </code></pre></div>
+<p>All of them have two modes:</p>
+<ul>
+<li><strong>Interactive</strong> (default): the waveforms are plotted and you can pick, inspect and process them with the interactive command prompt (see <a href="../plotting_interaction_documentation/">Plotting</a>).</li>
+<li><strong>Automatic</strong> (<code>-a</code>): no plots and no questions, the output is written to disk. Use it for big datasets and bash scripts.</li>
+</ul>
+<p>And all of them accept a <strong>post-script</strong>: your own Python script applied to each stream (see <a href="../scripts/">Scripts</a> and <code>surfquake make_config -c script_template</code>). With <code>--post_script_stage</code> you choose when it runs: <code>before</code> plotting (good for filtering or editing headers) or <code>after</code> plotting (good to act on the picks or metadata you added).</p>
+<hr />
 <h3 id="surfquake-quick">surfquake quick</h3>
-<p>Let's start explaining <strong>quick</strong> command:</p>
-<p>Overview:
-        Process seismic traces.
-        You can:
-            - Apply processing steps (filtering, normalization, etc.)
-            - Optionally visualize the waveforms (interactive mode)
-            - Apply a user-defined post-processing script before or after plotting</p>
-<div class="highlight"><pre><span></span><code>Modes:
+<div class="highlight"><pre><span></span><code>Overview:
+    Process seismic traces.
+    You can:
+        - Apply processing steps (filtering, normalization, etc.)
+        - Optionally visualize the waveforms (interactive mode)
+        - Apply a user-defined post-processing script before or after plotting
+
+Modes:
     Default  : Interactive mode (plotting + user prompts)
     --auto   : Non-interactive mode (no plots, no prompts, outputs written automatically)
 
@@ -2110,27 +2253,32 @@ Post-Script Logic:
         • before : script runs before plotting (good for filtering, editing headers)
         • after  : script runs after plotting (good if picks or metadata are added)
 
-    Examples:
-        Process waveform files with a config and plot interactively:
-            surfquake quick -w &quot;./data/*.mseed&quot; -c ./config.yaml -i ./inventory.xml --plot_config plot.yaml
+Examples:
+    Process waveform files with a config and plot interactively:
+        surfquake quick -w &quot;./data/*.mseed&quot; -c ./config.yaml -i ./inventory.xml -o ./out --plot_config plot.yaml
 
 Key Arguments:
-        -w, --wave_files         [REQUIRED | OPTIONAL] Glob pattern or path to waveform files, (not needed if the config has a &#39;Source&#39; section)
-        -f, --fast               [OPTIONAL] Quick-and-Dirty plotting
-        -c, --config_file        [OPTIONAL] YAML config defining processing steps
-        -i, --inventory_file     [OPTIONAL] Station metadata (StationXML or RESP)
-        -o, --output_folder      [OPTIONAL] Directory to save processed traces
-        -a, --auto               [OPTIONAL] Run in automatic (non-interactive) mode
-        -m, --merge              [OPTIONAL] If merge traces as fist action
-        -op, --order_preference  [OPTIONAL] &#39;trace_first&#39; (default) or &#39;stream_first&#39; — controls
-                                  whether trace-level steps (rmean, filter, taper...) run before
-                                  or after stream-level steps (cross_correlate, rotate, stack...)
-            --min_date           [OPTIONAL] Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
-            --max_date           [OPTIONAL] Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
-            --plot_config        [OPTIONAL] Plotting settings YAML
-            --post_script        [OPTIONAL] Python script to apply to each stream
-            --post_script_stage  [OPTIONAL] When to run post-script: &#39;before
+    -w, --wave_files         [REQUIRED | OPTIONAL] Glob pattern or path to waveform files, (not needed if the config has a &#39;Source&#39; section)
+    -f, --fast               [OPTIONAL] Quick-and-Dirty plotting
+    -c, --config_file        [OPTIONAL] YAML config defining processing steps
+    -i, --inventory_file     [OPTIONAL] Station metadata (StationXML or RESP)
+    -o, --output_folder      [OPTIONAL] Directory to save processed traces
+    -a, --auto               [OPTIONAL] Run in automatic (non-interactive) mode
+    -m, --merge              [OPTIONAL] If merge traces as first action
+    -op, --order_preference  [OPTIONAL] &#39;trace_first&#39; (default) or &#39;stream_first&#39; — controls
+                              whether trace-level steps (rmean, filter, taper...) run before
+                              or after stream-level steps (cross_correlate, rotate, stack...)
+        --min_date           [OPTIONAL] Filter Start date (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
+        --max_date           [OPTIONAL] Filter End date   (format: YYYY-MM-DD HH:MM:SS), DEFAULT None
+        --plot_config        [OPTIONAL] Plotting settings YAML
+        --post_script        [OPTIONAL] Python script to apply to each stream
+        --post_script_stage  [OPTIONAL] When to run post-script: &#39;before&#39; or &#39;after&#39; (default: before)
 </code></pre></div>
+<p>With <code>quick</code> all the selected files are read and processed together as <strong>one stream</strong>, which is what stream methods (rotation, correlation, beamforming...) need.</p>
+<div class="admonition tip">
+<p class="admonition-title">Synthetic test signals</p>
+<p>A config file with a <code>Source</code> section instead of <code>-w</code> generates synthetic signals (impulses, sines, chirps...). They are very useful to understand what a method does before applying it to real data: for example, filter an impulse to see the impulse response of the filter. See <code>surfquake make_config -c test_sign_config</code>.</p>
+</div>
 <hr />
 <h3 id="surfquake-processing">surfquake processing</h3>
 <div class="highlight"><pre><span></span><code>Overview:
@@ -2152,7 +2300,7 @@ Post-Script Logic:
         • after  : script runs after plotting (good if picks or metadata are added)
 
 Usage Example:
-    surfquake processing -p &quot;./project.pkl&quot; -i inventory.xml -e events.xml -c config.yaml -o ./output_folder --phases P,S --plot_config plot_settings.yaml --post_script custom_postproc.py
+    surfquake processing -p &quot;./project.pkl&quot; -i inventory.xml -e events.txt -c config.yaml -o ./output_folder --phases P,S --plot_config plot_settings.yaml --post_script custom_postproc.py
 
 Key Arguments:
     -p, --project_file         [OPTIONAL] Path to an existing project file
@@ -2165,7 +2313,7 @@ Key Arguments:
     -o, --output_folder        [OPTIONAL] Folder where processed files are saved
     -n, --net                  [OPTIONAL] Project net filter Example: NET1,NET2,NET3
     -s, --station              [OPTIONAL] Project station filter Example: STA1,STA2,STA3
-    -ch, --channel,            [OPTIONAL] Project channel filter Example: HHZ,BHN
+    -ch, --channel             [OPTIONAL] Project channel filter Example: HHZ,BHN
     -t, --cut_time             [OPTIONAL] pre &amp; post first arrival in seconds (symmetric)
     -cs, --cut_start_time      [OPTIONAL] Cut pre-first arrival in seconds
     -ce, --cut_end_time        [OPTIONAL] Cut post-first arrival in seconds
@@ -2182,9 +2330,10 @@ Key Arguments:
 Notes:
 You might need to set -w for individual files or -p for loading your project file
 </code></pre></div>
+<p>For each event of the event file, surfquake estimates the arrival times of the <code>--phases</code> at every station (or uses the origin time with <code>-r</code>), cuts the waveforms around them (<code>-t</code>, <code>-cs</code>, <code>-ce</code>) and processes <strong>one stream per event</strong>. The event and arrival information is stored in the trace headers, so methods like <code>rotate</code> (<code>GAC</code>) and <code>shift</code> (<code>phase_theo</code>) can use it.</p>
 <hr />
 <h3 id="surfquake-processing_daily">surfquake processing_daily</h3>
-<p>This command is different to simply surfquake processing because is intended to merge daily seismograms and work for big data sets. For xample, imagine that you need three days of seismograms for normal modes analysis of an event. Or imagine you would like to process datayo your daily mseed files.</p>
+<p>This command is different from <code>surfquake processing</code> because it is intended to <strong>merge daily seismograms</strong> and to work with big continuous datasets. For example, imagine that you need three days of seismograms for the normal-mode analysis of a large event, or that you would like to process all your daily MiniSEED files for ambient noise.</p>
 <div class="highlight"><pre><span></span><code>Overview:
     Cut seismograms and apply processing to continuous waveforms.
     You can perform either or both of these operations.
@@ -2200,19 +2349,20 @@ Post-Script Logic:
         • after  : apply script after plotting (e.g., to act on manual picks)
 
 Usage Example:
-    surfquake processing_daily \\
-        -i inventory.xml \\
-        -c config.yaml \\
-        -o ./output_folder \\
-        --min_date &quot;2024-01-01 00:00:00&quot; \\
-        --max_date &quot;2024-01-02 00:00:00&quot; \\
-        --span_seconds  86400\\
-        --plot_config plot_settings.yaml \\
-        --post_script my_custom.py \\
+    surfquake processing_daily \
+        -p ./project.pkl \
+        -i inventory.xml \
+        -c config.yaml \
+        -o ./output_folder \
+        --min_date &quot;2024-01-01 00:00:00&quot; \
+        --max_date &quot;2024-01-02 00:00:00&quot; \
+        --span_seconds 86400 \
+        --plot_config plot_settings.yaml \
+        --post_script my_custom.py \
         --post_script_stage after
 
 Key Arguments:
-    -p, --project_file        [REQUIRED] Path to a saved project files
+    -p, --project_file        [REQUIRED] Path to a saved project file
     -f, --fast                [OPTIONAL] Quick-and-Dirty plotting
     -o, --output_folder       [OPTIONAL] Directory for processed output
     -i, --inventory_file      [OPTIONAL] Station metadata (XML/RESP)
@@ -2232,39 +2382,38 @@ Key Arguments:
     --plot_config             [OPTIONAL] Optional plotting configuration (YAML)
     --post_script             [OPTIONAL] Path to Python script for custom post-processing
     --post_script_stage       [OPTIONAL] When to apply the post-script: before | after (default: before)
-&quot;&quot;&quot;
 </code></pre></div>
-<h3 id="event-file-format-eventtxt">Event File Format (<code>event.txt</code>)</h3>
-<p>Please find here a very simple event file format. This is typical input for surfquake processing -e ./event.txt</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>date;hour;latitude;longitude;depth;magnitude
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2022-02-02;23:35:29.7;42.5089;1.4293;20.7;1.71
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>2022-02-03;12:01:21.6;42.3047;2.2741;0.0;1.65
+<p>The project is divided into time spans of <code>--span_seconds</code> (one day by default); the files of each span are merged and processed as one stream. With <code>--time_segment</code>, the whole window between <code>--min_date</code> and <code>--max_date</code> is merged and processed as a single stream.</p>
+<hr />
+<h3 id="event-file-format-eventstxt">Event File Format (<code>events.txt</code>)</h3>
+<p>This is the input of <code>surfquake processing -e ./events.txt</code>. One event per line, columns separated by <code>;</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>date;hour;latitude;longitude;depth;magnitude
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2022-02-02;23:35:29.7;42.5089;1.4293;20.7;1.71
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>2022-02-03;12:01:21.6;42.3047;2.2741;0.0;1.65
 </code></pre></div>
+<p>Depth in km. A template is available with <code>surfquake make_config -c events</code>.</p>
 <hr />
 <h3 id="sample-processing-configuration-configyaml">Sample Processing Configuration (<code>config.yaml</code>)</h3>
-<hr />
-<p>The macro configuration (provided via a YAML file) defines your signal processing pipeline in a structured, step-by-step format. Each <code>process</code> entry specifies a method, its parameters, and the order in which it will be applied to each trace. You can process either full daily waveform files or extract and process specific segments based on an event file. Additionally, an interactive plotting tool is available to help you visually inspect and validate the processing steps.</p>
-<p>Please find here a very simple event file format. This is the typical input file for this commands:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span>./mseed_file<span class="w"> </span>-c<span class="w"> </span>./config.yaml<span class="w"> </span><span class="c1"># reading directly mseed files</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span>./project.pkl<span class="w"> </span>-c<span class="w"> </span>./config.yaml<span class="w"> </span>-e<span class="w"> </span>./event.txt<span class="w"> </span><span class="c1"># loading a project and using event files</span>
+<p>The config file defines your signal processing pipeline step by step. You can process files directly, full daily waveform files, or segments extracted around events, and the interactive plotting tool helps you to visually inspect and validate every step.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span>./mseed_file<span class="w"> </span>-c<span class="w"> </span>./config.yaml<span class="w">                         </span><span class="c1"># reading directly mseed files</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span>./project.pkl<span class="w"> </span>-c<span class="w"> </span>./config.yaml<span class="w"> </span>-e<span class="w"> </span>./events.txt<span class="w">    </span><span class="c1"># loading a project and using event files</span>
 </code></pre></div>
-<p><code>config.yaml</code>: Detaled information of this file in Processing traces and Processing Stream.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<p>Detailed information on every method is in <a href="../processing_config/">Processing Traces</a> and <a href="../processing_stream_config/">Processing Stream</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
 </code></pre></div>
 
 
