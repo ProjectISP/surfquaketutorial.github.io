@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#description" class="md-skip">
+        <a href="#beamforming" class="md-skip">
           Skip to content
         </a>
       
@@ -994,6 +994,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -1036,6 +1038,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1052,14 +1056,25 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Description">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
+  <a href="#methods" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parameters
+        Methods
       
     </span>
   </a>
@@ -1067,43 +1082,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#config-example" class="md-nav__link">
+  <a href="#what-the-array-can-resolve" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Config Example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Outputs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#peak-detection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Peak Detection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
+        What the array can resolve
       
     </span>
   </a>
@@ -1112,6 +1094,95 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typical-apparent-slowness-of-seismic-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typical apparent slowness of seismic phases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-file-automatic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config file (automatic)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1139,10 +1210,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#peak-detection-examples" class="md-nav__link">
+  <a href="#slowness-maps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Peak Detection Examples
+        Slowness maps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#peak-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Peak Detection
       
     </span>
   </a>
@@ -1160,19 +1242,19 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#slowness-map" class="md-nav__link">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Slowness map
+        Tips
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2110,117 +2192,447 @@
 
 
 
-  <h1>Beamforming</h1>
-
+<h1 id="beamforming">Beamforming</h1>
 <h2 id="description">Description</h2>
-<p>The <code>beamforming</code> method performs array-based slowness and back-azimuth analysis of seismic waveforms. It is based on frequency-wavenumber (FK) analysis and supports additional methods like MUSIC, CAPON, and Multitaper Coherence. This process is useful for identifying wave arrival directions and apparent velocities in local, regional, or teleseismic arrays.</p>
-<p>This method computes slowness and azimuth values over time windows by stacking energy across an array of stations. It is particularly effective in resolving wavefront parameters and isolating coherent seismic phases in noisy environments.</p>
-<p>Internally, it calls the FK analysis provided by <code>surfquakecore.arrayanalysis</code>, and uses ObsPy’s data structures for waveforms and metadata.</p>
+<p>A seismic <strong>array</strong> is a group of stations close enough to record the same wavefront, but far enough apart to see it arrive at different times. From those small delays, beamforming measures two properties of each wave that crosses the array:</p>
+<ul>
+<li><strong>Back-azimuth (BAz)</strong>: the direction the wave comes from, in degrees clockwise from North (station → source).</li>
+<li><strong>Apparent slowness (s)</strong>: how fast the wavefront sweeps across the surface, in s/km. Its inverse is the apparent velocity.</li>
+</ul>
+<p>Together they identify the wave: where it comes from, and which phase it is (a steep teleseismic P crosses the array almost at once and has a small slowness, while a crustal Lg travels along the surface and has a large one). With them you can detect and locate events with a single array, separate phases arriving at the same time from different directions, and improve the signal-to-noise ratio by stacking.</p>
+<p>SurfQuake computes the beamforming over sliding time windows, so you follow how power, slowness and back-azimuth evolve along the record, and lets you open the <strong>slowness map</strong> of any window with four different estimators: FK, Capon, Multitaper Coherence and MUSIC.</p>
 <blockquote>
 <p><strong>Scientific Reference</strong>:</p>
-<p>Rost, S., &amp; Thomas, C. (2002). Array seismology: Methods and applications. <em>Reviews of Geophysics</em>, 40(3).  </p>
+<p>Rost, S., &amp; Thomas, C. (2002). Array seismology: Methods and applications. <em>Reviews of Geophysics</em>, 40(3).</p>
 </blockquote>
+<p>A complete worked example is the <a href="../tutorials/beamforming_tutorial/">Beamforming Tutorial</a> (North Korea nuclear test, ILAR array).</p>
 <hr />
-<h3 id="parameters">Parameters</h3>
+<h2 id="how-it-works">How it works</h2>
+<p>Far from the source, the wavefront that crosses an array is approximately a <strong>plane</strong>. It is described by the horizontal <strong>slowness vector</strong> <span class="arithmatex">\(\mathbf{s} = (s_x, s_y)\)</span>: its length is the slowness and its direction points along the propagation. A station at position <span class="arithmatex">\(\mathbf{r}_i\)</span> (relative to the array centre) records the wave with a delay</p>
+<div class="arithmatex">\[\tau_i = \mathbf{s} \cdot \mathbf{r}_i\]</div>
+<p>Beamforming tests a <strong>grid</strong> of slowness vectors between <span class="arithmatex">\(-s_{max}\)</span> and <span class="arithmatex">\(+s_{max}\)</span> in both directions. For each one, the traces are shifted by their delays and stacked (in practice this is done in the frequency domain, with phase shifts). If the tested vector matches the real wave, the traces add up <strong>in phase</strong> and the beam power is maximal; otherwise they partially cancel. The grid point with the maximum power gives the slowness and the back-azimuth of the dominant wave:</p>
+<div class="arithmatex">\[s = \sqrt{s_x^2 + s_y^2}, \qquad \text{BAz} = \operatorname{atan2}(s_x, s_y) \;(\text{towards the source})\]</div>
+<p>The power of all grid points forms the <strong>slowness map</strong>: a picture of where the energy comes from in a time window.</p>
+<h3 id="methods">Methods</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Idea</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FK</strong> (conventional, Bartlett)</td>
+<td>Delay-and-sum in the frequency domain. Every direction is weighted the same.</td>
+<td>Robust, the reference method. Its resolution is limited by the array aperture: a broad peak and side lobes given by the array response.</td>
+</tr>
+<tr>
+<td><strong>CAPON</strong> (minimum variance)</td>
+<td>Adaptive weights: for each direction, it minimises the power coming from all other directions.</td>
+<td>Sharper peaks, better separation of close arrivals. More sensitive to noise and to errors in station positions.</td>
+</tr>
+<tr>
+<td><strong>MTP.COHERENCE</strong></td>
+<td>Multitaper estimate of the coherence between stations instead of power.</td>
+<td>Low-variance estimate, insensitive to amplitude differences between stations (site effects, gains).</td>
+</tr>
+<tr>
+<td><strong>MUSIC</strong></td>
+<td>Subspace method: separates the cross-spectral matrix into a signal subspace (1, 2 or 3 signals) and a noise subspace.</td>
+<td>Highest resolution, can resolve several simultaneous waves. You must choose the number of signals; the values are a pseudo-spectrum, not a power.</td>
+</tr>
+</tbody>
+</table>
+<p>The time evolution (sliding windows) is computed with <strong>FK</strong> or <strong>CAPON</strong>. The slowness maps can be computed with any of the four methods.</p>
+<h3 id="what-the-array-can-resolve">What the array can resolve</h3>
 <ul>
-<li><strong><code>timewindow</code></strong> (float): Duration of each sliding window for analysis (in seconds). Smaller windows improve temporal resolution; larger windows improve frequency resolution.</li>
-<li><strong><code>overlap</code></strong> (float): Fractional overlap between consecutive time windows. Values close to 1 provide smoother results.</li>
-<li><strong><code>fmin</code>, <code>fmax</code></strong> (float): Frequency band for filtering before beamforming. Filters out irrelevant noise and focuses on desired signal bands.</li>
-<li><strong><code>smax</code></strong> (float): Maximum slowness value (s/km) to consider in the slowness grid.</li>
-<li><strong><code>slow_grid</code></strong> (float): Resolution of the slowness grid (s/km). Smaller values yield higher-resolution slowness maps but are computationally more intensive.</li>
+<li><strong>Aperture</strong> (largest distance between stations): the larger the aperture compared with the wavelength, the sharper the slowness peak. Small arrays resolve high frequencies well but give broad peaks at low frequencies.</li>
+<li><strong>Station spacing</strong>: if the stations are further apart than half a wavelength, the slowness map shows <strong>aliases</strong> (several peaks of equal power). The minimum spacing sets the highest usable frequency.</li>
+<li><strong>Geometry</strong>: irregular, two-dimensional layouts give cleaner array responses than lines or regular grids.</li>
+</ul>
+<p>This is why the frequency band (<code>fmin</code>, <code>fmax</code>) must be chosen for your array: a band where the wavelengths are comparable to the aperture, but longer than about twice the station spacing.</p>
+<hr />
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>An ObsPy <code>Stream</code> with one trace per station, usually the <strong>vertical components</strong>, with the same sampling rate.</li>
+<li>An <strong>inventory</strong> (StationXML or dataless) with the coordinates of every station (<code>-i</code>).</li>
+<li>The traces are cut to their common time window (padding with zeros where needed).</li>
 </ul>
 <hr />
-<h3 id="config-example">Config Example</h3>
+<h2 id="parameters">Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>How to choose it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td><code>FK</code> or <code>CAPON</code>.</td>
+<td><code>FK</code> by default.</td>
+</tr>
+<tr>
+<td><code>timewindow</code></td>
+<td>Length of each sliding window (s).</td>
+<td>It must contain at least a few cycles of <code>fmin</code> (e.g. 3 s at 1 Hz). Shorter windows follow fast changes but give noisier estimates.</td>
+</tr>
+<tr>
+<td><code>overlap</code></td>
+<td><strong>Step</strong> between consecutive windows, as a fraction of <code>timewindow</code>. <code>0.05</code> moves the window by 5 % of its length (95 % overlap). <code>1.0</code> gives contiguous windows without overlap.</td>
+<td>Small values give a dense, smooth time evolution but take longer. 0.05–0.2 is usual.</td>
+</tr>
+<tr>
+<td><code>fmin</code>, <code>fmax</code></td>
+<td>Frequency band of the analysis (Hz). Only the frequencies in this band enter the cross-spectral computation.</td>
+<td>The band where your signal is above the noise, adapted to the array size (see above).</td>
+</tr>
+<tr>
+<td><code>smax</code></td>
+<td>Maximum slowness of the grid (s/km). The grid covers <span class="arithmatex">\(-s_{max}\)</span> to <span class="arithmatex">\(+s_{max}\)</span> in <span class="arithmatex">\(s_x\)</span> and <span class="arithmatex">\(s_y\)</span>.</td>
+<td>Larger than the slowest phase you want to see. 0.3–0.4 s/km covers body waves and Lg.</td>
+</tr>
+<tr>
+<td><code>slow_grid</code></td>
+<td>Spacing of the slowness grid (s/km).</td>
+<td>Fine enough to separate the phases you are interested in: 0.01 s/km for teleseismic P, 0.02–0.05 s/km for regional phases. Computation time grows with <span class="arithmatex">\((2 s_{max} / \text{slow\_grid})^2\)</span>.</td>
+</tr>
+<tr>
+<td><code>output_folder</code></td>
+<td>Folder where the result is saved.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="typical-apparent-slowness-of-seismic-phases">Typical apparent slowness of seismic phases</h3>
+<p>Use these values to choose <code>smax</code> and <code>slow_grid</code>, and to interpret your results (they vary with distance and with the Earth structure under the array):</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Apparent velocity (km/s)</th>
+<th>Slowness (s/km)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Teleseismic P (30°–90°)</td>
+<td>12–25</td>
+<td>0.04–0.08</td>
+</tr>
+<tr>
+<td>PKP (core phases)</td>
+<td>&gt; 25</td>
+<td>&lt; 0.04</td>
+</tr>
+<tr>
+<td>Pn</td>
+<td>~8</td>
+<td>~0.12–0.13</td>
+</tr>
+<tr>
+<td>Pg</td>
+<td>~6–6.5</td>
+<td>~0.15–0.17</td>
+</tr>
+<tr>
+<td>Sn</td>
+<td>~4.5</td>
+<td>~0.21–0.23</td>
+</tr>
+<tr>
+<td>Lg</td>
+<td>~3.5</td>
+<td>~0.27–0.30</td>
+</tr>
+<tr>
+<td>Rg (short-period Rayleigh)</td>
+<td>~3</td>
+<td>~0.33</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="usage">Usage</h2>
+<h3 id="config-file-automatic">Config file (automatic)</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;beam&#39;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">timewindow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">smax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">slow_grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">output_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/documents/beam_results&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;beam&#39;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;FK&#39;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nt">timewindow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="nt">smax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="nt">slow_grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">output_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./beam_results&quot;</span>
 </code></pre></div>
-<hr />
-<hr />
-<h3 id="outputs">Outputs</h3>
-<p>After running the beamforming step, the following attributes are available in the result object:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./data/*Z*&quot;</span><span class="w"> </span>-i<span class="w"> </span>./metadata/inventory.xml<span class="w"> </span>-c<span class="w"> </span>./configs/beam_config.yaml<span class="w"> </span>-a
+</code></pre></div>
+<p>The beamforming is a stream method that writes its result to disk; the traces passed to the next steps are unchanged. To analyse only a time window, add a <code>cut_stream</code> step before <code>beam</code> (see <a href="../processing_stream_config/">Processing Stream</a>).</p>
+<p>The result is saved in <code>output_folder</code> as <code>&lt;year&gt;.&lt;julday&gt;.beam</code> (year and julian day of the first trace), a compressed file that contains the complete result: power, slowness, back-azimuth, the parameters, the traces and the inventory.</p>
+<h3 id="interactive">Interactive</h3>
+<p>In the plot of <code>surfquake quick</code> (with <code>-i</code>), select a time window with the keys <code>u</code> (start) and <code>i</code> (end), open the command prompt with <code>v</code> and type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">help</span><span class="w"> </span>beam
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>beam<span class="w"> </span>--fmin<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span>--fmax<span class="w"> </span><span class="m">2</span>.2<span class="w"> </span>--smax<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--grid<span class="w"> </span><span class="m">0</span>.01<span class="w"> </span>--win<span class="w"> </span><span class="m">3</span><span class="w"> </span>--overlap<span class="w"> </span><span class="m">0</span>.05
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">help</span><span class="w"> </span>smap
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>smap<span class="w"> </span>--method<span class="w"> </span>CAPON<span class="w"> </span>--fmin<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span>--fmax<span class="w"> </span><span class="m">2</span>.2<span class="w"> </span>--smax<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--grid<span class="w"> </span><span class="m">0</span>.01
+</code></pre></div>
 <ul>
-<li><strong><code>relpower</code></strong>: Relative power for each time window.</li>
-<li><strong><code>abspower</code></strong>: Absolute power estimates (if computed).</li>
-<li><strong><code>AZ</code></strong>: Back-azimuth (degrees from North) per window.</li>
-<li><strong><code>Slowness</code></strong>: Apparent slowness (s/km).</li>
-<li><strong><code>T</code></strong>: Center times of each window.</li>
+<li><code>beam</code>: FK time evolution over the selected window, with the same figure and keys as <code>beamplot</code>.</li>
+<li><code>smap</code>: slowness map of the whole selected window. <code>--method</code>: <code>FK</code>, <code>CAPON</code>, <code>MTP.COHERENCE</code> or <code>MUSIC</code> (in capital letters).</li>
 </ul>
-<p>You may visualize the results using the built-in <code>plot_beam()</code> method, which produces:
-- Time series of relative power
-- Time evolution of slowness and azimuth
-- Optional FK/slowness maps on keypress</p>
 <hr />
-<h3 id="peak-detection">Peak Detection</h3>
-<p>To extract beamforming-derived arrivals, use the <code>detect_beam_peaks()</code> method. It supports:</p>
-<ul>
-<li><strong>Slowness filtering</strong> by phase type (regional/teleseismic)</li>
-<li><strong>Minimum power</strong> thresholding</li>
-<li><strong>Azimuth constraints</strong></li>
-<li><strong>Minimum time separation</strong> between detected peaks</li>
-</ul>
-<p>This is useful for automated or semi-automated phase picking and event localization.</p>
-<hr />
-<h3 id="notes">Notes</h3>
-<ul>
-<li>Requires an <code>ObsPy Stream</code> and corresponding <code>Inventory</code>.</li>
-<li>Trims traces to overlapping time intervals.</li>
-<li>Traces are filtered to the defined bandpass before analysis.</li>
-<li>Outputs can be saved and reloaded with <code>to_pickle()</code> and <code>from_pickle()</code> methods.</li>
-</ul>
+<h2 id="outputs">Outputs</h2>
+<p>The result is a <code>TraceBeamResult</code> object with one value per time window:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>relpower</code></td>
+<td>Relative power (0–1): the coherence of the traces for the best slowness vector. Close to 1 = a coherent plane wave crossing the array; low values = incoherent noise.</td>
+</tr>
+<tr>
+<td><code>abspower</code></td>
+<td>Absolute power of the beam. It depends on the amplitude of the signal.</td>
+</tr>
+<tr>
+<td><code>AZ</code></td>
+<td>Back-azimuth (°, 0–360, clockwise from North).</td>
+</tr>
+<tr>
+<td><code>Slowness</code></td>
+<td>Apparent slowness (s/km).</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>Start time of each window, as Matplotlib date numbers.</td>
+</tr>
+</tbody>
+</table>
+<p>You can load and use a result in Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="kn">import</span> <span class="n">num2date</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.arrayanalysis.beamrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">TraceBeamResult</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">beam</span> <span class="o">=</span> <span class="n">TraceBeamResult</span><span class="o">.</span><span class="n">from_pickle</span><span class="p">(</span><span class="s2">&quot;./beam_results/2017.246.beam&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">best</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">relpower</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">num2date</span><span class="p">(</span><span class="n">beam</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">best</span><span class="p">]),</span> <span class="n">beam</span><span class="o">.</span><span class="n">AZ</span><span class="p">[</span><span class="n">best</span><span class="p">],</span> <span class="n">beam</span><span class="o">.</span><span class="n">Slowness</span><span class="p">[</span><span class="n">best</span><span class="p">],</span> <span class="n">beam</span><span class="o">.</span><span class="n">relpower</span><span class="p">[</span><span class="n">best</span><span class="p">])</span>
+</code></pre></div>
 <hr />
 <h2 id="plotting-and-cli-usage">Plotting and CLI Usage</h2>
-<p>Beamforming results can be visualized and analyzed using the <code>surfquake beamplot</code> command-line utility. This tool reads a serialized <code>.beam</code> file and provides rich options for interactive visualization and automated peak detection.</p>
+<p>Beamforming results can be visualized and analyzed using the <code>surfquake beamplot</code> command-line utility. It reads a <code>.beam</code> file and provides interactive visualization and automated peak detection.</p>
 <h3 id="basic-usage">Basic Usage</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Plot a saved FK beamforming result</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>--file<span class="w"> </span>./output/2024.123.beam
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-h
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Plot a saved FK beamforming result</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>./beam_results/2024.123.beam
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># Save the figure instead of showing it</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>./beam_results/2024.123.beam<span class="w"> </span>--save_path<span class="w"> </span>./beam_results/2024.123.png
 </code></pre></div>
-<h3 id="peak-detection-examples">Peak Detection Examples</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Detect phase peaks with regional constraints</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>--file<span class="w"> </span>event.beam<span class="w"> </span>--find_solutions<span class="w"> </span>regional<span class="w"> </span>--write_path<span class="w"> </span>solutions.txt
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Apply custom slowness constraints (JSON format)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>--file<span class="w"> </span>beam.beam<span class="w"> </span>--find_solutions<span class="w"> </span><span class="s1">&#39;{&quot;Pn&quot;: [0.05, 0.08], &quot;Lg&quot;: [0.18, 0.30]}&#39;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Add azimuth filtering</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>beam.beam<span class="w"> </span>--find_solutions<span class="w"> </span>regional<span class="w"> </span>--baz_range<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">150</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># Set minimum relative power threshold</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>beam.beam<span class="w"> </span>--find_solutions<span class="w"> </span>teleseismic<span class="w"> </span>--min_power<span class="w"> </span><span class="m">0</span>.2
+<p>The figure shows three panels sharing the time axis: relative power, slowness and back-azimuth, all coloured by relative power. A wave crossing the array appears as a group of high-power points with stable slowness and back-azimuth; noise appears as scattered, low-power points.</p>
+<h3 id="slowness-maps">Slowness maps</h3>
+<p>The figure is interactive. Point with the mouse at a time (for example a power peak), press a number to choose the method, and then press <code>e</code> to plot the slowness map of the window starting at that time:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td>FK (conventional)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Capon</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Multitaper Coherence</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>MUSIC, 1 signal</td>
+</tr>
+<tr>
+<td><code>5</code></td>
+<td>MUSIC, 2 signals</td>
+</tr>
+<tr>
+<td><code>6</code></td>
+<td>MUSIC, 3 signals</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td>Compute and plot the slowness map</td>
+</tr>
+</tbody>
+</table>
+<p>The map shows the power over the <span class="arithmatex">\((s_x, s_y)\)</span> plane, with the slowness, back-azimuth and power of the maximum. The distance from the centre to the maximum is the slowness; its direction is the back-azimuth.</p>
+<h3 id="peak-detection">Peak Detection</h3>
+<p><code>--find_solutions</code> searches the time evolution for arrivals of given phases:</p>
+<ol>
+<li>For each phase, only the windows whose slowness is inside its slowness range are kept.</li>
+<li>The peaks of relative power are found among them.</li>
+<li>Peaks below <code>--min_power</code>, or outside <code>--baz_range</code>, are rejected.</li>
+<li>Peaks closer than 10 s to an already accepted peak are rejected, so the same arrival is not assigned to two phases.</li>
+<li>The <strong>strongest</strong> remaining peak of each phase is reported.</li>
+</ol>
+<p>This is useful for automated or semi-automated phase identification and event location.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Detect phase peaks with the regional shortcut</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>event.beam<span class="w"> </span>--find_solutions<span class="w"> </span>regional<span class="w"> </span>--write_path<span class="w"> </span>solutions.txt
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Custom slowness ranges (JSON format)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>event.beam<span class="w"> </span>--find_solutions<span class="w"> </span><span class="s1">&#39;{&quot;Pn&quot;: [0.11, 0.14], &quot;Lg&quot;: [0.26, 0.31]}&#39;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Add back-azimuth filtering</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>event.beam<span class="w"> </span>--find_solutions<span class="w"> </span>regional<span class="w"> </span>--baz_range<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">150</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Set the minimum relative power</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>surfquake<span class="w"> </span>beamplot<span class="w"> </span>-f<span class="w"> </span>event.beam<span class="w"> </span>--find_solutions<span class="w"> </span>teleseismic<span class="w"> </span>--min_power<span class="w"> </span><span class="m">0</span>.4
 </code></pre></div>
+<p>The shortcuts use these slowness ranges (s/km):</p>
+<table>
+<thead>
+<tr>
+<th><code>regional</code></th>
+<th></th>
+<th><code>teleseismic</code></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pn</td>
+<td>0.11–0.14</td>
+<td>P</td>
+<td>0.04–0.07</td>
+</tr>
+<tr>
+<td>Pg</td>
+<td>0.14–0.18</td>
+<td>PP</td>
+<td>0.06–0.08</td>
+</tr>
+<tr>
+<td>Sn</td>
+<td>0.20–0.24</td>
+<td>PKP</td>
+<td>0.05–0.07</td>
+</tr>
+<tr>
+<td>Lg</td>
+<td>0.26–0.31</td>
+<td>PcP</td>
+<td>0.05–0.07</td>
+</tr>
+<tr>
+<td>Rg</td>
+<td>0.31–0.40</td>
+<td>S</td>
+<td>0.07–0.12</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>SS</td>
+<td>0.09–0.13</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>SKS</td>
+<td>0.07–0.10</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>ScS</td>
+<td>0.09–0.13</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Rayleigh</td>
+<td>0.20–0.40</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>Love</td>
+<td>0.20–0.35</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The best ranges depend on your array and distance. Compare the shortcut ranges with the <a href="#typical-apparent-slowness-of-seismic-phases">typical apparent slowness</a> of the phases, and use your own JSON ranges when needed.</p>
+</div>
 <h3 id="cli-options">CLI Options</h3>
-<ul>
-<li><code>--file</code>, <code>-f</code> (required): Path to the <code>.beam</code> file (gzip-pickled <code>TraceBeamResult</code>).</li>
-<li><code>--save_path</code>: File path to save the plotted figure.</li>
-<li><code>--find_solutions</code>: Define phase constraints for peak detection. Accepts <code>'regional'</code>, <code>'teleseismic'</code>, or a custom JSON dictionary.</li>
-<li><code>--baz_range</code>: Filter solutions within a specific backazimuth range (in degrees).</li>
-<li><code>--min_power</code>: Minimum relative power to accept a peak (default: <code>0.6</code>).</li>
-<li><code>--write_path</code>: Output file to append detected peak information.</li>
-</ul>
-<h3 id="slowness-map">Slowness map</h3>
-<ul>
-<li>The figure includes time evolution of relative power, slowness, and backazimuth.</li>
-<li>Clicking or keypresses in the GUI will trigger slowness map popups for selected time points.</li>
-<li>This visualization is highly interactive and useful for manual phase inspection.</li>
-</ul>
-<p>Point with the mouse to the power peaks and press a key number to select a method to plot the slowness map:</p>
-<ul>
-<li><strong><code>Available methods</code></strong>: Beamforming algorithm to use:<ul>
-<li>1 <code>FK</code>: Classical frequency-wavenumber method.</li>
-<li>2 <code>CAPON</code>: Adaptive beamforming with improved resolution.</li>
-<li>3 <code>MTP.COHERENCE</code>: Multitaper-based coherence stacking.</li>
-<li>4 <code>MUSIC</code>: High-resolution direction-of-arrival estimation method. Using one cluster.</li>
-</ul>
-</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--file</code>, <code>-f</code></td>
+<td>(required) Path to the <code>.beam</code> file.</td>
+</tr>
+<tr>
+<td><code>--save_path</code></td>
+<td>File path to save the figure (e.g. <code>beam.png</code>). The figure is then not shown.</td>
+</tr>
+<tr>
+<td><code>--find_solutions</code></td>
+<td>Phase constraints for peak detection: <code>regional</code>, <code>teleseismic</code>, or a JSON dictionary <code>'{"phase": [smin, smax], ...}'</code>.</td>
+</tr>
+<tr>
+<td><code>--baz_range</code></td>
+<td>Accept only solutions with back-azimuth between <code>MIN</code> and <code>MAX</code> (degrees).</td>
+</tr>
+<tr>
+<td><code>--min_power</code></td>
+<td>Minimum relative power to accept a peak (default: <code>0.6</code>).</td>
+</tr>
+<tr>
+<td><code>--write_path</code></td>
+<td>Text file where the detected peaks are appended, one line per phase: <code>phase, time, back-azimuth, slowness, power</code>.</td>
+</tr>
+</tbody>
+</table>
 <hr />
+<h2 id="tips">Tips</h2>
+<ul>
+<li><strong>Filter and choose the band first</strong> by looking at the spectra of your traces: the beamforming only works where the signal is coherent across the array.</li>
+<li><strong>Check the array response</strong>: a slowness map of pure noise, or of a single clear arrival, shows the side lobes of your array; do not interpret them as waves.</li>
+<li><strong>Relative power</strong> is your quality measure: values above ~0.6 indicate a well-defined plane wave.</li>
+<li><strong>Back-azimuth deviations</strong> of a few degrees from the theoretical value are normal (lateral heterogeneity under the array and along the path), and they are systematic for a given direction: they can be calibrated with known events.</li>
+<li><strong>Small slowness = steep incidence</strong>: at very small slowness (core phases, near-vertical P) the back-azimuth becomes poorly constrained.</li>
+</ul>
 
 
 

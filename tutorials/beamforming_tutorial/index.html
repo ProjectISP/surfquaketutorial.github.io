@@ -2229,19 +2229,20 @@ Npts                 | 144001                    | 144001                    | 1
 <hr />
 <h2 id="find-the-p-wave">Find the P wave</h2>
 <p>Let's plot the array and look for the P arrival. We pass the metadata with <code>-i</code>, it will be needed later by the beamforming.</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-h
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial3/data/*&quot;</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;./tutorial3/metadata/dataless.dlsv&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial3/configs/plotting_config.yaml&quot;</span>
 </code></pre></div>
-- select starttime press <code>u</code> around <code>2017-09-03T03:38:37</code> and select endtime pressing <code>i</code> around <code>2017-09-03T03:40:39</code>.
-- Open an interactive prompt pressing <code>v</code>.
-- Filter the traces in the band where the P wave is clear:</p>
+<ul>
+<li>Open an interactive prompt pressing <code>v</code>.</li>
+<li>Filter the traces in the band where the P wave is clear:</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">help</span><span class="w"> </span>filter
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>filter<span class="w"> </span>bandpass<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="m">2</span>.2<span class="w"> </span>--corners<span class="w"> </span><span class="m">4</span><span class="w"> </span>--zerophase<span class="w"> </span>True
 </code></pre></div>
 <p>After filtering, the figure is redrawn and you are back in picking mode.</p>
 <ul>
 <li>Zoom around 03:39 UTC, about 9 minutes after the origin time. You will see the P wave arriving at all stations almost at the same time.</li>
-<li>Set the analysis time window: place the mouse a bit before the P wave (around <code>2017-09-03T03:38:37</code>) and press <code>u</code> (start time), then place it after the main P energy (around 2017-09-03T03:40:39) and press <code>i</code> (end time).</li>
+<li>Set the analysis time window: place the mouse a bit before the P wave (around 03:38:50) and press <code>u</code> (start time), then place it after the main P energy (around 03:39:40) and press <code>i</code> (end time).</li>
 </ul>
 <p><img alt="P wave at ILAR" src="../img/T3_pwave.png" /></p>
 <div class="admonition tip">
@@ -2261,7 +2262,7 @@ Npts                 | 144001                    | 144001                    | 1
 <li><code>--smax</code>: maximum slowness of the grid (s/km). 0.3 s/km covers all P and S phases.</li>
 <li><code>--grid</code>: slowness grid spacing (s/km). With 0.01 we can separate 0.06 from 0.07 s/km, the default 0.05 is too coarse for a teleseismic P.</li>
 <li><code>--win</code>: length of each sliding window (s). It should contain a few cycles of the lowest frequency.</li>
-<li><code>--overlap</code>: overlap between consecutive windows (fraction, 0.05 = 5 %).</li>
+<li><code>--overlap</code>: step between consecutive windows, as a fraction of <code>--win</code>. With 0.05 the window moves 5 % of its length each time (0.15 s), i.e. consecutive windows overlap by 95 %.</li>
 </ul>
 <p>The figure shows, from top to bottom, the relative power, the slowness and the back-azimuth of each window, colored by relative power.</p>
 <p><img alt="FK beamforming" src="../img/T3_beam.png" /></p>
@@ -2302,27 +2303,24 @@ Npts                 | 144001                    | 144001                    | 1
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;simple&#39;</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cut_stream&#39;</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;absolute&#39;</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-09-03T03:37:00</span>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-09-03T03:41:30</span>
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;beam&#39;</span>
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;FK&#39;</span>
-<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="nt">timewindow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
-<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
-<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
-<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
-<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">    </span><span class="nt">smax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
-<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span><span class="nt">slow_grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
-<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">    </span><span class="nt">output_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./tutorial3/beam&#39;</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cut_stream&#39;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;absolute&#39;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-09-03T03:38:30</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-09-03T03:41:30</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;beam&#39;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;FK&#39;</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="nt">timewindow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.0</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">    </span><span class="nt">overlap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="nt">smax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">    </span><span class="nt">slow_grid</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="w">    </span><span class="nt">output_folder</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./tutorial3/beam&#39;</span>
 </code></pre></div>
 <ul>
 <li><code>cut_stream</code> keeps three minutes around the P wave. Without it, the beamforming would run along the two hours of data.</li>

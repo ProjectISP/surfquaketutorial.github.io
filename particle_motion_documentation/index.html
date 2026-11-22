@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#processing-options" class="md-skip">
+        <a href="#particle-motion-analysis" class="md-skip">
           Skip to content
         </a>
       
@@ -1076,22 +1076,83 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#particle-motion-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Particle Motion Analysis
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Particle Motion Analysis">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
     <span class="md-ellipsis">
       
         Description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How it works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpreting-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpreting the results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interactive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interactive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-file-automatic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config file (automatic)
       
     </span>
   </a>
@@ -1109,18 +1170,12 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#config-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Config Example
-      
-    </span>
-  </a>
+      </ul>
+    </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#outputs" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1130,19 +1185,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#example-output-plot" class="md-nav__link">
-    <span class="md-ellipsis">
       
-        Example Output Plot
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
+        <li class="md-nav__item">
   <a href="#scientific-background" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1150,22 +1194,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notes
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2075,68 +2103,188 @@
 
 
 
-<h1 id="processing-options">Processing Options</h1>
-<h2 id="particle-motion-analysis">Particle Motion Analysis</h2>
-<p>The <code>pm</code> (particle motion) method analyzes the motion of a particle as recorded by a three-component seismic station (e.g., Z, N, E components). It provides geometrical parameters such as <strong>azimuth</strong>, <strong>incidence angle</strong>, <strong>rectilinearity</strong>, and <strong>planarity</strong>, which are critical for understanding wave polarization and propagation direction.</p>
-<hr />
-<h3 id="description">Description</h3>
-<p>Particle motion analysis plots the trajectory of ground motion in 3D (or in 2D projections like Z-N, Z-E, and N-E planes). By examining these plots, users can determine:</p>
+<h1 id="particle-motion-analysis">Particle Motion Analysis</h1>
+<h2 id="description">Description</h2>
+<p>As a seismic wave passes, each particle of the ground moves along a path in three dimensions. A three-component station (Z, N, E) records this path, and its <strong>shape</strong> tells us what kind of wave is passing and where it comes from:</p>
 <ul>
-<li><strong>Azimuth (°):</strong> The horizontal direction of wave propagation.</li>
-<li><strong>Incidence (°):</strong> The vertical angle of wave arrival relative to the surface.</li>
-<li><strong>Rectilinearity:</strong> A measure of how straight (linear) the motion is, often associated with body waves.</li>
-<li><strong>Planarity:</strong> A measure of how planar (flat) the motion is, often associated with surface waves.</li>
+<li><strong>P waves</strong> push and pull the ground along the direction of propagation: the motion is <strong>linear</strong>, pointing towards (or away from) the source and tilted by the incidence angle.</li>
+<li><strong>S waves</strong> move the ground perpendicular to the propagation: also linear, but perpendicular to the P direction.</li>
+<li><strong>Rayleigh waves</strong> move the ground along an <strong>ellipse</strong> in the vertical plane that contains the source and the station.</li>
+<li><strong>Love waves</strong> move the ground horizontally, perpendicular to the propagation.</li>
+<li><strong>Noise</strong> usually has no preferred direction: a cloud of points.</li>
 </ul>
-<p>The method automatically detects and maps three-component combinations (e.g., ZNE, Z12, ZYX) and processes them accordingly.</p>
+<p><strong>Particle motion</strong> (or polarisation) analysis quantifies this shape. With a single station you can estimate the direction of a wave, its incidence angle and its type, which helps to identify phases, check the orientation of the sensors, and separate body waves from surface waves.</p>
+<p>SurfQuake plots the particle motion in three planes (Z–N, Z–E and N–E) and computes the polarisation parameters of <strong>Flinn (1965)</strong>: <strong>azimuth</strong>, <strong>incidence</strong>, <strong>rectilinearity</strong> and <strong>planarity</strong>.</p>
 <hr />
+<h2 id="how-it-works">How it works</h2>
+<p>The three components in a time window form a cloud of points in 3D. SurfQuake computes the <strong>covariance matrix</strong> of the three components (after removing the mean) and its eigenvalues <span class="arithmatex">\(\lambda_1 \geq \lambda_2 \geq \lambda_3\)</span> and eigenvectors. The eigenvectors are the axes of the ellipsoid that best fits the cloud, and the eigenvalues their squared lengths:</p>
+<ul>
+<li>The <strong>first eigenvector</strong> (largest eigenvalue) is the main direction of the motion.</li>
+<li>The ratio between the eigenvalues describes the <strong>shape</strong>: a needle (linear), a disc (planar, elliptical) or a sphere (no polarisation).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Definition</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Azimuth (°)</strong></td>
+<td>Horizontal direction of the first eigenvector, clockwise from North.</td>
+<td>Direction of the main horizontal motion. Reported between 0° and 180° (see note below).</td>
+</tr>
+<tr>
+<td><strong>Incidence (°)</strong></td>
+<td>Angle between the first eigenvector and the vertical, 0°–90°.</td>
+<td>0° = vertical motion, 90° = horizontal motion. For a P wave it is the apparent incidence angle at the surface.</td>
+</tr>
+<tr>
+<td><strong>Rectilinearity</strong></td>
+<td><span class="arithmatex">\(1 - \sqrt{\lambda_2 / \lambda_1}\)</span></td>
+<td>1 = perfectly linear motion (body waves); 0 = no dominant direction.</td>
+</tr>
+<tr>
+<td><strong>Planarity</strong></td>
+<td><span class="arithmatex">\(1 - \dfrac{2\lambda_3}{\lambda_1 + \lambda_2}\)</span></td>
+<td>1 = the motion lies in a plane (e.g. elliptical Rayleigh motion, or linear motion); 0 = 3D cloud.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">The 180° ambiguity</p>
+<p>A linear motion back and forth along a line has no sign: the polarisation tells the direction of the <strong>line</strong>, not which way the wave is going. For this reason the azimuth is given between 0° and 180°, and the back-azimuth of the source is either the azimuth or the azimuth + 180°. For a P wave, the first-motion polarity solves it: a compressional first motion (Z up) moves the ground <strong>away</strong> from the source.</p>
+</div>
+<h3 id="interpreting-the-results">Interpreting the results</h3>
+<table>
+<thead>
+<tr>
+<th>Wave</th>
+<th>Rectilinearity</th>
+<th>Planarity</th>
+<th>Incidence</th>
+<th>Azimuth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P</td>
+<td>high (&gt; 0.8)</td>
+<td>high</td>
+<td>small to moderate</td>
+<td>along the source direction</td>
+</tr>
+<tr>
+<td>S (SV, SH)</td>
+<td>high</td>
+<td>high</td>
+<td>large (mostly horizontal)</td>
+<td>perpendicular to the source direction (SH)</td>
+</tr>
+<tr>
+<td>Rayleigh</td>
+<td>low to moderate</td>
+<td>high</td>
+<td>—</td>
+<td>elliptical motion in the vertical plane towards the source</td>
+</tr>
+<tr>
+<td>Love</td>
+<td>high</td>
+<td>high</td>
+<td>~90° (horizontal)</td>
+<td>perpendicular to the source direction</td>
+</tr>
+<tr>
+<td>Noise</td>
+<td>low</td>
+<td>low</td>
+<td>—</td>
+<td>not meaningful</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Three components per station, recognised automatically by the last letter of the channel: <strong>Z-N-E</strong>, <strong>Z-1-2</strong> or <strong>Z-Y-X</strong>. They are mapped to Z, N, E. Note that <code>1</code> and <code>2</code> are taken as North and East: if your sensor is not oriented to North, the azimuth is relative to its own axes.</li>
+<li>The traces are cut to a common time window before the analysis.</li>
+<li>Stations without a complete three-component set are skipped.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Getting good results</p>
+<ul>
+<li><strong>Filter</strong> the traces in a narrow band where the phase is clear (e.g. 1–5 Hz for local P waves): noise at other frequencies spreads the cloud and lowers the rectilinearity.</li>
+<li><strong>Use a short window around the phase</strong>: a few periods of the dominant frequency, starting at the onset. A long window mixes P, coda and S, and the result describes none of them.</li>
+<li>If the instrument response is different between components, remove it first (<code>remove_response</code>).</li>
+</ul>
+</div>
+<hr />
+<h2 id="usage">Usage</h2>
+<h3 id="interactive">Interactive</h3>
+<p>In the plot of <code>surfquake quick</code> (or <code>processing</code>), select a short window around the phase with the keys <code>u</code> (start) and <code>i</code> (end), open the command prompt with <code>v</code> and type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">help</span><span class="w"> </span>pm
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pm
+</code></pre></div>
+<p>The particle motion of each station shown in the plot is computed in the selected window and displayed.</p>
+<h3 id="config-file-automatic">Config file (automatic)</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cut_stream&#39;</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;reference&#39;</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">t_before</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="nt">t_after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;particle_motion&#39;</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./pm_results&#39;</span>
+</code></pre></div>
+<p>In this example, the traces are filtered and cut around the last reference time before the analysis. A reference time (key <code>w</code> on the plot) is added to <strong>all</strong> the traces, so the three components are cut to the same window. In automatic mode, read files that keep the reference in their header, i.e. HDF5 files saved after marking it (see <a href="../trace_header_documentation/">Trace Header</a>).</p>
+<p>ℹ️ With <code>method: 'phase'</code>, each trace is cut around its <strong>own</strong> pick, and traces without that pick are skipped. Use it only if the three components of each station are picked; otherwise the horizontal components are dropped.</p>
+<p>The particle motion is a stream method that writes its results to disk: the traces passed to the next steps are unchanged.</p>
 <h3 id="parameters">Parameters</h3>
 <ul>
-<li><strong><code>output_path</code></strong> (optional): Directory where particle motion plots and results will be saved.  </li>
-<li>If provided, a text file <code>pm.txt</code> will record azimuth, incidence, rectilinearity, and planarity for each analyzed trace.</li>
-<li>A <code>.png</code> plot is generated for each station.</li>
+<li><strong><code>output_path</code></strong>: folder where the plots and the results are saved. Set it always.</li>
 </ul>
 <hr />
-<h3 id="config-example">Config Example</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;particle_motion&#39;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./pm_results&#39;</span>
+<h2 id="outputs">Outputs</h2>
+<p>For each valid three-component station:</p>
+<ul>
+<li><strong>Figure</strong> <code>&lt;trace_id&gt;.D.&lt;year&gt;.&lt;julday&gt;.png</code> in <code>output_path</code>, with four panels:<ol>
+<li><strong>Z vs. N</strong> plane, with the incidence angle.</li>
+<li><strong>Z vs. E</strong> plane, with the incidence angle.</li>
+<li><strong>N vs. E</strong> plane (map view), with an arrow along the azimuth.</li>
+<li>A summary with azimuth, incidence, rectilinearity and planarity.</li>
+</ol>
+</li>
+<li><strong>Text file</strong> <code>pm.txt</code> in <code>output_path</code>. One line per station is appended:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>NET.STA.LOC.CHAN, YYYY-MM-DD HH:MM:SS, Azimuth°, Incidence°, Rectilinearity, Planarity
 </code></pre></div>
+<p>The time is the start of the analysed window.</p>
 <hr />
-<h3 id="outputs">Outputs</h3>
-<p>For each valid three-component station:
-- <strong>Plots:</strong>
-  - Z vs. N projection
-  - Z vs. E projection
-  - N vs. E projection (with azimuth arrow)
-  - Information box with computed parameters
-- <strong>Text file (pm.txt):</strong> Appends results in CSV format:
-  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>NET.STA.LOC.CHAN, YYYY-MM-DD HH:MM:SS, Azimuth, Incidence, Rectilinearity, Planarity
-</code></pre></div></p>
-<hr />
-<h3 id="example-output-plot">Example Output Plot</h3>
-<p>The particle motion figure contains:
-1. <strong>Z vs. N</strong> plane with incidence angle overlay.
-2. <strong>Z vs. E</strong> plane with incidence angle overlay.
-3. <strong>N vs. E</strong> plane with azimuth direction indicated by an arrow.
-4. A summary panel showing:
-   - Azimuth
-   - Incidence
-   - Rectilinearity
-   - Planarity</p>
-<hr />
-<h3 id="scientific-background">Scientific Background</h3>
-<p>Particle motion analysis is widely used in seismology for polarization studies, wavefield separation, and source characterization. For more details, see:</p>
+<h2 id="scientific-background">Scientific Background</h2>
+<p>Particle motion analysis is widely used in seismology for polarisation studies, phase identification, wavefield separation, sensor orientation and source characterization. For more details, see:</p>
 <ul>
-<li>Flinn, E. A. (1965). <em>Signal Analysis Using Rectilinearity and Direction of Particle Motion</em>. Proceedings of the IEEE, <strong>53(12)</strong>, 1874–1876.</li>
-<li>Vidale, J. E. (1986). <em>Complex polarization analysis of particle motion</em>. Bulletin of the Seismological Society of America, <strong>76(5)</strong>, 1393–1405.</li>
-</ul>
-<hr />
-<h3 id="notes">Notes</h3>
-<ul>
-<li>Ensure that three-component data are present for each station (ZNE or equivalent).</li>
-<li>The traces are trimmed to a common time window before analysis.</li>
-<li>If no valid 3-component set is found, the process is skipped for that station.</li>
+<li>Flinn, E. A. (1965). Signal analysis using rectilinearity and direction of particle motion. <em>Proceedings of the IEEE</em>, 53(12), 1874–1876.</li>
+<li>Montalbetti, J. F., &amp; Kanasewich, E. R. (1970). Enhancement of teleseismic body phases with a polarization filter. <em>Geophysical Journal International</em>, 21(2), 119–129.</li>
+<li>Vidale, J. E. (1986). Complex polarization analysis of particle motion. <em>Bulletin of the Seismological Society of America</em>, 76(5), 1393–1405.</li>
+<li>Jurkevics, A. (1988). Polarization analysis of three-component array data. <em>Bulletin of the Seismological Society of America</em>, 78(5), 1725–1743.</li>
 </ul>
 
 
