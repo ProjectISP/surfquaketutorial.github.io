@@ -58,13 +58,13 @@ When an earthquake arrives, the P probability rises to a sharp peak at the onset
 Before the network, surfquake prepares every file:
 
 1. Removes slow trends (a spline detrend) and merges gaps, filling them with zeros.
-2. Applies a **high-pass filter at 0.5 Hz** to remove long-period noise.
+2. **Resamples** the data to 100 Hz if needed, and applies a **high-pass filter at 0.5 Hz** to remove long-period noise.
 3. Keeps the UTC day that contains most of the samples of the file.
 
 Three things are important to know about how surfquake runs PhaseNet:
 
 - **Each file is picked alone.** The network is given one component at a time, so the same P wave is usually picked on Z, N and E: you will see up to three picks of the same arrival. This is normal, and the associator handles it later.
-- **PhaseNet was trained with data at 100 Hz.** The Granada data is 100 Hz. If your data has another sampling rate, resample it to 100 Hz before picking.
+- **PhaseNet was trained with data at 100 Hz.** The Granada data is already 100 Hz; data with another sampling rate is resampled automatically before picking.
 - **All the files should cover the same time span.** The network uses the length of the first file for all of them, so a longer file is cut. Daily files (or, like here, files cut to the same window) are the ideal input.
 
 ---
@@ -374,7 +374,7 @@ The results of the complete workflow with this data can be found in the [Granada
 
 - PhaseNet turns every seismogram into **probability curves** for P, S and noise; a **pick** is a peak above the threshold, and its height is the **probability**.
 - Each file is picked **alone**, so the same arrival can be picked on the three components.
-- The input should be at **100 Hz**, and all the files should cover the **same time span**.
+- PhaseNet works at **100 Hz** (other rates are resampled automatically), and all the files should cover the **same time span**.
 - The picks are written in three formats: `original_picks.csv` (complete table), daily folders (input of the associator REAL) and `nll_picks.txt` (NonLinLoc, interactive plot and polarities).
 - **P** picks are usually precise and confident; **S** picks are fewer, less confident and found mostly on the horizontal components.
 - Some picks are wrong: keep low thresholds and let the **associator** and the **location** reject the picks that do not fit.

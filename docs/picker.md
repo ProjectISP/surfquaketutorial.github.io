@@ -11,7 +11,7 @@ PhaseNet was trained with a large set of P and S arrivals picked by analysts. Fo
 
 surfQuake runs PhaseNet on every file of a [project](project.md):
 
-1. **Reading and preprocessing.** Every file is read, detrended (spline), merged (gaps filled with zeros) and **high-pass filtered at 0.5 Hz**. The trace is trimmed to the UTC day that contains most of its samples.
+1. **Reading and preprocessing.** Every file is read, detrended (spline), merged (gaps filled with zeros), **resampled to 100 Hz** if it has another sampling rate, and **high-pass filtered at 0.5 Hz**. The trace is trimmed to the UTC day that contains most of its samples.
 2. **Prediction.** The network computes the P, S and noise probabilities along the whole trace. Files are processed in batches (3 files at a time by default), on the GPU if available.
 3. **Peak detection.** The peaks of the P and S curves above the thresholds become picks. Two picks of the same phase must be at least 50 samples apart (0.5 s at 100 Hz).
 4. **Amplitude.** For every pick, the maximum absolute amplitude of the trace in a window after it (10 s for P, 5 s for S, or until the next pick) is measured.
@@ -19,7 +19,7 @@ surfQuake runs PhaseNet on every file of a [project](project.md):
 
 !!! note "Things to know before picking"
     - **Each file is picked alone**, one component at a time. The same arrival is usually picked on Z, N and E, giving up to three picks per arrival. The associator handles these duplicates.
-    - **The data should be sampled at 100 Hz**, the sampling rate used to train PhaseNet. Resample your data before picking if needed.
+    - **PhaseNet works at 100 Hz**, the sampling rate used to train it. Files with another sampling rate are resampled automatically; the pick times are not affected.
     - **All the files should cover the same time span.** The input length of the network is taken from the first file, so longer files are cut. Daily files are the ideal input.
     - Components named **1** and **2** are treated as **E** and **N**.
 
