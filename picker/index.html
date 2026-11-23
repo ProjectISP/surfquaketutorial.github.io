@@ -2250,7 +2250,7 @@
 <p>PhaseNet was trained with a large set of P and S arrivals picked by analysts. For every sample of a seismogram it returns three probabilities that add up to 1: <strong>P</strong>, <strong>S</strong> and <strong>noise</strong>. A <strong>pick</strong> is a peak of the P (or S) probability curve higher than a threshold, and its height is the <strong>probability</strong> of the pick, between 0 and 1.</p>
 <p>surfQuake runs PhaseNet on every file of a <a href="../project/">project</a>:</p>
 <ol>
-<li><strong>Reading and preprocessing.</strong> Every file is read, detrended (spline), merged (gaps filled with zeros) and <strong>high-pass filtered at 0.5 Hz</strong>. The trace is trimmed to the UTC day that contains most of its samples.</li>
+<li><strong>Reading and preprocessing.</strong> Every file is read, detrended (spline), merged (gaps filled with zeros), <strong>resampled to 100 Hz</strong> if it has another sampling rate, and <strong>high-pass filtered at 0.5 Hz</strong>. The trace is trimmed to the UTC day that contains most of its samples.</li>
 <li><strong>Prediction.</strong> The network computes the P, S and noise probabilities along the whole trace. Files are processed in batches (3 files at a time by default), on the GPU if available.</li>
 <li><strong>Peak detection.</strong> The peaks of the P and S curves above the thresholds become picks. Two picks of the same phase must be at least 50 samples apart (0.5 s at 100 Hz).</li>
 <li><strong>Amplitude.</strong> For every pick, the maximum absolute amplitude of the trace in a window after it (10 s for P, 5 s for S, or until the next pick) is measured.</li>
@@ -2260,7 +2260,7 @@
 <p class="admonition-title">Things to know before picking</p>
 <ul>
 <li><strong>Each file is picked alone</strong>, one component at a time. The same arrival is usually picked on Z, N and E, giving up to three picks per arrival. The associator handles these duplicates.</li>
-<li><strong>The data should be sampled at 100 Hz</strong>, the sampling rate used to train PhaseNet. Resample your data before picking if needed.</li>
+<li><strong>PhaseNet works at 100 Hz</strong>, the sampling rate used to train it. Files with another sampling rate are resampled automatically; the pick times are not affected.</li>
 <li><strong>All the files should cover the same time span.</strong> The input length of the network is taken from the first file, so longer files are cut. Daily files are the ideal input.</li>
 <li>Components named <strong>1</strong> and <strong>2</strong> are treated as <strong>E</strong> and <strong>N</strong>.</li>
 </ul>

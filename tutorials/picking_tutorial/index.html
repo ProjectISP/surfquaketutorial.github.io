@@ -2305,13 +2305,13 @@
 <p>Before the network, surfquake prepares every file:</p>
 <ol>
 <li>Removes slow trends (a spline detrend) and merges gaps, filling them with zeros.</li>
-<li>Applies a <strong>high-pass filter at 0.5 Hz</strong> to remove long-period noise.</li>
+<li><strong>Resamples</strong> the data to 100 Hz if needed, and applies a <strong>high-pass filter at 0.5 Hz</strong> to remove long-period noise.</li>
 <li>Keeps the UTC day that contains most of the samples of the file.</li>
 </ol>
 <p>Three things are important to know about how surfquake runs PhaseNet:</p>
 <ul>
 <li><strong>Each file is picked alone.</strong> The network is given one component at a time, so the same P wave is usually picked on Z, N and E: you will see up to three picks of the same arrival. This is normal, and the associator handles it later.</li>
-<li><strong>PhaseNet was trained with data at 100 Hz.</strong> The Granada data is 100 Hz. If your data has another sampling rate, resample it to 100 Hz before picking.</li>
+<li><strong>PhaseNet was trained with data at 100 Hz.</strong> The Granada data is already 100 Hz; data with another sampling rate is resampled automatically before picking.</li>
 <li><strong>All the files should cover the same time span.</strong> The network uses the length of the first file for all of them, so a longer file is cut. Daily files (or, like here, files cut to the same window) are the ideal input.</li>
 </ul>
 <hr />
@@ -2719,7 +2719,7 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 <ul>
 <li>PhaseNet turns every seismogram into <strong>probability curves</strong> for P, S and noise; a <strong>pick</strong> is a peak above the threshold, and its height is the <strong>probability</strong>.</li>
 <li>Each file is picked <strong>alone</strong>, so the same arrival can be picked on the three components.</li>
-<li>The input should be at <strong>100 Hz</strong>, and all the files should cover the <strong>same time span</strong>.</li>
+<li>PhaseNet works at <strong>100 Hz</strong> (other rates are resampled automatically), and all the files should cover the <strong>same time span</strong>.</li>
 <li>The picks are written in three formats: <code>original_picks.csv</code> (complete table), daily folders (input of the associator REAL) and <code>nll_picks.txt</code> (NonLinLoc, interactive plot and polarities).</li>
 <li><strong>P</strong> picks are usually precise and confident; <strong>S</strong> picks are fewer, less confident and found mostly on the horizontal components.</li>
 <li>Some picks are wrong: keep low thresholds and let the <strong>associator</strong> and the <strong>location</strong> reject the picks that do not fit.</li>
