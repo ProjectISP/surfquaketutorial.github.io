@@ -12,6 +12,7 @@ nav:
       - Basic Signal Processing 2: tutorials/tutorial1_part2.md
       - Time-Frequency Analysis: tutorials/tutorial2.md
       - Beamfoming: tutorials/beamforming_tutorial.md
+      - Auto-Picking (PhaseNet): tutorials/picking_tutorial.md
   - Signal Processing:
       - Overview: processing_overview.md
       - Trace Header: trace_header_documentation.md
