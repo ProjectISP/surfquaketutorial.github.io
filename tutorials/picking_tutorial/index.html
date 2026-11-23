@@ -1,0 +1,2831 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/tutorials/picking_tutorial/">
+      
+      
+        <link rel="prev" href="../beamforming_tutorial/">
+      
+      
+        <link rel="next" href="../../processing_overview/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Auto-Picking (PhaseNet) - SurfQuake</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/surfquake_toolboxes.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#event-analysis-automatic-phase-picking-tutorial-5" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SurfQuake" class="md-header__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SurfQuake
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Auto-Picking (PhaseNet)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../seismic_data_files/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../tutorial1/" class="md-tabs__link">
+          
+  
+  
+  Tutorial Book
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../processing_overview/" class="md-tabs__link">
+          
+  
+  
+  Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../picker/" class="md-tabs__link">
+          
+  
+  
+  Event Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ppsd_DB/" class="md-tabs__link">
+          
+  
+  
+  Noise Processing
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../create_metadata/" class="md-tabs__link">
+          
+  
+  
+  Utilities
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SurfQuake" class="md-nav__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    SurfQuake
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seismic_data_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seismic Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Book
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial Book
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1_part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamfoming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Picking (PhaseNet)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Picking (PhaseNet)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-what-does-phasenet-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: What does PhaseNet do?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-create-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Create a project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-run-the-picker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Run the picker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-the-output-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: The output files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: The output files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#original_pickscsv-the-complete-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        original_picks.csv: the complete table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20210126-input-for-the-associator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20210126/: input for the associator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nll_pickstxt-the-nonlinloc-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nll_picks.txt: the NonLinLoc format
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-the-picks-of-one-earthquake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: The picks of one earthquake
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-draw-the-picks-on-the-waveforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Draw the picks on the waveforms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-choosing-the-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Choosing the thresholds
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 7: Choosing the thresholds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#picking-only-some-stations-channels-or-times" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Picking only some stations, channels or times
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-picking-from-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Picking from Python
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-the-bash-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9: The bash script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-next" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What comes next?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signal Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Signal Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trace_header_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trace Header
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explore_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Availability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Traces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_stream_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Stream
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../particle_motion_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spectral_analysis_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../beamforming_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamforming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../characteristic_functions_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characteristic Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plotting_interaction_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../synthetic_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generate Test Signals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bash_script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash Script Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../picker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Picker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Associator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Associator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../associate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering Associate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coincidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coincidence Trigger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../locate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Location
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Focal Mechanism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Focal Mechanism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../focmec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Motion Polarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moment Tensor Inversion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Noise Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPSD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PPSD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_DB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataBase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_plot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting & Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ambient_noise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ambient Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dispersion_curves_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dispersion Curves Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utilities
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../create_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manage_catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build_mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build MTI Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="event-analysis-automatic-phase-picking-tutorial-5"><span style="color:darkcyan;"> <strong>Event Analysis: Automatic Phase Picking Tutorial 5</strong> </span></h1>
+<p>In the previous tutorials, we always knew <strong>when</strong> the earthquakes happened: the event file told surfquake where to cut. In real life, the first problem is the opposite: we have hours or days of continuous data, and we need to find the <strong>arrival times of the P and S waves</strong> of every earthquake inside it. Doing it by hand is impossible when a seismic sequence produces hundreds of events. In this tutorial, we will learn how to work with the commands <code>project</code>, <code>pick</code> and <code>quick</code> to:</p>
+<ol>
+<li>Organise continuous data in a <strong>project</strong>.</li>
+<li>Run the deep-learning picker <strong>PhaseNet</strong> on all the stations.</li>
+<li>Understand the three <strong>output files</strong> of the picker.</li>
+<li>Read the picks of one earthquake and check that they make sense.</li>
+<li>Draw the picks on top of the waveforms.</li>
+<li>Choose the <strong>probability thresholds</strong> and select stations, channels and dates.</li>
+<li>Run the picker from <strong>Python</strong> and from a <strong>bash script</strong>.</li>
+</ol>
+<p>The data is from the <strong>Granada seismic sequence (southern Spain) of January 2021</strong>. We will use 1.5 hours of continuous data, from 21:00 to 22:30 UTC on <strong>26 January 2021</strong>, recorded by 19 stations of the Spanish network (ES). During that time, three earthquakes of magnitude around 4 (ML 4.1, 4.1 and 4.3) happened very close to each other, near 37.19° N, 3.69° W and about 5 km deep, at 21:36:32, 21:44:18 and 21:54:55 UTC, together with many smaller aftershocks.</p>
+<p>In this tutorial we will follow this structure:</p>
+<ul>
+<li><em>Seismic files:</em> tutorial5/data</li>
+<li><em>Metadata:</em> tutorial5/metadata</li>
+<li><em>Config Files:</em> tutorial5/configs</li>
+<li><em>Project:</em> tutorial5/project</li>
+<li><em>Folder for the picks:</em> tutorial5/picks, this will be created by surfquake.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--tutorial5
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    --data
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        --ES.E0802..HHE.D.2021.26
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        --ES.E0802..HHN.D.2021.26
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        --ES.E0802..HHZ.D.2021.26
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ......
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        --ES.UMV15..EHZ.D.2021.26
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    --metadata
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        --ES_network.xml
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    --configs
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        --typical_config.yaml
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        --plotting_config.yaml
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    --project
+</code></pre></div>
+<p>For this tutorial you need to download the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Granada/inputs/waveforms_cut" rel="noopener noreferrer" target="_blank">seismic data here</a> (52 files, about 30 MB). The <a href="https://github.com/rcabdia/test_surfquake/tree/main/Granada/inputs/metadata" rel="noopener noreferrer" target="_blank">metadata</a> is <strong>not needed</strong> to pick, because PhaseNet only looks at the waveforms, but download it too: you will need it in the next steps of the workflow (association and location).</p>
+<p>The config files are the same as in <a href="../tutorial1/">Tutorial 1</a>. All the commands of this tutorial are run from the folder that contains <code>tutorial5</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PhaseNet is a neural network: running it takes some time and memory. With this small dataset it takes from a few seconds to a few minutes, depending on your computer. If you have a GPU configured for TensorFlow, surfquake uses it automatically.</p>
+</div>
+<hr />
+<h2 id="step-1-what-does-phasenet-do">Step 1: What does PhaseNet do?</h2>
+<p>PhaseNet (<a href="https://academic.oup.com/gji/article/216/1/261/5129142" rel="noopener noreferrer" target="_blank">Zhu and Beroza, 2019</a>) is a neural network trained with hundreds of thousands of P and S arrivals picked by analysts. It reads a seismogram and returns, for <strong>every sample</strong>, three probabilities that add up to 1:</p>
+<ul>
+<li>the probability that a <strong>P wave</strong> arrives at that sample,</li>
+<li>the probability that an <strong>S wave</strong> arrives at that sample,</li>
+<li>the probability that it is <strong>noise</strong>.</li>
+</ul>
+<p>When an earthquake arrives, the P probability rises to a sharp peak at the onset of the P wave, and the S probability rises at the onset of the S wave. A <strong>pick</strong> is a peak of the probability curve that is higher than a <strong>threshold</strong> (0.3 by default). Its time is the arrival time, and its height, the <strong>probability</strong> (between 0 and 1), tells how confident the network is.</p>
+<p>Before the network, surfquake prepares every file:</p>
+<ol>
+<li>Removes slow trends (a spline detrend) and merges gaps, filling them with zeros.</li>
+<li>Applies a <strong>high-pass filter at 0.5 Hz</strong> to remove long-period noise.</li>
+<li>Keeps the UTC day that contains most of the samples of the file.</li>
+</ol>
+<p>Three things are important to know about how surfquake runs PhaseNet:</p>
+<ul>
+<li><strong>Each file is picked alone.</strong> The network is given one component at a time, so the same P wave is usually picked on Z, N and E: you will see up to three picks of the same arrival. This is normal, and the associator handles it later.</li>
+<li><strong>PhaseNet was trained with data at 100 Hz.</strong> The Granada data is 100 Hz. If your data has another sampling rate, resample it to 100 Hz before picking.</li>
+<li><strong>All the files should cover the same time span.</strong> The network uses the length of the first file for all of them, so a longer file is cut. Daily files (or, like here, files cut to the same window) are the ideal input.</li>
+</ul>
+<hr />
+<h2 id="step-2-create-a-project">Step 2: Create a project</h2>
+<p>As in <a href="../tutorial1_part2/">Tutorial 1 (Part 2)</a>, the first step is to index the files in a <strong>project</strong>.</p>
+<p>Please review the following documentation:</p>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/project/" rel="noopener noreferrer" target="_blank">Project</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span>./tutorial5/data<span class="w"> </span>-s<span class="w"> </span>./tutorial5/project<span class="w"> </span>-n<span class="w"> </span>granada
+</code></pre></div>
+<ul>
+<li><code>-d</code>: folder with the waveform files.</li>
+<li><code>-s</code>: folder where the project is saved.</li>
+<li><code>-n</code>: name of the project (the file name).</li>
+</ul>
+<p>The terminal shows a summary of the project: 1 network, 19 stations and 52 files, from 21:00 to 22:30 on 26 January 2021. Not every station has three components: EMIN and EMLI have only two, and ENIJ only the vertical one. The picker works with whatever is available.</p>
+<p>The project is saved as <code>./tutorial5/project/granada</code>.</p>
+<hr />
+<h2 id="step-3-run-the-picker">Step 3: Run the picker</h2>
+<p>Please review the following documentation:</p>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/picker/" rel="noopener noreferrer" target="_blank">Phase Picker</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-h
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+</code></pre></div>
+<ul>
+<li><code>-f</code>: the project file.</li>
+<li><code>-o</code>: folder where the picks are written. It is created if it does not exist.</li>
+<li><code>-pt</code>, <code>-st</code>: minimum probability of a P pick and of an S pick (0.3 is the default).</li>
+<li><code>--verbose</code>: prints the number of P and S picks of every file.</li>
+</ul>
+<p>While it runs, surfquake shows the device it uses and the progress:</p>
+<div class="highlight"><pre><span></span><code>[PhaseNet] 52 files | device: CPU | batch size: 3 | min prob P/S: 0.3/0.3
+    ES.E0802..HHE.D.2021.26: ... P, ... S picks
+    ......
+[PhaseNet] 3/52 files (6%) | elapsed 0:00:04 | remaining ~0:01:05
+</code></pre></div>
+<p>At the end, it prints a summary similar to this one (the time depends on your computer):</p>
+<div class="highlight"><pre><span></span><code>============================================================
+ PhaseNet summary
+============================================================
+ Files processed     : 52
+ Stations with picks : 19
+ P picks             : 1140
+ S picks             : 1123
+ Total time          : 0:01:10
+ Results saved in    : .../tutorial5/picks
+   original_picks.csv, nll_picks.txt and one folder per day (REAL format)
+============================================================
+</code></pre></div>
+<p>More than 2000 picks in only 1.5 hours! Do not worry: three large earthquakes and their aftershocks produce many real arrivals, each arrival is often picked on three components, and some picks are noise. The next steps show how to read them.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To force the CPU (for example if your GPU does not have enough memory), add <code>--device cpu</code>. With <code>--device gpu</code>, surfquake stops with an error if no GPU is found.</p>
+</div>
+<hr />
+<h2 id="step-4-the-output-files">Step 4: The output files</h2>
+<p>The picker writes the same picks in three formats, each one for a different use:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>--tutorial5
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    --picks
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        --original_picks.csv
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        --nll_picks.txt
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        --20210126
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            --ES.E0802.P.txt
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            --ES.E0802.S.txt
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            --ES.EADA.P.txt
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            ......
+</code></pre></div>
+<h3 id="original_pickscsv-the-complete-table">original_picks.csv: the complete table</h3>
+<p>One line per pick, with all the information. This is the file to open with a spreadsheet or with pandas:</p>
+<div class="highlight"><pre><span></span><code>date,fname,year,month,day,net,station,flag,tt,date_time,weight,amplitude,phase,channel
+20210126,ES.E0802.P,2021,1,26,ES,E0802,1,77809.42,2021-01-26T21:36:49.420000,0.7245163321495056,498471187.5,P,HHE
+</code></pre></div>
+<p>The important columns are:</p>
+<ul>
+<li><code>date_time</code>: the arrival time (UTC).</li>
+<li><code>phase</code>: P or S.</li>
+<li><code>weight</code>: the <strong>probability</strong> of the pick, given by PhaseNet.</li>
+<li><code>net</code>, <code>station</code>, <code>channel</code>: where it was picked.</li>
+<li><code>tt</code>: the arrival time in seconds from 00:00 of that day (77809.42 s = 21:36:49.42).</li>
+<li><code>amplitude</code>: the maximum amplitude of the waveform just after the pick (10 s after a P, 5 s after an S). It is measured in <strong>counts</strong> and multiplied by a fixed factor, so it is not a physical amplitude: use it only to compare picks of the same channel.</li>
+</ul>
+<h3 id="20210126-input-for-the-associator">20210126/: input for the associator</h3>
+<p>One folder per day, and one file per station and phase (<code>ES.EADA.P.txt</code>), with three columns: <code>tt</code>, probability and amplitude. This is the input format of the associator REAL, used by <code>surfquake associate</code>. Here are the first P picks of EADA. The first three are the same P wave of the first earthquake, picked on HHE, HHN and HHZ:</p>
+<div class="highlight"><pre><span></span><code>77815.05 0.753131 5.795099e+08
+77815.05 0.760775 5.920444e+08
+77815.07 0.766324 8.130278e+08
+78030.83 0.535015 1.220437e+07
+</code></pre></div>
+<h3 id="nll_pickstxt-the-nonlinloc-format">nll_picks.txt: the NonLinLoc format</h3>
+<p>All the picks in the phase format of the location program NonLinLoc, one per line:</p>
+<div class="highlight"><pre><span></span><code>Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hour_min    Seconds Err ErrMag  Coda_duration   Amplitude   Period
+E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+08 -1.00e+00
+</code></pre></div>
+<p>The column <code>ErrMag</code> is the <strong>uncertainty</strong> of the pick in seconds, translated from the probability: the more confident the pick, the smaller the error (0.02 s above 0.95, up to 0.5 s below 0.6). This file can also be loaded in the interactive plot (Step 6) and is the input of <code>surfquake polarity</code>.</p>
+<hr />
+<h2 id="step-5-the-picks-of-one-earthquake">Step 5: The picks of one earthquake</h2>
+<p>Let's look at the first earthquake, at <strong>21:36:32.6 UTC</strong>. Open <code>original_picks.csv</code> and keep the picks between 21:36:32 and 21:37:20. For every station, this table shows the P and the S pick with the highest probability, ordered by time:</p>
+<table>
+<thead>
+<tr>
+<th>Station</th>
+<th>P pick (21:3x:xx)</th>
+<th>Prob. P</th>
+<th>S pick</th>
+<th>Prob. S</th>
+<th>S − P (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UMV15</td>
+<td>36:33.98 (EHZ)</td>
+<td>0.97</td>
+<td>36:35.89 (EHE)</td>
+<td>0.83</td>
+<td>1.9</td>
+</tr>
+<tr>
+<td>EQTA</td>
+<td>36:36.33 (HHZ)</td>
+<td>0.96</td>
+<td>36:40.00 (HHE)</td>
+<td>0.78</td>
+<td>3.7</td>
+</tr>
+<tr>
+<td>EGOR</td>
+<td>36:38.37 (HHZ)</td>
+<td>0.92</td>
+<td>36:44.18 (HHZ)</td>
+<td>0.43</td>
+<td>5.8</td>
+</tr>
+<tr>
+<td>ELGU</td>
+<td>36:38.61 (HHZ)</td>
+<td>0.82</td>
+<td>36:44.25 (HHE)</td>
+<td>0.52</td>
+<td>5.6</td>
+</tr>
+<tr>
+<td>EBER</td>
+<td>36:46.14 (HHZ)</td>
+<td>0.88</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>E0802</td>
+<td>36:49.29 (HHZ)</td>
+<td>0.93</td>
+<td>37:01.90 (HHE)</td>
+<td>0.65</td>
+<td>12.6</td>
+</tr>
+<tr>
+<td>EADA</td>
+<td>36:55.07 (HHZ)</td>
+<td>0.77</td>
+<td>37:12.09 (HHN)</td>
+<td>0.48</td>
+<td>17.0</td>
+</tr>
+<tr>
+<td>ENIJ</td>
+<td>36:55.08 (HHZ)</td>
+<td>0.83</td>
+<td>37:19.06 (HHZ)</td>
+<td>0.44</td>
+<td>24.0 ⚠</td>
+</tr>
+<tr>
+<td>EALB</td>
+<td>36:56.75 (HHZ)</td>
+<td>0.83</td>
+<td>37:15.70 (HHN)</td>
+<td>0.31</td>
+<td>19.0</td>
+</tr>
+<tr>
+<td>ECAB</td>
+<td>37:00.66 (HHZ)</td>
+<td>0.65</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>TLOR</td>
+<td>37:04.22 (HHZ)</td>
+<td>0.67</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>ESPR</td>
+<td>37:04.71 (HHZ)</td>
+<td>0.63</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>EZAR</td>
+<td>37:05.31 (HHZ)</td>
+<td>0.68</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>EMUR</td>
+<td>37:09.70 (HHE)</td>
+<td>0.81</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>ETOB</td>
+<td>37:11.25 (HHZ)</td>
+<td>0.90</td>
+<td>37:17.21 (HHE)</td>
+<td>0.42</td>
+<td>6.0 ⚠</td>
+</tr>
+<tr>
+<td>EMIN</td>
+<td>37:11.82 (HHZ)</td>
+<td>0.93</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>What can we learn from this table?</p>
+<ul>
+<li><strong>The P picks are very good.</strong> Almost all the stations have a P pick, most of them with probability above 0.8, and the same arrival is picked on the three components within a few hundredths of a second.</li>
+<li><strong>The arrivals follow the distance.</strong> The closest station, UMV15, records the P wave 1.4 s after the origin time, and the furthest ones about 40 s later.</li>
+<li><strong>S − P grows with distance.</strong> A simple rule for local earthquakes is that the distance (in km) is about 8 times S − P (in s): UMV15 is about 15 km from the earthquake, EQTA about 30 km and E0802 about 100 km.</li>
+<li><strong>The S picks are fewer and less confident.</strong> The S wave arrives in the coda of the P wave, so it is harder to recognise: many stations have no S pick, and their probabilities are usually lower. The S is picked mostly on the <strong>horizontal</strong> components, where it is larger.</li>
+<li><strong>Not every pick is right.</strong> Two S picks are suspicious (⚠). ENIJ has almost the same P time as EADA, so its S − P should also be about 17 s, not 24 s. ETOB has an S − P of only 6 s while its P arrives 40 s after the origin time: it is probably a pick of another arrival. These are the picks that the <strong>associator</strong> and the <strong>location</strong> will reject, because they do not fit with the other stations.</li>
+</ul>
+<p>Notice also TLOR, which has several P picks within one second with low probabilities (0.3 to 0.4) on its horizontal components: when the onset is not sharp, PhaseNet can give more than one peak.</p>
+<hr />
+<h2 id="step-6-draw-the-picks-on-the-waveforms">Step 6: Draw the picks on the waveforms</h2>
+<p>A table is useful, but it is always worth looking at the picks on the waveforms. Let's open the first earthquake at EQTA, the second closest station, with <code>quick</code>, cutting a window of 70 s with <code>--min_date</code> and <code>--max_date</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial5/data/ES.EQTA*&quot;</span><span class="w"> </span>-c<span class="w"> </span>./tutorial5/configs/typical_config.yaml<span class="w"> </span>--plot_config<span class="w"> </span>./tutorial5/configs/plotting_config.yaml<span class="w"> </span>--min_date<span class="w"> </span><span class="s2">&quot;2021-01-26 21:36:25&quot;</span><span class="w"> </span>--max_date<span class="w"> </span><span class="s2">&quot;2021-01-26 21:37:35&quot;</span>
+</code></pre></div>
+<p>The pattern <code>ES.EQTA*</code> selects the three components of EQTA. Change it to see other stations, for example <code>"./tutorial5/data/ES.UMV15*"</code>, or <code>"./tutorial5/data/*HZ*"</code> for the vertical component of all the stations.</p>
+<p>In the interactive prompt, load the picks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt; load_picks --file ./tutorial5/picks/nll_picks.txt
+</code></pre></div>
+<p>surfquake draws every pick on the trace of the same station and channel, and stores it in the <a href="https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/" rel="noopener noreferrer" target="_blank">trace header</a> (<code>picks</code>). The picks of the whole 1.5 hours are read, but only those inside the window are visible.</p>
+<p><img alt="PhaseNet picks of the first earthquake at EQTA" src="img/T5_picks.png" /></p>
+<p>Look at EQTA: the P pick is exactly at the sharp onset of the P wave on the three components, and the S pick on the horizontal components at the start of the larger S wave, 3.7 s later. You can now move, delete or add picks by hand, as explained in <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">Plotting Interaction</a>, and save them.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To see the picks of the second and third earthquakes, change the window to 21:44:10–21:45:20 and 21:54:50–21:56:00.</p>
+</div>
+<hr />
+<h2 id="step-7-choosing-the-thresholds">Step 7: Choosing the thresholds</h2>
+<p>The thresholds <code>-pt</code> and <code>-st</code> decide which peaks of the probability curve become picks. It is a compromise:</p>
+<ul>
+<li>A <strong>low</strong> threshold finds the arrivals of small earthquakes, but also picks noise.</li>
+<li>A <strong>high</strong> threshold keeps only clear arrivals, but misses the small events and many S waves.</li>
+</ul>
+<p>With the Granada picks, this is the number of picks that you would keep with each threshold:</p>
+<table>
+<thead>
+<tr>
+<th>Threshold</th>
+<th>P picks</th>
+<th>S picks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.3</td>
+<td>1140</td>
+<td>1123</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>702</td>
+<td>544</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>388</td>
+<td>188</td>
+</tr>
+<tr>
+<td>0.9</td>
+<td>128</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p>The S picks fall much faster than the P picks: above 0.9 almost no S wave survives. In the table of Step 5, a threshold of 0.5 would remove the suspicious S of ENIJ and ETOB, but also the good S picks of EADA and EALB.</p>
+<p>The usual strategy is to <strong>keep low thresholds (0.3)</strong> and let the associator and the location clean the false picks: a false pick that does not match other stations is simply not associated to any event. Raise the threshold only if the noisy picks are so many that the association becomes slow, or if you want only the best picks (for example, for a tomography).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_05<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.4
+</code></pre></div>
+<h3 id="picking-only-some-stations-channels-or-times">Picking only some stations, channels or times</h3>
+<p>You do not need to pick the whole project. The same filters as in other commands are available:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Only the vertical components (HHZ and EHZ)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_Z<span class="w"> </span>-ch<span class="w"> </span><span class="s2">&quot;?HZ&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Only three stations</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_sta<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;UMV15|EQTA|EGOR&quot;</span>
+</code></pre></div>
+<p>A filter can be a pattern with <code>*</code> and <code>?</code>, or a list of names separated by <code>|</code>. Always write it between quotes, because <code>*</code>, <code>?</code> and <code>|</code> have a special meaning in the terminal.</p>
+<p>Picking only the vertical components is faster and gives one P pick per arrival, but you lose most of the S picks, which are better seen on the horizontal components.</p>
+<p>With a long archive of daily files, <code>--min_date</code> and <code>--max_date</code> select the days to pick. They select <strong>files</strong>, they do not cut them: in this tutorial all the files cover the same 1.5 hours, so a date filter would keep all of them.</p>
+<hr />
+<h2 id="step-8-picking-from-python">Step 8: Picking from Python</h2>
+<p>The same can be done from a Python script, using the library. Create a file named <code>run_picking.py</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">freeze_support</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet.phasenet_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhasenetISP</span><span class="p">,</span> <span class="n">PhasenetUtils</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">project_file</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/project/granada&quot;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="n">output_picks</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/picks&quot;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a>    <span class="n">freeze_support</span><span class="p">()</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a>    <span class="c1"># Load the project and keep only the vertical components</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">project_file</span><span class="p">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;?HZ&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>    <span class="c1"># Run PhaseNet</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a>    <span class="n">picker</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>    <span class="c1"># Convert the predictions to a table and write the three formats</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a>    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>    <span class="c1"># The table is a pandas DataFrame: you can work with it directly</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">picks_results</span><span class="p">[</span><span class="n">picks_results</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">]</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="p">[[</span><span class="s2">&quot;station&quot;</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]])</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>run_picking.py
+</code></pre></div>
+<p>The lines <code>if __name__ == '__main__':</code> and <code>freeze_support()</code> are needed because the reading of the files runs in parallel; without them, the script may fail on Windows and macOS.</p>
+<hr />
+<h2 id="step-9-the-bash-script">Step 9: The bash script</h2>
+<p>Finally, the whole workflow in a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. Create a file named <code>run_picking.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial5
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/data<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>granada
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="nv">$BASE</span>/project/granada<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/picks<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_picking.sh
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>./run_picking.sh
+</code></pre></div>
+<hr />
+<h2 id="what-comes-next">What comes next?</h2>
+<p>The picks are only the first step of the automatic workflow. With the same Granada data, the next steps are:</p>
+<ol>
+<li><strong>Association</strong> (<code>surfquake associate</code>): groups the picks of different stations that belong to the same earthquake, using the daily folders and the metadata. Here, it finds the earthquakes of the sequence and discards the isolated false picks. See <a href="https://projectisp.github.io/surfquaketutorial.github.io/associate/" rel="noopener noreferrer" target="_blank">Clustering Associate</a>.</li>
+<li><strong>Location</strong> (<code>surfquake locate</code>): computes the hypocentre of every event with NonLinLoc. See <a href="https://projectisp.github.io/surfquaketutorial.github.io/locate/" rel="noopener noreferrer" target="_blank">Event Location</a>.</li>
+<li><strong>Source parameters and moment tensor</strong> (<code>surfquake source</code>, <code>surfquake mti</code>): magnitudes and focal mechanisms.</li>
+</ol>
+<p>The results of the complete workflow with this data can be found in the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Granada" rel="noopener noreferrer" target="_blank">Granada example</a>.</p>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li>PhaseNet turns every seismogram into <strong>probability curves</strong> for P, S and noise; a <strong>pick</strong> is a peak above the threshold, and its height is the <strong>probability</strong>.</li>
+<li>Each file is picked <strong>alone</strong>, so the same arrival can be picked on the three components.</li>
+<li>The input should be at <strong>100 Hz</strong>, and all the files should cover the <strong>same time span</strong>.</li>
+<li>The picks are written in three formats: <code>original_picks.csv</code> (complete table), daily folders (input of the associator REAL) and <code>nll_picks.txt</code> (NonLinLoc, interactive plot and polarities).</li>
+<li><strong>P</strong> picks are usually precise and confident; <strong>S</strong> picks are fewer, less confident and found mostly on the horizontal components.</li>
+<li>Some picks are wrong: keep low thresholds and let the <strong>associator</strong> and the <strong>location</strong> reject the picks that do not fit.</li>
+<li>Always check a few events on the waveforms with <code>load_picks</code>.</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<p>Zhu, Weiqiang, and Gregory C. Beroza. "PhaseNet: a deep-neural-network-based seismic arrival-time picking method." Geophysical Journal International 216.1 (2019): 261-273.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/rcabdia/SurfQuake" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ProgramSeismic" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
