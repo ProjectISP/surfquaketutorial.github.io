@@ -1348,6 +1348,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-seismic-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add Seismic Noise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rename" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3153,7 +3164,7 @@
 </code></pre></div>
 <hr />
 <h3 id="add-noise">Add Noise</h3>
-<p>Adds synthetic random noise to the trace. It is used to test the robustness of a method (picking, location, magnitudes) at decreasing signal-to-noise ratios.</p>
+<p>Adds synthetic random noise to the trace. It is used to test the robustness of a method (picking, location, magnitudes) at decreasing signal-to-noise ratios. The noise level is set <strong>relative to the trace</strong> (an SNR). To add noise with the level and spectrum of real seismic noise, use <a href="#add-seismic-noise">Add Seismic Noise</a>.</p>
 <p>The noise is generated in the frequency domain with a power spectral density proportional to <span class="arithmatex">\(1/f^{\alpha}\)</span>:</p>
 <table>
 <thead>
@@ -3212,6 +3223,79 @@
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nt">SNR_dB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </code></pre></div>
 <hr />
+<h3 id="add-seismic-noise">Add Seismic Noise</h3>
+<p>Adds <strong>realistic seismic background noise</strong>, with the spectrum and the absolute level of the noise recorded by real stations. While <code>add_noise</code> uses a mathematical spectrum and a level relative to the trace (an SNR), <code>add_seismic_noise</code> uses the <strong>Peterson (1993) noise models</strong>: the <strong>New Low Noise Model</strong> (NLNM), the quietest noise observed at the stations of a global network, and the <strong>New High Noise Model</strong> (NHNM), the noisiest. The real noise of almost every station lies between the two. They include the main features of the seismic noise: the <strong>microseism peaks</strong> between about 3 and 20 s and the increase of noise at long periods.</p>
+<p>It is useful to test a method with the noise that a quiet or a noisy station would really record, for example to see down to which magnitude an event is still detected or picked, or to add noise to synthetic seismograms that have none.</p>
+<p>How the noise is built (a Python port of R. Herrmann's <code>sacnoise</code>):</p>
+<ol>
+<li>Gaussian white noise is generated, with the same length and sampling rate as the trace.</li>
+<li>Its spectrum is shaped so that its power spectral density <span class="arithmatex">\(P(f)\)</span>, in acceleration, follows the noise model: <span class="arithmatex">\(|X(f)| = |W(f)|\sqrt{P(f)/(2\,\Delta t)}\)</span>, where <span class="arithmatex">\(W(f)\)</span> is the spectrum of the white noise and <span class="arithmatex">\(\Delta t\)</span> the sampling interval.</li>
+<li>The noise, in acceleration, is converted to the <strong>units of the trace</strong> (see <code>units</code>).</li>
+<li>The noise is added to the trace.</li>
+</ol>
+<p>The level between the two models is set with <code>noise_level</code>. It is interpolated in decibels: <span class="arithmatex">\(P_{dB}(f) = (1 - \text{noise\_level})\, \text{NLNM}(f) + \text{noise\_level}\, \text{NHNM}(f)\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>noise_level</code></td>
+<td>(optional, default <code>0.5</code>) <code>0</code> = NLNM (very quiet station), <code>0.5</code> = intermediate noise, <code>1</code> = NHNM (very noisy station). Values above 1 give noise above the NHNM, and below 0 noise under the NLNM.</td>
+</tr>
+<tr>
+<td><code>units</code></td>
+<td>(optional, default <code>counts</code>) units of the trace data. <code>counts</code>: raw data; the noise goes through the <strong>instrument response</strong>, as if recorded by the real sensor and digitizer. <code>ACC</code> (m/s²), <code>VEL</code> (m/s) or <code>DISP</code> (m): data already corrected for the instrument; the noise is converted by integration in the frequency domain, and no metadata is needed.</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td>(optional, default <code>None</code>) integer seed of the random generator. The same seed gives the same noise, so the test can be repeated.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;add_seismic_noise&#39;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="nt">noise_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;counts&#39;</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12345</span>
+</code></pre></div>
+<p>Example with data already in velocity: the response is removed first, then a quiet-station noise is added:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remove_response&#39;</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">    </span><span class="nt">water_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;VEL&#39;</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">    </span><span class="nt">pre_filt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.005</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.008</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">45</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">48</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;add_seismic_noise&#39;</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="w">    </span><span class="nt">noise_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a><span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;VEL&#39;</span>
+</code></pre></div>
+<p>⚠️ WARNING: With <code>units: 'counts'</code> the metadata is <strong>required</strong>: include your inventory, e.g. <code>surfquake quick -w "waveform_file" -i "inventory_file.xml"</code>. If there is no inventory, or the response of a trace is not found, a warning is printed and the noise is <strong>not added</strong> to that trace (the trace is kept unchanged).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Choose <code>units</code> according to the <strong>current</strong> state of the trace: <code>counts</code> before <code>remove_response</code>, and the output units of <code>remove_response</code> after it.</li>
+<li>The models are defined for periods between 0.1 and 100000 s. At higher frequencies (above 10 Hz, when the sampling rate is above 20 Hz), the value of the model at 0.1 s is used.</li>
+<li>The noise is added to the whole trace, also to the signal: compare the result with the original trace to see how the noise affects your method.</li>
+</ul>
+</div>
+<blockquote>
+<p><strong>Scientific Reference</strong>:</p>
+<p>Peterson, Jon R. "Observations and modeling of seismic background noise." U.S. Geological Survey Open-File Report 93-322 (1993): 1-95.</p>
+</blockquote>
+<hr />
 <h3 id="rename">Rename</h3>
 <p>Changes the network, station, location or channel codes of the traces. It is useful to harmonise data from different sources, or to change <code>1/2</code> components into <code>N/E</code>.</p>
 <p>All maps are optional; write them as <code>old: new</code>.</p>
@@ -3238,16 +3322,16 @@
 </tbody>
 </table>
 <p>Special keys: <code>'*'</code> = any code not matched explicitly; <code>''</code> = empty code.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nt">Analysis</span><span class="p">:</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rename&#39;</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">      </span><span class="s">&#39;XX&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;ES&#39;</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span><span class="nt">locations</span><span class="p">:</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">      </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;00&#39;</span>
-<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">    </span><span class="nt">components</span><span class="p">:</span>
-<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">      </span><span class="s">&#39;1&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;N&#39;</span>
-<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="w">      </span><span class="s">&#39;2&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;E&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rename&#39;</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">      </span><span class="s">&#39;XX&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;ES&#39;</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="nt">locations</span><span class="p">:</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">      </span><span class="s">&#39;&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;00&#39;</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="nt">components</span><span class="p">:</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">      </span><span class="s">&#39;1&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;N&#39;</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">      </span><span class="s">&#39;2&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&#39;E&#39;</span>
 </code></pre></div>
 <p>⚠️ Always quote the codes: unquoted <code>00</code> becomes <code>0</code>, and <code>NO</code> (Norway) becomes <code>False</code>.</p>
 <hr />
