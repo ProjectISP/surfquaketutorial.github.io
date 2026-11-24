@@ -530,7 +530,7 @@ Analysis:
 
 ### Add Noise
 
-Adds synthetic random noise to the trace. It is used to test the robustness of a method (picking, location, magnitudes) at decreasing signal-to-noise ratios.
+Adds synthetic random noise to the trace. It is used to test the robustness of a method (picking, location, magnitudes) at decreasing signal-to-noise ratios. The noise level is set **relative to the trace** (an SNR). To add noise with the level and spectrum of real seismic noise, use [Add Seismic Noise](#add-seismic-noise).
 
 The noise is generated in the frequency domain with a power spectral density proportional to $1/f^{\alpha}$:
 
@@ -553,6 +553,71 @@ Analysis:
     noise_type: 'white'
     SNR_dB: 1
 ```
+
+---
+
+### Add Seismic Noise
+
+Adds **realistic seismic background noise**, with the spectrum and the absolute level of the noise recorded by real stations. While `add_noise` uses a mathematical spectrum and a level relative to the trace (an SNR), `add_seismic_noise` uses the **Peterson (1993) noise models**: the **New Low Noise Model** (NLNM), the quietest noise observed at the stations of a global network, and the **New High Noise Model** (NHNM), the noisiest. The real noise of almost every station lies between the two. They include the main features of the seismic noise: the **microseism peaks** between about 3 and 20 s and the increase of noise at long periods.
+
+It is useful to test a method with the noise that a quiet or a noisy station would really record, for example to see down to which magnitude an event is still detected or picked, or to add noise to synthetic seismograms that have none.
+
+How the noise is built (a Python port of R. Herrmann's `sacnoise`):
+
+1. Gaussian white noise is generated, with the same length and sampling rate as the trace.
+2. Its spectrum is shaped so that its power spectral density $P(f)$, in acceleration, follows the noise model: $|X(f)| = |W(f)|\sqrt{P(f)/(2\,\Delta t)}$, where $W(f)$ is the spectrum of the white noise and $\Delta t$ the sampling interval.
+3. The noise, in acceleration, is converted to the **units of the trace** (see `units`).
+4. The noise is added to the trace.
+
+The level between the two models is set with `noise_level`. It is interpolated in decibels: $P_{dB}(f) = (1 - \text{noise\_level})\, \text{NLNM}(f) + \text{noise\_level}\, \text{NHNM}(f)$.
+
+| Parameter | Description |
+|-----------|-------------|
+| `noise_level` | (optional, default `0.5`) `0` = NLNM (very quiet station), `0.5` = intermediate noise, `1` = NHNM (very noisy station). Values above 1 give noise above the NHNM, and below 0 noise under the NLNM. |
+| `units` | (optional, default `counts`) units of the trace data. `counts`: raw data; the noise goes through the **instrument response**, as if recorded by the real sensor and digitizer. `ACC` (m/s²), `VEL` (m/s) or `DISP` (m): data already corrected for the instrument; the noise is converted by integration in the frequency domain, and no metadata is needed. |
+| `seed` | (optional, default `None`) integer seed of the random generator. The same seed gives the same noise, so the test can be repeated. |
+
+```yaml
+Analysis:
+  process_1:
+    name: 'add_seismic_noise'
+    noise_level: 0.5
+    units: 'counts'
+    seed: 12345
+```
+
+Example with data already in velocity: the response is removed first, then a quiet-station noise is added:
+
+```yaml
+Analysis:
+  process_1:
+    name: 'rmean'
+    method: 'linear'
+  process_2:
+    name: 'taper'
+    method: 'cosine'
+    max_percentage: 0.05
+  process_3:
+    name: 'remove_response'
+    water_level: 90
+    units: 'VEL'
+    pre_filt: [0.005, 0.008, 45, 48]
+  process_4:
+    name: 'add_seismic_noise'
+    noise_level: 0.2
+    units: 'VEL'
+```
+
+⚠️ WARNING: With `units: 'counts'` the metadata is **required**: include your inventory, e.g. `surfquake quick -w "waveform_file" -i "inventory_file.xml"`. If there is no inventory, or the response of a trace is not found, a warning is printed and the noise is **not added** to that trace (the trace is kept unchanged).
+
+!!! tip
+    - Choose `units` according to the **current** state of the trace: `counts` before `remove_response`, and the output units of `remove_response` after it.
+    - The models are defined for periods between 0.1 and 100000 s. At higher frequencies (above 10 Hz, when the sampling rate is above 20 Hz), the value of the model at 0.1 s is used.
+    - The noise is added to the whole trace, also to the signal: compare the result with the original trace to see how the noise affects your method.
+
+> **Scientific Reference**:
+>
+> Peterson, Jon R. "Observations and modeling of seismic background noise." U.S. Geological Survey Open-File Report 93-322 (1993): 1-95.
 
 ---
 
