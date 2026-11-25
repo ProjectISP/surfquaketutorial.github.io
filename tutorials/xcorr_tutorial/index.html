@@ -1,0 +1,2980 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/tutorials/xcorr_tutorial/">
+      
+      
+        <link rel="prev" href="../beamforming_tutorial/">
+      
+      
+        <link rel="next" href="../picking_tutorial/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>CrossCorrelation - SurfQuake</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/surfquake_toolboxes.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#array-processing-cross-correlation-and-coherence-tutorial-4-part-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SurfQuake" class="md-header__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SurfQuake
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CrossCorrelation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../seismic_data_files/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../tutorial1/" class="md-tabs__link">
+          
+  
+  
+  Tutorial Book
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../processing_overview/" class="md-tabs__link">
+          
+  
+  
+  Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../picker/" class="md-tabs__link">
+          
+  
+  
+  Event Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ppsd_DB/" class="md-tabs__link">
+          
+  
+  
+  Noise Processing
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../create_metadata/" class="md-tabs__link">
+          
+  
+  
+  Utilities
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SurfQuake" class="md-nav__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    SurfQuake
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seismic_data_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seismic Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Book
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial Book
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1_part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../polarization_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polarization & Rotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamfoming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CrossCorrelation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CrossCorrelation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-bit-of-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A bit of theory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A bit of theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cross-correlation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-correlation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plane-wave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plane wave
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-spectrum-coherence-and-transfer-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-spectrum, coherence and transfer function
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-the-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prepare the files
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prepare the files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-post-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The post-script
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-cross-correlate-the-p-wave-interactively" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Cross-correlate the P wave interactively
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-delays-and-plane-wave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Delays and plane wave
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2: Delays and plane wave">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cycle-skipping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cycle skipping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-coherence-between-two-stations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Coherence between two stations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Coherence between two stations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-phase-gives-the-delay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The phase gives the delay
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-automatic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Automatic
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-bash-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Bash script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picking_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Picking (PhaseNet)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signal Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Signal Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trace_header_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trace Header
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explore_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Availability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Traces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_stream_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Stream
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../particle_motion_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spectral_analysis_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../beamforming_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamforming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../characteristic_functions_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characteristic Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plotting_interaction_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../synthetic_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generate Test Signals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bash_script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash Script Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../picker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Picker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Associator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Associator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../associate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering Associate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coincidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coincidence Trigger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../locate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Location
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Focal Mechanism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Focal Mechanism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../focmec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Motion Polarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moment Tensor Inversion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Noise Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPSD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PPSD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_DB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataBase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_plot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting & Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ambient_noise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ambient Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dispersion_curves_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dispersion Curves Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utilities
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../create_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manage_catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build_mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build MTI Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="array-processing-cross-correlation-and-coherence-tutorial-4-part-2"><span style="color:darkcyan;"> <strong>Array Processing: Cross-Correlation and Coherence Tutorial 4 (Part 2)</strong> </span></h1>
+<p>In the <a href="../beamforming_tutorial/">Beamforming Tutorial</a>, we found the direction and the slowness of the P wave of the North Korea nuclear test by testing all the possible plane waves on the ILAR array. In this tutorial, we will look at the same data from a different angle: we will <strong>compare the stations two by two</strong>. Because ILAR is a small array, the P wave looks almost the same at all its stations, and only arrives a little earlier or later. Measuring how similar two waveforms are, and how much one is delayed with respect to the other, is the job of the <strong>cross-correlation</strong> in the time domain, and of the <strong>cross-spectrum</strong> and the <strong>coherence</strong> in the frequency domain.</p>
+<p>We will learn how to work with the commands <code>quick</code> and <code>specplot</code>, and the interactive commands <code>cut</code>, <code>xcorr</code>, <code>runpy</code> and <code>coh</code>, to:</p>
+<ol>
+<li>Cross-correlate the P wave of every station with a reference station.</li>
+<li>Measure the <strong>delays</strong> between stations, and fit a <strong>plane wave</strong> to them: a beamforming "by hand".</li>
+<li>Recognise <strong>cycle skipping</strong>, the classic error of cross-correlation.</li>
+<li>Compute the <strong>coherence</strong> and the <strong>transfer function</strong> between two stations, and see how the similarity changes with frequency and distance.</li>
+<li>Repeat everything <strong>automatically</strong> with a config file and a post-script.</li>
+</ol>
+<p>The data is the same as in the beamforming tutorial: the <strong>North Korea nuclear test of 3 September 2017</strong> (origin time 03:30:01 UTC), recorded at the 18 vertical short-period stations of the <strong>ILAR array</strong> (network IM, Alaska), at 20 samples per second. The P wave arrives at about 03:39:03.5 UTC.</p>
+<p>In this tutorial we will follow this structure:</p>
+<ul>
+<li><em>Seismic files:</em> tutorial3/data</li>
+<li><em>Metadata:</em> tutorial3/metadata</li>
+<li><em>Config Files:</em> tutorial3/configs</li>
+<li><em>Scripts:</em> tutorial3/scripts</li>
+<li><em>Folder for the coherence results:</em> tutorial3/coh, this will be created by surfquake.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--tutorial3
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    --data
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        --IM.IL02..SHZ
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        --IM.IL03..SHZ
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        ......
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        --IM.IL19..SHZ
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    --metadata
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        --dataless.dlsv
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    --configs
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        --plotting_config.yaml
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        --filter_config.yaml
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        --xcorr_config.yaml
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        --plotting_record.yaml
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    --scripts
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        --xcorr_lags.py
+</code></pre></div>
+<p>If you have not done the beamforming tutorial, download the <a href="https://github.com/ProjectISP/ISP/tree/master/isp/examples/NuclearExplotionILAR_2017" rel="noopener noreferrer" target="_blank">seismic data here</a> and the <a href="https://github.com/ProjectISP/ISP/tree/master/isp/Metadata/dataless_LASA" rel="noopener noreferrer" target="_blank">metadata here</a>, and create the plotting configuration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial3/configs&quot;</span>
+</code></pre></div>
+<p>All the commands of this tutorial are run from the folder that contains <code>tutorial3</code>.</p>
+<hr />
+<h2 id="a-bit-of-theory">A bit of theory</h2>
+<h3 id="cross-correlation">Cross-correlation</h3>
+<p>The cross-correlation of a reference trace <span class="arithmatex">\(x(t)\)</span> and a trace <span class="arithmatex">\(y(t)\)</span> measures their similarity when <span class="arithmatex">\(y\)</span> is shifted by a <strong>lag</strong> <span class="arithmatex">\(\tau\)</span>:</p>
+<div class="arithmatex">\[
+C(\tau) = \frac{\sum_t x(t)\, y(t+\tau)}{\sqrt{\sum_t x^2(t)\,\sum_t y^2(t+\tau)}}
+\]</div>
+<p>With this normalisation, <span class="arithmatex">\(C\)</span> is a <strong>correlation coefficient</strong> between −1 and 1: 1 means that the two waveforms are identical (except for a scale factor), 0 that they have nothing in common, and −1 that they are identical but with opposite polarity. The lag of the maximum is the <strong>delay</strong> of <span class="arithmatex">\(y\)</span> with respect to <span class="arithmatex">\(x\)</span>: a positive lag means that the wave arrives <strong>later</strong> at <span class="arithmatex">\(y\)</span> than at the reference.</p>
+<p>The correlation of a trace with itself is the <strong>autocorrelation</strong>: its maximum is always 1, at lag 0.</p>
+<h3 id="plane-wave">Plane wave</h3>
+<p>A teleseismic P wave crosses a small array as a <strong>plane wave</strong>. If the station <span class="arithmatex">\(i\)</span> is at position <span class="arithmatex">\((x_i, y_i)\)</span> (east and north, in km) from the reference, its delay is:</p>
+<div class="arithmatex">\[
+\tau_i = s_x\, x_i + s_y\, y_i
+\]</div>
+<p>where <span class="arithmatex">\((s_x, s_y)\)</span> is the <strong>slowness vector</strong> (s/km). Its length is the slowness <span class="arithmatex">\(s\)</span> (the inverse of the apparent velocity), and it points in the direction of propagation, opposite to the back-azimuth. With the delays of three or more stations, the slowness vector is found by least squares. This is the principle of the slowness vector estimation with arrays (Cabieces et al., 2020).</p>
+<h3 id="cross-spectrum-coherence-and-transfer-function">Cross-spectrum, coherence and transfer function</h3>
+<p>In the frequency domain, the traces are cut into overlapping windows, and the spectra <span class="arithmatex">\(X(f)\)</span> and <span class="arithmatex">\(Y(f)\)</span> of the windows are averaged (Welch method) to build:</p>
+<ul>
+<li>the <strong>cross-spectrum</strong>: <span class="arithmatex">\(G_{xy}(f) = \langle X^*(f)\, Y(f) \rangle\)</span></li>
+<li>the <strong>coherence</strong>: <span class="arithmatex">\(\gamma^2(f) = \dfrac{|G_{xy}(f)|^2}{G_{xx}(f)\, G_{yy}(f)}\)</span>, between 0 and 1</li>
+<li>the <strong>transfer function</strong>: <span class="arithmatex">\(H(f) = G_{xy}(f) / G_{xx}(f)\)</span>, with an amplitude and a phase</li>
+</ul>
+<p>The coherence is the "correlation coefficient" of each frequency: it is close to 1 when, window after window, the two traces have the same amplitude ratio and the same phase difference at that frequency. A delay <span class="arithmatex">\(\tau\)</span> produces a phase that changes linearly with frequency:</p>
+<div class="arithmatex">\[
+\phi(f) = -360°\, f\, \tau
+\]</div>
+<p>Please review the following documentation:</p>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/" rel="noopener noreferrer" target="_blank">Processing Stream</a>, <a href="https://projectisp.github.io/surfquaketutorial.github.io/spectral_analysis_documentation/" rel="noopener noreferrer" target="_blank">Time-Frequency Analysis</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/scripts/" rel="noopener noreferrer" target="_blank">Scripts</a></p>
+<hr />
+<h2 id="prepare-the-files">Prepare the files</h2>
+<h3 id="config-files">Config files</h3>
+<p>Create the file <code>./tutorial3/configs/filter_config.yaml</code>. It prepares the traces and keeps the band where the P wave is clear, as in the beamforming tutorial:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<p>Open <code>./tutorial3/configs/plotting_config.yaml</code> and set these keys. They are used later to plot the correlations as a record section:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="w">  </span><span class="nt">traces_per_fig</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">record_option</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">egf</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">scale_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
+</code></pre></div>
+<p><code>record_option: egf</code> draws the record section against the <strong>lag time</strong>, with a red line at lag 0.</p>
+<h3 id="the-post-script">The post-script</h3>
+<p>surfquake computes the correlations, and a short Python script reads their maxima. Create the file <code>./tutorial3/scripts/xcorr_lags.py</code> with this content:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span>
+<span class="normal"><a href="#__codelineno-4-34">34</a></span>
+<span class="normal"><a href="#__codelineno-4-35">35</a></span>
+<span class="normal"><a href="#__codelineno-4-36">36</a></span>
+<span class="normal"><a href="#__codelineno-4-37">37</a></span>
+<span class="normal"><a href="#__codelineno-4-38">38</a></span>
+<span class="normal"><a href="#__codelineno-4-39">39</a></span>
+<span class="normal"><a href="#__codelineno-4-40">40</a></span>
+<span class="normal"><a href="#__codelineno-4-41">41</a></span>
+<span class="normal"><a href="#__codelineno-4-42">42</a></span>
+<span class="normal"><a href="#__codelineno-4-43">43</a></span>
+<span class="normal"><a href="#__codelineno-4-44">44</a></span>
+<span class="normal"><a href="#__codelineno-4-45">45</a></span>
+<span class="normal"><a href="#__codelineno-4-46">46</a></span>
+<span class="normal"><a href="#__codelineno-4-47">47</a></span>
+<span class="normal"><a href="#__codelineno-4-48">48</a></span>
+<span class="normal"><a href="#__codelineno-4-49">49</a></span>
+<span class="normal"><a href="#__codelineno-4-50">50</a></span>
+<span class="normal"><a href="#__codelineno-4-51">51</a></span>
+<span class="normal"><a href="#__codelineno-4-52">52</a></span>
+<span class="normal"><a href="#__codelineno-4-53">53</a></span>
+<span class="normal"><a href="#__codelineno-4-54">54</a></span>
+<span class="normal"><a href="#__codelineno-4-55">55</a></span>
+<span class="normal"><a href="#__codelineno-4-56">56</a></span>
+<span class="normal"><a href="#__codelineno-4-57">57</a></span>
+<span class="normal"><a href="#__codelineno-4-58">58</a></span>
+<span class="normal"><a href="#__codelineno-4-59">59</a></span>
+<span class="normal"><a href="#__codelineno-4-60">60</a></span>
+<span class="normal"><a href="#__codelineno-4-61">61</a></span>
+<span class="normal"><a href="#__codelineno-4-62">62</a></span>
+<span class="normal"><a href="#__codelineno-4-63">63</a></span>
+<span class="normal"><a href="#__codelineno-4-64">64</a></span>
+<span class="normal"><a href="#__codelineno-4-65">65</a></span>
+<span class="normal"><a href="#__codelineno-4-66">66</a></span>
+<span class="normal"><a href="#__codelineno-4-67">67</a></span>
+<span class="normal"><a href="#__codelineno-4-68">68</a></span>
+<span class="normal"><a href="#__codelineno-4-69">69</a></span>
+<span class="normal"><a href="#__codelineno-4-70">70</a></span>
+<span class="normal"><a href="#__codelineno-4-71">71</a></span>
+<span class="normal"><a href="#__codelineno-4-72">72</a></span>
+<span class="normal"><a href="#__codelineno-4-73">73</a></span>
+<span class="normal"><a href="#__codelineno-4-74">74</a></span>
+<span class="normal"><a href="#__codelineno-4-75">75</a></span>
+<span class="normal"><a href="#__codelineno-4-76">76</a></span>
+<span class="normal"><a href="#__codelineno-4-77">77</a></span>
+<span class="normal"><a href="#__codelineno-4-78">78</a></span>
+<span class="normal"><a href="#__codelineno-4-79">79</a></span>
+<span class="normal"><a href="#__codelineno-4-80">80</a></span>
+<span class="normal"><a href="#__codelineno-4-81">81</a></span>
+<span class="normal"><a href="#__codelineno-4-82">82</a></span>
+<span class="normal"><a href="#__codelineno-4-83">83</a></span>
+<span class="normal"><a href="#__codelineno-4-84">84</a></span>
+<span class="normal"><a href="#__codelineno-4-85">85</a></span>
+<span class="normal"><a href="#__codelineno-4-86">86</a></span>
+<span class="normal"><a href="#__codelineno-4-87">87</a></span>
+<span class="normal"><a href="#__codelineno-4-88">88</a></span>
+<span class="normal"><a href="#__codelineno-4-89">89</a></span>
+<span class="normal"><a href="#__codelineno-4-90">90</a></span>
+<span class="normal"><a href="#__codelineno-4-91">91</a></span>
+<span class="normal"><a href="#__codelineno-4-92">92</a></span>
+<span class="normal"><a href="#__codelineno-4-93">93</a></span>
+<span class="normal"><a href="#__codelineno-4-94">94</a></span>
+<span class="normal"><a href="#__codelineno-4-95">95</a></span>
+<span class="normal"><a href="#__codelineno-4-96">96</a></span>
+<span class="normal"><a href="#__codelineno-4-97">97</a></span>
+<span class="normal"><a href="#__codelineno-4-98">98</a></span>
+<span class="normal"><a href="#__codelineno-4-99">99</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="sd">xcorr_lags.py - Lag times of the cross-correlations and plane-wave fit.</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="sd">Use it after the stream method &#39;cross_correlate&#39; (mode &#39;full&#39;, trim True):</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="sd">  - Automatic (quick / processing):  --post_script xcorr_lags.py --post_script_stage before</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="sd">  - Interactive (command prompt):     runpy xcorr_lags.py</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="sd">For every cross-correlation trace it prints the lag of the maximum and the</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="sd">correlation coefficient. Then it fits a plane wave to the reliable lags,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="sd">t = sx * x + sy * y, and prints the slowness and the back-azimuth.</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="sd">Finally, it stores in the header of each trace its distance along the</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="sd">direction of propagation, so the correlations can be plotted as a record</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="sd">section (plot_type: record, record_option: egf).</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_inventory</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy.geodetics</span><span class="w"> </span><span class="kn">import</span> <span class="n">gps2dist_azimuth</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="n">INVENTORY</span> <span class="o">=</span> <span class="s2">&quot;./tutorial3/metadata/dataless.dlsv&quot;</span>  <span class="c1"># used when the script runs with runpy</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="n">MIN_CC</span> <span class="o">=</span> <span class="mf">0.7</span>      <span class="c1"># minimum correlation coefficient of a reliable lag</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="n">MAX_SLOW</span> <span class="o">=</span> <span class="mf">0.10</span>   <span class="c1"># s/km. A lag longer than MAX_SLOW * distance is not physical (cycle skip)</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="k">def</span><span class="w"> </span><span class="nf">_peak</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Index of the maximum, refined with a parabola through the three samples around it.&quot;&quot;&quot;</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a>    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a>        <span class="n">den</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a>        <span class="k">if</span> <span class="n">den</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a>            <span class="k">return</span> <span class="n">k</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">den</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a>
+<a id="__codelineno-4-36" name="__codelineno-4-36"></a>
+<a id="__codelineno-4-37" name="__codelineno-4-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">_coords</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span> <span class="n">trace_id</span><span class="p">):</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38"></a>    <span class="n">net</span><span class="p">,</span> <span class="n">sta</span> <span class="o">=</span> <span class="n">trace_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39"></a>    <span class="n">station</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">net</span><span class="p">,</span> <span class="n">station</span><span class="o">=</span><span class="n">sta</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-4-40" name="__codelineno-4-40"></a>    <span class="k">return</span> <span class="n">station</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">station</span><span class="o">.</span><span class="n">longitude</span>
+<a id="__codelineno-4-41" name="__codelineno-4-41"></a>
+<a id="__codelineno-4-42" name="__codelineno-4-42"></a>
+<a id="__codelineno-4-43" name="__codelineno-4-43"></a><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">inventory</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a id="__codelineno-4-44" name="__codelineno-4-44"></a>    <span class="k">if</span> <span class="n">inventory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-45" name="__codelineno-4-45"></a>        <span class="n">inventory</span> <span class="o">=</span> <span class="n">read_inventory</span><span class="p">(</span><span class="n">INVENTORY</span><span class="p">)</span>
+<a id="__codelineno-4-46" name="__codelineno-4-46"></a>
+<a id="__codelineno-4-47" name="__codelineno-4-47"></a>    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-4-48" name="__codelineno-4-48"></a>    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<a id="__codelineno-4-49" name="__codelineno-4-49"></a>        <span class="n">ref_id</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;correlation_with&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-50" name="__codelineno-4-50"></a>        <span class="n">sta_id</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;original_trace&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-51" name="__codelineno-4-51"></a>        <span class="k">if</span> <span class="n">ref_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">sta_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-52" name="__codelineno-4-52"></a>            <span class="k">continue</span>  <span class="c1"># not a cross-correlation trace</span>
+<a id="__codelineno-4-53" name="__codelineno-4-53"></a>        <span class="n">zero_lag</span> <span class="o">=</span> <span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">npts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<a id="__codelineno-4-54" name="__codelineno-4-54"></a>        <span class="n">k</span><span class="p">,</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">_peak</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-4-55" name="__codelineno-4-55"></a>        <span class="n">lag</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">zero_lag</span><span class="p">)</span> <span class="o">*</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">delta</span>
+<a id="__codelineno-4-56" name="__codelineno-4-56"></a>        <span class="n">lat0</span><span class="p">,</span> <span class="n">lon0</span> <span class="o">=</span> <span class="n">_coords</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span> <span class="n">ref_id</span><span class="p">)</span>
+<a id="__codelineno-4-57" name="__codelineno-4-57"></a>        <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span> <span class="o">=</span> <span class="n">_coords</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span> <span class="n">sta_id</span><span class="p">)</span>
+<a id="__codelineno-4-58" name="__codelineno-4-58"></a>        <span class="n">dist_m</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gps2dist_azimuth</span><span class="p">(</span><span class="n">lat0</span><span class="p">,</span> <span class="n">lon0</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">)</span>
+<a id="__codelineno-4-59" name="__codelineno-4-59"></a>        <span class="n">dist</span> <span class="o">=</span> <span class="n">dist_m</span> <span class="o">/</span> <span class="mf">1000.0</span>
+<a id="__codelineno-4-60" name="__codelineno-4-60"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">dist</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">az</span><span class="p">)),</span> <span class="n">dist</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">az</span><span class="p">))</span>
+<a id="__codelineno-4-61" name="__codelineno-4-61"></a>        <span class="n">ok</span> <span class="o">=</span> <span class="p">(</span><span class="n">cc</span> <span class="o">&gt;=</span> <span class="n">MIN_CC</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MAX_SLOW</span> <span class="o">*</span> <span class="n">dist</span> <span class="o">+</span> <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">delta</span><span class="p">)</span>
+<a id="__codelineno-4-62" name="__codelineno-4-62"></a>        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tr</span><span class="p">,</span> <span class="n">sta_id</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lag</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">ok</span><span class="p">))</span>
+<a id="__codelineno-4-63" name="__codelineno-4-63"></a>
+<a id="__codelineno-4-64" name="__codelineno-4-64"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
+<a id="__codelineno-4-65" name="__codelineno-4-65"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[xcorr_lags] No cross-correlation traces found.&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-66" name="__codelineno-4-66"></a>        <span class="k">return</span> <span class="n">stream</span>
+<a id="__codelineno-4-67" name="__codelineno-4-67"></a>
+<a id="__codelineno-4-68" name="__codelineno-4-68"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[xcorr_lags] Reference: </span><span class="si">{</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">correlation_with</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-69" name="__codelineno-4-69"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Station&#39;</span><span class="si">:</span><span class="s2">&lt;16</span><span class="si">}{</span><span class="s1">&#39;Dist (km)&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}{</span><span class="s1">&#39;Lag (s)&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}{</span><span class="s1">&#39;CC&#39;</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2">  Used&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-70" name="__codelineno-4-70"></a>    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">sta_id</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lag</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">ok</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+<a id="__codelineno-4-71" name="__codelineno-4-71"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sta_id</span><span class="si">:</span><span class="s2">&lt;16</span><span class="si">}{</span><span class="n">dist</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}{</span><span class="n">lag</span><span class="si">:</span><span class="s2">&gt;+10.3f</span><span class="si">}{</span><span class="n">cc</span><span class="si">:</span><span class="s2">&gt;7.2f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">ok</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;NO&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-72" name="__codelineno-4-72"></a>
+<a id="__codelineno-4-73" name="__codelineno-4-73"></a>    <span class="n">good</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="ow">and</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-4-74" name="__codelineno-4-74"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">good</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+<a id="__codelineno-4-75" name="__codelineno-4-75"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[xcorr_lags] Not enough reliable lags for a plane-wave fit.&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-76" name="__codelineno-4-76"></a>        <span class="k">return</span> <span class="n">stream</span>
+<a id="__codelineno-4-77" name="__codelineno-4-77"></a>
+<a id="__codelineno-4-78" name="__codelineno-4-78"></a>    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">r</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">good</span><span class="p">])</span>
+<a id="__codelineno-4-79" name="__codelineno-4-79"></a>    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">good</span><span class="p">])</span>
+<a id="__codelineno-4-80" name="__codelineno-4-80"></a>    <span class="p">(</span><span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">),</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-4-81" name="__codelineno-4-81"></a>    <span class="n">slowness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">)</span>
+<a id="__codelineno-4-82" name="__codelineno-4-82"></a>    <span class="n">baz</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">))</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.0</span>
+<a id="__codelineno-4-83" name="__codelineno-4-83"></a>    <span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">A</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sx</span><span class="p">,</span> <span class="n">sy</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-4-84" name="__codelineno-4-84"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[xcorr_lags] Plane wave from </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">good</span><span class="p">)</span><span class="si">}</span><span class="s2"> stations:&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-85" name="__codelineno-4-85"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Slowness      : </span><span class="si">{</span><span class="n">slowness</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> s/km  (apparent velocity </span><span class="si">{</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">slowness</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> km/s)&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-86" name="__codelineno-4-86"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Back-azimuth  : </span><span class="si">{</span><span class="n">baz</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> deg&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-87" name="__codelineno-4-87"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   RMS residual  : </span><span class="si">{</span><span class="n">rms</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-88" name="__codelineno-4-88"></a>
+<a id="__codelineno-4-89" name="__codelineno-4-89"></a>    <span class="c1"># Distance along the direction of propagation, for the record section</span>
+<a id="__codelineno-4-90" name="__codelineno-4-90"></a>    <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span> <span class="o">=</span> <span class="n">sx</span> <span class="o">/</span> <span class="n">slowness</span><span class="p">,</span> <span class="n">sy</span> <span class="o">/</span> <span class="n">slowness</span>
+<a id="__codelineno-4-91" name="__codelineno-4-91"></a>    <span class="k">for</span> <span class="n">tr</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+<a id="__codelineno-4-92" name="__codelineno-4-92"></a>        <span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">geodetic</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;geodetic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">ux</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">uy</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]}</span>
+<a id="__codelineno-4-93" name="__codelineno-4-93"></a>
+<a id="__codelineno-4-94" name="__codelineno-4-94"></a>    <span class="k">return</span> <span class="n">stream</span>
+<a id="__codelineno-4-95" name="__codelineno-4-95"></a>
+<a id="__codelineno-4-96" name="__codelineno-4-96"></a>
+<a id="__codelineno-4-97" name="__codelineno-4-97"></a><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+<a id="__codelineno-4-98" name="__codelineno-4-98"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Entry point of the interactive command runpy.&quot;&quot;&quot;</span>
+<a id="__codelineno-4-99" name="__codelineno-4-99"></a>    <span class="k">return</span> <span class="n">run</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>What does it do?</p>
+<ul>
+<li><strong>Lag of the maximum</strong> (<code>_peak</code>): the correlation is sampled every 0.05 s. A parabola through the maximum and its two neighbours gives the lag with a precision better than one sample.</li>
+<li><strong>Reliable lags</strong>: a lag is used only if the correlation coefficient is at least <code>MIN_CC</code> (0.7), and if it is physically possible: no P wave crosses the array slower than <code>MAX_SLOW</code> (0.1 s/km), so the lag cannot be longer than 0.1 s per km of distance between the stations.</li>
+<li><strong>Plane-wave fit</strong>: the least-squares solution of <span class="arithmatex">\(\tau_i = s_x x_i + s_y y_i\)</span>.</li>
+<li><strong>Record section</strong>: the distance of each station along the direction of propagation is stored in the header (<code>geodetic</code>), so the correlations can be ordered in a record section.</li>
+</ul>
+<p>The script has a function <code>run(stream, inventory, event)</code> for the automatic mode and a function <code>process(stream)</code> for the interactive command <code>runpy</code>, so the same file works in both.</p>
+<hr />
+<h2 id="step-1-cross-correlate-the-p-wave-interactively">Step 1: Cross-correlate the P wave interactively</h2>
+<p>Open the array with the filter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial3/data/*&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial3/configs/filter_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial3/configs/plotting_config.yaml&quot;</span>
+</code></pre></div>
+<p>Zoom around the P wave, at 03:39. The correlation must be computed on the <strong>P wave only</strong>, not on the two hours of data, where the noise would dominate. Select the window: place the mouse at <strong>03:39:00</strong> and press <code>u</code>, then at <strong>03:39:20</strong> and press <code>i</code>. This window starts 3.5 s before the P onset and contains the first and strongest cycles of the P wave.</p>
+<p>Open the prompt with <code>v</code>, and cut the traces to the window:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt; cut
+</code></pre></div>
+<p>Then cross-correlate all the traces with the first one:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;&gt; help xcorr
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&gt;&gt; xcorr --ref 0 --mode full --normalize full
+</code></pre></div>
+<ul>
+<li><code>--ref 0</code>: the reference is the first trace, IM.IL02..SHZ.</li>
+<li><code>--mode full</code>: all the possible lags are computed, from −20 to +20 s.</li>
+<li><code>--normalize full</code>: the correlation coefficient of the equation above, between −1 and 1.</li>
+</ul>
+<p>The traces are replaced by 18 correlations, named after the two stations: <code>IM.IL02_IL03..SXZ</code> is the correlation of IL03 with the reference IL02, and <code>IM.IL02_IL02..SXZ</code> is the autocorrelation of IL02.</p>
+<p><img alt="Cross-correlations" src="img/TX_xcorr.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>--ref</code> is the position of the trace in the list of loaded traces. Check the name of the correlations: the station before the underscore is the reference.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The horizontal axis of a correlation is a <strong>lag</strong>, not a date: surfquake draws the correlations starting at 1970-01-01 00:00:00, which is the default start time of a new trace. In Step 2 we will plot them against the lag time.</p>
+</div>
+<hr />
+<h2 id="step-2-delays-and-plane-wave">Step 2: Delays and plane wave</h2>
+<p>Open the prompt again with <code>v</code>, and run the post-script on the correlations:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt;&gt; runpy ./tutorial3/scripts/xcorr_lags.py
+</code></pre></div>
+<p>The script prints a table with the lag and the correlation coefficient of every station, and the plane wave:</p>
+<div class="highlight"><pre><span></span><code>[xcorr_lags] Reference: IM.IL02..SHZ
+Station          Dist (km)   Lag (s)     CC  Used
+IM.IL02..SHZ          0.00    -0.000   1.00  yes
+IM.IL03..SHZ          1.61    +0.105   0.89  yes
+IM.IL04..SHZ          3.14    +0.065   0.86  yes
+IM.IL05..SHZ          3.07    -0.104   0.92  yes
+IM.IL06..SHZ          1.99    -0.126   0.93  yes
+IM.IL07..SHZ          2.02    +0.081   0.93  yes
+IM.IL08..SHZ          3.27    +0.268   0.88  yes
+IM.IL09..SHZ          4.28    +0.321   0.83  yes
+IM.IL10..SHZ          3.69    +0.201   0.84  yes
+IM.IL11..SHZ          5.07    +0.033   0.84  yes
+IM.IL12..SHZ          5.84    -0.145   0.91  yes
+IM.IL13..SHZ          7.12    -1.065   0.64  NO
+IM.IL14..SHZ          5.58    -0.274   0.89  yes
+IM.IL15..SHZ          3.81    -0.172   0.89  yes
+IM.IL16..SHZ          2.88    -0.141   0.91  yes
+IM.IL17..SHZ          2.79    -0.055   0.93  yes
+IM.IL18..SHZ          5.15    +1.170   0.66  NO
+IM.IL19..SHZ          5.35    +0.335   0.69  NO
+
+[xcorr_lags] Plane wave from 14 stations:
+   Slowness      : 0.0663 s/km  (apparent velocity 15.1 km/s)
+   Back-azimuth  : 292.2 deg
+   RMS residual  : 0.046 s
+</code></pre></div>
+<p>What can we learn from this table?</p>
+<ul>
+<li><strong>The waveforms are very similar.</strong> Most correlation coefficients are between 0.83 and 0.93: the P wave is almost the same signal at stations up to 6 km apart.</li>
+<li><strong>The delays are small</strong>, less than ±0.35 s for the reliable stations. The P wave crosses the 10 km of ILAR in less than a second. The stations to the east (IL08, IL09, IL10) have positive lags, and the stations to the west (IL12, IL14, IL15) negative lags: the wave comes from the west.</li>
+<li><strong>The plane wave explains the delays</strong> with an RMS residual of 0.046 s, less than one sample (0.05 s), thanks to the parabolic interpolation of the maximum.</li>
+<li><strong>The solution agrees with the beamforming.</strong> A slowness of 0.066 s/km and a back-azimuth of 292° are close to the theoretical values of the P wave from North Korea (0.068 s/km and 286°). As with the beamforming, the difference of a few degrees in back-azimuth comes from the structure under the array and along the path.</li>
+</ul>
+<p>Now, let's see the correlations as a record section against the lag time:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt; plot_type record
+</code></pre></div>
+<p><img alt="Correlations as a record section" src="img/TX_record.png" /></p>
+<p>Each correlation is drawn at the distance of its station <strong>along the direction of propagation</strong> (negative: the station is reached before the reference). The maxima of the correlations line up along a straight line through lag 0: its slope is the slowness. This is exactly the plane wave that the beamforming searches for. Zoom between −2 and 2 s to see it.</p>
+<h3 id="cycle-skipping">Cycle skipping</h3>
+<p>Look at IL13 and IL18 in the table. The plane wave predicts a lag of −0.26 s for IL13 and +0.33 s for IL18, but the maxima of their correlations are at −1.07 and +1.17 s, about <strong>0.8 s</strong> away. The P wave is a band-limited signal, almost periodic, with a dominant period of about 0.8 s: its correlation has several maxima separated by one period. When the waveforms are less similar (IL13 and IL18 are the most distant stations from IL02, 7.1 and 5.2 km), the wrong maximum can become the highest one. This is <strong>cycle skipping</strong>, the classic error of cross-correlation with narrow-band signals.</p>
+<p>The two checks of the script remove these lags: their correlation coefficient is low (0.64 and 0.66), and the lags are not physically possible (1.07 s over 7.1 km would be a slowness of 0.15 s/km).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Try a shorter window, 03:39:02–03:39:12. The correlation coefficients become higher (above 0.7 for all the stations), but IL13 and IL18 still skip a cycle: a high coefficient does not guarantee the right lag. The physical limit <code>MAX_SLOW</code> still catches them, and the solution is the same (0.068 s/km, 293°). To reduce cycle skipping: use a window long enough to contain the whole P wave, a broader frequency band, or a reference station in the centre of the array.</p>
+</div>
+<p>To close the interactive session:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&gt;&gt; exit
+</code></pre></div>
+<hr />
+<h2 id="step-3-coherence-between-two-stations">Step 3: Coherence between two stations</h2>
+<p>The cross-correlation gives one number for the whole band. The coherence tells us <strong>at which frequencies</strong> two stations record the same signal.</p>
+<p>Open four stations, without filtering: the reference IL02, the closest station IL03 (1.6 km), and IL09 (4.3 km) and IL13 (7.1 km). A list of files separated by commas keeps this order:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial3/data/IM.IL02..SHZ,./tutorial3/data/IM.IL03..SHZ,./tutorial3/data/IM.IL09..SHZ,./tutorial3/data/IM.IL13..SHZ&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial3/configs/plotting_config.yaml&quot;</span>
+</code></pre></div>
+<p>Select the same window of the P wave (03:39:00–03:39:20) with <code>u</code> and <code>i</code>, open the prompt with <code>v</code>, and type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&gt;&gt; help coh
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>&gt;&gt; coh --ref IM.IL02..SHZ --win 4 --axis xlog
+</code></pre></div>
+<ul>
+<li><code>--ref</code>: the reference trace, by its index on the page or by its id.</li>
+<li><code>--win 4</code>: the length of the Welch windows, in seconds. The 20 s window is divided into 9 windows of 4 s overlapping 50 %, and their spectra are averaged.</li>
+<li><code>--axis xlog</code>: logarithmic frequency axis.</li>
+</ul>
+<p>A figure is opened for each station, with three panels: the amplitude <span class="arithmatex">\(|H(f)|\)</span> and the phase of the transfer function, and the coherence. The red dashed line is the <strong>95 % significance level</strong>: a coherence below it cannot be distinguished from the coherence of two unrelated noises.</p>
+<p><img alt="Coherence IL02 - IL03" src="img/TX_coh_il03.png" /></p>
+<p>These are the mean coherences in three frequency bands:</p>
+<table>
+<thead>
+<tr>
+<th>Window</th>
+<th>Station</th>
+<th>0.8–2.2 Hz</th>
+<th>3–5 Hz</th>
+<th>6–9 Hz</th>
+<th>Significance (95 %)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P wave (03:39:00–03:39:20)</td>
+<td>IL03 (1.6 km)</td>
+<td>0.71</td>
+<td>0.37</td>
+<td>0.10</td>
+<td>0.31</td>
+</tr>
+<tr>
+<td>P wave (03:39:00–03:39:20)</td>
+<td>IL13 (7.1 km)</td>
+<td>0.46</td>
+<td>0.21</td>
+<td>0.10</td>
+<td>0.31</td>
+</tr>
+<tr>
+<td>Noise (03:36:00–03:38:30)</td>
+<td>IL03 (1.6 km)</td>
+<td>0.10</td>
+<td>0.14</td>
+<td>0.02</td>
+<td>0.04</td>
+</tr>
+<tr>
+<td>Noise (03:36:00–03:38:30)</td>
+<td>IL13 (7.1 km)</td>
+<td>0.02</td>
+<td>0.04</td>
+<td>0.02</td>
+<td>0.04</td>
+</tr>
+</tbody>
+</table>
+<p>To obtain the noise rows, select a window before the P wave, from 03:36:00 to 03:38:30, and repeat the command.</p>
+<ul>
+<li><strong>The P wave is coherent in its band.</strong> Between 0.8 and 2.2 Hz the coherence of the P wave is well above the significance level, while the noise in the same band is almost incoherent. This is why the beamforming and the correlations work in this band.</li>
+<li><strong>The coherence decreases with frequency.</strong> At 3–5 Hz it is lower, and above 6 Hz it is at the level of the noise: the teleseismic P wave has lost its high frequencies along its path of more than 5000 km, and what remains at the stations is local noise.</li>
+<li><strong>The coherence decreases with distance.</strong> IL13 is less coherent than IL03 at all frequencies: the farther the stations, the more the structure under each one changes the waveform. This is the reason why IL13 skipped a cycle in Step 2.</li>
+</ul>
+<h3 id="the-phase-gives-the-delay">The phase gives the delay</h3>
+<p>Look at the phase panel of IL09. Between 0.8 and 2.2 Hz, where the coherence is high, the phase decreases almost linearly with frequency: from about −115° at 0.8 Hz to about −235° at 2.2 Hz (drawn as +125°, because the phase is wrapped between −180° and 180°). The slope is about −85° per Hz, so the delay is <span class="arithmatex">\(\tau \approx 85 / 360 \approx 0.24\)</span> s. The correlation gave 0.32 s: the phase is noisier, but it confirms that IL09 receives the wave later than IL02. For IL13 the phase increases with frequency: IL13 receives the wave <strong>before</strong> IL02.</p>
+<div class="admonition warning">
+<p class="admonition-title">Never use a single window</p>
+<p>Repeat the command with <code>--win 20</code>: the Welch window is now as long as the data, so there is nothing to average, and the coherence is exactly <strong>1 at all frequencies</strong>, also for pure noise. The coherence is only meaningful when it is averaged over several windows. The more windows, the lower the significance level (here 0.31 with 9 windows, 0.04 with the 74 windows of the noise). Keep in mind that overlapping windows are not fully independent, so the real significance level is a bit higher than the one drawn.</p>
+</div>
+<p>To save the coherences and transfer functions to disk:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>&gt;&gt; save_tf coh all --ref 0 --win 4 --folder_path ./tutorial3/coh
+</code></pre></div>
+<hr />
+<h2 id="step-4-automatic">Step 4: Automatic</h2>
+<p>Now, the whole workflow in a config file. Create <code>./tutorial3/configs/xcorr_config.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cut_stream&#39;</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;absolute&#39;</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">    </span><span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-09-03T03:39:00</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">    </span><span class="nt">end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2017-09-03T03:39:20</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">  </span><span class="nt">process_5</span><span class="p">:</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_spectrum&#39;</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;welch&#39;</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">    </span><span class="nt">win</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.0</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="w">    </span><span class="nt">overlap_percent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50.0</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="w">    </span><span class="nt">output_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;./tutorial3/coh&#39;</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="w">  </span><span class="nt">process_6</span><span class="p">:</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cross_correlate&#39;</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="w">    </span><span class="nt">normalize</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;full&#39;</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="w">    </span><span class="nt">reference_idx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="w">    </span><span class="nt">trim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<ul>
+<li>The trace methods (<code>rmean</code>, <code>taper</code>, <code>filter</code>) are applied first to the two hours of data, and then the stream methods, in order. This is important: filtering before cutting avoids the edge effects of filtering a short window.</li>
+<li><code>cut_stream</code> keeps the 20 s of the P wave at all the stations.</li>
+<li><code>cross_spectrum</code> computes the coherence and the transfer function of every station with respect to the reference, and saves them in <code>output_path</code>. It does not change the traces. Since the traces are already filtered, look at the results only between 0.8 and 2.2 Hz.</li>
+<li><code>cross_correlate</code> replaces the traces by their correlations with the reference. It must be the <strong>last</strong> step, because the following steps would receive correlations instead of waveforms.</li>
+</ul>
+<p>Create also a small plotting configuration, <code>./tutorial3/configs/plotting_record.yaml</code>, for the record section:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">plotting</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">plot_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">record</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nt">record_option</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">egf</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="nt">scale_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
+</code></pre></div>
+<p>And run it, passing the metadata (needed by the post-script) and the post-script, which runs before the plot:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial3/data/*&quot;</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;./tutorial3/metadata/dataless.dlsv&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;./tutorial3/configs/xcorr_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;./tutorial3/configs/plotting_record.yaml&quot;</span><span class="w"> </span>--post_script<span class="w"> </span><span class="s2">&quot;./tutorial3/scripts/xcorr_lags.py&quot;</span><span class="w"> </span>--post_script_stage<span class="w"> </span>before
+</code></pre></div>
+<p>The terminal shows the files written by <code>cross_spectrum</code>, one per station:</p>
+<div class="highlight"><pre><span></span><code>[INFO] IM.IL02..SHZ -&gt; IM.IL03..SHZ - Writing cross-spectral result to ./tutorial3/coh/IM.IL02..SHZ__IM.IL03..SHZ.D.2017.246.coh
+</code></pre></div>
+<p>then the table and the plane wave of Step 2, and finally the record section of the correlations.</p>
+<p>Open any of the coherence files with <code>specplot</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;./tutorial3/coh/IM.IL02..SHZ__IM.IL13..SHZ.D.2017.246.coh&quot;</span><span class="w"> </span>-a<span class="w"> </span>xlog
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>reference_idx</code> is the position of the trace in the stream. Check the names of the output files and of the correlations to confirm which station is the reference.</p>
+</div>
+<hr />
+<h2 id="using-bash-script">Using Bash script</h2>
+<p>Finally, the automatic workflow in a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. Create a file named <code>run_xcorr.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial3
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/data/*&quot;</span><span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/metadata/dataless.dlsv&quot;</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/configs/xcorr_config.yaml&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/configs/plotting_record.yaml&quot;</span><span class="w"> </span>--post_script<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/scripts/xcorr_lags.py&quot;</span><span class="w"> </span>--post_script_stage<span class="w"> </span>before
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>surfquake<span class="w"> </span>specplot<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/coh/IM.IL02..SHZ__IM.IL13..SHZ.D.2017.246.coh&quot;</span><span class="w"> </span>-a<span class="w"> </span>xlog<span class="w"> </span>--save_path<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BASE</span><span class="s2">/coh&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_xcorr.sh
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>./run_xcorr.sh
+</code></pre></div>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li>The <strong>cross-correlation</strong> measures the similarity of two waveforms and the <strong>delay</strong> between them. On a small array, the P wave of a teleseism is very similar at all the stations (coefficients of 0.83–0.93 at ILAR).</li>
+<li>The delays of a plane wave depend linearly on the position of the stations. A least-squares fit gives the <strong>slowness</strong> and the <strong>back-azimuth</strong>, in agreement with the beamforming.</li>
+<li><strong>Cycle skipping</strong>: with narrow-band signals, the correlation has maxima separated by one period, and the highest one is not always the right one. Check the correlation coefficient <strong>and</strong> that the lag is physically possible.</li>
+<li>The <strong>coherence</strong> shows at which frequencies two stations record the same signal. At ILAR, the P wave is coherent between 0.8 and 2.2 Hz, and the coherence decreases with frequency and with the distance between the stations.</li>
+<li>The <strong>phase</strong> of the transfer function changes linearly with frequency: its slope is the delay.</li>
+<li>The coherence needs <strong>averaging</strong>: with a single window it is always 1.</li>
+<li>Correlate and compute the coherence on a window that contains the <strong>signal</strong>; on long windows of noise, the result describes the noise.</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<p>Bendat, Julius S., and Allan G. Piersol. Random Data: Analysis and Measurement Procedures. 4th ed. John Wiley &amp; Sons (2010).</p>
+<p>Cabieces, Roberto, et al. "Slowness vector estimation over large-aperture sparse arrays with the Continuous Wavelet Transform (CWT): application to Ocean Bottom Seismometers." Geophysical Journal International 223.3 (2020): 1919-1934.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/rcabdia/SurfQuake" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ProgramSeismic" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
