@@ -1,0 +1,2874 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/tutorials/polarization_tutorial/">
+      
+      
+        <link rel="prev" href="../tutorial1_part2/">
+      
+      
+        <link rel="next" href="../tutorial2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Polarization & Rotation - SurfQuake</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/surfquake_toolboxes.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#three-component-analysis-rotation-and-polarization-tutorial-3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SurfQuake" class="md-header__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SurfQuake
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Polarization & Rotation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../seismic_data_files/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../tutorial1/" class="md-tabs__link">
+          
+  
+  
+  Tutorial Book
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../processing_overview/" class="md-tabs__link">
+          
+  
+  
+  Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../picker/" class="md-tabs__link">
+          
+  
+  
+  Event Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ppsd_DB/" class="md-tabs__link">
+          
+  
+  
+  Noise Processing
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../create_metadata/" class="md-tabs__link">
+          
+  
+  
+  Utilities
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SurfQuake" class="md-nav__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    SurfQuake
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seismic_data_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seismic Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Book
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial Book
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1_part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polarization & Rotation
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polarization & Rotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Coordinate systems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Coordinate systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-back-azimuth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The back-azimuth
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zne-zrt-and-lqt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ZNE, ZRT and LQT
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-the-event-and-its-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: The event and its geometry
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-the-three-components-of-genf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The three components of GENF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-rotate-to-radial-and-transverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Rotate to Radial and Transverse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-particle-motion-of-the-p-wave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Particle motion of the P wave
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-rotate-to-lqt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Rotate to LQT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-rotate-all-the-stations-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Rotate all the stations automatically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-polarization-to-check-the-stations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Polarization to check the stations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 8: Polarization to check the stations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-sensor-that-is-not-oriented-to-the-north" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A sensor that is not oriented to the north
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-9-the-bash-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 9: The bash script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamfoming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picking_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Picking (PhaseNet)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signal Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Signal Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trace_header_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trace Header
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explore_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Availability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Traces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_stream_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Stream
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../particle_motion_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spectral_analysis_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../beamforming_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamforming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../characteristic_functions_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characteristic Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plotting_interaction_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../synthetic_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generate Test Signals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bash_script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash Script Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../picker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Picker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Associator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Associator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../associate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering Associate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coincidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coincidence Trigger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../locate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Location
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Focal Mechanism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Focal Mechanism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../focmec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Motion Polarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moment Tensor Inversion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Noise Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPSD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PPSD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_DB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataBase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_plot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting & Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ambient_noise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ambient Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dispersion_curves_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dispersion Curves Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utilities
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../create_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manage_catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build_mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build MTI Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="three-component-analysis-rotation-and-polarization-tutorial-3"><span style="color:darkcyan;"> <strong>Three-Component Analysis: Rotation and Polarization Tutorial 3</strong> </span></h1>
+<p>A seismometer records the ground motion in three fixed directions: <strong>Z</strong> (up), <strong>N</strong> (north) and <strong>E</strong> (east). These directions are chosen by the installer, not by the earthquake: a P or an S wave arriving from the south-west is split between N and E, and it is difficult to see what kind of motion it produces. In this tutorial, we will learn how to work with the commands <code>processing</code> and the interactive commands <code>rotate</code> and <code>pm</code> to:</p>
+<ol>
+<li>Understand the <strong>coordinate systems</strong> ZNE, ZRT and LQT, and the <strong>back-azimuth</strong>.</li>
+<li><strong>Rotate</strong> the horizontal components to <strong>Radial</strong> and <strong>Transverse</strong>, and separate the P, SV and SH motions.</li>
+<li>Measure the <strong>polarization</strong> of the P wave: its direction, incidence angle and shape.</li>
+<li>Use the measured incidence to <strong>rotate to LQT</strong>.</li>
+<li>Rotate all the stations of an event <strong>automatically</strong> with a config file.</li>
+<li>Use polarization to <strong>check the stations</strong>: which measurements can be trusted, and which sensors are not oriented to the north.</li>
+</ol>
+<p>We will use the same data as in <a href="../tutorial1_part2/">Tutorial 1 (Part 2)</a>: 10 stations around Andorra during the seismic sequence of 1 February 2022. We will analyse the largest earthquake, of magnitude <strong>ML 3.5</strong>, at <strong>02:03:00.3 UTC</strong>, 42.500° N, 1.462° E and 5.3 km deep. We will follow this structure:</p>
+<ul>
+<li><em>Seismic files:</em> tutorial1/data</li>
+<li><em>Metadata:</em> tutorial1/metadata</li>
+<li><em>Project:</em> tutorial1/project</li>
+<li><em>Event file:</em> tutorial1/events</li>
+<li><em>Config Files:</em> tutorial1/configs</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--tutorial1
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    --data
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        --CA.ARBS..HH1.D.2022.32
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        --CA.ARBS..HH2.D.2022.32
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        --CA.ARBS..HHZ.D.2022.32
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ......
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        --FR.VALC.00.HHZ.D.2022.32
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    --metadata
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        --inv_all.xml
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    --project
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        --andorra
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    --events
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        --event_ml35.txt
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    --configs
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        --typical_config.yaml
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        --plotting_config.yaml
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        --rotate_config.yaml
+</code></pre></div>
+<p>If you have not done Tutorial 1, download the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/waveforms_cut" rel="noopener noreferrer" target="_blank">seismic data here</a> and the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Andorra/inputs/metadata" rel="noopener noreferrer" target="_blank">metadata here</a>, create the config files and the project:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>typical_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/configs&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial1/configs&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span>./tutorial1/data<span class="w"> </span>-s<span class="w"> </span>./tutorial1/project<span class="w"> </span>-n<span class="w"> </span>andorra
+</code></pre></div>
+<p>In this tutorial the <strong>metadata is required</strong>: surfquake needs the coordinates of the stations to compute the direction of the earthquake.</p>
+<p>Open <code>plotting_config.yaml</code> and set <code>back2future: true</code>. With it, the command <code>back2future</code> restores the original traces, so we can try several rotations on the same data.</p>
+<p>All the commands of this tutorial are run from the folder that contains <code>tutorial1</code>.</p>
+<hr />
+<h2 id="step-1-coordinate-systems">Step 1: Coordinate systems</h2>
+<h3 id="the-back-azimuth">The back-azimuth</h3>
+<p>The <strong>back-azimuth</strong> (baz) is the direction from the <strong>station to the earthquake</strong>, measured clockwise from the north. The <strong>azimuth</strong> is the opposite direction, from the earthquake to the station. For example, the earthquake is south of station GENF, so its back-azimuth at GENF is about 194°.</p>
+<p>When an event file and the metadata are given, surfquake computes the distance, the azimuth and the back-azimuth of every station, and stores them in the <a href="https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/" rel="noopener noreferrer" target="_blank">trace header</a> (<code>geodetic</code>), together with the theoretical arrivals and the <strong>incidence angle</strong> of the first arrival.</p>
+<h3 id="zne-zrt-and-lqt">ZNE, ZRT and LQT</h3>
+<p>There are three common ways to describe the same ground motion:</p>
+<ul>
+<li><strong>ZNE</strong>: vertical, north and east. The directions of the sensor.</li>
+<li><strong>ZRT</strong>: the horizontal components are rotated around the vertical axis. The <strong>Radial</strong> (R) component points along the great circle that joins the earthquake and the station, away from the earthquake; the <strong>Transverse</strong> (T) component is perpendicular to it. Z is unchanged.</li>
+<li><strong>LQT</strong>: a 3D rotation that also tilts the axes by the incidence angle of the ray. <strong>L</strong> points along the direction of the P ray, <strong>Q</strong> is perpendicular to it in the vertical plane that contains the ray (the SV direction), and <strong>T</strong> is the same transverse component (the SH direction).</li>
+</ul>
+<p>The rotation from N, E to R, T is:</p>
+<div class="arithmatex">\[
+R = -N\cos(\text{baz}) - E\sin(\text{baz}), \qquad T = N\sin(\text{baz}) - E\cos(\text{baz})
+\]</div>
+<p>Why is it useful? Because each wave moves the ground in a known direction <strong>relative to the ray</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Wave</th>
+<th>Motion</th>
+<th>Where it is after rotation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P</td>
+<td>along the ray</td>
+<td>Z and <strong>R</strong> (ZRT), <strong>L</strong> (LQT)</td>
+</tr>
+<tr>
+<td>SV</td>
+<td>perpendicular to the ray, in the vertical plane</td>
+<td>Z and <strong>R</strong> (ZRT), <strong>Q</strong> (LQT)</td>
+</tr>
+<tr>
+<td>SH</td>
+<td>horizontal, perpendicular to the ray</td>
+<td><strong>T</strong></td>
+</tr>
+<tr>
+<td>Rayleigh</td>
+<td>ellipse in the vertical plane</td>
+<td>Z and R</td>
+</tr>
+<tr>
+<td>Love</td>
+<td>horizontal, perpendicular to the ray</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>So, after a good rotation, the <strong>P wave disappears from T</strong>, and the T component shows only SH (and Love) energy.</p>
+<p>Please review the following documentation:</p>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_stream_config/" rel="noopener noreferrer" target="_blank">Rotate Seismograms</a> and <a href="https://projectisp.github.io/surfquaketutorial.github.io/particle_motion_documentation/" rel="noopener noreferrer" target="_blank">Particle Motion</a></p>
+<hr />
+<h2 id="step-2-the-event-and-its-geometry">Step 2: The event and its geometry</h2>
+<p>Create the file <code>./tutorial1/events/event_ml35.txt</code> with the earthquake:</p>
+<div class="highlight"><pre><span></span><code>2022-02-01;02:03:00.3;42.5003;1.4619;5.3;3.49
+</code></pre></div>
+<p>For this earthquake, the geometry of the stations is:</p>
+<table>
+<thead>
+<tr>
+<th>Station</th>
+<th>Distance (km)</th>
+<th>Back-azimuth (°)</th>
+<th>Incidence of <code>p</code> (°)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PAND</td>
+<td>7.4</td>
+<td>249.4</td>
+<td>54.3</td>
+</tr>
+<tr>
+<td>ARBS</td>
+<td>9.4</td>
+<td>321.1</td>
+<td>60.5</td>
+</tr>
+<tr>
+<td>CEST</td>
+<td>20.3</td>
+<td>122.5</td>
+<td>75.2</td>
+</tr>
+<tr>
+<td>CSOR</td>
+<td>30.5</td>
+<td>62.6</td>
+<td>80.0</td>
+</tr>
+<tr>
+<td>CORG</td>
+<td>32.4</td>
+<td>21.6</td>
+<td>80.6</td>
+</tr>
+<tr>
+<td>SALF</td>
+<td>36.5</td>
+<td>141.9</td>
+<td>81.6</td>
+</tr>
+<tr>
+<td>GENF</td>
+<td>37.0</td>
+<td>194.2</td>
+<td>81.7</td>
+</tr>
+<tr>
+<td>VALC</td>
+<td>49.2</td>
+<td>284.9</td>
+<td>83.6</td>
+</tr>
+<tr>
+<td>CARF</td>
+<td>57.9</td>
+<td>245.9</td>
+<td>84.5</td>
+</tr>
+<tr>
+<td>FNEB</td>
+<td>69.2</td>
+<td>229.9</td>
+<td>85.3</td>
+</tr>
+</tbody>
+</table>
+<p>The stations surround the earthquake, so every direction is represented. The incidence angle is the angle between the ray and the vertical at the station, computed by TauP with the IASP91 model: 0° is a ray arriving from below, 90° a horizontal ray. The closer the station, the more vertical the ray.</p>
+<hr />
+<h2 id="step-3-the-three-components-of-genf">Step 3: The three components of GENF</h2>
+<p>We start with a single station, <strong>GENF</strong>, at 37 km, where the P wave is very clear. Let's open the earthquake, from 5 s before to 20 s after the first arrival:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span>./tutorial1/project/andorra<span class="w"> </span>-i<span class="w"> </span>./tutorial1/metadata/inv_all.xml<span class="w"> </span>-e<span class="w"> </span>./tutorial1/events/event_ml35.txt<span class="w"> </span>-c<span class="w"> </span>./tutorial1/configs/typical_config.yaml<span class="w"> </span>-s<span class="w"> </span>GENF<span class="w"> </span>--phases<span class="w"> </span>p,s,P,S<span class="w"> </span>-cs<span class="w"> </span><span class="m">5</span><span class="w"> </span>-ce<span class="w"> </span><span class="m">20</span><span class="w"> </span>--plot_config<span class="w"> </span>./tutorial1/configs/plotting_config.yaml
+</code></pre></div>
+<ul>
+<li><code>-s GENF</code>: only the station GENF.</li>
+<li><code>--phases p,s,P,S</code>: the phases computed for the header. For local earthquakes, include <code>p</code> and <code>s</code> (see <a href="../tutorial1_part2/">Tutorial 1, Part 2</a>).</li>
+<li><code>-cs 5 -ce 20</code>: the cut, in seconds before and after the first theoretical arrival.</li>
+</ul>
+<p>The config file <code>typical_config.yaml</code> removes the trend, tapers and filters the traces between 0.5 and 8.5 Hz.</p>
+<p><img alt="GENF in ZNE" src="img/TP_genf_zne.png" /></p>
+<p>The three traces are FR.GENF.00.HHZ, HH1 and HH2. Instead of N and E, GENF has the horizontal components <strong>1</strong> and <strong>2</strong>, a name used when the sensor is not exactly aligned with the north. The metadata says that HH1 points to 7° and HH2 to 97°, so they are close to N and E: surfquake reads 1 as N and 2 as E, and the error of 7° is small for this tutorial.</p>
+<p>Look at the arrivals:</p>
+<ul>
+<li>The <strong>P wave</strong> arrives at about 02:03:06.1. It is clear on Z and on HH1 (north), and smaller on HH2 (east).</li>
+<li>The <strong>S wave</strong> arrives about 4.4 s later, at 02:03:10.5. It is largest on HH2 (east).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The theoretical <code>p</code> arrival of the IASP91 model is at 02:03:06.7, about 0.6 s later than the real P wave. IASP91 is a global model; the crust of the Pyrenees is faster for these short paths. Always use the observed onset, not the theoretical one, to choose the analysis windows.</p>
+</div>
+<hr />
+<h2 id="step-4-rotate-to-radial-and-transverse">Step 4: Rotate to Radial and Transverse</h2>
+<p>Place the mouse on the figure and press <code>v</code> to open the command prompt. Then rotate:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&gt;&gt; rotate NE-&gt;RT
+</code></pre></div>
+<p>Without an angle, <code>rotate</code> reads the back-azimuth of each station from its header (194.2° for GENF). The terminal confirms the rotation:</p>
+<div class="highlight"><pre><span></span><code>[INFO] FR.GENF.00.HH?: NE-&gt;RT with baz=194.22°
+[INFO] Rotation &#39;NE-&gt;RT&#39; complete: 1 station groups rotated, 0 not rotated.
+</code></pre></div>
+<p>The channels are renamed HHR and HHT, and the figure is redrawn:</p>
+<p><img alt="GENF in ZRT" src="img/TP_genf_rt.png" /></p>
+<p>Compare the maximum amplitudes (in counts) before and after the rotation:</p>
+<table>
+<thead>
+<tr>
+<th>Window</th>
+<th>N (HH1)</th>
+<th>E (HH2)</th>
+<th>R</th>
+<th>T</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P wave</td>
+<td>25 700</td>
+<td>8 300</td>
+<td>26 400</td>
+<td>6 900</td>
+</tr>
+<tr>
+<td>S wave</td>
+<td>23 100</td>
+<td>64 800</td>
+<td>30 100</td>
+<td>59 800</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The <strong>P wave</strong> moves to the <strong>R</strong> component: on T it is about 4 times smaller. The small P energy left on T comes from the 7° orientation of the sensor, the noise, and the 3D structure, which bends the rays out of the great circle.</li>
+<li>The <strong>S wave</strong> is largest on <strong>T</strong>: at GENF this earthquake radiates mostly <strong>SH</strong> energy. The ratio between SH and SV depends on the focal mechanism and on the direction to the station, so at other stations the S wave can be larger on R.</li>
+</ul>
+<p>The interactive rotation is also possible with a fixed angle, for example <code>rotate NE-&gt;RT 194.2</code>.</p>
+<hr />
+<h2 id="step-5-particle-motion-of-the-p-wave">Step 5: Particle motion of the P wave</h2>
+<p>The rotation used the back-azimuth computed from the event location. <strong>Polarization analysis</strong> does the opposite: it measures the direction of the wave from the waveforms of a single station.</p>
+<p>First, restore the original traces:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt;&gt; back2future
+</code></pre></div>
+<p>Now select a short window around the P wave: place the mouse at the onset of the P wave, at about <strong>02:03:06.09</strong>, and press <code>u</code>; then at about <strong>02:03:06.64</strong> (half a second later) and press <code>i</code>. Open the prompt with <code>v</code> and type:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt; pm
+</code></pre></div>
+<p>surfquake computes the covariance of the three components in the window, and its eigenvectors (Flinn, 1965). The largest eigenvector is the main direction of the motion. The particle motion is plotted in three planes (Z–N, Z–E and N–E), and the fourth panel of the figure shows the parameters:</p>
+<div class="highlight"><pre><span></span><code>Azimuth:         15.02°
+Incidence:       55.62°
+Rectilinearity:  0.85
+Planarity:       1.00
+</code></pre></div>
+<p><img alt="Particle motion at GENF" src="img/TP_pm.png" /></p>
+<p>The values may change a little with the window that you select. How do we read them?</p>
+<ul>
+<li><strong>Rectilinearity 0.85</strong>: the motion is almost a straight line, as expected for a P wave. This tells us that the measurement is reliable.</li>
+<li><strong>Azimuth 15°</strong>: the direction of the line, from the north. A line has two directions, so the polarization gives the back-azimuth <strong>with an ambiguity of 180°</strong>: 15° or 195°. The back-azimuth of the earthquake is 194.2°: the agreement is about 1°. The first motion solves the ambiguity: when the P wave pushes the ground up (compression), the horizontal motion points <strong>away</strong> from the earthquake.</li>
+<li><strong>Incidence 56°</strong>: the P motion is 56° from the vertical. But the incidence of the <code>p</code> ray computed with IASP91 is 82°!</li>
+</ul>
+<p>Why are the two incidence angles so different? Two reasons:</p>
+<ol>
+<li><strong>The ray bends towards the vertical near the surface.</strong> The rocks close to the surface are slower than the 5.8 km/s of IASP91, so the real ray arrives steeper than in the model.</li>
+<li><strong>The free surface.</strong> At the surface, the incoming P wave is reflected as P and SV waves, which add to the motion. The measured angle is an <strong>apparent</strong> incidence, which is different from the true angle of the ray.</li>
+</ol>
+<p>So, the theoretical incidence describes the ray in the model, and the measured one describes the motion that the station really records. For the rotation to LQT, the measured one is the useful one.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>Use a <strong>short window</strong> of a few periods of the P wave, starting at the onset. A long window mixes the P wave with its coda and with the S wave.</li>
+<li>Filter first in a band where the P wave is clear. Here, the 0.5–8.5 Hz band of <code>typical_config.yaml</code> is enough.</li>
+<li>Trust the azimuth only when the <strong>rectilinearity</strong> is high (above about 0.7).</li>
+</ul>
+</div>
+<hr />
+<h2 id="step-6-rotate-to-lqt">Step 6: Rotate to LQT</h2>
+<p>Restore the traces again, and rotate to LQT with the incidence from the header (the IASP91 value, 81.7°):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt; back2future
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&gt;&gt; rotate ZNE-&gt;LQT
+</code></pre></div>
+<p>Then repeat with the incidence that we measured:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;&gt; back2future
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&gt;&gt; rotate ZNE-&gt;LQT 194.2 56
+</code></pre></div>
+<p>The two numbers are the back-azimuth and the incidence. These are the maximum amplitudes of the P wave on L and Q:</p>
+<table>
+<thead>
+<tr>
+<th>Incidence used</th>
+<th>L</th>
+<th>Q</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>81.7° (IASP91, from the header)</td>
+<td>29 000</td>
+<td>16 300</td>
+</tr>
+<tr>
+<td>56° (measured with <code>pm</code>)</td>
+<td>32 900</td>
+<td>4 400</td>
+</tr>
+</tbody>
+</table>
+<p>With the theoretical incidence, a large part of the P wave stays on Q. With the measured incidence, the P wave is concentrated on <strong>L</strong>, and Q is almost free of P energy: now Q shows the SV motion and T the SH motion, and the onset of the S wave is much easier to see.</p>
+<p><img alt="GENF in LQT" src="img/TP_genf_lqt.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the LQT system, the T component is the same as in ZRT: only Z and R are rotated by the incidence angle.</p>
+</div>
+<hr />
+<h2 id="step-7-rotate-all-the-stations-automatically">Step 7: Rotate all the stations automatically</h2>
+<p>The interactive commands are perfect to explore one station. To rotate all the stations of the event, add a <code>rotate</code> step to the config file. Create the file <code>./tutorial1/configs/rotate_config.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;filter&#39;</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;bandpass&#39;</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="nt">fmin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="nt">fmax</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.5</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="nt">corners</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">    </span><span class="nt">zerophase</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rotate&#39;</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;NE-&gt;RT&#39;</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;GAC&#39;</span>
+</code></pre></div>
+<ul>
+<li><code>type: 'NE-&gt;RT'</code>: the rotation. The others are <code>RT-&gt;NE</code>, <code>ZNE-&gt;LQT</code> and <code>LQT-&gt;ZNE</code>.</li>
+<li><code>method: 'GAC'</code> (Great Arc Circle): the back-azimuth (and the incidence, for LQT) of each station is read from its header. With <code>method: 'FREE'</code>, the same <code>angle</code> (and <code>inclination</code>) is used for all the stations.</li>
+</ul>
+<p><code>rotate</code> is a stream method: by default it runs after the trace methods, on the stream of each event. The components of each station are renamed to Z/N/E if needed (1 → N, 2 → E) and cut to a common time window before rotating.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span>./tutorial1/project/andorra<span class="w"> </span>-i<span class="w"> </span>./tutorial1/metadata/inv_all.xml<span class="w"> </span>-e<span class="w"> </span>./tutorial1/events/event_ml35.txt<span class="w"> </span>-c<span class="w"> </span>./tutorial1/configs/rotate_config.yaml<span class="w"> </span>--phases<span class="w"> </span>p,s,P,S<span class="w"> </span>-cs<span class="w"> </span><span class="m">5</span><span class="w"> </span>-ce<span class="w"> </span><span class="m">20</span><span class="w"> </span>--plot_config<span class="w"> </span>./tutorial1/configs/plotting_config.yaml
+</code></pre></div>
+<p>The terminal shows the back-azimuth used for every station, and a summary:</p>
+<div class="highlight"><pre><span></span><code>[INFO] FR.PAND.00.HH?: NE-&gt;RT with baz=249.36°
+......
+[INFO] Rotation &#39;NE-&gt;RT&#39;: 10 station groups rotated, 0 not rotated
+</code></pre></div>
+<p>A station is not rotated if it does not have both horizontal components, or if its header has no back-azimuth (for example, when the event file or the metadata is missing). Its traces are kept unrotated.</p>
+<p>Now, all the stations are in ZRT, ordered by distance. Browse the pages with <code>n</code> and <code>b</code>: at most stations, the P wave is clearly smaller on T than on R.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Add <code>-o ./tutorial1/rotated</code> to save the rotated traces of the event (HDF5 files that keep the header). You can open them later with <code>quick</code>, for example only the transverse components with <code>-w "./tutorial1/rotated/*HHT*"</code>.</p>
+</div>
+<hr />
+<h2 id="step-8-polarization-to-check-the-stations">Step 8: Polarization to check the stations</h2>
+<p>Repeat Step 5 for every station (change <code>-s GENF</code> to another station). These are the results for a window from 0.05 s before to 0.35 s after the P onset, with the 0.5–8.5 Hz filter. The <strong>expected azimuth</strong> is the back-azimuth folded between 0° and 180°, because of the ambiguity of 180°:</p>
+<table>
+<thead>
+<tr>
+<th>Station</th>
+<th>Distance (km)</th>
+<th>Expected azimuth (°)</th>
+<th>Measured azimuth (°)</th>
+<th>Difference (°)</th>
+<th>Rectilinearity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PAND</td>
+<td>7.4</td>
+<td>69.4</td>
+<td>90.9</td>
+<td>21</td>
+<td>0.33</td>
+</tr>
+<tr>
+<td>ARBS</td>
+<td>9.4</td>
+<td>141.1</td>
+<td>100.3</td>
+<td>−41</td>
+<td>0.59</td>
+</tr>
+<tr>
+<td>CEST</td>
+<td>20.3</td>
+<td>122.5</td>
+<td>116.9</td>
+<td>−6</td>
+<td>0.52</td>
+</tr>
+<tr>
+<td>CSOR</td>
+<td>30.5</td>
+<td>62.6</td>
+<td>46.6</td>
+<td>−16</td>
+<td>0.79</td>
+</tr>
+<tr>
+<td>CORG</td>
+<td>32.4</td>
+<td>21.6</td>
+<td>12.1</td>
+<td>−10</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>SALF</td>
+<td>36.5</td>
+<td>141.9</td>
+<td>146.0</td>
+<td>4</td>
+<td>0.81</td>
+</tr>
+<tr>
+<td>GENF</td>
+<td>37.0</td>
+<td>14.2</td>
+<td>15.0</td>
+<td>1</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td>VALC</td>
+<td>49.2</td>
+<td>104.9</td>
+<td>97.7</td>
+<td>−7</td>
+<td>0.21</td>
+</tr>
+<tr>
+<td>CARF</td>
+<td>57.9</td>
+<td>65.9</td>
+<td>64.2</td>
+<td>−2</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td>FNEB</td>
+<td>69.2</td>
+<td>49.9</td>
+<td>47.9</td>
+<td>−2</td>
+<td>0.76</td>
+</tr>
+</tbody>
+</table>
+<p>What does the table tell us?</p>
+<ul>
+<li><strong>Where the rectilinearity is high (0.7 or more)</strong>, the measured azimuth agrees with the back-azimuth within 16°, and within 4° at GENF, SALF, CARF and FNEB. A single station gives the direction of the earthquake!</li>
+<li><strong>Where the rectilinearity is low</strong>, the measurement cannot be trusted, even if the difference is small (VALC, 0.21). The P wave of VALC is weak, and the window contains mostly noise.</li>
+<li><strong>The closest stations</strong> (PAND and ARBS) have low rectilinearity. Their rays arrive almost vertically, so the horizontal P motion is small, and the S wave arrives only 1.5–2 s after the P wave. Close to the earthquake, the azimuth is very sensitive to the noise and to the window.</li>
+<li><strong>The differences of 10–16°</strong> (CSOR, CORG) can come from the 3D structure of the crust, which bends the rays, from the location of the earthquake, or from a small misorientation of the sensor.</li>
+</ul>
+<h3 id="a-sensor-that-is-not-oriented-to-the-north">A sensor that is not oriented to the north</h3>
+<p>Look at the metadata of ARBS: its horizontal channels are HH1 and HH2, like GENF, but HH1 points to <strong>241°</strong> and HH2 to <strong>331°</strong>. The sensor is rotated 241° from the north! The orientation of every channel is the <code>Azimuth</code> field of the channel in the StationXML file. You can also print it with a few lines of Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_inventory</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">inv</span> <span class="o">=</span> <span class="n">read_inventory</span><span class="p">(</span><span class="s2">&quot;./tutorial1/metadata/inv_all.xml&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="n">inv</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="k">for</span> <span class="n">sta</span> <span class="ow">in</span> <span class="n">net</span><span class="p">:</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="k">for</span> <span class="n">cha</span> <span class="ow">in</span> <span class="n">sta</span><span class="p">:</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">sta</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">cha</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">cha</span><span class="o">.</span><span class="n">azimuth</span><span class="p">,</span> <span class="n">cha</span><span class="o">.</span><span class="n">dip</span><span class="p">)</span>
+</code></pre></div>
+<p>surfquake reads 1 as N and 2 as E, so for ARBS the "north" component is really pointing to 241°. This means that:</p>
+<ul>
+<li>The <strong>rotation</strong> of ARBS to R and T uses the wrong axes: its R and T components are <strong>not</strong> the real radial and transverse.</li>
+<li>The <strong>azimuth</strong> measured with <code>pm</code> at ARBS is relative to the axes of the sensor, not to the north.</li>
+</ul>
+<p>Before rotating or measuring polarizations, always check the orientation of the horizontal components in the metadata, especially for components named 1 and 2 (or X and Y in ocean-bottom seismometers). With many earthquakes, the polarization of the P waves is also the standard method to <strong>measure</strong> the orientation of a sensor when it is unknown: the average difference between the measured azimuth and the back-azimuth is the misorientation.</p>
+<hr />
+<h2 id="step-9-the-bash-script">Step 9: The bash script</h2>
+<p>Finally, the whole workflow in a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. Create a file named <code>run_rotation.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial1
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># 1. One station: rotate and measure the polarization interactively</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span><span class="nv">$BASE</span>/project/andorra<span class="w"> </span>-i<span class="w"> </span><span class="nv">$BASE</span>/metadata/inv_all.xml<span class="w"> </span>-e<span class="w"> </span><span class="nv">$BASE</span>/events/event_ml35.txt<span class="w"> </span>-c<span class="w"> </span><span class="nv">$BASE</span>/configs/typical_config.yaml<span class="w"> </span>-s<span class="w"> </span>GENF<span class="w"> </span>--phases<span class="w"> </span>p,s,P,S<span class="w"> </span>-cs<span class="w"> </span><span class="m">5</span><span class="w"> </span>-ce<span class="w"> </span><span class="m">20</span><span class="w"> </span>--plot_config<span class="w"> </span><span class="nv">$BASE</span>/configs/plotting_config.yaml
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="c1"># 2. All the stations rotated to ZRT, saved to disk</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>surfquake<span class="w"> </span>processing<span class="w"> </span>-p<span class="w"> </span><span class="nv">$BASE</span>/project/andorra<span class="w"> </span>-i<span class="w"> </span><span class="nv">$BASE</span>/metadata/inv_all.xml<span class="w"> </span>-e<span class="w"> </span><span class="nv">$BASE</span>/events/event_ml35.txt<span class="w"> </span>-c<span class="w"> </span><span class="nv">$BASE</span>/configs/rotate_config.yaml<span class="w"> </span>--phases<span class="w"> </span>p,s,P,S<span class="w"> </span>-cs<span class="w"> </span><span class="m">5</span><span class="w"> </span>-ce<span class="w"> </span><span class="m">20</span><span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/rotated<span class="w"> </span>--plot_config<span class="w"> </span><span class="nv">$BASE</span>/configs/plotting_config.yaml
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_rotation.sh
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>./run_rotation.sh
+</code></pre></div>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li>The <strong>back-azimuth</strong> is the direction from the station to the earthquake. surfquake computes it from the event file and the metadata, and stores it in the header.</li>
+<li>Rotating <strong>NE → RT</strong> puts the P and SV motion on R and the SH motion on T: after a good rotation, the P wave almost disappears from T.</li>
+<li>The <strong>polarization</strong> of the P wave measures the direction of the earthquake from a single station, with an ambiguity of 180°. Trust it only when the <strong>rectilinearity</strong> is high.</li>
+<li>The measured incidence is an <strong>apparent</strong> incidence: it is smaller than the theoretical one because of the slow near-surface rocks and the free surface. Use it for the <strong>LQT</strong> rotation, which then concentrates the P wave on L.</li>
+<li>Use <code>method: 'GAC'</code> in a config file to rotate all the stations of an event automatically.</li>
+<li>Always check the <strong>orientation of the sensors</strong> in the metadata. Components named 1/2 are read as N/E, so a misoriented sensor such as ARBS gives wrong R/T components and azimuths.</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<p>Flinn, E. A. "Signal analysis using rectilinearity and direction of particle motion." Proceedings of the IEEE 53.12 (1965): 1874-1876.</p>
+<p>Jurkevics, Andy. "Polarization analysis of three-component array data." Bulletin of the Seismological Society of America 78.5 (1988): 1725-1743.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/rcabdia/SurfQuake" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ProgramSeismic" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
