@@ -232,10 +232,19 @@ surfquake quick -w "./tutorial5/data/ES.EQTA*" -c ./tutorial5/configs/typical_co
 
 The pattern `ES.EQTA*` selects the three components of EQTA. Change it to see other stations, for example `"./tutorial5/data/ES.UMV15*"`, or `"./tutorial5/data/*HZ*"` for the vertical component of all the stations.
 
-In the interactive prompt, load the picks:
+Two different ways:
+
+- In the interactive prompt press `v`, then load the picks:
 
 ```
 >> load_picks --file ./tutorial5/picks/nll_picks.txt
+```
+
+- In the plotting_config.yaml, set the variables pick_output_file and auto_load_pick_file:
+
+```
+pick_output_file: /Granada/outputs/real/new/nll_input.txt
+auto_load_pick_file: /Granada/outputs/real/new/nll_input.txt
 ```
 
 surfquake draws every pick on the trace of the same station and channel, and stores it in the [trace header](https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/){: target="_blank" rel="noopener noreferrer" } (`picks`). The picks of the whole 1.5 hours are read, but only those inside the window are visible.
