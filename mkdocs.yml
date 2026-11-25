@@ -13,6 +13,7 @@ nav:
       - Polarization & Rotation: tutorials/polarization_tutorial.md
       - Time-Frequency Analysis: tutorials/tutorial2.md
       - Beamfoming: tutorials/beamforming_tutorial.md
+      - CrossCorrelation: tutorials/xcorr_tutorial.md
       - Auto-Picking (PhaseNet): tutorials/picking_tutorial.md
   - Signal Processing:
       - Overview: processing_overview.md
