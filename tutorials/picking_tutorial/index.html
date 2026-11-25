@@ -2593,11 +2593,20 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial5/data/ES.EQTA*&quot;</span><span class="w"> </span>-c<span class="w"> </span>./tutorial5/configs/typical_config.yaml<span class="w"> </span>--plot_config<span class="w"> </span>./tutorial5/configs/plotting_config.yaml<span class="w"> </span>--min_date<span class="w"> </span><span class="s2">&quot;2021-01-26 21:36:25&quot;</span><span class="w"> </span>--max_date<span class="w"> </span><span class="s2">&quot;2021-01-26 21:37:35&quot;</span>
 </code></pre></div>
 <p>The pattern <code>ES.EQTA*</code> selects the three components of EQTA. Change it to see other stations, for example <code>"./tutorial5/data/ES.UMV15*"</code>, or <code>"./tutorial5/data/*HZ*"</code> for the vertical component of all the stations.</p>
-<p>In the interactive prompt, load the picks:</p>
+<p>Two different ways:</p>
+<ul>
+<li>In the interactive prompt press <code>v</code>, then load the picks:</li>
+</ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt; load_picks --file ./tutorial5/picks/nll_picks.txt
 </code></pre></div>
+<ul>
+<li>In the plotting_config.yaml, set the variables pick_output_file and auto_load_pick_file:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pick_output_file: /Granada/outputs/real/new/nll_input.txt
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>auto_load_pick_file: /Granada/outputs/real/new/nll_input.txt
+</code></pre></div>
 <p>surfquake draws every pick on the trace of the same station and channel, and stores it in the <a href="https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/" rel="noopener noreferrer" target="_blank">trace header</a> (<code>picks</code>). The picks of the whole 1.5 hours are read, but only those inside the window are visible.</p>
-<p><img alt="PhaseNet picks of the first earthquake at EQTA" src="img/T5_picks.png" /></p>
+<p><img alt="PhaseNet picks of the first earthquake at EQTA" src="../img/T5_picks.png" /></p>
 <p>Look at EQTA: the P pick is exactly at the sharp onset of the P wave on the three components, and the S pick on the horizontal components at the start of the larger S wave, 3.7 s later. You can now move, delete or add picks by hand, as explained in <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">Plotting Interaction</a>, and save them.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -2644,15 +2653,15 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 </table>
 <p>The S picks fall much faster than the P picks: above 0.9 almost no S wave survives. In the table of Step 5, a threshold of 0.5 would remove the suspicious S of ENIJ and ETOB, but also the good S picks of EADA and EALB.</p>
 <p>The usual strategy is to <strong>keep low thresholds (0.3)</strong> and let the associator and the location clean the false picks: a false pick that does not match other stations is simply not associated to any event. Raise the threshold only if the noisy picks are so many that the association becomes slow, or if you want only the best picks (for example, for a tomography).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_05<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_05<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.4
 </code></pre></div>
 <h3 id="picking-only-some-stations-channels-or-times">Picking only some stations, channels or times</h3>
 <p>You do not need to pick the whole project. The same filters as in other commands are available:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Only the vertical components (HHZ and EHZ)</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_Z<span class="w"> </span>-ch<span class="w"> </span><span class="s2">&quot;?HZ&quot;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Only three stations</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_sta<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;UMV15|EQTA|EGOR&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Only the vertical components (HHZ and EHZ)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_Z<span class="w"> </span>-ch<span class="w"> </span><span class="s2">&quot;?HZ&quot;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Only three stations</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_sta<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;UMV15|EQTA|EGOR&quot;</span>
 </code></pre></div>
 <p>A filter can be a pattern with <code>*</code> and <code>?</code>, or a list of names separated by <code>|</code>. Always write it between quotes, because <code>*</code>, <code>?</code> and <code>|</code> have a special meaning in the terminal.</p>
 <p>Picking only the vertical components is faster and gives one P pick per arrival, but you lose most of the S picks, which are better seen on the horizontal components.</p>
@@ -2660,78 +2669,78 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 <hr />
 <h2 id="step-8-picking-from-python">Step 8: Picking from Python</h2>
 <p>The same can be done from a Python script, using the library. Create a file named <code>run_picking.py</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-8-10">10</a></span>
-<span class="normal"><a href="#__codelineno-8-11">11</a></span>
-<span class="normal"><a href="#__codelineno-8-12">12</a></span>
-<span class="normal"><a href="#__codelineno-8-13">13</a></span>
-<span class="normal"><a href="#__codelineno-8-14">14</a></span>
-<span class="normal"><a href="#__codelineno-8-15">15</a></span>
-<span class="normal"><a href="#__codelineno-8-16">16</a></span>
-<span class="normal"><a href="#__codelineno-8-17">17</a></span>
-<span class="normal"><a href="#__codelineno-8-18">18</a></span>
-<span class="normal"><a href="#__codelineno-8-19">19</a></span>
-<span class="normal"><a href="#__codelineno-8-20">20</a></span>
-<span class="normal"><a href="#__codelineno-8-21">21</a></span>
-<span class="normal"><a href="#__codelineno-8-22">22</a></span>
-<span class="normal"><a href="#__codelineno-8-23">23</a></span>
-<span class="normal"><a href="#__codelineno-8-24">24</a></span>
-<span class="normal"><a href="#__codelineno-8-25">25</a></span>
-<span class="normal"><a href="#__codelineno-8-26">26</a></span>
-<span class="normal"><a href="#__codelineno-8-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">freeze_support</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet.phasenet_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhasenetISP</span><span class="p">,</span> <span class="n">PhasenetUtils</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">project_file</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/project/granada&quot;</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="n">output_picks</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/picks&quot;</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a>    <span class="n">freeze_support</span><span class="p">()</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a>    <span class="c1"># Load the project and keep only the vertical components</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">project_file</span><span class="p">)</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;?HZ&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a>    <span class="c1"># Run PhaseNet</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a>    <span class="n">picker</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17"></a>    <span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18"></a>
-<a id="__codelineno-8-19" name="__codelineno-8-19"></a>    <span class="c1"># Convert the predictions to a table and write the three formats</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20"></a>    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24"></a>
-<a id="__codelineno-8-25" name="__codelineno-8-25"></a>    <span class="c1"># The table is a pandas DataFrame: you can work with it directly</span>
-<a id="__codelineno-8-26" name="__codelineno-8-26"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">picks_results</span><span class="p">[</span><span class="n">picks_results</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">]</span>
-<a id="__codelineno-8-27" name="__codelineno-8-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="p">[[</span><span class="s2">&quot;station&quot;</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]])</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">freeze_support</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet.phasenet_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhasenetISP</span><span class="p">,</span> <span class="n">PhasenetUtils</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">project_file</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/project/granada&quot;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="n">output_picks</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/picks&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>    <span class="n">freeze_support</span><span class="p">()</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>    <span class="c1"># Load the project and keep only the vertical components</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">project_file</span><span class="p">)</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;?HZ&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>    <span class="c1"># Run PhaseNet</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>    <span class="n">picker</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a>    <span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>    <span class="c1"># Convert the predictions to a table and write the three formats</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a>    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a>    <span class="c1"># The table is a pandas DataFrame: you can work with it directly</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">picks_results</span><span class="p">[</span><span class="n">picks_results</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">]</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="p">[[</span><span class="s2">&quot;station&quot;</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]])</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>run_picking.py
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python<span class="w"> </span>run_picking.py
 </code></pre></div>
 <p>The lines <code>if __name__ == '__main__':</code> and <code>freeze_support()</code> are needed because the reading of the files runs in parallel; without them, the script may fail on Windows and macOS.</p>
 <hr />
 <h2 id="step-9-the-bash-script">Step 9: The bash script</h2>
 <p>Finally, the whole workflow in a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. Create a file named <code>run_picking.sh</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="ch">#!/bin/bash</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Activate your conda environment</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial5
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/data<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>granada
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="nv">$BASE</span>/project/granada<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/picks<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial5
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/data<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>granada
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="nv">$BASE</span>/project/granada<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/picks<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_picking.sh
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>./run_picking.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_picking.sh
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>./run_picking.sh
 </code></pre></div>
 <hr />
 <h2 id="what-comes-next">What comes next?</h2>
