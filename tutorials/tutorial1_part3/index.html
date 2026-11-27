@@ -1,0 +1,2828 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://github.com/rcabdia/SurfQuake/tutorials/tutorial1_part3/">
+      
+      
+        <link rel="prev" href="../tutorial1_part2/">
+      
+      
+        <link rel="next" href="../polarization_tutorial/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Basic Signal Processing 3 - SurfQuake</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/surfquake_toolboxes.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basic-signal-processing-tutorial-3-continuous-data-instrument-response-and-decimation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SurfQuake" class="md-header__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SurfQuake
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Basic Signal Processing 3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../install/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../seismic_data_files/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../tutorial1/" class="md-tabs__link">
+          
+  
+  
+  Tutorial Book
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../processing_overview/" class="md-tabs__link">
+          
+  
+  
+  Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../picker/" class="md-tabs__link">
+          
+  
+  
+  Event Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../ppsd_DB/" class="md-tabs__link">
+          
+  
+  
+  Noise Processing
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../create_metadata/" class="md-tabs__link">
+          
+  
+  
+  Utilities
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SurfQuake" class="md-nav__button md-logo" aria-label="SurfQuake" data-md-component="logo">
+      
+  <img src="../../img/logo.png" alt="logo">
+
+    </a>
+    SurfQuake
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../seismic_data_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seismic Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial Book
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial Book
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial1_part2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Signal Processing 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-download-the-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Download the data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-create-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Create the project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-the-instrument-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: The instrument response
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-decimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Decimation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-the-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: The config file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-process-one-day-interactively" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Process one day interactively
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-process-the-three-days-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 7: Process the three days automatically
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-check-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Check the result
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-bash-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Bash script
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../polarization_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polarization & Rotation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beamforming_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamfoming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xcorr_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CrossCorrelation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../picking_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auto-Picking (PhaseNet)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Signal Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Signal Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trace_header_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trace Header
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explore_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Availability
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Traces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../processing_stream_config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing Stream
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../particle_motion_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Particle Motion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spectral_analysis_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Time-Frequency Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../beamforming_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beamforming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../characteristic_functions_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characteristic Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plotting_interaction_documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../synthetic_tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generate Test Signals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scripts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    My Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bash_script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash Script Interaction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Analysis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Analysis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../picker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase Picker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../xcorr_picker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Xcorr Picker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Associator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Event Associator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../associate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering Associate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coincidence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coincidence Trigger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../locate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Event Location
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Parameters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Focal Mechanism
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Focal Mechanism
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../focmec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First Motion Polarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moment Tensor Inversion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Noise Processing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPSD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PPSD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_DB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataBase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ppsd_plot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plotting & Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ambient_noise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ambient Noise Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dispersion_curves_processing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dispersion Curves Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utilities
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../create_metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create Metadata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manage_catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../build_mti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build MTI Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="basic-signal-processing-tutorial-3-continuous-data-instrument-response-and-decimation"><span style="color:darkcyan;"> <strong>Basic Signal Processing Tutorial 3: Continuous Data, Instrument Response and Decimation</strong> </span></h1>
+<p>In the previous tutorials we processed short files or windows around earthquakes. Many studies, however, start with <strong>days or months of continuous data</strong>: ambient noise, detection of small events, monitoring of a volcano or a fault. Before any analysis, these data are usually prepared in the same way: the <strong>instrument response</strong> is removed, so that all the stations are in the same physical units, and the data are <strong>decimated</strong> to the sampling rate that the study needs, to reduce the volume of data and the computation time.</p>
+<p>In this tutorial, we will learn how to work with a Python download script and the commands <code>project</code>, <code>processing_daily</code> and <code>quick</code> to:</p>
+<ol>
+<li><strong>Download</strong> three days of continuous data of the Global Seismographic Network (network <strong>IU</strong>) in <strong>daily files</strong>, together with the metadata.</li>
+<li>Understand the <strong>instrument response</strong> and how to remove it to obtain <strong>ground velocity</strong>.</li>
+<li><strong>Decimate</strong> the data from 40 Hz to <strong>5 Hz</strong> without aliasing.</li>
+<li>Process the data <strong>day by day</strong> with <code>processing_daily</code>, first interactively and then automatically.</li>
+<li>Check the result.</li>
+</ol>
+<p>We will download data from five stations of the IU network, some of the best broadband stations in the world:</p>
+<table>
+<thead>
+<tr>
+<th>Station</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ANMO</td>
+<td>Albuquerque, New Mexico, USA</td>
+</tr>
+<tr>
+<td>HRV</td>
+<td>Harvard, Massachusetts, USA</td>
+</tr>
+<tr>
+<td>KONO</td>
+<td>Kongsberg, Norway</td>
+</tr>
+<tr>
+<td>PAB</td>
+<td>San Pablo, Spain</td>
+</tr>
+<tr>
+<td>TATO</td>
+<td>Taipei, Taiwan</td>
+</tr>
+</tbody>
+</table>
+<p>We will download the first three days of 2024, from <strong>1 to 3 January</strong>. On 1 January, at 07:10 UTC, the <strong>Mw 7.5 Noto Peninsula earthquake</strong> (Japan) was recorded by all the stations of the world, so the data contain a large teleseismic event besides three days of seismic noise.</p>
+<p>In this tutorial we will follow this structure:</p>
+<ul>
+<li><em>Download script:</em> tutorial_daily/scripts</li>
+<li><em>Seismic files:</em> tutorial_daily/data, created by the download script</li>
+<li><em>Metadata:</em> tutorial_daily/metadata, created by the download script</li>
+<li><em>Config Files:</em> tutorial_daily/configs</li>
+<li><em>Project:</em> tutorial_daily/project</li>
+<li><em>Processed files:</em> tutorial_daily/processed, created by surfquake</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>--tutorial_daily
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    --scripts
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        --download_iu.py
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    --data
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        --IU.ANMO.00.BH1.D.2024.001
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        --IU.ANMO.00.BH2.D.2024.001
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        --IU.ANMO.00.BHZ.D.2024.001
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        ......
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        --IU.TATO.00.BHZ.D.2024.003
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    --metadata
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        --IU_stations.xml
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    --configs
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        --response_config.yaml
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        --plotting_config.yaml
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    --project
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    --processed
+</code></pre></div>
+<p>All the commands of this tutorial are run from the folder that contains <code>tutorial_daily</code>.</p>
+<hr />
+<h2 id="step-1-download-the-data">Step 1: Download the data</h2>
+<p>The data of the IU network are freely available from the EarthScope data center (formerly IRIS), through the <strong>FDSN web services</strong>, a standard way of requesting seismic data and metadata over the internet. ObsPy, which is installed with surfquake, includes a client for these services.</p>
+<p>Create the file <code>./tutorial_daily/scripts/download_iu.py</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span>
+<span class="normal"><a href="#__codelineno-1-32">32</a></span>
+<span class="normal"><a href="#__codelineno-1-33">33</a></span>
+<span class="normal"><a href="#__codelineno-1-34">34</a></span>
+<span class="normal"><a href="#__codelineno-1-35">35</a></span>
+<span class="normal"><a href="#__codelineno-1-36">36</a></span>
+<span class="normal"><a href="#__codelineno-1-37">37</a></span>
+<span class="normal"><a href="#__codelineno-1-38">38</a></span>
+<span class="normal"><a href="#__codelineno-1-39">39</a></span>
+<span class="normal"><a href="#__codelineno-1-40">40</a></span>
+<span class="normal"><a href="#__codelineno-1-41">41</a></span>
+<span class="normal"><a href="#__codelineno-1-42">42</a></span>
+<span class="normal"><a href="#__codelineno-1-43">43</a></span>
+<span class="normal"><a href="#__codelineno-1-44">44</a></span>
+<span class="normal"><a href="#__codelineno-1-45">45</a></span>
+<span class="normal"><a href="#__codelineno-1-46">46</a></span>
+<span class="normal"><a href="#__codelineno-1-47">47</a></span>
+<span class="normal"><a href="#__codelineno-1-48">48</a></span>
+<span class="normal"><a href="#__codelineno-1-49">49</a></span>
+<span class="normal"><a href="#__codelineno-1-50">50</a></span>
+<span class="normal"><a href="#__codelineno-1-51">51</a></span>
+<span class="normal"><a href="#__codelineno-1-52">52</a></span>
+<span class="normal"><a href="#__codelineno-1-53">53</a></span>
+<span class="normal"><a href="#__codelineno-1-54">54</a></span>
+<span class="normal"><a href="#__codelineno-1-55">55</a></span>
+<span class="normal"><a href="#__codelineno-1-56">56</a></span>
+<span class="normal"><a href="#__codelineno-1-57">57</a></span>
+<span class="normal"><a href="#__codelineno-1-58">58</a></span>
+<span class="normal"><a href="#__codelineno-1-59">59</a></span>
+<span class="normal"><a href="#__codelineno-1-60">60</a></span>
+<span class="normal"><a href="#__codelineno-1-61">61</a></span>
+<span class="normal"><a href="#__codelineno-1-62">62</a></span>
+<span class="normal"><a href="#__codelineno-1-63">63</a></span>
+<span class="normal"><a href="#__codelineno-1-64">64</a></span>
+<span class="normal"><a href="#__codelineno-1-65">65</a></span>
+<span class="normal"><a href="#__codelineno-1-66">66</a></span>
+<span class="normal"><a href="#__codelineno-1-67">67</a></span>
+<span class="normal"><a href="#__codelineno-1-68">68</a></span>
+<span class="normal"><a href="#__codelineno-1-69">69</a></span>
+<span class="normal"><a href="#__codelineno-1-70">70</a></span>
+<span class="normal"><a href="#__codelineno-1-71">71</a></span>
+<span class="normal"><a href="#__codelineno-1-72">72</a></span>
+<span class="normal"><a href="#__codelineno-1-73">73</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="sd">download_iu.py - Download continuous data of IU stations in daily MiniSEED files,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="sd">together with the StationXML metadata (including the instrument response).</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="sd">Usage:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="sd">    python download_iu.py</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="sd">Edit the parameters below to change the stations, the channels or the days.</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTCDateTime</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy.clients.fdsn</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="kn">from</span><span class="w"> </span><span class="nn">obspy.clients.fdsn.header</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDSNNoDataException</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="c1"># ---------------------------------------------------------------- parameters</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="n">DATA_CENTER</span> <span class="o">=</span> <span class="s2">&quot;IRIS&quot;</span>          <span class="c1"># FDSN data center (with recent ObsPy you can also use &quot;EARTHSCOPE&quot;)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="n">NETWORK</span> <span class="o">=</span> <span class="s2">&quot;IU&quot;</span>                <span class="c1"># Global Seismographic Network (IRIS/USGS)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">STATIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ANMO&quot;</span><span class="p">,</span> <span class="s2">&quot;HRV&quot;</span><span class="p">,</span> <span class="s2">&quot;KONO&quot;</span><span class="p">,</span> <span class="s2">&quot;PAB&quot;</span><span class="p">,</span> <span class="s2">&quot;TATO&quot;</span><span class="p">]</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="n">LOCATION</span> <span class="o">=</span> <span class="s2">&quot;00&quot;</span>               <span class="c1"># primary broadband sensor</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="n">CHANNEL</span> <span class="o">=</span> <span class="s2">&quot;BH?&quot;</span>               <span class="c1"># broadband, high gain, three components (use &quot;BHZ&quot; for a faster download)</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="n">START</span> <span class="o">=</span> <span class="n">UTCDateTime</span><span class="p">(</span><span class="s2">&quot;2024-01-01&quot;</span><span class="p">)</span>   <span class="c1"># first day (00:00:00 UTC)</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="n">NDAYS</span> <span class="o">=</span> <span class="mi">3</span>                     <span class="c1"># number of days</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="n">OUT_DATA</span> <span class="o">=</span> <span class="s2">&quot;./tutorial_daily/data&quot;</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="n">OUT_META</span> <span class="o">=</span> <span class="s2">&quot;./tutorial_daily/metadata&quot;</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="c1"># ---------------------------------------------------------------------------</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a>
+<a id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUT_DATA</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32"></a>    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUT_META</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33"></a>    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">DATA_CENTER</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34"></a>    <span class="n">end</span> <span class="o">=</span> <span class="n">START</span> <span class="o">+</span> <span class="n">NDAYS</span> <span class="o">*</span> <span class="mi">86400</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36"></a>    <span class="c1"># 1. Metadata with the instrument response</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Downloading metadata of </span><span class="si">{</span><span class="n">NETWORK</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">STATIONS</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38"></a>    <span class="n">inv</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_stations</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="n">NETWORK</span><span class="p">,</span> <span class="n">station</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">STATIONS</span><span class="p">),</span> <span class="n">location</span><span class="o">=</span><span class="n">LOCATION</span><span class="p">,</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39"></a>                              <span class="n">channel</span><span class="o">=</span><span class="n">CHANNEL</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="n">START</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;response&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40"></a>    <span class="n">meta_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT_META</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NETWORK</span><span class="si">}</span><span class="s2">_stations.xml&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41"></a>    <span class="n">inv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">meta_file</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;STATIONXML&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Metadata saved to </span><span class="si">{</span><span class="n">meta_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43"></a>
+<a id="__codelineno-1-44" name="__codelineno-1-44"></a>    <span class="c1"># 2. One file per channel and day: NET.STA.LOC.CHA.D.YEAR.JDAY</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45"></a>    <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NDAYS</span><span class="p">):</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46"></a>        <span class="n">t1</span> <span class="o">=</span> <span class="n">START</span> <span class="o">+</span> <span class="n">day</span> <span class="o">*</span> <span class="mi">86400</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47"></a>        <span class="n">t2</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">+</span> <span class="mi">86400</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48"></a>        <span class="k">for</span> <span class="n">sta</span> <span class="ow">in</span> <span class="n">STATIONS</span><span class="p">:</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49"></a>            <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50"></a>                <span class="n">st</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_waveforms</span><span class="p">(</span><span class="n">NETWORK</span><span class="p">,</span> <span class="n">sta</span><span class="p">,</span> <span class="n">LOCATION</span><span class="p">,</span> <span class="n">CHANNEL</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51"></a>            <span class="k">except</span> <span class="n">FDSNNoDataException</span><span class="p">:</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] No data for </span><span class="si">{</span><span class="n">NETWORK</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">sta</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">t1</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53"></a>                <span class="k">continue</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54"></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[WARN] Download failed for </span><span class="si">{</span><span class="n">NETWORK</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">sta</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">t1</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56"></a>                <span class="k">continue</span>
+<a id="__codelineno-1-57" name="__codelineno-1-57"></a>
+<a id="__codelineno-1-58" name="__codelineno-1-58"></a>            <span class="n">gaps</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">get_gaps</span><span class="p">()</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59"></a>            <span class="k">if</span> <span class="n">gaps</span><span class="p">:</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] </span><span class="si">{</span><span class="n">NETWORK</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">sta</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">t1</span><span class="o">.</span><span class="n">date</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gaps</span><span class="p">)</span><span class="si">}</span><span class="s2"> gap(s), filled by interpolation&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-61" name="__codelineno-1-61"></a>            <span class="n">st</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;interpolate&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-62" name="__codelineno-1-62"></a>            <span class="n">st</span><span class="o">.</span><span class="n">trim</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span> <span class="o">-</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="n">nearest_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>   <span class="c1"># exactly one day: [00:00, 24:00)</span>
+<a id="__codelineno-1-63" name="__codelineno-1-63"></a>
+<a id="__codelineno-1-64" name="__codelineno-1-64"></a>            <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">st</span><span class="p">:</span>
+<a id="__codelineno-1-65" name="__codelineno-1-65"></a>                <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">.D.</span><span class="si">{</span><span class="n">t1</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">t1</span><span class="o">.</span><span class="n">julday</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-1-66" name="__codelineno-1-66"></a>                <span class="n">tr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUT_DATA</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;MSEED&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-67" name="__codelineno-1-67"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">npts</span><span class="si">}</span><span class="s2"> samples at </span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">sampling_rate</span><span class="si">}</span><span class="s2"> Hz&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-68" name="__codelineno-1-68"></a>
+<a id="__codelineno-1-69" name="__codelineno-1-69"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Download complete&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-70" name="__codelineno-1-70"></a>
+<a id="__codelineno-1-71" name="__codelineno-1-71"></a>
+<a id="__codelineno-1-72" name="__codelineno-1-72"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73"></a>    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>What does it do?</p>
+<ul>
+<li><strong>The request.</strong> <code>NETWORK</code>, <code>STATIONS</code>, <code>LOCATION</code> and <code>CHANNEL</code> are the four parts of a seismic channel code. The location <code>00</code> is the primary sensor of the IU stations. The channel <code>BH?</code> means <strong>B</strong>roadband, <strong>H</strong>igh-gain seismometer, and <code>?</code> any component.</li>
+<li><strong>The metadata</strong> (<code>get_stations</code> with <code>level="response"</code>) is saved in one StationXML file. It contains the coordinates, the orientation of the components and, most important for this tutorial, the <strong>instrument response</strong> of every channel.</li>
+<li><strong>The waveforms</strong> are requested day by day. Each day is merged (small gaps are filled by linear interpolation), trimmed to exactly 00:00–24:00 UTC, and written as <strong>one MiniSEED file per channel and day</strong>, with the name <code>NET.STA.LOC.CHA.D.YEAR.JDAY</code>, where <code>JDAY</code> is the day of the year (001, 002, 003).</li>
+<li>If a station has no data for one day, a warning is printed and the script continues with the next one.</li>
+</ul>
+<p>Run it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>./tutorial_daily/scripts/download_iu.py
+</code></pre></div>
+<p>The terminal shows each file as it is written:</p>
+<div class="highlight"><pre><span></span><code>[INFO] IU.ANMO.00.BH1.D.2024.001: 3456000 samples at 40.0 Hz
+......
+</code></pre></div>
+<p>The IU broadband channels are usually recorded at <strong>40 samples per second</strong>: one day is 86400 × 40 = 3 456 000 samples per channel. The full download is up to 45 files (5 stations × 3 components × 3 days) and can take a few minutes. To make it faster, change <code>CHANNEL</code> to <code>"BHZ"</code> and keep only the vertical components.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some IU stations name their horizontal components <strong>1</strong> and <strong>2</strong> instead of N and E, because the sensor is not exactly aligned with the north. Their real orientation is in the metadata. See the <a href="../polarization_tutorial/">Rotation and Polarization Tutorial</a>.</p>
+</div>
+<hr />
+<h2 id="step-2-create-the-project">Step 2: Create the project</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span>./tutorial_daily/data<span class="w"> </span>-s<span class="w"> </span>./tutorial_daily/project<span class="w"> </span>-n<span class="w"> </span>iu_raw
+</code></pre></div>
+<p>The summary shows the network, the 5 stations, and the time span of the project, from 2024-01-01 00:00:00 to 2024-01-03 23:59:59.</p>
+<hr />
+<h2 id="step-3-the-instrument-response">Step 3: The instrument response</h2>
+<p>A seismometer does not record the ground motion directly. The ground moves the mass of the sensor, the sensor produces a voltage, and the digitizer converts the voltage into integer <strong>counts</strong>. Each of these stages amplifies some frequencies more than others. Together, they form the <strong>instrument response</strong> <span class="arithmatex">\(I(f)\)</span>:</p>
+<div class="arithmatex">\[
+C(f) = I(f)\, V(f)
+\]</div>
+<p>where <span class="arithmatex">\(C(f)\)</span> is the spectrum of the recorded counts and <span class="arithmatex">\(V(f)\)</span> the spectrum of the ground velocity. A broadband sensor like those of the IU network has an almost flat response in velocity over a wide band (typically from about 120 s to more than 10 Hz), and a response that decreases rapidly outside it.</p>
+<p><strong>Removing the response</strong> means dividing by it, in the frequency domain:</p>
+<div class="arithmatex">\[
+V(f) = \frac{C(f)}{I(f)}
+\]</div>
+<p>This gives the ground velocity in <strong>m/s</strong>. Now, stations with different sensors and digitizers can be compared, their amplitudes have a physical meaning, and they can be used for magnitudes, spectral studies or ambient noise.</p>
+<p>The division is dangerous where <span class="arithmatex">\(I(f)\)</span> is very small (very long periods, and frequencies close to the Nyquist frequency): there, the noise is divided by an almost zero number and explodes. Two tools stabilise it:</p>
+<ul>
+<li><strong><code>pre_filt</code></strong>: four frequencies <span class="arithmatex">\([f_1, f_2, f_3, f_4]\)</span> of a band-pass filter applied in the frequency domain. It is flat between <span class="arithmatex">\(f_2\)</span> and <span class="arithmatex">\(f_3\)</span> and goes smoothly to zero below <span class="arithmatex">\(f_1\)</span> and above <span class="arithmatex">\(f_4\)</span>, so the unstable frequencies are removed.</li>
+<li><strong><code>water_level</code></strong>: a floor for the response, in dB below its maximum. Where the response is weaker than this level, the division uses the level instead.</li>
+</ul>
+<hr />
+<h2 id="step-4-decimation">Step 4: Decimation</h2>
+<p>Our data are at 40 Hz, so they contain frequencies up to 20 Hz (the <strong>Nyquist frequency</strong>, half of the sampling rate). Many studies need much less: teleseismic body and surface waves, the microseisms and the ambient noise are below 1–2 Hz. Decimating to <strong>5 Hz</strong> keeps the frequencies up to 2.5 Hz, and the data have <strong>8 times fewer samples</strong>: every later step is faster and needs less memory.</p>
+<p>Decimating is not just keeping one sample out of eight. Frequencies above the new Nyquist frequency (2.5 Hz) would fold back into the band and contaminate it: this is <strong>aliasing</strong> (see <a href="synthetic_tutorial.md">Tutorial 4</a>). So the method <code>resample</code> with <code>pre_filter: True</code>:</p>
+<ol>
+<li>Applies an <strong>anti-alias low-pass filter</strong> at 90 % of the new Nyquist frequency (2.25 Hz).</li>
+<li>Changes the sampling rate (from 40 to 5 Hz, a factor of 8). Factors larger than 10 are done in several steps.</li>
+</ol>
+<hr />
+<h2 id="step-5-the-config-file">Step 5: The config file</h2>
+<p>Create the file <code>./tutorial_daily/configs/response_config.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">Analysis</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">process_1</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rmean&#39;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;linear&#39;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">process_2</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;taper&#39;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;cosine&#39;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">max_percentage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">  </span><span class="nt">process_3</span><span class="p">:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;remove_response&#39;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="nt">units</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;VEL&#39;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="nt">water_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nt">pre_filt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.002</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">0.004</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">8.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="nt">process_4</span><span class="p">:</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;resample&#39;</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nt">sampling_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nt">pre_filter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+</code></pre></div>
+<p>Please review the following documentation:</p>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/processing_config/" rel="noopener noreferrer" target="_blank">Processing Individual Traces Options</a></p>
+<p>Step by step:</p>
+<ul>
+<li><strong><code>rmean</code> and <code>taper</code></strong>: remove the trend and bring the ends of each day to zero, as always before an FFT-based method. With one day of data, the 5 % taper affects the first and last 72 minutes of each day.</li>
+<li><strong><code>remove_response</code></strong> to velocity (<code>VEL</code>):<ul>
+<li><code>pre_filt: [0.002, 0.004, 8.0, 10.0]</code>: the band is flat between 0.004 Hz (250 s) and 8 Hz. At long periods, it removes the frequencies where the response of the sensor falls. At high frequencies, it stays well below the Nyquist frequency of the raw data (20 Hz). The decimation will remove everything above 2.25 Hz anyway.</li>
+<li><code>water_level: 60</code>: a floor 60 dB below the maximum of the response.</li>
+</ul>
+</li>
+<li><strong><code>resample</code></strong> to 5 Hz, with the anti-alias filter.</li>
+</ul>
+<p>The order matters: first the response is removed at the original sampling rate, where the metadata describe the data exactly, and then the data are decimated.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The response is removed with the metadata given with <code>-i</code>. If the response of a channel is not found (for example, if the metadata file does not include that station), its data are removed and a message is printed.</p>
+</div>
+<hr />
+<h2 id="step-6-process-one-day-interactively">Step 6: Process one day interactively</h2>
+<p><code>processing_daily</code> is designed for continuous data: it divides the project into <strong>time spans</strong> (one day by default, <code>--span_seconds 86400</code>), and for each span reads the files of all the stations, processes them and, optionally, plots and saves them. Only one day is in memory at a time.</p>
+<p>Create the plotting configuration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>make_config<span class="w"> </span>-c<span class="w"> </span>plotting_config<span class="w"> </span>-o<span class="w"> </span><span class="s2">&quot;./tutorial_daily/configs&quot;</span>
+</code></pre></div>
+<p>and set <code>traces_per_fig: 3</code> in it, so each page shows the three components of one station.</p>
+<p>Let's first check the processing on the first day:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>surfquake<span class="w"> </span>processing_daily<span class="w"> </span>-p<span class="w"> </span>./tutorial_daily/project/iu_raw<span class="w"> </span>-i<span class="w"> </span>./tutorial_daily/metadata/IU_stations.xml<span class="w"> </span>-c<span class="w"> </span>./tutorial_daily/configs/response_config.yaml<span class="w"> </span>--min_date<span class="w"> </span><span class="s2">&quot;2024-01-01 00:00:00&quot;</span><span class="w"> </span>--max_date<span class="w"> </span><span class="s2">&quot;2024-01-02 00:00:00&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span>./tutorial_daily/configs/plotting_config.yaml<span class="w"> </span>-f
+</code></pre></div>
+<ul>
+<li><code>-p</code>: the project.</li>
+<li><code>-i</code>: the metadata, required to remove the response.</li>
+<li><code>-c</code>: the config file.</li>
+<li><code>--min_date</code>, <code>--max_date</code>: only the first day.</li>
+<li><code>-f</code>: <strong>fast plotting</strong>. A day of data has hundreds of thousands of samples per trace; the fast mode draws a decimated envelope that looks the same and is much quicker.</li>
+</ul>
+<p><img alt="First day processed" src="img/T1c_processed.png" /></p>
+<p>The traces are now in <strong>m/s</strong>, at 5 Hz. Look at the Noto earthquake: the P wave arrives at about 07:14 UTC at TATO (18° from the earthquake), and between 07:22 and 07:24 UTC at KONO, ANMO, PAB and HRV (74° to 96°), and the large surface waves follow for more than an hour. The rest of the day is seismic noise, dominated by the <strong>microseisms</strong>, the waves generated by the ocean, with periods of 3 to 10 seconds.</p>
+<p>Now, compare with the raw data. Open the prompt with <code>v</code>, and plot the spectrum of the vertical component:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;&gt; sp 0
+</code></pre></div>
+<p>Then, in another terminal, open the raw file of the same channel and plot its spectrum too:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial_daily/data/IU.PAB.00.BHZ.D.2024.001&quot;</span><span class="w"> </span>-f
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt; sp 0
+</code></pre></div>
+<p><img alt="Raw vs processed spectra" src="img/T1c_spectra.png" /></p>
+<ul>
+<li>The raw spectrum is in <strong>counts</strong> and goes up to 20 Hz.</li>
+<li>The processed spectrum is in <strong>m/s</strong> and stops at 2.5 Hz, the new Nyquist frequency. Above 2.25 Hz it falls rapidly: this is the anti-alias filter.</li>
+<li>Between the corners of <code>pre_filt</code>, both spectra have the same shape, because the response of a broadband sensor is flat in velocity: removing it changes the units and the level, not the shape. The <strong>microseism peak</strong> (around 0.1–0.3 Hz) is clear in both.</li>
+</ul>
+<p>When you close the figure, surfquake asks what to do next:</p>
+<div class="highlight"><pre><span></span><code>[Prompt] Finished subproject 0. Type &#39;c&#39; to continue, &#39;r&#39; to reprocess this event, or &#39;e&#39; to exit:
+</code></pre></div>
+<ul>
+<li><code>c</code>: continue with the next span.</li>
+<li><code>r</code>: reload the config file and process the same day again. Use it to change a parameter (for example <code>water_level</code>) and see the effect without restarting.</li>
+<li><code>e</code>: exit.</li>
+</ul>
+<hr />
+<h2 id="step-7-process-the-three-days-automatically">Step 7: Process the three days automatically</h2>
+<p>Once the config is correct, process all the days without plots, and save the results:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>surfquake<span class="w"> </span>processing_daily<span class="w"> </span>-p<span class="w"> </span>./tutorial_daily/project/iu_raw<span class="w"> </span>-i<span class="w"> </span>./tutorial_daily/metadata/IU_stations.xml<span class="w"> </span>-c<span class="w"> </span>./tutorial_daily/configs/response_config.yaml<span class="w"> </span>-o<span class="w"> </span>./tutorial_daily/processed<span class="w"> </span>--auto
+</code></pre></div>
+<ul>
+<li><code>-o</code>: output folder. It is created if it does not exist.</li>
+<li><code>--auto</code>: no plots and no prompts. The files are written only in this mode (or when the plot is configured to be saved, not shown).</li>
+</ul>
+<p>surfquake divides the project into three days and processes them one after the other:</p>
+<div class="highlight"><pre><span></span><code>[INFO] Splitting into subprojects every 86400 seconds
+[0] 2024-01-01 00:00:00 → 2024-01-01 23:59:59 | 15 files | Event: span
+[1] 2024-01-02 00:00:00 → 2024-01-02 23:59:59 | 15 files | Event: span
+[2] 2024-01-03 00:00:00 → 2024-01-03 23:59:59 | 15 files | Event: span
+[INFO] Processing subproject 0 (daily stream)
+......
+IU.ANMO.00.BHZ - Writing processed data to ./tutorial_daily/processed/IU.ANMO.00.BHZ.D.2024.001.h5
+</code></pre></div>
+<p>The processed files are written in <strong>HDF5</strong> format (<code>.h5</code>), which keeps the surfquake header of the traces, with the same naming convention as the raw files.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li>To process only some stations or components, use the filters <code>-n</code>, <code>-s</code> and <code>-ch</code>, for example <code>-ch "BHZ"</code>.</li>
+<li>To process the whole time window as <strong>a single stream</strong> (for example, to obtain one continuous trace per channel for the three days), add <code>--time_segment</code> with <code>--min_date</code> and <code>--max_date</code>. Keep in mind that all the data are then in memory at the same time.</li>
+<li>With <code>--span_seconds</code> you can use other spans, for example <code>--span_seconds 3600</code> for one-hour windows.</li>
+</ul>
+</div>
+<hr />
+<h2 id="step-8-check-the-result">Step 8: Check the result</h2>
+<p>Create a project with the processed data:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span>./tutorial_daily/processed<span class="w"> </span>-s<span class="w"> </span>./tutorial_daily/project<span class="w"> </span>-n<span class="w"> </span>iu_vel_5hz
+</code></pre></div>
+<p>and look at the vertical components of the first day, now from the processed files:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial_daily/processed/*BHZ.D.2024.001.h5&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span>./tutorial_daily/configs/plotting_config.yaml<span class="w"> </span>-f
+</code></pre></div>
+<p>Check that:</p>
+<ul>
+<li>the sampling rate is <strong>5 Hz</strong> (the trace header shows <code>sampling_rate: 5.0</code> and 432 000 samples per day);</li>
+<li>the amplitudes are in <strong>m/s</strong>: very small numbers for the noise (ground velocities are tiny), and much larger ones for the surface waves of the Noto earthquake;</li>
+<li>the five stations, with different sensors, now have <strong>comparable amplitudes</strong>: TATO, the closest station to Japan, records the largest earthquake signal.</li>
+</ul>
+<p>The new project <code>iu_vel_5hz</code> is now ready for the next steps of a study: ambient noise cross-correlation, spectral analysis, detection, etc.</p>
+<hr />
+<h2 id="using-bash-script">Using Bash script</h2>
+<p>Finally, the whole workflow in a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. Create a file named <code>run_daily.sh</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial_daily
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1"># 1. Download three days of IU data and the metadata</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>python<span class="w"> </span><span class="nv">$BASE</span>/scripts/download_iu.py
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="c1"># 2. Project with the raw data</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/data<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>iu_raw
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="c1"># 3. Remove the response and decimate to 5 Hz, day by day</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>surfquake<span class="w"> </span>processing_daily<span class="w"> </span>-p<span class="w"> </span><span class="nv">$BASE</span>/project/iu_raw<span class="w"> </span>-i<span class="w"> </span><span class="nv">$BASE</span>/metadata/IU_stations.xml<span class="w"> </span>-c<span class="w"> </span><span class="nv">$BASE</span>/configs/response_config.yaml<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/processed<span class="w"> </span>--auto
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="c1"># 4. Project with the processed data</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/processed<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>iu_vel_5hz
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_daily.sh
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>./run_daily.sh
+</code></pre></div>
+<hr />
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li>Continuous data are usually organised in <strong>daily files</strong>, one per channel: <code>NET.STA.LOC.CHA.D.YEAR.JDAY</code>.</li>
+<li>The <strong>FDSN web services</strong> give free access to the data and metadata of many networks; ObsPy downloads them with a few lines of Python.</li>
+<li>Seismometers record <strong>counts</strong>. Removing the <strong>instrument response</strong> converts them to ground velocity (m/s), so stations with different instruments can be compared. <code>pre_filt</code> and <code>water_level</code> keep the deconvolution stable.</li>
+<li><strong>Decimation</strong> reduces the volume of data. An anti-alias low-pass filter must be applied first, or high frequencies fold into the new band.</li>
+<li><strong><code>processing_daily</code></strong> processes a project span by span (one day by default): check the processing interactively on one day, then run all the days with <code>--auto</code> and <code>-o</code>.</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<p>Havskov, Jens, and Gerardo Alguacil. Instrumentation in Earthquake Seismology. 2nd ed. Springer (2016).</p>
+<p>Scherbaum, Frank. Of Poles and Zeros: Fundamentals of Digital Seismology. 2nd ed. Springer (2001).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://robertocabieces.com"  target="_blank" rel="noopener">Roberto Cabieces</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/rcabdia/SurfQuake" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/ProgramSeismic" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
