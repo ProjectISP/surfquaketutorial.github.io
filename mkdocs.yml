@@ -10,6 +10,7 @@ nav:
   - Tutorial Book:
       - Basic Signal Processing 1: tutorials/tutorial1.md
       - Basic Signal Processing 2: tutorials/tutorial1_part2.md
+      - Basic Signal Processing 3: tutorials/tutorial1_part3.md
       - Polarization & Rotation: tutorials/polarization_tutorial.md
       - Time-Frequency Analysis: tutorials/tutorial2.md
       - Beamfoming: tutorials/beamforming_tutorial.md
@@ -30,6 +31,7 @@ nav:
       - Bash Script Interaction: bash_script.md
   - Event Analysis:
       - Phase Picker: picker.md
+      - Xcorr Picker: xcorr_picker.md
       - Event Associator:
             - Clustering Associate: associate.md
             - Coincidence Trigger: coincidence.md
