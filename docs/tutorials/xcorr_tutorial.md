@@ -263,7 +263,7 @@ Then cross-correlate all the traces with the first one:
 
 ```
 >> help xcorr
->> xcorr --ref 0 --mode full --normalize full
+>> xcorr --ref 0 --mode full --normalize full --trim False
 ```
 
 - `--ref 0`: the reference is the first trace, IM.IL02..SHZ.

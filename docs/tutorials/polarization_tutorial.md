@@ -96,7 +96,8 @@ Please review the following documentation:
 ## Step 2: The event and its geometry
 
 Create the file `./tutorial1/events/event_ml35.txt` with the earthquake:
-
+    
+    date;hour;latitude;longitude;depth;magnitude
     2022-02-01;02:03:00.3;42.5003;1.4619;5.3;3.49
 
 For this earthquake, the geometry of the stations is:
