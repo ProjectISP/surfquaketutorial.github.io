@@ -2444,7 +2444,6 @@
 
 
 <h1 id="surfquake-ccpick-cross-correlation-picker">surfquake ccpick — cross-correlation picker</h1>
-<p>Nov 23, 2026 · @Roberto Cabieces</p>
 <h2 id="overview">Overview</h2>
 <p><code>surfquake ccpick</code> finds P and S arrivals by template matching: it slides waveforms of a known event (the <em>master</em>) along the project data and picks wherever the data look like it. Its pick files are identical to those of <code>surfquake pick</code> (PhaseNet), so association and location work unchanged.</p>
 <p>It has two modes:</p>
@@ -2473,7 +2472,10 @@
 </tbody>
 </table>
 <p>ccpick complements PhaseNet rather than replacing it: it only finds events similar to a master, at about the same place and with a similar mechanism. A typical workflow is to build the catalogue with PhaseNet, choose the best events as masters, then run ccpick to fill in the small events.</p>
-<p>ccpick does not need TensorFlow.</p>
+<div class="admonition info please review the reference">
+<p class="admonition-title">Info</p>
+<p>S. J. Gibbons and F. Ringdal (2006). The detection of low magnitude seismic events using array-based waveform correlation. <em>Geophysical Journal International</em>, 165, 149–166. <a href="https://doi.org/10.1111/j.1365-246X.2006.02865.x">doi:10.1111/j.1365-246X.2006.02865.x</a></p>
+</div>
 <h2 id="quick-start">Quick start</h2>
 <p>The smallest run needs a project file, a folder with one template and an output folder.</p>
 <ol>
@@ -2535,37 +2537,39 @@
 <p>The correlation coefficient's meaning depends on the template: noise alone easily reaches 0.5 with a short, narrow-band template. If you get many false picks, raise <code>--threshold</code> or use longer templates.</p>
 <h2 id="network-mode-gibbons-ringdal-2006">Network mode (Gibbons &amp; Ringdal 2006)</h2>
 <p>Network mode correlates all channels of one master event at once and stacks the correlation traces, not the waveforms. In the paper this detects events about one magnitude unit smaller than an STA/LTA on the array beam. It works because, for an event at the master's location, every channel matches its template at the same moment, even when the waveforms differ from station to station.</p>
-<p>&#91;embedded content: network mode · from correlation to picks]</p>
 <p>Every detection must clear the scaled threshold and the ratio test, and the slowness test when an inventory is given; only then is each channel's own maximum turned into a pick.</p>
 <h3 id="1-data-are-processed-one-day-at-a-time">1. Data are processed one day at a time</h3>
 <p>Files are grouped by UTC day. All template channels of that day are read together, gaps are filled with zeros, and every channel is padded to the full day, so one short station cannot shorten the day for the others. A template is only run if at least <code>--min_channels</code> of its channels are present (default 3, or fewer if the template has fewer).</p>
 <h3 id="2-network-correlation-coefficient">2. Network correlation coefficient</h3>
-<p>Each channel is correlated with its own template window, giving Cⱼ(t). Because the windows keep their true start times, all Cⱼ peak together for a repeat of the master, and their average is the network coefficient:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>C<span class="nb">_</span>A(t) = <span class="k">\frac</span><span class="nb">{</span>1<span class="nb">}{</span>M<span class="nb">}</span> <span class="k">\sum_</span><span class="nb">{</span>j=1<span class="nb">}^{</span>M<span class="nb">}</span> C<span class="nb">_</span>j(t)
-</code></pre></div>
+<p>Each channel is correlated with its own template window, giving <span class="arithmatex">\(C_j(t)\)</span>. Because the windows keep their true start times, all <span class="arithmatex">\(C_j\)</span> peak together for a repeat of the master, and their average is the network coefficient:</p>
+<div class="arithmatex">\[
+C_A(t) = \frac{1}{M} \sum_{j=1}^{M} C_j(t)
+\]</div>
 <h3 id="3-scaled-coefficient-the-detection-statistic">3. Scaled coefficient: the detection statistic</h3>
-<p>A raw value of C_A means different things for different templates and networks, so each value is judged against its local background. The RMS of C_A is measured in two windows on either side of t, leaving a gap around t so the template's own side-lobes do not count:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">\text</span><span class="nb">{</span>scaled<span class="nb">}</span>(t) = <span class="k">\frac</span><span class="nb">{</span>C<span class="nb">_</span>A(t)<span class="nb">}{</span><span class="k">\mathrm</span><span class="nb">{</span>RMS<span class="nb">}</span><span class="k">\left</span><span class="na">[\, C_A \text{ over } [t-b,\, t-a]</span> <span class="k">\cup</span> [t+a,<span class="k">\,</span> t+b] <span class="k">\,\right</span>]<span class="nb">}</span>
-</code></pre></div>
+<p>A raw value of <span class="arithmatex">\(C_A\)</span> means different things for different templates and networks, so each value is judged against its local background. The RMS of <span class="arithmatex">\(C_A\)</span> is measured in two windows on either side of t, leaving a gap around t so the template's own side-lobes do not count:</p>
+<div class="arithmatex">\[
+\text{scaled}(t) = \frac{C_A(t)}{\mathrm{RMS}\left[\, C_A \text{ over } [t-b,\, t-a] \cup [t+a,\, t+b] \,\right]}
+\]</div>
 <p>Defaults are a = 1.0 s and b = 2.5 s (<code>--scc_a</code>, <code>--scc_b</code>), and a detection needs a scaled value of at least 6 (<code>--threshold</code>). The paper used 6.0 in its tests and 5.5 at the Barentsburg mine. The value works like a signal-to-noise ratio of the correlation trace.</p>
 <h3 id="4-from-one-detection-to-a-pick-per-station">4. From one detection to a pick per station</h3>
-<p>A detection gives one time for the whole network. For each channel, ccpick looks for that channel's own correlation maximum Cⱼᴸ within ±<code>--lag_win</code> (default 0.5 s) of the detection, and its small time shift (lag):</p>
+<p>A detection gives one time for the whole network. For each channel, ccpick looks for that channel's own correlation maximum <span class="arithmatex">\(C_j^L\)</span> within ±<code>--lag_win</code> (default 0.5 s) of the detection, and its small time shift (lag):</p>
 <ul>
 <li>pick time = master pick on that channel + (detection time − template start) + lag</li>
-<li>weight = Cⱼᴸ, between 0 and 1 like a PhaseNet probability</li>
-<li>a pick is written only if Cⱼᴸ ≥ <code>--min_channel_cc</code> (default 0.3), so stations that do not really see the event get no pick</li>
+<li>weight = <span class="arithmatex">\(C_j^L\)</span>, between 0 and 1 like a PhaseNet probability</li>
+<li>a pick is written only if <span class="arithmatex">\(C_j^L\)</span> ≥ <code>--min_channel_cc</code> (default 0.3), so stations that do not really see the event get no pick</li>
 </ul>
 <h3 id="5-false-alarm-tests">5. False-alarm tests</h3>
 <p><strong>Ratio test (always on).</strong> If the channels truly agree, stacking at zero delay loses almost nothing and the ratio below is close to 1. If their peaks are scattered in time, the stack is much smaller than its parts and the detection is rejected:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">\frac</span><span class="nb">{</span>C<span class="nb">_</span>A(t<span class="nb">_</span>d)<span class="nb">}{</span><span class="k">\operatorname</span><span class="nb">{</span>mean<span class="nb">}_</span>j<span class="k">\,</span> C<span class="nb">_</span>j<span class="nb">^{</span>L<span class="nb">}}</span> <span class="k">\ge</span> 0.58
-</code></pre></div>
+<div class="arithmatex">\[
+\frac{C_A(t_d)}{\operatorname{mean}_j\, C_j^{L}} \ge 0.58
+\]</div>
 <p>The threshold is <code>--min_ratio</code>. This test needs no station coordinates, so it works on any network.</p>
 <p><strong>Slowness test (optional, small arrays).</strong> With <code>--inventory</code>, ccpick fits a plane wave to the channel lags. A true repeat has the same slowness as the master, so the fitted slowness is close to zero; a detection is rejected if it exceeds <code>--max_slowness</code> (default 0.04 s/km, the paper's value). It needs at least 3 stations with coordinates. This is a simpler version of the paper's f–k analysis of the correlation traces.</p>
 <p>Small-aperture arrays are the most prone to false alarms, because an unrelated wavefront can match on all sensors within a short time. On sparse networks a chance match at every station is unlikely, and the ratio test is usually enough.</p>
 <h3 id="6-optional-magnitude">6. Optional magnitude</h3>
 <p>With <code>--master_mag</code>, each detection gets a magnitude relative to the master, from the amplitude ratio between data and template (ObsPy's <code>template_magnitudes</code>). It is written to <code>ccpick_detections.csv</code>, not to the pick files.</p>
 <h2 id="command-line-reference">Command-line reference</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>PROJECT<span class="w"> </span>-t<span class="w"> </span>TEMPLATES<span class="w"> </span>-o<span class="w"> </span>OUTPUT<span class="w"> </span><span class="o">[</span>--mode<span class="w"> </span>simple<span class="p">|</span>network<span class="o">]</span><span class="w"> </span><span class="o">[</span>-th<span class="w"> </span>THRESHOLD<span class="o">]</span><span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>PROJECT<span class="w"> </span>-t<span class="w"> </span>TEMPLATES<span class="w"> </span>-o<span class="w"> </span>OUTPUT<span class="w"> </span><span class="o">[</span>--mode<span class="w"> </span>simple<span class="p">|</span>network<span class="o">]</span><span class="w"> </span><span class="o">[</span>-th<span class="w"> </span>THRESHOLD<span class="o">]</span><span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
 </code></pre></div>
 <table>
 <thead>
@@ -2712,13 +2716,13 @@
 </tbody>
 </table>
 <p>Examples:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># one station, stricter threshold, only July 2024</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>project.pkl<span class="w"> </span>-t<span class="w"> </span>./templates<span class="w"> </span>-o<span class="w"> </span>./picks<span class="w"> </span>-s<span class="w"> </span>EMAL<span class="w"> </span>-th<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>--min_date<span class="w"> </span><span class="s2">&quot;2024-07-01 00:00:00&quot;</span><span class="w"> </span>--max_date<span class="w"> </span><span class="s2">&quot;2024-07-31 23:59:59&quot;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># small array with slowness test and magnitudes</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>project.pkl<span class="w"> </span>-t<span class="w"> </span>./templates<span class="w"> </span>-o<span class="w"> </span>./picks<span class="w"> </span>--mode<span class="w"> </span>network<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>--fmin<span class="w"> </span><span class="m">3</span><span class="w"> </span>--fmax<span class="w"> </span><span class="m">12</span><span class="w"> </span>--inventory<span class="w"> </span>stations.xml<span class="w"> </span>--master_mag<span class="w"> </span><span class="m">1</span>.8
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># one station, stricter threshold, only July 2024</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>project.pkl<span class="w"> </span>-t<span class="w"> </span>./templates<span class="w"> </span>-o<span class="w"> </span>./picks<span class="w"> </span>-s<span class="w"> </span>EMAL<span class="w"> </span>-th<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>--min_date<span class="w"> </span><span class="s2">&quot;2024-07-01 00:00:00&quot;</span><span class="w"> </span>--max_date<span class="w"> </span><span class="s2">&quot;2024-07-31 23:59:59&quot;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># small array with slowness test and magnitudes</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>project.pkl<span class="w"> </span>-t<span class="w"> </span>./templates<span class="w"> </span>-o<span class="w"> </span>./picks<span class="w"> </span>--mode<span class="w"> </span>network<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>--fmin<span class="w"> </span><span class="m">3</span><span class="w"> </span>--fmax<span class="w"> </span><span class="m">12</span><span class="w"> </span>--inventory<span class="w"> </span>stations.xml<span class="w"> </span>--master_mag<span class="w"> </span><span class="m">1</span>.8
 </code></pre></div>
 <h2 id="outputs">Outputs</h2>
 <p>Both modes write the same files as <code>surfquake pick</code>, with the same columns, so association (REAL) and location (NonLinLoc) read them unchanged.</p>
@@ -2750,7 +2754,7 @@
 </table>
 <p>How ccpick fills the columns that PhaseNet fills from its model:</p>
 <ul>
-<li><strong>weight</strong>: the correlation value (simple mode) or the channel's own correlation maximum Cⱼᴸ (network mode), between 0 and 1. Correlation values are usually lower than PhaseNet probabilities, so NonLinLoc errors come out larger.</li>
+<li><strong>weight</strong>: the correlation value (simple mode) or the channel's own correlation maximum <span class="arithmatex">\(C_j^L\)</span> (network mode), between 0 and 1. Correlation values are usually lower than PhaseNet probabilities, so NonLinLoc errors come out larger.</li>
 <li><strong>amplitude</strong>: the largest absolute value in the 10 s after a P pick or 5 s after an S pick, on the data high-passed at 0.5 Hz, scaled like PhaseNet's.</li>
 <li><strong>date</strong> and <strong>tt</strong>: the pick's own UTC day and seconds since midnight of that day.</li>
 </ul>
@@ -2777,7 +2781,7 @@
 </tr>
 <tr>
 <td><code>cc_mean</code></td>
-<td>Network coefficient C_A at the detection</td>
+<td>Network coefficient <span class="arithmatex">\(C_A\)</span> at the detection</td>
 </tr>
 <tr>
 <td><code>scaled_cc</code></td>
@@ -2804,7 +2808,7 @@
 <p>This file is the place to tune the threshold: compare the <code>scaled_cc</code> of events you know are real with that of doubtful detections.</p>
 <h2 id="reviewing-the-correlation-traces">Reviewing the correlation traces</h2>
 <p>With <code>--save_cc FOLDER</code>, ccpick also writes the correlation traces it used, so anyone can check why a detection was made or rejected. Files are SurfQuake H5, one folder per day, and open directly in the plotting tool. Each detection is marked in the trace header (<code>stats.picks</code>), so the plotting tool shows the marks.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>project.pkl<span class="w"> </span>-t<span class="w"> </span>./templates<span class="w"> </span>-o<span class="w"> </span>./picks<span class="w"> </span>--mode<span class="w"> </span>network<span class="w"> </span>--save_cc<span class="w"> </span>./cc_review
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>surfquake<span class="w"> </span>ccpick<span class="w"> </span>-f<span class="w"> </span>project.pkl<span class="w"> </span>-t<span class="w"> </span>./templates<span class="w"> </span>-o<span class="w"> </span>./picks<span class="w"> </span>--mode<span class="w"> </span>network<span class="w"> </span>--save_cc<span class="w"> </span>./cc_review
 </code></pre></div>
 <table>
 <thead>
@@ -2847,7 +2851,7 @@
 <tr>
 <td><code>CC.&lt;template&gt;..AVG</code></td>
 <td>network</td>
-<td>Network coefficient C_A</td>
+<td>Network coefficient <span class="arithmatex">\(C_A\)</span></td>
 <td>Detection time</td>
 </tr>
 <tr>
@@ -2861,7 +2865,7 @@
 <ul>
 <li>File names: <code>&lt;save_cc&gt;/YYYYMMDD/&lt;template&gt;_&lt;phase&gt;_&lt;detection time&gt;.h5</code>, or <code>..._day.h5</code> in full mode.</li>
 <li>In network mode, detections rejected by the ratio or slowness test are saved too. The reason is in the file name (<code>..._rejected_ratio.h5</code>) and in the mark label (<code>P-rejected_ratio</code>), so you can see what the tests removed.</li>
-<li>Each trace carries a <code>stats.ccpick</code> header with the template, phase, status, thresholds and the detection's values (C_A, scaled value, ratio, slowness).</li>
+<li>Each trace carries a <code>stats.ccpick</code> header with the template, phase, status, thresholds and the detection's values (<span class="arithmatex">\(C_A\)</span>, scaled value, ratio, slowness).</li>
 <li>Saving needs <code>obspyh5</code>, which SurfQuake already uses for H5 files.</li>
 </ul>
 <h2 id="tuning-troubleshooting-and-limitations">Tuning, troubleshooting and limitations</h2>
@@ -2933,20 +2937,20 @@
 </ul>
 <h2 id="python-api-and-code-layout">Python API and code layout</h2>
 <p>The same picker can be used from Python. <code>CCPicker.pick()</code> returns the pick table, and the writers in <code>pick_output</code> save it in the PhaseNet formats.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.cc_picker</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCPicker</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet</span><span class="w"> </span><span class="kn">import</span> <span class="n">pick_output</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="s2">&quot;project.pkl&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">picker</span> <span class="o">=</span> <span class="n">CCPicker</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="s2">&quot;./templates&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;network&quot;</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>                  <span class="n">fmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">pick</span><span class="p">()</span>                      <span class="c1"># pandas DataFrame, PhaseNet columns</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">pick_output</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">pick_output</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">pick_output</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">picker</span><span class="o">.</span><span class="n">write_detections</span><span class="p">(</span><span class="s2">&quot;./picks&quot;</span><span class="p">)</span>         <span class="c1"># network mode: ccpick_detections.csv</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">picker</span><span class="o">.</span><span class="n">detections</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.cc_picker</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCPicker</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet</span><span class="w"> </span><span class="kn">import</span> <span class="n">pick_output</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="s2">&quot;project.pkl&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">picker</span> <span class="o">=</span> <span class="n">CCPicker</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="s2">&quot;./templates&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;network&quot;</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>                  <span class="n">fmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">pick</span><span class="p">()</span>                      <span class="c1"># pandas DataFrame, PhaseNet columns</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">pick_output</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">pick_output</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="n">pick_output</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="s2">&quot;./picks&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="n">picker</span><span class="o">.</span><span class="n">write_detections</span><span class="p">(</span><span class="s2">&quot;./picks&quot;</span><span class="p">)</span>         <span class="c1"># network mode: ccpick_detections.csv</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">picker</span><span class="o">.</span><span class="n">detections</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre></div>
 <p>The keyword arguments of <code>CCPicker</code> are the command-line options without dashes (<code>min_ratio</code>, <code>lag_win</code>, <code>pre_pick</code>, ...). <code>inventory</code> takes an ObsPy <code>Inventory</code>, not a file name.</p>
 <table>
@@ -2971,7 +2975,6 @@
 </tr>
 </tbody>
 </table>
-<p>Reference: S. J. Gibbons and F. Ringdal (2006). The detection of low magnitude seismic events using array-based waveform correlation. <em>Geophysical Journal International</em>, 165, 149–166. <a href="https://doi.org/10.1111/j.1365-246X.2006.02865.x">doi:10.1111/j.1365-246X.2006.02865.x</a></p>
 
 
 
