@@ -1,7 +1,5 @@
 # surfquake ccpick — cross-correlation picker
 
-Nov 23, 2026 · @Roberto Cabieces
-
 ## Overview
 
 `surfquake ccpick` finds P and S arrivals by template matching: it slides waveforms of a known event (the *master*) along the project data and picks wherever the data look like it. Its pick files are identical to those of `surfquake pick` (PhaseNet), so association and location work unchanged.
@@ -15,7 +13,8 @@ It has two modes:
 
 ccpick complements PhaseNet rather than replacing it: it only finds events similar to a master, at about the same place and with a similar mechanism. A typical workflow is to build the catalogue with PhaseNet, choose the best events as masters, then run ccpick to fill in the small events.
 
-ccpick does not need TensorFlow.
+!!! info Please review the reference
+    S. J. Gibbons and F. Ringdal (2006). The detection of low magnitude seismic events using array-based waveform correlation. *Geophysical Journal International*, 165, 149–166. [doi:10.1111/j.1365-246X.2006.02865.x](https://doi.org/10.1111/j.1365-246X.2006.02865.x)
 
 ## Quick start
 
@@ -53,7 +52,7 @@ WM.EMAL..HHZ.20240901.mseed   P      2024-09-01T12:00:05.000
 
 - **file**: path relative to the templates folder. One trace per file (only the first trace is read), already cut around the phase.
 - **phase**: P or S.
-- **pick\_time**: absolute UTC onset time. It must lie inside the template window.
+- **pick_time**: absolute UTC onset time. It must lie inside the template window.
 - **event** (optional, network mode): lines with the same event and phase form one multichannel template. Lines without event are single-channel templates.
 
 ### Option 2: picks in the trace header (no text file)
@@ -95,8 +94,6 @@ The correlation coefficient's meaning depends on the template: noise alone easil
 
 Network mode correlates all channels of one master event at once and stacks the correlation traces, not the waveforms. In the paper this detects events about one magnitude unit smaller than an STA/LTA on the array beam. It works because, for an event at the master's location, every channel matches its template at the same moment, even when the waveforms differ from station to station.
 
-&#91;embedded content: network mode · from correlation to picks\]
-
 Every detection must clear the scaled threshold and the ratio test, and the slowness test when an inventory is given; only then is each channel's own maximum turned into a pick.
 
 ### 1. Data are processed one day at a time
@@ -105,37 +102,37 @@ Files are grouped by UTC day. All template channels of that day are read togethe
 
 ### 2. Network correlation coefficient
 
-Each channel is correlated with its own template window, giving Cⱼ(t). Because the windows keep their true start times, all Cⱼ peak together for a repeat of the master, and their average is the network coefficient:
+Each channel is correlated with its own template window, giving $C_j(t)$. Because the windows keep their true start times, all $C_j$ peak together for a repeat of the master, and their average is the network coefficient:
 
-```latex
+$$
 C_A(t) = \frac{1}{M} \sum_{j=1}^{M} C_j(t)
-```
+$$
 
 ### 3. Scaled coefficient: the detection statistic
 
-A raw value of C\_A means different things for different templates and networks, so each value is judged against its local background. The RMS of C\_A is measured in two windows on either side of t, leaving a gap around t so the template's own side-lobes do not count:
+A raw value of $C_A$ means different things for different templates and networks, so each value is judged against its local background. The RMS of $C_A$ is measured in two windows on either side of t, leaving a gap around t so the template's own side-lobes do not count:
 
-```latex
+$$
 \text{scaled}(t) = \frac{C_A(t)}{\mathrm{RMS}\left[\, C_A \text{ over } [t-b,\, t-a] \cup [t+a,\, t+b] \,\right]}
-```
+$$
 
 Defaults are a = 1.0 s and b = 2.5 s (`--scc_a`, `--scc_b`), and a detection needs a scaled value of at least 6 (`--threshold`). The paper used 6.0 in its tests and 5.5 at the Barentsburg mine. The value works like a signal-to-noise ratio of the correlation trace.
 
 ### 4. From one detection to a pick per station
 
-A detection gives one time for the whole network. For each channel, ccpick looks for that channel's own correlation maximum Cⱼᴸ within ±`--lag_win` (default 0.5 s) of the detection, and its small time shift (lag):
+A detection gives one time for the whole network. For each channel, ccpick looks for that channel's own correlation maximum $C_j^L$ within ±`--lag_win` (default 0.5 s) of the detection, and its small time shift (lag):
 
 - pick time = master pick on that channel + (detection time − template start) + lag
-- weight = Cⱼᴸ, between 0 and 1 like a PhaseNet probability
-- a pick is written only if Cⱼᴸ ≥ `--min_channel_cc` (default 0.3), so stations that do not really see the event get no pick
+- weight = $C_j^L$, between 0 and 1 like a PhaseNet probability
+- a pick is written only if $C_j^L$ ≥ `--min_channel_cc` (default 0.3), so stations that do not really see the event get no pick
 
 ### 5. False-alarm tests
 
 **Ratio test (always on).** If the channels truly agree, stacking at zero delay loses almost nothing and the ratio below is close to 1. If their peaks are scattered in time, the stack is much smaller than its parts and the detection is rejected:
 
-```latex
+$$
 \frac{C_A(t_d)}{\operatorname{mean}_j\, C_j^{L}} \ge 0.58
-```
+$$
 
 The threshold is `--min_ratio`. This test needs no station coordinates, so it works on any network.
 
@@ -196,14 +193,14 @@ Both modes write the same files as `surfquake pick`, with the same columns, so a
 
 | File | Contents |
 | --- | --- |
-| `original_picks.csv` | One row per pick: date, NET.STA.PHASE, year, month, day, net, station, flag, seconds since midnight, date\_time, weight, amplitude, phase, channel |
+| `original_picks.csv` | One row per pick: date, NET.STA.PHASE, year, month, day, net, station, flag, seconds since midnight, date_time, weight, amplitude, phase, channel |
 | `nll_picks.txt` | Picks in NonLinLoc format; the weight is converted to a time error |
 | `YYYYMMDD/NET.STA.P.txt`, `.S.txt` | One folder per day in REAL format |
 | `ccpick_detections.csv` | Network mode only: one row per detected event |
 
 How ccpick fills the columns that PhaseNet fills from its model:
 
-- **weight**: the correlation value (simple mode) or the channel's own correlation maximum Cⱼᴸ (network mode), between 0 and 1. Correlation values are usually lower than PhaseNet probabilities, so NonLinLoc errors come out larger.
+- **weight**: the correlation value (simple mode) or the channel's own correlation maximum $C_j^L$ (network mode), between 0 and 1. Correlation values are usually lower than PhaseNet probabilities, so NonLinLoc errors come out larger.
 - **amplitude**: the largest absolute value in the 10 s after a P pick or 5 s after an S pick, on the data high-passed at 0.5 Hz, scaled like PhaseNet's.
 - **date** and **tt**: the pick's own UTC day and seconds since midnight of that day.
 
@@ -214,7 +211,7 @@ How ccpick fills the columns that PhaseNet fills from its model:
 | `time` | Detection time (template start aligned on the data) |
 | `phase`, `template` | Phase and template name (event or folder) |
 | `n_channels`, `n_picks` | Channels correlated, and picks written |
-| `cc_mean` | Network coefficient C\_A at the detection |
+| `cc_mean` | Network coefficient $C_A$ at the detection |
 | `scaled_cc` | Scaled coefficient, the value compared with the threshold |
 | `ratio` | Ratio test value |
 | `slowness` | Fitted slowness in s/km, if the slowness test ran |
@@ -241,12 +238,12 @@ What each file contains:
 | Trace id | Mode | Content | Where the mark is |
 | --- | --- | --- | --- |
 | Data id, for example `WM.EMAL..HHZ` | both | Correlation of that channel with its template | Simple mode: the pick. Network mode: the channel's own maximum, which gives its pick |
-| `CC.<template>..AVG` | network | Network coefficient C\_A | Detection time |
+| `CC.<template>..AVG` | network | Network coefficient $C_A$ | Detection time |
 | `CC.<template>..SCC` | network | Scaled coefficient, the value compared with the threshold | Detection time |
 
 - File names: `<save_cc>/YYYYMMDD/<template>_<phase>_<detection time>.h5`, or `..._day.h5` in full mode.
 - In network mode, detections rejected by the ratio or slowness test are saved too. The reason is in the file name (`..._rejected_ratio.h5`) and in the mark label (`P-rejected_ratio`), so you can see what the tests removed.
-- Each trace carries a `stats.ccpick` header with the template, phase, status, thresholds and the detection's values (C\_A, scaled value, ratio, slowness).
+- Each trace carries a `stats.ccpick` header with the template, phase, status, thresholds and the detection's values ($C_A$, scaled value, ratio, slowness).
 - Saving needs `obspyh5`, which SurfQuake already uses for H5 files.
 
 ## Tuning, troubleshooting and limitations
@@ -307,4 +304,3 @@ The keyword arguments of `CCPicker` are the command-line options without dashes 
 | `surfquakecore/phasenet/pick_output.py` | Pick table format and writers shared with PhaseNet, without TensorFlow |
 | `surfquakecore/cli/main.py` | `_ccpick()` command and `_filter_project()` project filters |
 
-Reference: S. J. Gibbons and F. Ringdal (2006). The detection of low magnitude seismic events using array-based waveform correlation. *Geophysical Journal International*, 165, 149–166. [doi:10.1111/j.1365-246X.2006.02865.x](https://doi.org/10.1111/j.1365-246X.2006.02865.x)
