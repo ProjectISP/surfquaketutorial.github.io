@@ -1,14 +1,15 @@
-# <span style="color:darkcyan;"> **Event Analysis: Automatic Phase Picking Tutorial 5** </span>
+# <span style="color:darkcyan;"> **Event Analysis: Automatic Phase Picking and First-Motion Polarities Tutorial 5** </span>
 
-In the previous tutorials, we always knew **when** the earthquakes happened: the event file told surfquake where to cut. In real life, the first problem is the opposite: we have hours or days of continuous data, and we need to find the **arrival times of the P and S waves** of every earthquake inside it. Doing it by hand is impossible when a seismic sequence produces hundreds of events. In this tutorial, we will learn how to work with the commands `project`, `pick` and `quick` to:
+In the previous tutorials, we always knew **when** the earthquakes happened: the event file told surfquake where to cut. In real life, the first problem is the opposite: we have hours or days of continuous data, and we need to find the **arrival times of the P and S waves** of every earthquake inside it. Doing it by hand is impossible when a seismic sequence produces hundreds of events. In this tutorial, we will learn how to work with the commands `project`, `pick`, `polarity` and `quick` to:
 
 1. Organise continuous data in a **project**.
 2. Run the deep-learning picker **PhaseNet** on all the stations.
 3. Understand the three **output files** of the picker.
 4. Read the picks of one earthquake and check that they make sense.
 5. Draw the picks on top of the waveforms.
-6. Choose the **probability thresholds** and select stations, channels and dates.
-7. Run the picker from **Python** and from a **bash script**.
+6. Determine the **first-motion polarity** of the P waves with the deep-learning model **PolarCAP**, and check it by hand.
+7. Choose the **probability thresholds** and select stations, channels and dates.
+8. Run the picker and the polarities from **Python** and from a **bash script**.
 
 The data is from the **Granada seismic sequence (southern Spain) of January 2021**. We will use 1.5 hours of continuous data, from 21:00 to 22:30 UTC on **26 January 2021**, recorded by 19 stations of the Spanish network (ES). During that time, three earthquakes of magnitude around 4 (ML 4.1, 4.1 and 4.3) happened very close to each other, near 37.19° N, 3.69° W and about 5 km deep, at 21:36:32, 21:44:18 and 21:54:55 UTC, together with many smaller aftershocks.
 
@@ -183,7 +184,7 @@ All the picks in the phase format of the location program NonLinLoc, one per lin
     Station_name	Instrument	Component	P_phase_onset	P_phase_descriptor	First_Motion	Date	Hour_min	Seconds	Err	ErrMag	Coda_duration	Amplitude	Period
     E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+08 -1.00e+00
 
-The column `ErrMag` is the **uncertainty** of the pick in seconds, translated from the probability: the more confident the pick, the smaller the error (0.02 s above 0.95, up to 0.5 s below 0.6). This file can also be loaded in the interactive plot (Step 6) and is the input of `surfquake polarity`.
+The column `ErrMag` is the **uncertainty** of the pick in seconds, translated from the probability: the more confident the pick, the smaller the error (0.02 s above 0.95, up to 0.5 s below 0.6). The column `First_Motion` is `?` for now: it will be filled in Step 7. This file can also be loaded in the interactive plot (Step 6) and is the input of `surfquake polarity`.
 
 ---
 
@@ -240,12 +241,15 @@ Two different ways:
 >> load_picks --file ./tutorial5/picks/nll_picks.txt
 ```
 
-- In the plotting_config.yaml, set the variables pick_output_file and auto_load_pick_file:
+- Or load them automatically when the figure opens. In `plotting_config.yaml`, set the file in `pick_output_file` and turn on `auto_load_pick_file`:
 
+```yaml
+  pick_output_file: ./tutorial5/picks/nll_picks.txt
+  auto_load_pick_file: true
 ```
-pick_output_file: /Granada/outputs/real/new/nll_input.txt
-auto_load_pick_file: /Granada/outputs/real/new/nll_input.txt
-```
+
+!!! warning
+    `pick_output_file` is also the file where surfquake **saves** your manual picks: every time you add or delete a pick, the file is rewritten with the picks of the traces that are open. If you open only some stations, the picks of the other stations would be lost from that file. Use `auto_load_pick_file` with a copy of the pick file, or load the picks with `load_picks` and keep `pick_output_file` pointing to another file.
 
 surfquake draws every pick on the trace of the same station and channel, and stores it in the [trace header](https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/){: target="_blank" rel="noopener noreferrer" } (`picks`). The picks of the whole 1.5 hours are read, but only those inside the window are visible.
 
@@ -258,7 +262,121 @@ Look at EQTA: the P pick is exactly at the sharp onset of the P wave on the thre
 
 ---
 
-## Step 7: Choosing the thresholds
+## Step 7: First-motion polarities with PolarCAP
+
+### What is the first-motion polarity?
+
+The first motion of the ground when the P wave arrives can be **up** or **down** on the vertical component. It depends on the position of the station with respect to the **fault** and its slip:
+
+- In some directions the rock is pushed towards the station: the P wave starts with a **compression**, and the vertical component moves **up** (`U`).
+- In other directions the rock is pulled away from the station: the P wave starts with a **dilatation**, and the vertical component moves **down** (`D`).
+
+The regions of compressions and dilatations are separated by two perpendicular planes, one of them the fault plane. With enough well-distributed polarities, these planes can be found: this is the **focal mechanism from first motions**, a classic method that works also for small earthquakes, too small for a moment tensor inversion.
+
+The polarity is only meaningful for the **P wave** on the **vertical component**, and it must be read on the **first half-cycle** of the onset, before any later arrival or reverberation.
+
+### PolarCAP
+
+Reading hundreds of polarities by hand is slow and subjective. surfquake uses **PolarCAP** (Chakraborty et al., 2022), a small deep-learning model trained with more than 130 000 polarities labelled by analysts in Italy. For every P pick on a vertical channel, surfquake:
+
+1. Reads the raw trace (gaps filled, resampled to 100 Hz if needed). The data are **not filtered**: filters can change the shape of the onset, and zero-phase filters even create a false motion before it.
+2. Cuts a window of **0.64 s centred on the pick** (32 samples before and 32 after) and normalises it.
+3. Asks PolarCAP for the polarity, **positive** (up) or **negative** (down), and its probability.
+4. Writes `U` or `D` in the `First_Motion` column of the pick, only if the probability is at least the threshold (`-t`, 0.9 by default). Otherwise the pick keeps `?`.
+
+Because the window is centred on the pick, PolarCAP needs **precise P picks**. This is why we use the picks of PhaseNet, whose errors are of a few hundredths of a second.
+
+Please review the following documentation:
+
+[First Polarity](https://projectisp.github.io/surfquaketutorial.github.io/focmec/){: target="_blank" rel="noopener noreferrer" }
+
+### Run it
+
+```bash
+surfquake polarity -h
+surfquake polarity -f ./tutorial5/picks/nll_picks.txt -p ./tutorial5/project/granada -o ./tutorial5/picks/nll_picks_polarities.txt -t 0.9
+```
+
+- `-f`: the pick file in NonLinLoc format, `nll_picks.txt` from Step 3.
+- `-p`: the project, to read the waveforms.
+- `-o`: the output pick file, with the polarities.
+- `-t`: the minimum probability to accept a polarity (default 0.9).
+
+Save the output **in the picks folder**, as in the command above. In the next tutorial, the associator looks there for pick files with polarities and copies them to the associated events.
+
+!!! note
+    PolarCAP needs TensorFlow, like PhaseNet. With this dataset it takes about one minute.
+
+### The result
+
+`nll_picks_polarities.txt` is the same pick file, with the `First_Motion` column filled:
+
+    Station_name	Instrument	Component	P_phase_onset	P_phase_descriptor	First_Motion	Date	Hour_min	Seconds	Err	ErrMag	Coda_duration	Amplitude	Period
+    E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.0 4.98e+08 -1.0
+    ......
+    EQTA   ?    HHZ  ? P      U 20210126 2136 36.3270 GAU 2.00e-02 -1.0 5.15e+09 -1.0
+
+Of the 1140 P picks, 381 are on vertical channels. With the default threshold of 0.9, **316** of them get a polarity (170 `U` and 146 `D`); the others keep `?`. The P picks of the horizontal channels and all the S picks always keep `?`.
+
+These are the polarities of the first earthquake (21:36:32), in order of arrival:
+
+| Station | P pick | Polarity |   | Station | P pick | Polarity |
+|---------|--------|----------|---|---------|--------|----------|
+| UMV15 | 36:33.98 | U | | ECAB | 37:00.66 | D |
+| EQTA | 36:36.32 | U | | ELOR | 37:03.99 | U |
+| EGOR | 36:38.37 | U | | TLOR | 37:04.22 | U |
+| ELGU | 36:38.61 | U | | ESPR | 37:04.70 | D |
+| EBER | 36:46.13 | D | | EZAR | 37:05.31 | D |
+| E0802 | 36:49.29 | U | | EMUR | 37:09.71 | D |
+| EMIJ | 36:50.37 | U | | ETOB | 37:11.25 | U |
+| EADA | 36:55.07 | D | | EMIN | 37:11.81 | D |
+| ENIJ | 36:55.07 | D | | | | |
+| EALB | 36:56.75 | D | | | | |
+
+18 stations have a polarity, and both `U` and `D` are present: the stations closest to the earthquake (UMV15, EQTA, EGOR, ELGU) all move up, and many of the distant ones move down. This mixture is what constrains a focal mechanism.
+
+### The threshold
+
+The threshold `-t` is a compromise, as for the picks:
+
+| Threshold | Vertical P picks with polarity |
+|-----------|--------------------------------|
+| 0.7 | 361 |
+| 0.9 (default) | 316 |
+| 0.95 | 286 |
+
+For the first earthquake, the three thresholds give the same polarities; with 0.95 only EZAR loses its polarity. A wrong polarity is worse than a missing one, because the focal mechanism has to fit it. Keep the default, or raise it if you have many stations.
+
+### Check the polarities by hand
+
+PolarCAP is very accurate (98 % on its test data), but no automatic method is perfect, especially for weak or emergent onsets. Always check some of them. Open EQTA again, as in Step 6, with the information box of the picks turned on in `plotting_config.yaml` (`show_info_picks: true`):
+
+```bash
+surfquake quick -w "./tutorial5/data/ES.EQTA*" --plot_config ./tutorial5/configs/plotting_config.yaml --min_date "2021-01-26 21:36:25" --max_date "2021-01-26 21:37:35"
+```
+
+```
+>> load_picks --file ./tutorial5/picks/nll_picks_polarities.txt
+```
+
+Open the raw data, **without** a config file: as explained above, a filter can change the first motion. Zoom on the P onset of the vertical component: the trace moves up, and the pick shows `P, U`.
+
+![PolarCAP polarity at EQTA](img/T5_polarity.png)
+
+To correct a polarity, delete the pick with the mouse on it and the key `d`, and pick it again with the quick-pick keys:
+
+| Key | Pick |
+|-----|------|
+| `1` | P, polarity unknown (`?`) |
+| `2` | P, up (`U`) |
+| `3` | P, down (`D`) |
+| `4`, `5`, `6` | S, with `?`, `U` or `D` |
+
+The picks are saved in `pick_output_file` (see the warning of Step 6).
+
+---
+
+## Step 8: Choosing the thresholds
 
 The thresholds `-pt` and `-st` decide which peaks of the probability curve become picks. It is a compromise:
 
@@ -302,7 +420,7 @@ With a long archive of daily files, `--min_date` and `--max_date` select the day
 
 ---
 
-## Step 8: Picking from Python
+## Step 9: Picking and polarities from Python
 
 The same can be done from a Python script, using the library. Create a file named `run_picking.py`:
 
@@ -310,6 +428,7 @@ The same can be done from a Python script, using the library. Create a file name
 from multiprocessing import freeze_support
 from surfquakecore.phasenet.phasenet_handler import PhasenetISP, PhasenetUtils
 from surfquakecore.project.surf_project import SurfProject
+from surfquakecore.first_polarity.get_pol import RunPolarity
 
 project_file = "./tutorial5/project/granada"
 output_picks = "./tutorial5/picks"
@@ -334,17 +453,21 @@ if __name__ == '__main__':
     # The table is a pandas DataFrame: you can work with it directly
     best = picks_results[picks_results["weight"] > 0.8]
     print(best[["station", "channel", "phase", "date_time", "weight"]])
+
+    # First-motion polarities of the P picks with PolarCAP
+    RunPolarity(sp, f"{output_picks}/nll_picks.txt", f"{output_picks}/nll_picks_polarities.txt",
+                0.9).send_polarities()
 ```
 
 ```bash
 python run_picking.py
 ```
 
-The lines `if __name__ == '__main__':` and `freeze_support()` are needed because the reading of the files runs in parallel; without them, the script may fail on Windows and macOS.
+`RunPolarity` takes the project, the input pick file, the output pick file and the threshold, like the command `polarity`. The lines `if __name__ == '__main__':` and `freeze_support()` are needed because the reading of the files runs in parallel; without them, the script may fail on Windows and macOS.
 
 ---
 
-## Step 9: The bash script
+## Step 10: The bash script
 
 Finally, the whole workflow in a [bash script file](https://projectisp.github.io/surfquaketutorial.github.io/bash_script/){: target="_blank" rel="noopener noreferrer" }. Create a file named `run_picking.sh`:
 
@@ -358,6 +481,7 @@ BASE=./tutorial5
 
 surfquake project -d $BASE/data -s $BASE/project -n granada
 surfquake pick -f $BASE/project/granada -o $BASE/picks -pt 0.3 -st 0.3 --verbose
+surfquake polarity -f $BASE/picks/nll_picks.txt -p $BASE/project/granada -o $BASE/picks/nll_picks_polarities.txt -t 0.9
 ```
 
 ```bash
@@ -371,9 +495,10 @@ chmod u+x run_picking.sh
 
 The picks are only the first step of the automatic workflow. With the same Granada data, the next steps are:
 
-1. **Association** (`surfquake associate`): groups the picks of different stations that belong to the same earthquake, using the daily folders and the metadata. Here, it finds the earthquakes of the sequence and discards the isolated false picks. See [Clustering Associate](https://projectisp.github.io/surfquaketutorial.github.io/associate/){: target="_blank" rel="noopener noreferrer" }.
+1. **Association** (`surfquake associate`): groups the picks of different stations that belong to the same earthquake, using the daily folders and the metadata. Here, it finds the earthquakes of the sequence and discards the isolated false picks. If the picks folder contains `nll_picks_polarities.txt`, the polarities are copied to the associated P picks. See [Clustering Associate](https://projectisp.github.io/surfquaketutorial.github.io/associate/){: target="_blank" rel="noopener noreferrer" }.
 2. **Location** (`surfquake locate`): computes the hypocentre of every event with NonLinLoc. See [Event Location](https://projectisp.github.io/surfquaketutorial.github.io/locate/){: target="_blank" rel="noopener noreferrer" }.
-3. **Source parameters and moment tensor** (`surfquake source`, `surfquake mti`): magnitudes and focal mechanisms.
+3. **Focal mechanisms from first motions** (`surfquake focmec`, `surfquake plotmec`): the polarities of each located event are used to find its fault planes.
+4. **Source parameters and moment tensor** (`surfquake source`, `surfquake mti`): magnitudes and focal mechanisms from the waveforms.
 
 The results of the complete workflow with this data can be found in the [Granada example](https://github.com/rcabdia/test_surfquake/tree/main/Granada){: target="_blank" rel="noopener noreferrer" }.
 
@@ -388,9 +513,14 @@ The results of the complete workflow with this data can be found in the [Granada
 - **P** picks are usually precise and confident; **S** picks are fewer, less confident and found mostly on the horizontal components.
 - Some picks are wrong: keep low thresholds and let the **associator** and the **location** reject the picks that do not fit.
 - Always check a few events on the waveforms with `load_picks`.
+- The **first-motion polarity** (up or down) of the P wave on the vertical component depends on the position of the station with respect to the fault. **PolarCAP** reads it on a 0.64 s window of the raw data centred on the pick, so it needs precise picks.
+- Only polarities with a probability above the threshold (0.9 by default) are written. A wrong polarity is worse than a missing one.
+- Save `nll_picks_polarities.txt` in the picks folder: the associator uses it in the next step.
 
 ---
 
 ## References
+
+Chakraborty, Megha, et al. "PolarCAP – A deep learning approach for first motion polarity classification of earthquake waveforms." Artificial Intelligence in Geosciences 3 (2022): 46-52.
 
 Zhu, Weiqiang, and Gregory C. Beroza. "PhaseNet: a deep-neural-network-based seismic arrival-time picking method." Geophysical Journal International 216.1 (2019): 261-273.
