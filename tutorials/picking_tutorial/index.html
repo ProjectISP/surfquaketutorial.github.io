@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#event-analysis-automatic-phase-picking-tutorial-5" class="md-skip">
+        <a href="#event-analysis-automatic-phase-picking-and-first-motion-polarities-tutorial-5" class="md-skip">
           Skip to content
         </a>
       
@@ -1036,15 +1036,98 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-7-choosing-the-thresholds" class="md-nav__link">
+  <a href="#step-7-first-motion-polarities-with-polarcap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 7: Choosing the thresholds
+        Step 7: First-motion polarities with PolarCAP
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 7: Choosing the thresholds">
+    <nav class="md-nav" aria-label="Step 7: First-motion polarities with PolarCAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-the-first-motion-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is the first-motion polarity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polarcap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PolarCAP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The result
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-threshold" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The threshold
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-the-polarities-by-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check the polarities by hand
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-8-choosing-the-thresholds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 8: Choosing the thresholds
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 8: Choosing the thresholds">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1064,10 +1147,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-8-picking-from-python" class="md-nav__link">
+  <a href="#step-9-picking-and-polarities-from-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 8: Picking from Python
+        Step 9: Picking and polarities from Python
       
     </span>
   </a>
@@ -1075,10 +1158,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-9-the-bash-script" class="md-nav__link">
+  <a href="#step-10-the-bash-script" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Step 9: The bash script
+        Step 10: The bash script
       
     </span>
   </a>
@@ -2365,16 +2448,17 @@
 
 
 
-<h1 id="event-analysis-automatic-phase-picking-tutorial-5"><span style="color:darkcyan;"> <strong>Event Analysis: Automatic Phase Picking Tutorial 5</strong> </span></h1>
-<p>In the previous tutorials, we always knew <strong>when</strong> the earthquakes happened: the event file told surfquake where to cut. In real life, the first problem is the opposite: we have hours or days of continuous data, and we need to find the <strong>arrival times of the P and S waves</strong> of every earthquake inside it. Doing it by hand is impossible when a seismic sequence produces hundreds of events. In this tutorial, we will learn how to work with the commands <code>project</code>, <code>pick</code> and <code>quick</code> to:</p>
+<h1 id="event-analysis-automatic-phase-picking-and-first-motion-polarities-tutorial-5"><span style="color:darkcyan;"> <strong>Event Analysis: Automatic Phase Picking and First-Motion Polarities Tutorial 5</strong> </span></h1>
+<p>In the previous tutorials, we always knew <strong>when</strong> the earthquakes happened: the event file told surfquake where to cut. In real life, the first problem is the opposite: we have hours or days of continuous data, and we need to find the <strong>arrival times of the P and S waves</strong> of every earthquake inside it. Doing it by hand is impossible when a seismic sequence produces hundreds of events. In this tutorial, we will learn how to work with the commands <code>project</code>, <code>pick</code>, <code>polarity</code> and <code>quick</code> to:</p>
 <ol>
 <li>Organise continuous data in a <strong>project</strong>.</li>
 <li>Run the deep-learning picker <strong>PhaseNet</strong> on all the stations.</li>
 <li>Understand the three <strong>output files</strong> of the picker.</li>
 <li>Read the picks of one earthquake and check that they make sense.</li>
 <li>Draw the picks on top of the waveforms.</li>
+<li>Determine the <strong>first-motion polarity</strong> of the P waves with the deep-learning model <strong>PolarCAP</strong>, and check it by hand.</li>
 <li>Choose the <strong>probability thresholds</strong> and select stations, channels and dates.</li>
-<li>Run the picker from <strong>Python</strong> and from a <strong>bash script</strong>.</li>
+<li>Run the picker and the polarities from <strong>Python</strong> and from a <strong>bash script</strong>.</li>
 </ol>
 <p>The data is from the <strong>Granada seismic sequence (southern Spain) of January 2021</strong>. We will use 1.5 hours of continuous data, from 21:00 to 22:30 UTC on <strong>26 January 2021</strong>, recorded by 19 stations of the Spanish network (ES). During that time, three earthquakes of magnitude around 4 (ML 4.1, 4.1 and 4.3) happened very close to each other, near 37.19° N, 3.69° W and about 5 km deep, at 21:36:32, 21:44:18 and 21:54:55 UTC, together with many smaller aftershocks.</p>
 <p>In this tutorial we will follow this structure:</p>
@@ -2516,7 +2600,7 @@
 <div class="highlight"><pre><span></span><code>Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hour_min    Seconds Err ErrMag  Coda_duration   Amplitude   Period
 E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+08 -1.00e+00
 </code></pre></div>
-<p>The column <code>ErrMag</code> is the <strong>uncertainty</strong> of the pick in seconds, translated from the probability: the more confident the pick, the smaller the error (0.02 s above 0.95, up to 0.5 s below 0.6). This file can also be loaded in the interactive plot (Step 6) and is the input of <code>surfquake polarity</code>.</p>
+<p>The column <code>ErrMag</code> is the <strong>uncertainty</strong> of the pick in seconds, translated from the probability: the more confident the pick, the smaller the error (0.02 s above 0.95, up to 0.5 s below 0.6). The column <code>First_Motion</code> is <code>?</code> for now: it will be filled in Step 7. This file can also be loaded in the interactive plot (Step 6) and is the input of <code>surfquake polarity</code>.</p>
 <hr />
 <h2 id="step-5-the-picks-of-one-earthquake">Step 5: The picks of one earthquake</h2>
 <p>Let's look at the first earthquake, at <strong>21:36:32.6 UTC</strong>. Open <code>original_picks.csv</code> and keep the picks between 21:36:32 and 21:37:20. For every station, this table shows the P and the S pick with the highest probability, ordered by time:</p>
@@ -2684,11 +2768,15 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt;&gt; load_picks --file ./tutorial5/picks/nll_picks.txt
 </code></pre></div>
 <ul>
-<li>In the plotting_config.yaml, set the variables pick_output_file and auto_load_pick_file:</li>
+<li>Or load them automatically when the figure opens. In <code>plotting_config.yaml</code>, set the file in <code>pick_output_file</code> and turn on <code>auto_load_pick_file</code>:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pick_output_file: /Granada/outputs/real/new/nll_input.txt
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>auto_load_pick_file: /Granada/outputs/real/new/nll_input.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">  </span><span class="nt">pick_output_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./tutorial5/picks/nll_picks.txt</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">auto_load_pick_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>pick_output_file</code> is also the file where surfquake <strong>saves</strong> your manual picks: every time you add or delete a pick, the file is rewritten with the picks of the traces that are open. If you open only some stations, the picks of the other stations would be lost from that file. Use <code>auto_load_pick_file</code> with a copy of the pick file, or load the picks with <code>load_picks</code> and keep <code>pick_output_file</code> pointing to another file.</p>
+</div>
 <p>surfquake draws every pick on the trace of the same station and channel, and stores it in the <a href="https://projectisp.github.io/surfquaketutorial.github.io/trace_header_documentation/" rel="noopener noreferrer" target="_blank">trace header</a> (<code>picks</code>). The picks of the whole 1.5 hours are read, but only those inside the window are visible.</p>
 <p><img alt="PhaseNet picks of the first earthquake at EQTA" src="../img/T5_picks.png" /></p>
 <p>Look at EQTA: the P pick is exactly at the sharp onset of the P wave on the three components, and the S pick on the horizontal components at the start of the larger S wave, 3.7 s later. You can now move, delete or add picks by hand, as explained in <a href="https://projectisp.github.io/surfquaketutorial.github.io/plotting_interaction_documentation/" rel="noopener noreferrer" target="_blank">Plotting Interaction</a>, and save them.</p>
@@ -2697,7 +2785,219 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 <p>To see the picks of the second and third earthquakes, change the window to 21:44:10–21:45:20 and 21:54:50–21:56:00.</p>
 </div>
 <hr />
-<h2 id="step-7-choosing-the-thresholds">Step 7: Choosing the thresholds</h2>
+<h2 id="step-7-first-motion-polarities-with-polarcap">Step 7: First-motion polarities with PolarCAP</h2>
+<h3 id="what-is-the-first-motion-polarity">What is the first-motion polarity?</h3>
+<p>The first motion of the ground when the P wave arrives can be <strong>up</strong> or <strong>down</strong> on the vertical component. It depends on the position of the station with respect to the <strong>fault</strong> and its slip:</p>
+<ul>
+<li>In some directions the rock is pushed towards the station: the P wave starts with a <strong>compression</strong>, and the vertical component moves <strong>up</strong> (<code>U</code>).</li>
+<li>In other directions the rock is pulled away from the station: the P wave starts with a <strong>dilatation</strong>, and the vertical component moves <strong>down</strong> (<code>D</code>).</li>
+</ul>
+<p>The regions of compressions and dilatations are separated by two perpendicular planes, one of them the fault plane. With enough well-distributed polarities, these planes can be found: this is the <strong>focal mechanism from first motions</strong>, a classic method that works also for small earthquakes, too small for a moment tensor inversion.</p>
+<p>The polarity is only meaningful for the <strong>P wave</strong> on the <strong>vertical component</strong>, and it must be read on the <strong>first half-cycle</strong> of the onset, before any later arrival or reverberation.</p>
+<h3 id="polarcap">PolarCAP</h3>
+<p>Reading hundreds of polarities by hand is slow and subjective. surfquake uses <strong>PolarCAP</strong> (Chakraborty et al., 2022), a small deep-learning model trained with more than 130 000 polarities labelled by analysts in Italy. For every P pick on a vertical channel, surfquake:</p>
+<ol>
+<li>Reads the raw trace (gaps filled, resampled to 100 Hz if needed). The data are <strong>not filtered</strong>: filters can change the shape of the onset, and zero-phase filters even create a false motion before it.</li>
+<li>Cuts a window of <strong>0.64 s centred on the pick</strong> (32 samples before and 32 after) and normalises it.</li>
+<li>Asks PolarCAP for the polarity, <strong>positive</strong> (up) or <strong>negative</strong> (down), and its probability.</li>
+<li>Writes <code>U</code> or <code>D</code> in the <code>First_Motion</code> column of the pick, only if the probability is at least the threshold (<code>-t</code>, 0.9 by default). Otherwise the pick keeps <code>?</code>.</li>
+</ol>
+<p>Because the window is centred on the pick, PolarCAP needs <strong>precise P picks</strong>. This is why we use the picks of PhaseNet, whose errors are of a few hundredths of a second.</p>
+<p>Please review the following documentation:</p>
+<p><a href="https://projectisp.github.io/surfquaketutorial.github.io/focmec/" rel="noopener noreferrer" target="_blank">First Polarity</a></p>
+<h3 id="run-it">Run it</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>polarity<span class="w"> </span>-h
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>surfquake<span class="w"> </span>polarity<span class="w"> </span>-f<span class="w"> </span>./tutorial5/picks/nll_picks.txt<span class="w"> </span>-p<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks/nll_picks_polarities.txt<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>.9
+</code></pre></div>
+<ul>
+<li><code>-f</code>: the pick file in NonLinLoc format, <code>nll_picks.txt</code> from Step 3.</li>
+<li><code>-p</code>: the project, to read the waveforms.</li>
+<li><code>-o</code>: the output pick file, with the polarities.</li>
+<li><code>-t</code>: the minimum probability to accept a polarity (default 0.9).</li>
+</ul>
+<p>Save the output <strong>in the picks folder</strong>, as in the command above. In the next tutorial, the associator looks there for pick files with polarities and copies them to the associated events.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PolarCAP needs TensorFlow, like PhaseNet. With this dataset it takes about one minute.</p>
+</div>
+<h3 id="the-result">The result</h3>
+<p><code>nll_picks_polarities.txt</code> is the same pick file, with the <code>First_Motion</code> column filled:</p>
+<div class="highlight"><pre><span></span><code>Station_name    Instrument  Component   P_phase_onset   P_phase_descriptor  First_Motion    Date    Hour_min    Seconds Err ErrMag  Coda_duration   Amplitude   Period
+E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.0 4.98e+08 -1.0
+......
+EQTA   ?    HHZ  ? P      U 20210126 2136 36.3270 GAU 2.00e-02 -1.0 5.15e+09 -1.0
+</code></pre></div>
+<p>Of the 1140 P picks, 381 are on vertical channels. With the default threshold of 0.9, <strong>316</strong> of them get a polarity (170 <code>U</code> and 146 <code>D</code>); the others keep <code>?</code>. The P picks of the horizontal channels and all the S picks always keep <code>?</code>.</p>
+<p>These are the polarities of the first earthquake (21:36:32), in order of arrival:</p>
+<table>
+<thead>
+<tr>
+<th>Station</th>
+<th>P pick</th>
+<th>Polarity</th>
+<th></th>
+<th>Station</th>
+<th>P pick</th>
+<th>Polarity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UMV15</td>
+<td>36:33.98</td>
+<td>U</td>
+<td></td>
+<td>ECAB</td>
+<td>37:00.66</td>
+<td>D</td>
+</tr>
+<tr>
+<td>EQTA</td>
+<td>36:36.32</td>
+<td>U</td>
+<td></td>
+<td>ELOR</td>
+<td>37:03.99</td>
+<td>U</td>
+</tr>
+<tr>
+<td>EGOR</td>
+<td>36:38.37</td>
+<td>U</td>
+<td></td>
+<td>TLOR</td>
+<td>37:04.22</td>
+<td>U</td>
+</tr>
+<tr>
+<td>ELGU</td>
+<td>36:38.61</td>
+<td>U</td>
+<td></td>
+<td>ESPR</td>
+<td>37:04.70</td>
+<td>D</td>
+</tr>
+<tr>
+<td>EBER</td>
+<td>36:46.13</td>
+<td>D</td>
+<td></td>
+<td>EZAR</td>
+<td>37:05.31</td>
+<td>D</td>
+</tr>
+<tr>
+<td>E0802</td>
+<td>36:49.29</td>
+<td>U</td>
+<td></td>
+<td>EMUR</td>
+<td>37:09.71</td>
+<td>D</td>
+</tr>
+<tr>
+<td>EMIJ</td>
+<td>36:50.37</td>
+<td>U</td>
+<td></td>
+<td>ETOB</td>
+<td>37:11.25</td>
+<td>U</td>
+</tr>
+<tr>
+<td>EADA</td>
+<td>36:55.07</td>
+<td>D</td>
+<td></td>
+<td>EMIN</td>
+<td>37:11.81</td>
+<td>D</td>
+</tr>
+<tr>
+<td>ENIJ</td>
+<td>36:55.07</td>
+<td>D</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>EALB</td>
+<td>36:56.75</td>
+<td>D</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>18 stations have a polarity, and both <code>U</code> and <code>D</code> are present: the stations closest to the earthquake (UMV15, EQTA, EGOR, ELGU) all move up, and many of the distant ones move down. This mixture is what constrains a focal mechanism.</p>
+<h3 id="the-threshold">The threshold</h3>
+<p>The threshold <code>-t</code> is a compromise, as for the picks:</p>
+<table>
+<thead>
+<tr>
+<th>Threshold</th>
+<th>Vertical P picks with polarity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.7</td>
+<td>361</td>
+</tr>
+<tr>
+<td>0.9 (default)</td>
+<td>316</td>
+</tr>
+<tr>
+<td>0.95</td>
+<td>286</td>
+</tr>
+</tbody>
+</table>
+<p>For the first earthquake, the three thresholds give the same polarities; with 0.95 only EZAR loses its polarity. A wrong polarity is worse than a missing one, because the focal mechanism has to fit it. Keep the default, or raise it if you have many stations.</p>
+<h3 id="check-the-polarities-by-hand">Check the polarities by hand</h3>
+<p>PolarCAP is very accurate (98 % on its test data), but no automatic method is perfect, especially for weak or emergent onsets. Always check some of them. Open EQTA again, as in Step 6, with the information box of the picks turned on in <code>plotting_config.yaml</code> (<code>show_info_picks: true</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>surfquake<span class="w"> </span>quick<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;./tutorial5/data/ES.EQTA*&quot;</span><span class="w"> </span>--plot_config<span class="w"> </span>./tutorial5/configs/plotting_config.yaml<span class="w"> </span>--min_date<span class="w"> </span><span class="s2">&quot;2021-01-26 21:36:25&quot;</span><span class="w"> </span>--max_date<span class="w"> </span><span class="s2">&quot;2021-01-26 21:37:35&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt; load_picks --file ./tutorial5/picks/nll_picks_polarities.txt
+</code></pre></div>
+<p>Open the raw data, <strong>without</strong> a config file: as explained above, a filter can change the first motion. Zoom on the P onset of the vertical component: the trace moves up, and the pick shows <code>P, U</code>.</p>
+<p><img alt="PolarCAP polarity at EQTA" src="img/T5_polarity.png" /></p>
+<p>To correct a polarity, delete the pick with the mouse on it and the key <code>d</code>, and pick it again with the quick-pick keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Pick</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td>P, polarity unknown (<code>?</code>)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>P, up (<code>U</code>)</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>P, down (<code>D</code>)</td>
+</tr>
+<tr>
+<td><code>4</code>, <code>5</code>, <code>6</code></td>
+<td>S, with <code>?</code>, <code>U</code> or <code>D</code></td>
+</tr>
+</tbody>
+</table>
+<p>The picks are saved in <code>pick_output_file</code> (see the warning of Step 6).</p>
+<hr />
+<h2 id="step-8-choosing-the-thresholds">Step 8: Choosing the thresholds</h2>
 <p>The thresholds <code>-pt</code> and <code>-st</code> decide which peaks of the probability curve become picks. It is a compromise:</p>
 <ul>
 <li>A <strong>low</strong> threshold finds the arrivals of small earthquakes, but also picks noise.</li>
@@ -2737,102 +3037,114 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 </table>
 <p>The S picks fall much faster than the P picks: above 0.9 almost no S wave survives. In the table of Step 5, a threshold of 0.5 would remove the suspicious S of ENIJ and ETOB, but also the good S picks of EADA and EALB.</p>
 <p>The usual strategy is to <strong>keep low thresholds (0.3)</strong> and let the associator and the location clean the false picks: a false pick that does not match other stations is simply not associated to any event. Raise the threshold only if the noisy picks are so many that the association becomes slow, or if you want only the best picks (for example, for a tomography).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_05<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.4
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_05<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.5<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.4
 </code></pre></div>
 <h3 id="picking-only-some-stations-channels-or-times">Picking only some stations, channels or times</h3>
 <p>You do not need to pick the whole project. The same filters as in other commands are available:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Only the vertical components (HHZ and EHZ)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_Z<span class="w"> </span>-ch<span class="w"> </span><span class="s2">&quot;?HZ&quot;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Only three stations</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_sta<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;UMV15|EQTA|EGOR&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Only the vertical components (HHZ and EHZ)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_Z<span class="w"> </span>-ch<span class="w"> </span><span class="s2">&quot;?HZ&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Only three stations</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span>./tutorial5/project/granada<span class="w"> </span>-o<span class="w"> </span>./tutorial5/picks_sta<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;UMV15|EQTA|EGOR&quot;</span>
 </code></pre></div>
 <p>A filter can be a pattern with <code>*</code> and <code>?</code>, or a list of names separated by <code>|</code>. Always write it between quotes, because <code>*</code>, <code>?</code> and <code>|</code> have a special meaning in the terminal.</p>
 <p>Picking only the vertical components is faster and gives one P pick per arrival, but you lose most of the S picks, which are better seen on the horizontal components.</p>
 <p>With a long archive of daily files, <code>--min_date</code> and <code>--max_date</code> select the days to pick. They select <strong>files</strong>, they do not cut them: in this tutorial all the files cover the same 1.5 hours, so a date filter would keep all of them.</p>
 <hr />
-<h2 id="step-8-picking-from-python">Step 8: Picking from Python</h2>
+<h2 id="step-9-picking-and-polarities-from-python">Step 9: Picking and polarities from Python</h2>
 <p>The same can be done from a Python script, using the library. Create a file named <code>run_picking.py</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-9-10">10</a></span>
-<span class="normal"><a href="#__codelineno-9-11">11</a></span>
-<span class="normal"><a href="#__codelineno-9-12">12</a></span>
-<span class="normal"><a href="#__codelineno-9-13">13</a></span>
-<span class="normal"><a href="#__codelineno-9-14">14</a></span>
-<span class="normal"><a href="#__codelineno-9-15">15</a></span>
-<span class="normal"><a href="#__codelineno-9-16">16</a></span>
-<span class="normal"><a href="#__codelineno-9-17">17</a></span>
-<span class="normal"><a href="#__codelineno-9-18">18</a></span>
-<span class="normal"><a href="#__codelineno-9-19">19</a></span>
-<span class="normal"><a href="#__codelineno-9-20">20</a></span>
-<span class="normal"><a href="#__codelineno-9-21">21</a></span>
-<span class="normal"><a href="#__codelineno-9-22">22</a></span>
-<span class="normal"><a href="#__codelineno-9-23">23</a></span>
-<span class="normal"><a href="#__codelineno-9-24">24</a></span>
-<span class="normal"><a href="#__codelineno-9-25">25</a></span>
-<span class="normal"><a href="#__codelineno-9-26">26</a></span>
-<span class="normal"><a href="#__codelineno-9-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">freeze_support</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet.phasenet_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhasenetISP</span><span class="p">,</span> <span class="n">PhasenetUtils</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">project_file</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/project/granada&quot;</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="n">output_picks</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/picks&quot;</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a>    <span class="n">freeze_support</span><span class="p">()</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a>    <span class="c1"># Load the project and keep only the vertical components</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">project_file</span><span class="p">)</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;?HZ&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a>    <span class="c1"># Run PhaseNet</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16"></a>    <span class="n">picker</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-9-17" name="__codelineno-9-17"></a>    <span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
-<a id="__codelineno-9-18" name="__codelineno-9-18"></a>
-<a id="__codelineno-9-19" name="__codelineno-9-19"></a>    <span class="c1"># Convert the predictions to a table and write the three formats</span>
-<a id="__codelineno-9-20" name="__codelineno-9-20"></a>    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-9-22" name="__codelineno-9-22"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-9-23" name="__codelineno-9-23"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
-<a id="__codelineno-9-24" name="__codelineno-9-24"></a>
-<a id="__codelineno-9-25" name="__codelineno-9-25"></a>    <span class="c1"># The table is a pandas DataFrame: you can work with it directly</span>
-<a id="__codelineno-9-26" name="__codelineno-9-26"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">picks_results</span><span class="p">[</span><span class="n">picks_results</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">]</span>
-<a id="__codelineno-9-27" name="__codelineno-9-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="p">[[</span><span class="s2">&quot;station&quot;</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]])</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">freeze_support</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.phasenet.phasenet_handler</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhasenetISP</span><span class="p">,</span> <span class="n">PhasenetUtils</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.project.surf_project</span><span class="w"> </span><span class="kn">import</span> <span class="n">SurfProject</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">surfquakecore.first_polarity.get_pol</span><span class="w"> </span><span class="kn">import</span> <span class="n">RunPolarity</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="n">project_file</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/project/granada&quot;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="n">output_picks</span> <span class="o">=</span> <span class="s2">&quot;./tutorial5/picks&quot;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a>    <span class="n">freeze_support</span><span class="p">()</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a>    <span class="c1"># Load the project and keep only the vertical components</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a>    <span class="n">sp</span> <span class="o">=</span> <span class="n">SurfProject</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">path_to_project_file</span><span class="o">=</span><span class="n">project_file</span><span class="p">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a>    <span class="n">sp</span><span class="o">.</span><span class="n">filter_project_keys</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="s2">&quot;?HZ&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a>    <span class="c1"># Run PhaseNet</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a>    <span class="n">picker</span> <span class="o">=</span> <span class="n">PhasenetISP</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_p_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">min_s_prob</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a>    <span class="n">picks</span> <span class="o">=</span> <span class="n">picker</span><span class="o">.</span><span class="n">phasenet</span><span class="p">()</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a>    <span class="c1"># Convert the predictions to a table and write the three formats</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a>    <span class="n">picks_results</span> <span class="o">=</span> <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">split_picks</span><span class="p">(</span><span class="n">picks</span><span class="p">)</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">convert2real</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">save_original_picks</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a>    <span class="n">PhasenetUtils</span><span class="o">.</span><span class="n">write_nlloc_format</span><span class="p">(</span><span class="n">picks_results</span><span class="p">,</span> <span class="n">output_picks</span><span class="p">)</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a>    <span class="c1"># The table is a pandas DataFrame: you can work with it directly</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a>    <span class="n">best</span> <span class="o">=</span> <span class="n">picks_results</span><span class="p">[</span><span class="n">picks_results</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">]</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">best</span><span class="p">[[</span><span class="s2">&quot;station&quot;</span><span class="p">,</span> <span class="s2">&quot;channel&quot;</span><span class="p">,</span> <span class="s2">&quot;phase&quot;</span><span class="p">,</span> <span class="s2">&quot;date_time&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">]])</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a>    <span class="c1"># First-motion polarities of the P picks with PolarCAP</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a>    <span class="n">RunPolarity</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_picks</span><span class="si">}</span><span class="s2">/nll_picks.txt&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">output_picks</span><span class="si">}</span><span class="s2">/nll_picks_polarities.txt&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a>                <span class="mf">0.9</span><span class="p">)</span><span class="o">.</span><span class="n">send_polarities</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python<span class="w"> </span>run_picking.py
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>python<span class="w"> </span>run_picking.py
 </code></pre></div>
-<p>The lines <code>if __name__ == '__main__':</code> and <code>freeze_support()</code> are needed because the reading of the files runs in parallel; without them, the script may fail on Windows and macOS.</p>
+<p><code>RunPolarity</code> takes the project, the input pick file, the output pick file and the threshold, like the command <code>polarity</code>. The lines <code>if __name__ == '__main__':</code> and <code>freeze_support()</code> are needed because the reading of the files runs in parallel; without them, the script may fail on Windows and macOS.</p>
 <hr />
-<h2 id="step-9-the-bash-script">Step 9: The bash script</h2>
+<h2 id="step-10-the-bash-script">Step 10: The bash script</h2>
 <p>Finally, the whole workflow in a <a href="https://projectisp.github.io/surfquaketutorial.github.io/bash_script/" rel="noopener noreferrer" target="_blank">bash script file</a>. Create a file named <code>run_picking.sh</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/bin/bash</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># Activate your conda environment</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial5
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/data<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>granada
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="nv">$BASE</span>/project/granada<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/picks<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># Activate your conda environment</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>conda<span class="w"> </span>shell.bash<span class="w"> </span>hook<span class="k">)</span><span class="s2">&quot;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>conda<span class="w"> </span>activate<span class="w"> </span>surfquake<span class="w">  </span><span class="c1"># Replace with the name of your environment</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="nv">BASE</span><span class="o">=</span>./tutorial5
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>surfquake<span class="w"> </span>project<span class="w"> </span>-d<span class="w"> </span><span class="nv">$BASE</span>/data<span class="w"> </span>-s<span class="w"> </span><span class="nv">$BASE</span>/project<span class="w"> </span>-n<span class="w"> </span>granada
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>surfquake<span class="w"> </span>pick<span class="w"> </span>-f<span class="w"> </span><span class="nv">$BASE</span>/project/granada<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/picks<span class="w"> </span>-pt<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>-st<span class="w"> </span><span class="m">0</span>.3<span class="w"> </span>--verbose
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>surfquake<span class="w"> </span>polarity<span class="w"> </span>-f<span class="w"> </span><span class="nv">$BASE</span>/picks/nll_picks.txt<span class="w"> </span>-p<span class="w"> </span><span class="nv">$BASE</span>/project/granada<span class="w"> </span>-o<span class="w"> </span><span class="nv">$BASE</span>/picks/nll_picks_polarities.txt<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>.9
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_picking.sh
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>./run_picking.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>run_picking.sh
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>./run_picking.sh
 </code></pre></div>
 <hr />
 <h2 id="what-comes-next">What comes next?</h2>
 <p>The picks are only the first step of the automatic workflow. With the same Granada data, the next steps are:</p>
 <ol>
-<li><strong>Association</strong> (<code>surfquake associate</code>): groups the picks of different stations that belong to the same earthquake, using the daily folders and the metadata. Here, it finds the earthquakes of the sequence and discards the isolated false picks. See <a href="https://projectisp.github.io/surfquaketutorial.github.io/associate/" rel="noopener noreferrer" target="_blank">Clustering Associate</a>.</li>
+<li><strong>Association</strong> (<code>surfquake associate</code>): groups the picks of different stations that belong to the same earthquake, using the daily folders and the metadata. Here, it finds the earthquakes of the sequence and discards the isolated false picks. If the picks folder contains <code>nll_picks_polarities.txt</code>, the polarities are copied to the associated P picks. See <a href="https://projectisp.github.io/surfquaketutorial.github.io/associate/" rel="noopener noreferrer" target="_blank">Clustering Associate</a>.</li>
 <li><strong>Location</strong> (<code>surfquake locate</code>): computes the hypocentre of every event with NonLinLoc. See <a href="https://projectisp.github.io/surfquaketutorial.github.io/locate/" rel="noopener noreferrer" target="_blank">Event Location</a>.</li>
-<li><strong>Source parameters and moment tensor</strong> (<code>surfquake source</code>, <code>surfquake mti</code>): magnitudes and focal mechanisms.</li>
+<li><strong>Focal mechanisms from first motions</strong> (<code>surfquake focmec</code>, <code>surfquake plotmec</code>): the polarities of each located event are used to find its fault planes.</li>
+<li><strong>Source parameters and moment tensor</strong> (<code>surfquake source</code>, <code>surfquake mti</code>): magnitudes and focal mechanisms from the waveforms.</li>
 </ol>
 <p>The results of the complete workflow with this data can be found in the <a href="https://github.com/rcabdia/test_surfquake/tree/main/Granada" rel="noopener noreferrer" target="_blank">Granada example</a>.</p>
 <hr />
@@ -2845,9 +3157,13 @@ E0802  ?    HHE  ? P      ? 20210126 2136 49.4200 GAU 1.50e-01 -1.00e+00 4.98e+0
 <li><strong>P</strong> picks are usually precise and confident; <strong>S</strong> picks are fewer, less confident and found mostly on the horizontal components.</li>
 <li>Some picks are wrong: keep low thresholds and let the <strong>associator</strong> and the <strong>location</strong> reject the picks that do not fit.</li>
 <li>Always check a few events on the waveforms with <code>load_picks</code>.</li>
+<li>The <strong>first-motion polarity</strong> (up or down) of the P wave on the vertical component depends on the position of the station with respect to the fault. <strong>PolarCAP</strong> reads it on a 0.64 s window of the raw data centred on the pick, so it needs precise picks.</li>
+<li>Only polarities with a probability above the threshold (0.9 by default) are written. A wrong polarity is worse than a missing one.</li>
+<li>Save <code>nll_picks_polarities.txt</code> in the picks folder: the associator uses it in the next step.</li>
 </ul>
 <hr />
 <h2 id="references">References</h2>
+<p>Chakraborty, Megha, et al. "PolarCAP – A deep learning approach for first motion polarity classification of earthquake waveforms." Artificial Intelligence in Geosciences 3 (2022): 46-52.</p>
 <p>Zhu, Weiqiang, and Gregory C. Beroza. "PhaseNet: a deep-neural-network-based seismic arrival-time picking method." Geophysical Journal International 216.1 (2019): 261-273.</p>
 
 

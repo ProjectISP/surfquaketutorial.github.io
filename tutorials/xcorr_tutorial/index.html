@@ -2687,7 +2687,7 @@ C(\tau) = \frac{\sum_t x(t)\, y(t+\tau)}{\sqrt{\sum_t x^2(t)\,\sum_t y^2(t+\tau)
 <p>Open the prompt with <code>v</code>, and cut the traces to the window:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt;&gt; cut
 </code></pre></div>
-<p><img alt="Cross-correlations" src="img/cut_xcorr.png" /></p>
+<p><img alt="Cross-correlations" src="../img/cut_xcorr.png" /></p>
 <p>Then cross-correlate all the traces with the first one:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt;&gt; help xcorr
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&gt;&gt; xcorr --ref 0 --mode full --normalize full --trim False
@@ -2698,7 +2698,7 @@ C(\tau) = \frac{\sum_t x(t)\, y(t+\tau)}{\sqrt{\sum_t x^2(t)\,\sum_t y^2(t+\tau)
 <li><code>--normalize full</code>: the correlation coefficient of the equation above, between −1 and 1.</li>
 </ul>
 <p>The traces are replaced by 18 correlations, named after the two stations: <code>IM.IL02_IL03..SXZ</code> is the correlation of IL03 with the reference IL02, and <code>IM.IL02_IL02..SXZ</code> is the autocorrelation of IL02.</p>
-<p><img alt="Cross-correlations" src="img/TX_xcorr.png" /></p>
+<p><img alt="Cross-correlations" src="../img/TX_xcorr.png" /></p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><code>--ref</code> is the position of the trace in the list of loaded traces. Check the name of the correlations: the station before the underscore is the reference.</p>
@@ -2749,7 +2749,7 @@ IM.IL19..SHZ          5.35    +0.335   0.69  NO
 <p>Now, let's see the correlations as a record section against the lag time:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&gt;&gt; plot_type record
 </code></pre></div>
-<p><img alt="Correlations as a record section" src="img/TX_record.png" /></p>
+<p><img alt="Correlations as a record section" src="../img/TX_record.png" /></p>
 <p>Each correlation is drawn at the distance of its station <strong>along the direction of propagation</strong> (negative: the station is reached before the reference). The maxima of the correlations line up along a straight line through lag 0: its slope is the slowness. This is exactly the plane wave that the beamforming searches for. Zoom between −2 and 2 s to see it.</p>
 <h3 id="cycle-skipping">Cycle skipping</h3>
 <p>Look at IL13 and IL18 in the table. The plane wave predicts a lag of −0.26 s for IL13 and +0.33 s for IL18, but the maxima of their correlations are at −1.07 and +1.17 s, about <strong>0.8 s</strong> away. The P wave is a band-limited signal, almost periodic, with a dominant period of about 0.8 s: its correlation has several maxima separated by one period. When the waveforms are less similar (IL13 and IL18 are the most distant stations from IL02, 7.1 and 5.2 km), the wrong maximum can become the highest one. This is <strong>cycle skipping</strong>, the classic error of cross-correlation with narrow-band signals.</p>
@@ -2777,7 +2777,7 @@ IM.IL19..SHZ          5.35    +0.335   0.69  NO
 <li><code>--axis xlog</code>: logarithmic frequency axis.</li>
 </ul>
 <p>A figure is opened for each station, with three panels: the amplitude <span class="arithmatex">\(|H(f)|\)</span> and the phase of the transfer function, and the coherence. The red dashed line is the <strong>95 % significance level</strong>: a coherence below it cannot be distinguished from the coherence of two unrelated noises.</p>
-<p><img alt="Coherence IL02 - IL03" src="img/TX_coh_il03.png" /></p>
+<p><img alt="Coherence IL02 - IL03" src="../img/TX_coh_il03.png" /></p>
 <p>These are the mean coherences in three frequency bands:</p>
 <table>
 <thead>
