@@ -2534,7 +2534,7 @@ R = -N\cos(\text{baz}) - E\sin(\text{baz}), \qquad T = N\sin(\text{baz}) - E\cos
 <li><code>-cs 5 -ce 20</code>: the cut, in seconds before and after the first theoretical arrival.</li>
 </ul>
 <p>The config file <code>typical_config.yaml</code> removes the trend, tapers and filters the traces between 0.5 and 8.5 Hz.</p>
-<p><img alt="GENF in ZNE" src="img/TP_genf_zne.png" /></p>
+<p><img alt="GENF in ZNE" src="../img/TP_genf_zne.png" /></p>
 <p>The three traces are FR.GENF.00.HHZ, HH1 and HH2. Instead of N and E, GENF has the horizontal components <strong>1</strong> and <strong>2</strong>, a name used when the sensor is not exactly aligned with the north. The metadata says that HH1 points to 7° and HH2 to 97°, so they are close to N and E: surfquake reads 1 as N and 2 as E, and the error of 7° is small for this tutorial.</p>
 <p>Look at the arrivals:</p>
 <ul>
@@ -2555,7 +2555,7 @@ R = -N\cos(\text{baz}) - E\sin(\text{baz}), \qquad T = N\sin(\text{baz}) - E\cos
 [INFO] Rotation &#39;NE-&gt;RT&#39; complete: 1 station groups rotated, 0 not rotated.
 </code></pre></div>
 <p>The channels are renamed HHR and HHT, and the figure is redrawn:</p>
-<p><img alt="GENF in ZRT" src="img/TP_genf_rt.png" /></p>
+<p><img alt="GENF in ZRT" src="../img/TP_genf_rt.png" /></p>
 <p>Compare the maximum amplitudes (in counts) before and after the rotation:</p>
 <table>
 <thead>
@@ -2604,7 +2604,7 @@ Incidence:       55.62°
 Rectilinearity:  0.85
 Planarity:       1.00
 </code></pre></div>
-<p><img alt="Particle motion at GENF" src="img/TP_pm.png" /></p>
+<p><img alt="Particle motion at GENF" src="../img/TP_pm.png" /></p>
 <p>The values may change a little with the window that you select. How do we read them?</p>
 <ul>
 <li><strong>Rectilinearity 0.85</strong>: the motion is almost a straight line, as expected for a P wave. This tells us that the measurement is reliable.</li>
@@ -2658,7 +2658,7 @@ Planarity:       1.00
 </tbody>
 </table>
 <p>With the theoretical incidence, a large part of the P wave stays on Q. With the measured incidence, the P wave is concentrated on <strong>L</strong>, and Q is almost free of P energy: now Q shows the SV motion and T the SH motion, and the onset of the S wave is much easier to see.</p>
-<p><img alt="GENF in LQT" src="img/TP_genf_lqt.png" /></p>
+<p><img alt="GENF in LQT" src="../img/TP_genf_lqt.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In the LQT system, the T component is the same as in ZRT: only Z and R are rotated by the incidence angle.</p>
