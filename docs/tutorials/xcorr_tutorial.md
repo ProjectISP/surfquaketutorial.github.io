@@ -259,6 +259,10 @@ Open the prompt with `v`, and cut the traces to the window:
 >> cut
 ```
 
+
+![Cross-correlations](img/cut_xcorr.png)
+
+
 Then cross-correlate all the traces with the first one:
 
 ```
